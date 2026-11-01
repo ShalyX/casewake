@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 1,
+  "revision": 2,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "HUMAN_IDEA_GATE",
   "active_specialist": null,
@@ -8,10 +8,10 @@
   "pending_gate": {
     "id": "idea-001",
     "type": "idea_selection",
-    "reason": "Three materially different product opportunities survived research and product criticism.",
-    "exact_question": "Which thesis do we lock: 1 EchoLedger, 2 Watchline, or 3 Signalbook?",
-    "recommendation": "1 EchoLedger",
-    "choices": ["1 EchoLedger", "2 Watchline", "3 Signalbook"],
+    "reason": "User narrowed the field to two finalists and requested deeper validation. Deep validation is complete; final product lock still requires a choice.",
+    "exact_question": "Which thesis do we lock after deepening: EchoLedger or Watchline?",
+    "recommendation": "EchoLedger",
+    "choices": ["EchoLedger", "Watchline"],
     "scope": "product_thesis",
     "resume_phase": "VALIDATION"
   },
@@ -42,7 +42,7 @@
     "RESEARCH": "passed: pain points, alternatives, sponsor fit, risks documented",
     "IDEATION": "passed: three candidates ranked and recommendation recorded"
   },
-  "blockers": [],
-  "next_action": "Record user idea selection, then run adversarial validation and existential technical spikes.",
-  "updated_at": "2026-11-01T14:43:00+01:00"
+  "blockers": ["Real Tatum/Walrus integration spike requires credentials not currently present in the local environment."],
+  "next_action": "Choose EchoLedger or Watchline; recommendation EchoLedger. When credentials are available, run the shared Tatum transaction + Walrus memory recall spike before PRODUCT_LOCK/TECHNICAL_DERISK advances.",
+  "updated_at": "2026-11-01T15:14:00+01:00"
 }
