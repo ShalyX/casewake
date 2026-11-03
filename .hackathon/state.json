@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 3,
+  "revision": 4,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "HUMAN_IDEA_GATE",
   "active_specialist": null,
@@ -8,15 +8,15 @@
   "pending_gate": {
     "id": "idea-001",
     "type": "idea_selection",
-    "reason": "User parked EchoLedger and Watchline and requested ecosystem-need research. Ecosystem shortlist is now available, but no new product has been selected.",
-    "exact_question": "Which ecosystem direction, if any, should receive adversarial validation next: Incident Memory, Indexer Recovery, or Compatibility Desk? Original finalists remain parked.",
-    "recommendation": "Incident Memory first; Indexer Recovery second.",
+    "reason": "User requested deeper exploration of both ecosystem finalists. Adversarial comparisons and synthetic safety tests complete, but sponsor integrations, authentic incident pair, indexer feed and track fit remain unverified.",
+    "exact_question": "Which product thesis should be locked after the real evidence gates: Incident Memory, Indexer Recovery, or one of the parked alternatives?",
+    "recommendation": "Incident Memory conditional on real authentic digests and sponsor proof; otherwise reconsider alternatives rather than fabricate evidence.",
     "choices": [
       "Incident Memory",
       "Indexer Recovery",
-      "Compatibility Desk",
-      "Return to EchoLedger or Watchline",
-      "Explore more ecosystem gaps"
+      "EchoLedger",
+      "Watchline",
+      "Explore further"
     ],
     "scope": "product_thesis",
     "resume_phase": "VALIDATION"
@@ -48,11 +48,17 @@
     "RESEARCH": "passed: pain points, alternatives, sponsor fit, risks documented",
     "IDEATION": "passed: three candidates ranked and recommendation recorded",
     "ECOSYSTEM_RESEARCH": "Exploratory six-issue opportunity map documented in ECOSYSTEM_RESEARCH.md, 2026-11-03",
-    "ECOSYSTEM_IDEATION": "Exploratory five-concept shortlist documented in ECOSYSTEM_IDEATION.md, 2026-11-03; no thesis selected"
+    "ECOSYSTEM_IDEATION": "Exploratory five-concept shortlist documented in ECOSYSTEM_IDEATION.md, 2026-11-03; no thesis selected",
+    "ECOSYSTEM_DEEP_VALIDATION": "Both finalists narrowed and competitor kill-search documented 2026-11-03; MODIFY verdicts, no product lock",
+    "SYNTHETIC_BEHAVIORAL_SPIKE": "13/13 deterministic safety filter tests passed with synthetic fixtures 2026-11-03; not proof of Tatum/Walrus integration"
   },
   "blockers": [
-    "Real Tatum/Walrus integration spike requires credentials not currently present in the local environment."
+    "No TATUM_API_KEY in remote PC process environment as of 2026-11-03",
+    "No MEMWAL_PRIVATE_KEY / MEMWAL_ACCOUNT_ID / MEMWAL_SERVER_URL in remote PC process environment",
+    "No genuine matched failed-transaction digest pair and verified resolution identified",
+    "No connected real indexer metrics / reproduction environment",
+    "B2B developer-infrastructure workflow track eligibility not explicitly verified"
   ],
-  "next_action": "Compare ecosystem shortlist to original parked candidates, then optionally validate Incident Memory and Indexer Recovery. Confirm Smart Agents track fit and prove authenticated Tatum gRPC plus Walrus Mainnet read/write before building.",
+  "next_action": "Find 2 authentic comparable failed Sui onchain digests and human-verified remediation; configure Tatum gRPC API and Walrus MemWal delegate account through secure environment; prove real end-to-end. If unavailable, evaluate real indexer metrics or parked personal finalists. Confirm B2B track fit.",
   "updated_at": "2026-11-03T18:05:00+01:00"
 }

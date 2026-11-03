@@ -7,11 +7,11 @@ User explicitly parked EchoLedger + Watchline, requested ecosystem problems (dev
 ## Observed pain 1 — Repeated transaction failures and disconnected fixes
 User: Sui dApp engineers, protocol support staff, maintainers.
 Problem: onchain transaction failures are observable but diagnosis is scattered among traces, versioned SDK docs, GitHub issues, human runbooks. An incident's *verified resolution* is often not carried forward to the next similar failure.
-Evidence: official Sui error guidance catalogs transport vs execution errors; Sui Move Trace Debugger already supports transaction replay; Oct 28 2026 issue #28467 reports dry-run success then InsufficientGas failure.
+Evidence: official Sui error guidance catalogs transport vs execution errors; Sui Move Trace Debugger already supports transaction replay. Do not cite issue #28467 as an onchain InsufficientGas example: directly opening that URL on 2026-11-03 showed a network connectivity test failure, not a verified transaction-resolution case.
 Current workarounds: Sui CLI traces, documentation, VS Code Move Trace Debugger, GitHub issues, generic AI explainers.
 Opportunity: a human-confirmed incident memory that links chain-observed symptoms -> diagnosed resolution -> changed handling when a similar issue recurs.
 Risk: do not claim universal root-cause accuracy or copy existing one-off debugger UX.
-Sources: https://www.docs.sui.io/develop/testing-debugging/common-errors ; https://docs.sui.io/references/ide/debugger ; https://github.com/MystenLabs/sui/issues/28467 ; https://www.alchemy.com/docs/wallets/transactions/debug-transactions
+Sources: https://www.docs.sui.io/develop/testing-debugging/common-errors ; https://docs.sui.io/references/ide/debugger ; https://www.alchemy.com/docs/wallets/transactions/debug-transactions
 Evidence: HIGH for error/debugging category; MEDIUM for unsatisfied shared-memory demand (needs interviews).
 
 ## Observed pain 2 — Indexer lag, watermarks, and historical data gaps

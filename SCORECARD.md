@@ -67,3 +67,16 @@ Rules and event surfaces checked 2026-11-01. No project implementation exists ye
 2. Validate selected user problem and differentiation.
 3. Spike Walrus Mainnet remember/recall + Tatum Sui RPC.
 4. Lock a demo where remembered feedback visibly changes later behavior.
+
+
+## Ecosystem finalist assessment — 2026-11-03 (concept-stage, NOT awarded judge scores)
+Official 30/30/20/20 weights above remain unchanged. Because no judged product has been implemented, none of the ecosystem concepts has earned a verified technical/integration score.
+
+| Criterion | Incident Memory | Indexer Recovery | Required visible proof |
+|---|---|---|---|
+| Walrus + Tatum integration (30%) | UNPROVEN: genuine digest -> memory -> later digest | UNPROVEN: live chain tip + genuine local watermark -> memory -> later recurrence | Authenticated Tatum Sui gRPC, 10+ completed MemWal Mainnet jobs, after-before recall |
+| Technical quality (30%) | 13 synthetic-fixture tests shared; live inputs missing | Same; production metrics missing | Reproducible end-to-end path, no false match on mismatch/stale inputs |
+| Creativity (20%) | CONDITIONAL: narrow Sui verified resolution exchange vs existing debugger/SRE tools | CONDITIONAL: context-aware versioned Sui pipeline remediation vs ordinary metrics | Evidence of unique workflow and real user benefit |
+| Presentation (20%) | Clear narrative, script-only | Clear narrative if metrics are real | Finished 2–3min video, source-visible proof, public working demo |
+
+Concept feasibility recommendation: Incident Memory first; Indexer Recovery only if authentic metrics are accessible. Original EchoLedger and Watchline remain parked. Product Critic verdicts: MODIFY, MODIFY/CONDITIONAL. Details: VALIDATION_ECOSYSTEM_FINALISTS.md and EVIDENCE.md.
