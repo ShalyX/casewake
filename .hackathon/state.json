@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 5,
+  "revision": 6,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "DEPENDENCY_ATTACK",
   "active_specialist": "Engineering",
@@ -20,7 +20,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "PLANNING",
+  "evidence_status": "PARTIAL_LIVE_PROOF",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -41,15 +41,18 @@
     "PRODUCT_LOCK": "passed: PRODUCT.md revision 1",
     "DEMO_ARCHITECTURE": "draft in DEMO.md, not yet proof-backed",
     "IMPLEMENTATION_SCAFFOLD": "Next UI + API routes written; installation/build not yet confirmed",
-    "INCIDENT_MEMORY_TESTS": "8/8 pure TypeScript synthetic safety assertions passed 2026-11-03"
+    "INCIDENT_MEMORY_TESTS": "8/8 pure TypeScript synthetic safety assertions passed 2026-11-03",
+    "TATUM_MAINNET_CREDENTIAL": "VERIFIED 2026-11-04: LedgerService/GetServiceInfo authenticated through Tatum gRPC, HTTP 200, status 0, 118 bytes; transaction read still unproven",
+    "WALRUS_MAINNET_SMOKE": "VERIFIED 2026-11-04: health, authenticated recall, 1 completed Mainnet test memory blob fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA, successful recall"
   },
   "blockers": [
-    "No TATUM_API_KEY configured in PC environment",
-    "No MEMWAL_PRIVATE_KEY / MEMWAL_ACCOUNT_ID configured",
-    "No two authentic comparable failed Sui transaction digests with independently confirmed resolution",
-    "Next.js npm installation/build not yet verified",
-    "Smart Agents track applicability to B2B developer workflow not organizer-confirmed"
+    "App npm/pnpm dependencies and production build not yet verified",
+    "Tatum GetTransaction against authentic failed Sui digest not yet tested",
+    "No genuine comparable failed Sui digest pair and independently confirmed resolution",
+    "Walrus memory integration through app routes (rather than isolated SDK smoke test) not yet proven",
+    "Ten human-verified incident memories on Mainnet not yet completed",
+    "B2B Smart Agents track eligibility not explicitly confirmed"
   ],
-  "next_action": "Finish Next.js dependency install and build verification; configure server-only Tatum and MemWal credentials; prove real failed digest → human-approved fix → completed Mainnet Walrus blob → later recall. Capture evidence before submission.",
-  "updated_at": "2026-11-03T17:54:18.617Z"
+  "next_action": "Complete dependency install and build; Tatum query genuine failed transaction; verify engineer resolution; app remembers real case through Walrus; second failed transaction recalls safe compatible fix. Collect 10+ legitimate Mainnet case memories and demo proof.",
+  "updated_at": "2026-11-03T23:44:57.462422+00:00"
 }

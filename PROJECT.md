@@ -1,7 +1,7 @@
 # PROJECT — Total Recall / Incident Memory
 
 ## Current milestone
-PRODUCT_LOCK completed at thesis level. DEPENDENCY_ATTACK and BUILD_VERTICAL_SLICE in progress. No completed, real end-to-end sponsor proof.
+PRODUCT_LOCK completed at thesis level. DEPENDENCY_ATTACK is partially cleared: live Tatum authenticated Mainnet service read and a real Walrus Mainnet write/recall succeeded. The complete incident-resolution vertical slice remains UNPROVEN.
 
 ## Selected thesis
 User explicitly selected Incident Memory on 2026-11-03. PRODUCT.md revision 1 is source of truth; product *brand name* remains unselected. No merge with Indexer Recovery or personal finance candidates.
@@ -14,15 +14,16 @@ User explicitly selected Incident Memory on 2026-11-03. PRODUCT.md revision 1 is
 - First implementation scaffold written in web/: separate Next landing and /workspace; server-side Tatum gRPC, Walrus memory and protected review routes; explicit configuration/missing-proof states.
 - Previous synthetic safety spike: 13/13 Python tests passed (2026-11-03).
 - Current TypeScript incident fingerprint/matching/serialization logic: 8/8 synthetic assertions passed using Node 24 (2026-11-03). This is NOT Mainnet integration proof.
+- 2026-11-04: Tatum authenticated Mainnet gRPC `LedgerService/GetServiceInfo` returned HTTP 200 / gRPC 0, 118-byte protobuf response. Proof: web/scripts/probe-tatum-grpc.cjs.
+- 2026-11-04: Walrus Mainnet relayer health, authenticated recall, one accepted/completed memory job, and exact-marker recall ALL succeeded. Job: c05c5968-9aef-4c6f-af02-fd71100bcb7e; blob: fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA. It is ONLY an explicitly labeled integration-test memory, not a verified case.
 
 ## Active work
 - Dependency installation on connected Windows PC via npm, which is taking unusually long. The scaffold may not be fully installable/buildable yet; do not call the UI compiled or deployed without test evidence.
-- Technical proof needed: Tatum authenticated Sui gRPC, authentic failed digest pair, human-confirmed fix, real Walrus rememberAndWait and recall.
+- Remaining end-to-end proof: Tatum GetTransaction against a genuine failed digest, authentic comparable failed digest pair, human-confirmed fix, and the APP's Walrus remember/recall route with validated data. The isolated sponsor credential probes already succeeded.
 - Naming, design lock, actual visual QA, demo video, blog and submission remain future milestones.
 
 ## External blockers
-- TATUM_API_KEY not configured in observed Windows process environment.
-- MEMWAL_PRIVATE_KEY and MEMWAL_ACCOUNT_ID not configured in observed environment.
+- The Tatum and Walrus secrets are now configured privately in web/.env.local; never copy or log them. Both were verified by live isolated probes on 2026-11-04.
 - No verified compatible pair of genuine failed Sui transaction digests and real resolved diagnosis.
 - No organizer confirmation yet that B2B engineering incidents fit the Smart Agents track.
 - Write gateway disabled until WORKSPACE_WRITE_KEY configured.
@@ -36,7 +37,7 @@ User explicitly selected Incident Memory on 2026-11-03. PRODUCT.md revision 1 is
 - Current reviewer token is a local MVP guard, not a production auth system. Do not publicly enable writes without more security.
 
 ## Evidence gaps
-No authenticated Tatum call, Walrus Mainnet blob, 10 completed memories, live screenshot review, public deployment, independently validated user demand, verified incident pair, or completed demo. See EVIDENCE.md.
+Authenticated Tatum service-read and ONE completed Walrus Mainnet smoke memory have been verified. Still missing: actual Tatum failed-transaction lookup, ten verified incident memories, integrated production routes, app build and visual QA, public deployment, independently validated user demand, real incident pair, and completed demo. See EVIDENCE.md.
 
 ## Product and design risks
 - Never become a generic AI error-explainer. The product must reuse verified cases, not merely summarize failures.
@@ -49,10 +50,11 @@ No authenticated Tatum call, Walrus Mainnet blob, 10 completed memories, live sc
 Deployment: NOT STARTED. Submission: NOT STARTED. Official deadline 2026-11-10 17:00 UTC.
 
 ## Next action
-1. Finish dependency installation, run `npm run build`, inspect actual UI and fix errors.
-2. Obtain Tatum API key and MemWal Mainnet delegate/account securely; never commit or paste credentials in chat.
-3. Fetch real failed digests from Tatum and test Walrus completed write+recall. Capture proof in EVIDENCE.md.
-4. Until then, use synthetic tests only for engineering checks, never judge-facing claims.
+1. Install the Next.js/SDK dependencies cleanly (initial npm and pnpm attempts were interrupted); run build, inspect the actual UI, and fix type/API errors.
+2. Use verified Tatum credentials to query an authentic onchain FAILED transaction (GetTransaction), then find a second comparable genuine failure with independently documented resolution.
+3. Run the app's complete reviewer-confirmation → Walrus write → second-case recall loop, not just the successful standalone SDK smoke test.
+4. Collect at least 10 distinct completed Mainnet memories with documented provenance. Never pretend the one integration smoke memory represents a real incident.
+5. Capture timestamps and proof in EVIDENCE.md; no fabricated demo activity.
 
 ## Evidence register
 - HACKATHON.md, RESEARCH.md, IDEATION.md
@@ -73,10 +75,10 @@ Deployment: NOT STARTED. Submission: NOT STARTED. Official deadline 2026-11-10 1
 ## Specialist handoffs
 Research: evidence-backed ecosystem need; real case pair still missing.
 Product Critic: MODIFY inside approved incident-memory thesis; no auto-fix.
-Engineering: code scaffold present; deterministic tests pass; actual sponsor integrations blocked.
+Engineering: code scaffold present; deterministic tests pass; isolated live Tatum/Walrus credential probes VERIFIED. Integrated product routes and real incident-case workflow still unproven.
 Demo Director: early architecture specified but no recording or verified demo.
-Proof: EVIDENCE.md records gaps; no real integration proof.
+Proof: EVIDENCE.md now records real authenticated Tatum service read and first Walrus Mainnet smoke blob+recall, with remaining integration gaps.
 HQ: continue build/technical gate; do not advance to product review or submission.
 
 ## Checkpoint
-Revision 5 — 2026-11-03. Final git SHA to be recorded after implementation commit.
+Revision 6 — 2026-11-04. Previous implementation commit 836331c; new evidence checkpoint to be recorded.
