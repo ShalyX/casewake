@@ -1,7 +1,7 @@
 # PROJECT
 
 ## Current milestone
-HUMAN_IDEA_GATE
+HUMAN_IDEA_GATE — expanded ecosystem-idea exploration (no product lock).
 
 ## Completed work
 - INTAKE: official event page and formal rules verified.
@@ -10,7 +10,7 @@ HUMAN_IDEA_GATE
 - IDEATION: weak concepts eliminated; three materially different candidates ranked.
 
 ## Active work
-User narrowed the field to EchoLedger and Watchline and asked to take both further. Deep validation is complete in VALIDATION_1_2.md. Operator recommendation remains EchoLedger, with Watchline retained as the live alternate. Shared existential spike is prepared conceptually: same Tatum transaction normalizer + Walrus structured-memory adapter should test both behaviors before final lock.
+2026-11-03: User intentionally PARKED both EchoLedger and Watchline and directed research toward ecosystem-wide problems. Completed exploratory ecosystem research in ECOSYSTEM_RESEARCH.md and ideation in ECOSYSTEM_IDEATION.md. Top exploratory candidates: Incident Memory; Indexer Recovery; Compatibility Desk. Existing personal-product validation remains intact, no merge, no lock. Technical spike remains unproven.
 
 ## Known blockers
 - Product thesis is not yet locked; user is comparing two finalists.
@@ -38,7 +38,7 @@ Not started.
 NOT_STARTED.
 
 ## Next recommended action
-Run the shared real integration spike as soon as Tatum + Walrus credentials are available, then choose between EchoLedger and Watchline based on recall reliability and judge-visible behavior. If a product decision must be made before the spike, lock EchoLedger.
+Discuss ecosystem candidates with user. Recommend Incident Memory and Indexer Recovery for next adversarial comparison (Compatibility Desk fallback), while keeping EchoLedger and Watchline parked. Test Tatum Sui gRPC + Walrus Mainnet write/recall when credentials are available. Before lock, verify B2B developer-ops suitability for the Smart Agents track and acquire authentic incident/metrics proof.
 
 ## Evidence register
 - HACKATHON.md: official rules/requirements, checked 2026-11-01.
@@ -46,6 +46,8 @@ Run the shared real integration spike as soon as Tatum + Walrus credentials are 
 - RESEARCH.md: web evidence + technology opportunity map, checked 2026-11-01.
 - IDEATION.md: scored candidates and eliminations, 2026-11-01.
 - VALIDATION_1_2.md: deep finalist comparison, sponsor-fit risks, shared derisk plan, 2026-11-01.
+- ECOSYSTEM_RESEARCH.md: six sourced ecosystem-level pain areas, competitor coverage, caveats, 2026-11-03.
+- ECOSYSTEM_IDEATION.md: five ecosystem product opportunities, eliminations, ranking, demo and kill tests, 2026-11-03.
 
 ## Decision log and lock revisions
 - 2026-11-01: Do not optimize around the disputed third $500 special award until clarified.
@@ -60,13 +62,13 @@ Judge/Rubric: completed; strongest proof is real RPC -> teach -> Mainnet memory 
 Product Critic/Ideation: completed; EchoLedger 42/45, Watchline 39/45, Signalbook 32/45.
 
 ## Pending human gate
-Type: idea selection.
-Question: Which thesis do we lock after deepening — EchoLedger or Watchline?
-Recommendation: EchoLedger.
-Independent work completed while gate is open: deep validation and shared integration-spike design. Real integration proof now requires external credentials.
+Type: idea selection (expanded, not yet resolved).
+Question: Which, if any, ecosystem thesis should receive deeper validation: Incident Memory, Indexer Recovery, or Compatibility Desk? EchoLedger and Watchline remain parked, selectable later.
+Recommendation: deepen Incident Memory first; Indexer Recovery second. No product is locked.
+Independent research/ideation done; real integration proof requires credentials.
 
 ## Freeze time and deadline buffer
 To set after product lock and technical spike. Absolute submission deadline: 2026-11-10 17:00 UTC.
 
 ## Checkpoint revision and last verified time
-Revision 1 — 2026-11-01.
+Revision 3 — 2026-11-03. Research-based exploration, no live integration claims.

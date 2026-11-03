@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 2,
+  "revision": 3,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "HUMAN_IDEA_GATE",
   "active_specialist": null,
@@ -8,10 +8,16 @@
   "pending_gate": {
     "id": "idea-001",
     "type": "idea_selection",
-    "reason": "User narrowed the field to two finalists and requested deeper validation. Deep validation is complete; final product lock still requires a choice.",
-    "exact_question": "Which thesis do we lock after deepening: EchoLedger or Watchline?",
-    "recommendation": "EchoLedger",
-    "choices": ["EchoLedger", "Watchline"],
+    "reason": "User parked EchoLedger and Watchline and requested ecosystem-need research. Ecosystem shortlist is now available, but no new product has been selected.",
+    "exact_question": "Which ecosystem direction, if any, should receive adversarial validation next: Incident Memory, Indexer Recovery, or Compatibility Desk? Original finalists remain parked.",
+    "recommendation": "Incident Memory first; Indexer Recovery second.",
+    "choices": [
+      "Incident Memory",
+      "Indexer Recovery",
+      "Compatibility Desk",
+      "Return to EchoLedger or Watchline",
+      "Explore more ecosystem gaps"
+    ],
     "scope": "product_thesis",
     "resume_phase": "VALIDATION"
   },
@@ -40,9 +46,13 @@
     "INTAKE": "passed: official rules and requirements verified 2026-11-01",
     "RUBRIC_DECODE": "passed: four criteria mapped to visible proof",
     "RESEARCH": "passed: pain points, alternatives, sponsor fit, risks documented",
-    "IDEATION": "passed: three candidates ranked and recommendation recorded"
+    "IDEATION": "passed: three candidates ranked and recommendation recorded",
+    "ECOSYSTEM_RESEARCH": "Exploratory six-issue opportunity map documented in ECOSYSTEM_RESEARCH.md, 2026-11-03",
+    "ECOSYSTEM_IDEATION": "Exploratory five-concept shortlist documented in ECOSYSTEM_IDEATION.md, 2026-11-03; no thesis selected"
   },
-  "blockers": ["Real Tatum/Walrus integration spike requires credentials not currently present in the local environment."],
-  "next_action": "Choose EchoLedger or Watchline; recommendation EchoLedger. When credentials are available, run the shared Tatum transaction + Walrus memory recall spike before PRODUCT_LOCK/TECHNICAL_DERISK advances.",
-  "updated_at": "2026-11-01T15:14:00+01:00"
+  "blockers": [
+    "Real Tatum/Walrus integration spike requires credentials not currently present in the local environment."
+  ],
+  "next_action": "Compare ecosystem shortlist to original parked candidates, then optionally validate Incident Memory and Indexer Recovery. Confirm Smart Agents track fit and prove authenticated Tatum gRPC plus Walrus Mainnet read/write before building.",
+  "updated_at": "2026-11-03T18:05:00+01:00"
 }
