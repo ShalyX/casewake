@@ -1,77 +1,82 @@
-# PROJECT
+# PROJECT — Total Recall / Incident Memory
 
 ## Current milestone
-HUMAN_IDEA_GATE — ecosystem finalists deepened with adversarial validation (no thesis locked).
+PRODUCT_LOCK completed at thesis level. DEPENDENCY_ATTACK and BUILD_VERTICAL_SLICE in progress. No completed, real end-to-end sponsor proof.
 
-## Completed work
-- INTAKE: official event page and formal rules verified.
-- RUBRIC_DECODE: all four weighted criteria mapped to judge-visible proof.
-- RESEARCH: real pain, workarounds, sponsor fit, risks, and opportunity strengths documented.
-- IDEATION: weak concepts eliminated; three materially different candidates ranked.
+## Selected thesis
+User explicitly selected Incident Memory on 2026-11-03. PRODUCT.md revision 1 is source of truth; product *brand name* remains unselected. No merge with Indexer Recovery or personal finance candidates.
+
+## Completed
+- Intake, rubric decode and ecosystem research/ideation, plus deep competitive validation.
+- Human idea gate: Incident Memory chosen on 2026-11-03.
+- Locked user/problem/workflow/magic moment/non-goals in PRODUCT.md revision 1.
+- Wrote DEMO.md architecture, DEPENDENCY_ATTACK.md, and root README.
+- First implementation scaffold written in web/: separate Next landing and /workspace; server-side Tatum gRPC, Walrus memory and protected review routes; explicit configuration/missing-proof states.
+- Previous synthetic safety spike: 13/13 Python tests passed (2026-11-03).
+- Current TypeScript incident fingerprint/matching/serialization logic: 8/8 synthetic assertions passed using Node 24 (2026-11-03). This is NOT Mainnet integration proof.
 
 ## Active work
-2026-11-03: User deliberately PARKED EchoLedger and Watchline and asked to deepen ecosystem finalists. Incident Memory and Indexer Recovery were evaluated adversarially in VALIDATION_ECOSYSTEM_FINALISTS.md. Both received MODIFY verdicts; Incident Memory is the stronger competition candidate, Indexer Recovery contingent on real indexer telemetry. Ran 13 deterministic safety-filter tests with SYNTHETIC fixtures; all passed. No real Tatum gRPC, Walrus Mainnet, or operator metrics are verified; no concept locked.
+- Dependency installation on connected Windows PC via npm, which is taking unusually long. The scaffold may not be fully installable/buildable yet; do not call the UI compiled or deployed without test evidence.
+- Technical proof needed: Tatum authenticated Sui gRPC, authentic failed digest pair, human-confirmed fix, real Walrus rememberAndWait and recall.
+- Naming, design lock, actual visual QA, demo video, blog and submission remain future milestones.
 
-## Known blockers
-- Product thesis is not yet locked; user is comparing two finalists.
-- Shared real integration spike is blocked on local credentials: `TATUM_API_KEY`, `MEMWAL_PRIVATE_KEY`, `MEMWAL_ACCOUNT_ID`, and relayer/server URL are not currently present in the environment.
-- This does not block product comparison, only proof of the sponsor integrations.
+## External blockers
+- TATUM_API_KEY not configured in observed Windows process environment.
+- MEMWAL_PRIVATE_KEY and MEMWAL_ACCOUNT_ID not configured in observed environment.
+- No verified compatible pair of genuine failed Sui transaction digests and real resolved diagnosis.
+- No organizer confirmation yet that B2B engineering incidents fit the Smart Agents track.
+- Write gateway disabled until WORKSPACE_WRITE_KEY configured.
 
-## Technical risks
-- Walrus Memory Mainnet remember/recall must work with real credentials/account.
-- Tatum Sui RPC must return usable real data for the selected workflow.
-- Never store private keys/secrets as memories.
-
-## Design risks
-Do not polish before vertical slice. Judge-facing learning effect must be visually obvious.
-
-## Demo risks
-If the before/teach/after behavior change is not visible, the strongest award path is lost.
+## Technical risks / caveats
+- Tatum official gRPC endpoint uses x-api-key metadata, not old Sui JSON-RPC.
+- Walrus remember acceptance is asynchronous; only completed blob_id proves storage.
+- Walrus namespace is owner-scoped; shared case catalog requires careful operator-mediated access.
+- Sui SDK/client version is not encoded in a chain digest and must be reviewer-supplied. Never infer it from transaction alone.
+- Source error/status normalization must be confirmed with live Tatum output, not only assumed from SDK generated types.
+- Current reviewer token is a local MVP guard, not a production auth system. Do not publicly enable writes without more security.
 
 ## Evidence gaps
-No Mainnet memory writes, no authenticated Tatum RPC calls, no genuine matched pair of failed Sui transaction digests, no connected real indexer metrics, no user validation, no screenshots, deployment, or submission. 13 synthetic-fixture unit tests passed on 2026-11-03; they establish only the deterministic review filters.
+No authenticated Tatum call, Walrus Mainnet blob, 10 completed memories, live screenshot review, public deployment, independently validated user demand, verified incident pair, or completed demo. See EVIDENCE.md.
 
-## Deployment state
-Not started.
+## Product and design risks
+- Never become a generic AI error-explainer. The product must reuse verified cases, not merely summarize failures.
+- Must distinguish transport errors, onchain failures and successful transactions.
+- Nonmatches must be explicitly rejected, and matching only offers review recommendations.
+- Name and brand kit deliberately postponed until a collision-checked shortlist exists.
+- Visual QA still required after dependency installation; CSS/JSX existing is not proof of UI quality.
 
-## Submission state
-NOT_STARTED.
+## Deployment / submission
+Deployment: NOT STARTED. Submission: NOT STARTED. Official deadline 2026-11-10 17:00 UTC.
 
-## Next recommended action
-Lead with Incident Memory: find two authentic analog failed onchain Sui digests plus an independently confirmed human fix; then prove Tatum Sui gRPC status/effects and MemWal Mainnet remember-job-complete/recall with own account. If impossible, do not fake the demo: compare the conditional Indexer Recovery path only if real metrics are available, or revisit parked EchoLedger/Watchline. Confirm B2B operations fit to Smart Agents track before product lock.
+## Next action
+1. Finish dependency installation, run `npm run build`, inspect actual UI and fix errors.
+2. Obtain Tatum API key and MemWal Mainnet delegate/account securely; never commit or paste credentials in chat.
+3. Fetch real failed digests from Tatum and test Walrus completed write+recall. Capture proof in EVIDENCE.md.
+4. Until then, use synthetic tests only for engineering checks, never judge-facing claims.
 
 ## Evidence register
-- HACKATHON.md: official rules/requirements, checked 2026-11-01.
-- SCORECARD.md: rubric decode, checked 2026-11-01.
-- RESEARCH.md: web evidence + technology opportunity map, checked 2026-11-01.
-- IDEATION.md: scored candidates and eliminations, 2026-11-01.
-- VALIDATION_1_2.md: deep finalist comparison, sponsor-fit risks, shared derisk plan, 2026-11-01.
-- ECOSYSTEM_RESEARCH.md: six sourced ecosystem-level pain areas, competitor coverage, caveats, 2026-11-03.
-- ECOSYSTEM_IDEATION.md: five ecosystem product opportunities, eliminations, ranking, demo and kill tests, 2026-11-03.
-- VALIDATION_ECOSYSTEM_FINALISTS.md: adversarial finalist analysis, MVP/demo, source corrections, kill gates, 2026-11-03.
-- EVIDENCE.md: source-checked vs unproven claim registry, 2026-11-03.
-- spikes/ecosystem_spike.py and test_ecosystem_spike.py: 13 passed synthetic-fixture tests, 2026-11-03.
+- HACKATHON.md, RESEARCH.md, IDEATION.md
+- VALIDATION_1_2.md (parked original finalists)
+- ECOSYSTEM_RESEARCH.md, ECOSYSTEM_IDEATION.md, VALIDATION_ECOSYSTEM_FINALISTS.md
+- PRODUCT.md (locked thesis), DEMO.md, DEPENDENCY_ATTACK.md
+- EVIDENCE.md, SCORECARD.md
+- spikes/ (previous synthetic tests), web/scripts/test-incidents.mjs (8 synthetic assertions)
 
-## Decision log and lock revisions
-- 2026-11-01: Do not optimize around the disputed third $500 special award until clarified.
-- 2026-11-01: Generic memory chatbot eliminated.
-- 2026-11-01: EchoLedger recommended; not yet selected.
-- 2026-11-01: User narrowed idea gate to EchoLedger + Watchline for deeper validation; Signalbook dropped from active consideration.
-- 2026-11-01: After deepening, EchoLedger remains recommended because Watchline overlaps an explicit sponsor example and therefore carries a creativity deduction risk.
+## Decision log
+- 2026-11-01: Original three ideas assessed, EchoLedger initially recommended.
+- 2026-11-01: EchoLedger + Watchline deepened, kept alive.
+- 2026-11-03: User parked two personal finalists, requested ecosystem research.
+- 2026-11-03: Incident Memory vs Indexer Recovery validated; both MODIFY, Incident Memory recommended.
+- 2026-11-03: User explicitly selected Incident Memory; thesis lock revision 1. Product brand is not yet locked.
+- 2026-11-03: Never fabricate an incident, Tatum response, Walrus Mainnet write or video.
 
 ## Specialist handoffs
-Research: completed; recommended adaptive finance/wallet semantics.
-Judge/Rubric: completed; strongest proof is real RPC -> teach -> Mainnet memory -> changed later behavior.
-Product Critic/Ideation: completed; EchoLedger 42/45, Watchline 39/45, Signalbook 32/45.
+Research: evidence-backed ecosystem need; real case pair still missing.
+Product Critic: MODIFY inside approved incident-memory thesis; no auto-fix.
+Engineering: code scaffold present; deterministic tests pass; actual sponsor integrations blocked.
+Demo Director: early architecture specified but no recording or verified demo.
+Proof: EVIDENCE.md records gaps; no real integration proof.
+HQ: continue build/technical gate; do not advance to product review or submission.
 
-## Pending human gate
-Type: final idea selection; NOT resolved. The user chose to deepen both ecosystem finalists, not to lock either.
-Question: Once their critical proof gates are attempted, which thesis (Incident Memory, Indexer Recovery, or an earlier parked finalist) should receive PRODUCT_LOCK?
-Recommendation: Incident Memory only if authentic failure/resolution pair and sponsor integrations can be proven; otherwise revisit existing alternatives instead of inventing demo evidence.
-Independent comparative validation and synthetic deterministic-spike completed.
-
-## Freeze time and deadline buffer
-To set after product lock and technical spike. Absolute submission deadline: 2026-11-10 17:00 UTC.
-
-## Checkpoint revision and last verified time
-Revision 4 — 2026-11-03. Source-backed comparison + 13 synthetic tests; no live integration claims.
+## Checkpoint
+Revision 5 — 2026-11-03. Final git SHA to be recorded after implementation commit.

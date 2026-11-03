@@ -1,28 +1,13 @@
 {
   "schema_version": 2,
-  "revision": 4,
+  "revision": 5,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "HUMAN_IDEA_GATE",
-  "active_specialist": null,
-  "human_input_required": true,
-  "pending_gate": {
-    "id": "idea-001",
-    "type": "idea_selection",
-    "reason": "User requested deeper exploration of both ecosystem finalists. Adversarial comparisons and synthetic safety tests complete, but sponsor integrations, authentic incident pair, indexer feed and track fit remain unverified.",
-    "exact_question": "Which product thesis should be locked after the real evidence gates: Incident Memory, Indexer Recovery, or one of the parked alternatives?",
-    "recommendation": "Incident Memory conditional on real authentic digests and sponsor proof; otherwise reconsider alternatives rather than fabricate evidence.",
-    "choices": [
-      "Incident Memory",
-      "Indexer Recovery",
-      "EchoLedger",
-      "Watchline",
-      "Explore further"
-    ],
-    "scope": "product_thesis",
-    "resume_phase": "VALIDATION"
-  },
-  "product_locked": false,
-  "product_lock_revision": null,
+  "phase": "DEPENDENCY_ATTACK",
+  "active_specialist": "Engineering",
+  "human_input_required": false,
+  "pending_gate": null,
+  "product_locked": true,
+  "product_lock_revision": 1,
   "demo_defined": false,
   "technical_risks_cleared": false,
   "vertical_slice_complete": false,
@@ -43,22 +28,28 @@
   "submission_status": "NOT_STARTED",
   "submission_receipt": null,
   "milestones": {
-    "INTAKE": "passed: official rules and requirements verified 2026-11-01",
+    "INTAKE": "passed: official rules verified 2026-11-01",
     "RUBRIC_DECODE": "passed: four criteria mapped to visible proof",
-    "RESEARCH": "passed: pain points, alternatives, sponsor fit, risks documented",
-    "IDEATION": "passed: three candidates ranked and recommendation recorded",
-    "ECOSYSTEM_RESEARCH": "Exploratory six-issue opportunity map documented in ECOSYSTEM_RESEARCH.md, 2026-11-03",
-    "ECOSYSTEM_IDEATION": "Exploratory five-concept shortlist documented in ECOSYSTEM_IDEATION.md, 2026-11-03; no thesis selected",
-    "ECOSYSTEM_DEEP_VALIDATION": "Both finalists narrowed and competitor kill-search documented 2026-11-03; MODIFY verdicts, no product lock",
-    "SYNTHETIC_BEHAVIORAL_SPIKE": "13/13 deterministic safety filter tests passed with synthetic fixtures 2026-11-03; not proof of Tatum/Walrus integration"
+    "RESEARCH": "passed: pain, alternatives and risks documented",
+    "IDEATION": "passed: candidates evaluated",
+    "ECOSYSTEM_RESEARCH": "completed: six source-backed pain areas 2026-11-03",
+    "ECOSYSTEM_IDEATION": "completed: ecosystem candidate shortlist 2026-11-03",
+    "ECOSYSTEM_DEEP_VALIDATION": "completed: MODIFY verdicts, user subsequently selected Incident Memory",
+    "SYNTHETIC_BEHAVIORAL_SPIKE": "13/13 previous Python tests with synthetic fixtures",
+    "HUMAN_IDEA_GATE": "passed: user selected Incident Memory 2026-11-03",
+    "VALIDATION": "MODIFY accepted within selected thesis; sponsor proof remains unproven",
+    "PRODUCT_LOCK": "passed: PRODUCT.md revision 1",
+    "DEMO_ARCHITECTURE": "draft in DEMO.md, not yet proof-backed",
+    "IMPLEMENTATION_SCAFFOLD": "Next UI + API routes written; installation/build not yet confirmed",
+    "INCIDENT_MEMORY_TESTS": "8/8 pure TypeScript synthetic safety assertions passed 2026-11-03"
   },
   "blockers": [
-    "No TATUM_API_KEY in remote PC process environment as of 2026-11-03",
-    "No MEMWAL_PRIVATE_KEY / MEMWAL_ACCOUNT_ID / MEMWAL_SERVER_URL in remote PC process environment",
-    "No genuine matched failed-transaction digest pair and verified resolution identified",
-    "No connected real indexer metrics / reproduction environment",
-    "B2B developer-infrastructure workflow track eligibility not explicitly verified"
+    "No TATUM_API_KEY configured in PC environment",
+    "No MEMWAL_PRIVATE_KEY / MEMWAL_ACCOUNT_ID configured",
+    "No two authentic comparable failed Sui transaction digests with independently confirmed resolution",
+    "Next.js npm installation/build not yet verified",
+    "Smart Agents track applicability to B2B developer workflow not organizer-confirmed"
   ],
-  "next_action": "Find 2 authentic comparable failed Sui onchain digests and human-verified remediation; configure Tatum gRPC API and Walrus MemWal delegate account through secure environment; prove real end-to-end. If unavailable, evaluate real indexer metrics or parked personal finalists. Confirm B2B track fit.",
-  "updated_at": "2026-11-03T18:05:00+01:00"
+  "next_action": "Finish Next.js dependency install and build verification; configure server-only Tatum and MemWal credentials; prove real failed digest → human-approved fix → completed Mainnet Walrus blob → later recall. Capture evidence before submission.",
+  "updated_at": "2026-11-03T17:54:18.617Z"
 }

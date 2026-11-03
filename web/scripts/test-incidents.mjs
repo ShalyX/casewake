@@ -1,0 +1,16 @@
+import assert from "node:assert/strict";
+import { fingerprintError, encodeMemory, decodeMemory, assessCase } from "../src/lib/incidents.ts";
+const raw = "MoveAbort in 0xAAAABBBBCCCCDDDDEEEEFFFFAAAABBBBCCCCDDDDEEEEFFFF: module::func code 7";
+const exact = fingerprintError(raw);
+assert.equal(exact, fingerprintError(raw.replace("0xAAAABBBBCCCCDDDDEEEEFFFFAAAABBBBCCCCDDDDEEEEFFFF", "0x1234567890abcdef1234567890abcdef1234567890abcdef")));
+const obs = { digest: "REAL_DIGEST_PLACEHOLDER_NOT_PROOF", network:"sui-mainnet", source:"Tatum Sui gRPC", observedAt:new Date().toISOString(), outcome:"failed", errorText:raw, fingerprint:exact, packageId:null };
+const incident = { schema:"incident-memory/v1", id:"fixture-1", digest:"PAST_PLACEHOLDER", network:"sui-mainnet", fingerprint:exact, errorText:raw, packageId:null, sdkVersion:null, diagnosis:"synthetic demonstration only", resolutionSteps:"Inspect the called Move function and arguments, then re-test", evidenceUrl:"https://example.com/test", reviewer:"test-engineer", verifiedAt:new Date().toISOString(), status:"human-verified" };
+const serialized=encodeMemory(incident);
+assert.deepEqual(decodeMemory(serialized),incident);
+assert.equal(assessCase(obs,incident,0.1).verdict,"eligible-for-review");
+assert.equal(assessCase({...obs,outcome:"succeeded"},incident,0.1).verdict,"incompatible");
+assert.equal(assessCase({...obs,fingerprint:fingerprintError("InsufficientGas")},incident,0.1).verdict,"incompatible");
+assert.equal(assessCase({...obs,packageId:"0x1"},{...incident,packageId:"0x2"},0.1).verdict,"incompatible");
+assert.equal(decodeMemory("malformed sample"),null);
+assert.equal(decodeMemory(serialized.replace('"status":"human-verified"','"status":"unverified"')),null);
+console.log("Passed 8 deterministic memory safety assertions (synthetic fixtures; no sponsor APIs).");
