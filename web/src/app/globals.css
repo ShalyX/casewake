@@ -247,3 +247,21 @@ button:disabled{opacity:.46;cursor:not-allowed}
 .proof-notes h3{font:600 22px 'Space Grotesk',sans-serif}
 .proof-notes p{color:#a8baaa;line-height:1.7}
 @media(max-width:700px){.proof-compare,.proof-notes{grid-template-columns:1fr}.proof-page{padding:25px 22px 60px}.proof-page .proof-container{margin:40px auto}}
+
+/* Casewake: offset evidence brackets, not a generic chain or diamond mark. */
+.brand{letter-spacing:-.045em}
+.brand-mark,.site-footer .brand-mark{transform:none;border:0;width:30px;height:30px;display:grid;place-items:center}
+.brand-mark:before,.brand-mark:after{content:"";position:absolute;top:4px;height:22px;width:10px;border:2px solid var(--green)}
+.brand-mark:before{left:2px;border-right:0}
+.brand-mark:after{right:2px;border-left:0}
+.brand-mark>span{height:4px;width:10px;background:var(--green)}
+.brand-light{font-weight:400}
+.demo-presets{border-top:1px solid #455649;margin-top:24px;padding-top:18px}
+.demo-presets-label{font:10px 'DM Mono',monospace;color:#a8ba97;letter-spacing:.055em}
+.demo-preset-list{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 12px}
+.demo-preset-list button{display:flex;align-items:center;gap:9px;color:#e5eddf;background:#203025;border:1px solid #577050;padding:11px 13px;font-size:12px}
+.demo-preset-list button:hover:not(:disabled){background:#2b432d;border-color:#c8ed9b}
+.demo-preset-list button small{color:#a0cd87;font:10px 'DM Mono',monospace}
+.demo-preset-list button span{color:#c8ed9b}
+.demo-presets>p{font-size:11px;color:#9db39d;line-height:1.65;margin:0}
+:where(a,button,input,textarea):focus-visible{outline:2px solid #c8ed9b;outline-offset:3px}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 function Brand() {
-  return <Link className="brand" href="/"><span className="brand-mark"><span/></span><span>INCIDENT<span className="brand-light">/MEMORY</span></span></Link>;
+  return <Link className="brand" href="/"><span className="brand-mark"><span/></span><span>CASEWAKE</span></Link>;
 }
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="pulse" /> SUI ENGINEERING INTELLIGENCE <span className="slash">/</span> EARLY BUILD</div>
           <h1>The failure ends.<br/><em>The lesson</em><br/>shouldn&apos;t.</h1>
-          <p>Real transaction evidence. Human-verified fixes. Recalled when the next incident looks familiar. An engineering memory that gets more useful each time it&apos;s corrected.</p>
+          <p>Real onchain failure evidence, remembered precedents, and simulation-tested troubleshooting. When the same failure returns, the investigation no longer starts at zero.</p>
           <div className="hero-actions"><Link href="/workspace" className="primary-button">Investigate an incident <span>↗</span></Link><a href="#method" className="quiet-button">See the method <span>↓</span></a></div>
           <div className="trust-line"><span className="tiny-square"/> Read-only Sui evidence <span className="dot-separator">·</span> Reviewer-approved memory <span className="dot-separator">·</span> No automatic chain actions</div>
         </div>
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </section>
       <section id="why" className="manifesto"><div className="container manifesto-inner"><div className="eyebrow">A SHARED ENGINEERING ADVANTAGE</div><h2>Blockchains preserve<br/><i>the event.</i><br/>We preserve <i>the answer.</i></h2><p>A source-backed memory of engineering decisions is more valuable than another page of raw transaction logs.</p><Link href="/workspace" className="primary-button">Enter the workspace <span>↗</span></Link></div></section>
-      <footer className="site-footer container"><Brand /><span>Early prototype · 10 authentic Mainnet failure observations · verified remedies pending.</span><span>Built for Total Recall / 2026</span></footer>
+      <footer className="site-footer container"><Brand /><span>12 completed Mainnet memories · simulation-tested runbook · historical repairs not claimed.</span><span>Built for Total Recall / 2026</span></footer>
     </main>
   );
 }

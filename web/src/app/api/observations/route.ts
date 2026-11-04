@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { storeObservedCase } from "@/lib/observations";
+import { isPublicDemoMode } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
 export async function POST(request: NextRequest) {
+  if (isPublicDemoMode()) return NextResponse.json({error:"Public demo is strictly read-only. Memory writes remain disabled."},{status:403});
   if (!process.env.WORKSPACE_WRITE_KEY) return NextResponse.json({error:"Reviewer writes are not configured."},{status:503});
   if (request.headers.get("x-workspace-key") !== process.env.WORKSPACE_WRITE_KEY)
     return NextResponse.json({error:"Reviewer access required."},{status:403});

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { recallAllPrecedents } from "@/lib/unified-recall";
+import { isAllowedPublicDemoDigest } from "@/lib/public-demo";
 
 export const runtime = "nodejs";
 export const maxDuration = 90;
@@ -13,6 +14,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error:"Enter a valid Sui transaction digest."},{status:400});
     }
     digest = body.digest;
+    if (!isAllowedPublicDemoDigest(digest)) {
+      return NextResponse.json({error:"Only the three published real evidence digests are available in the public demo."},{status:403});
+    }
   } catch {
     return NextResponse.json({error:"Invalid request body."},{status:400});
   }

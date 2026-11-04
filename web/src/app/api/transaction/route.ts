@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction, ConfigurationError } from "@/lib/tatum";
+import { isAllowedPublicDemoDigest, isPublicDemoMode } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json() as { digest?: unknown };
     if (typeof body.digest !== "string" || body.digest.length > 100)
       return NextResponse.json({ error: "Enter a Sui transaction digest." }, { status: 400 });
-    const transaction = await getTatumTransaction(body.digest.trim());
+    const digest = body.digest.trim();
+    if (!isAllowedPublicDemoDigest(digest))
+      return NextResponse.json({error:"The public demo only supports the three displayed real transaction examples. Private operator mode supports other digests."},{status:403});
+    const transaction = await getTatumTransaction(digest);
     return NextResponse.json({ transaction });
   } catch (error) {
     return NextResponse.json({
-      error: error instanceof ConfigurationError ? error.message
+      error: isPublicDemoMode() ? "The Sui gateway is temporarily unavailable. Retry the example." : error instanceof ConfigurationError ? error.message
         : error instanceof Error ? error.message : "Unable to look up this transaction.",
     }, { status: error instanceof ConfigurationError ? 503 : 422 });
   }

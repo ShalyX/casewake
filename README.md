@@ -1,8 +1,8 @@
-# Incident Memory — Sui engineering memory
+# Casewake — evidence-backed Sui engineering memory
 
 An evidence-backed agent for Sui dApp builders: a real failed transaction is observed through Tatum, related past failures are recalled from Walrus Mainnet, and only human-confirmed resolutions can become recommended fixes.
 
-**Working title, not the final brand name.** Project thesis locked on 2026-11-03. Deadline: November 10, 2026, 17:00 UTC.
+**Casewake is the release-candidate brand.** The underlying Incident Memory thesis was locked on 2026-11-03. Naming collision checks are preliminary, not trademark clearance. Deadline: November 10, 2026, 17:00 UTC.
 
 ## Current verified state — November 4, 2026
 - Next.js 16.4.4 installed with pnpm; `pnpm lint` and `pnpm build` last executed during QA; see `PROJECT.md` for latest verified result.

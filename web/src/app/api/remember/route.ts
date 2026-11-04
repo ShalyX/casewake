@@ -3,10 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { safeText, type VerifiedCase } from "@/lib/incidents";
 import { storeVerifiedIncident } from "@/lib/walrus";
+import { isPublicDemoMode } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
 export async function POST(request: NextRequest) {
+  if (isPublicDemoMode()) return NextResponse.json({error:"Public demo is read-only; reviewer storage is disabled."},{status:403});
   const requiredKey = process.env.WORKSPACE_WRITE_KEY;
   if (!requiredKey) return NextResponse.json({ error: "Write access is disabled until WORKSPACE_WRITE_KEY is configured." }, { status: 503 });
   // Reviewer token is never persisted in the browser; this route must remain server-only.
