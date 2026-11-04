@@ -17,7 +17,7 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
   });
   const client = new SuiGrpcClient({ network: "mainnet", transport });
   const { response } = await client.ledgerService.getTransaction(
-    { digest, readMask: { paths: ["digest", "effects"] } },
+    { digest, readMask: { paths: ["digest", "effects", "transaction"] } },
     { meta: { "x-api-key": apiKey }, timeout: 15000 },
   );
   const transaction = response.transaction;
@@ -31,6 +31,11 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
   const errorText = outcome === "failed"
     ? String(errorObj?.description || errorObj?.message || "Onchain execution failed (no details returned).")
     : null;
+  const commandNumber = errorText?.match(/\bin command (\d+)\b/);
+  const failedCommandIndex = commandNumber ? Number(commandNumber[1]) : null;
+  type TxCommands = {kind?:{data?:{programmableTransaction?:{commands?:Array<{command?:{oneofKind?:string}}>}}}};
+  const txCommands = (transaction.transaction as TxCommands | undefined)?.kind?.data?.programmableTransaction?.commands;
+  const failedCommandKind = failedCommandIndex !== null ? txCommands?.[failedCommandIndex]?.command?.oneofKind ?? null : null;
   return {
     digest: transaction.digest || digest,
     network: "sui-mainnet",
@@ -41,5 +46,7 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     fingerprint: errorText ? fingerprintError(errorText) : null,
     // Never invent a Move package from an error string; fill only from verified decoded input.
     packageId: null,
+    failedCommandIndex,
+    failedCommandKind,
   };
 }

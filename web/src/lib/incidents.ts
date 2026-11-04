@@ -7,6 +7,8 @@ export type ObservedTransaction = {
   errorText: string | null;
   fingerprint: string | null;
   packageId: string | null;
+  failedCommandIndex?: number | null;
+  failedCommandKind?: string | null;
 };
 
 export type VerifiedCase = {

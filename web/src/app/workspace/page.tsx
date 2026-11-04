@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; network: string; checksAreLive: boolean };
-type Transaction = { digest: string; network: string; source: string; observedAt: string; outcome: "failed" | "succeeded" | "unknown"; errorText: string | null; fingerprint: string | null; packageId: string | null };
+type Transaction = { digest: string; network: string; source: string; observedAt: string; outcome: "failed" | "succeeded" | "unknown"; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
 type Case = { id: string; digest: string; diagnosis: string; resolutionSteps: string; evidenceUrl: string; reviewer: string; verifiedAt: string; errorText: string; sdkVersion: string | null };
 type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[] };
 type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
@@ -31,6 +31,7 @@ export default function Workspace() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [observedPrecedents, setObservedPrecedents] = useState<ObservedPrecedent[]>([]);
   const [inventory, setInventory] = useState<Inventory | null>(null);
+  const [inventoryUnavailable, setInventoryUnavailable] = useState(false);
   const [observationOnly, setObservationOnly] = useState(false);
   const [recallNote, setRecallNote] = useState("");
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
@@ -46,10 +47,10 @@ export default function Workspace() {
   const [verified, setVerified] = useState(false);
   useEffect(() => {
     fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
-    fetch("/api/memories").then((r) => r.ok ? r.json() : null).then(setInventory).catch(() => {});
+    fetch("/api/memories").then((r) => { if (!r.ok) throw new Error("Relayer unavailable"); return r.json(); }).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
   }, []);
   async function refreshInventory() {
-    try { const r=await fetch("/api/memories"); if(r.ok)setInventory(await r.json() as Inventory); } catch { /* inventory is supplementary */ }
+    try { const r=await fetch("/api/memories"); if(r.ok){setInventory(await r.json() as Inventory);setInventoryUnavailable(false);}else{setInventoryUnavailable(true);} } catch { setInventoryUnavailable(true); }
   }
 
   useEffect(() => {
@@ -66,6 +67,19 @@ export default function Workspace() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status?.tatumConfigured]);
 
+  async function loadRecall(observed: Transaction) {
+    try {
+      const recalled = await postJson("/api/recall", { digest: observed.digest });
+      setCandidates((recalled.candidates || []) as Candidate[]);
+      setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
+      setRecallNote(String(recalled.reason || ""));
+    } catch {
+      setCandidates([]);
+      setObservedPrecedents([]);
+      setRecallNote("Walrus recall is temporarily unavailable. Tatum transaction evidence and completed storage receipts remain valid. Try again when the relayer recovers.");
+    }
+  }
+
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
@@ -77,10 +91,7 @@ export default function Workspace() {
       setTx(observed);
       if (observed.outcome === "failed" && status?.walrusConfigured) {
         setPhase("recalling");
-        const recalled = await postJson("/api/recall", { digest: observed.digest });
-        setCandidates((recalled.candidates || []) as Candidate[]);
-        setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
-        setRecallNote(String(recalled.reason || ""));
+        await loadRecall(observed);
       } else if (observed.outcome === "failed") {
         setRecallNote("Walrus Memory has not been configured. Transaction evidence is separate from persistent recall.");
       } else {
@@ -102,10 +113,7 @@ export default function Workspace() {
       setShowEditor(false);
       await refreshInventory();
       setPhase("recalling");
-      const recalled = await postJson("/api/recall", { digest: tx.digest });
-      setCandidates((recalled.candidates || []) as Candidate[]);
-        setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
-      setRecallNote(String(recalled.reason || ""));
+      await loadRecall(tx);
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
   }
@@ -120,10 +128,7 @@ export default function Workspace() {
       setProof(stored);
       await refreshInventory();
       setPhase("recalling");
-      const recalled=await postJson("/api/recall",{digest:tx.digest});
-      setCandidates((recalled.candidates || []) as Candidate[]);
-      setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
-      setRecallNote(String(recalled.reason || ""));
+      await loadRecall(tx);
     } catch(e){setError(e instanceof Error ? e.message : "Observation write failed.");}
     finally{setPhase("idle");}
   }
@@ -145,7 +150,7 @@ export default function Workspace() {
 
         <div className="health-row" role="status">
           <div><span className={status?.tatumConfigured ? "health-indicator ready" : "health-indicator"} /> Tatum gRPC <b>{status ? (status.tatumConfigured ? (tx ? "Live transaction fetched" : "Key configured · inspect to verify") : "Key required") : "Checking…"}</b></div>
-          <div><span className={status?.walrusConfigured ? "health-indicator ready" : "health-indicator"} /> Walrus Memory <b>{status ? (status.walrusConfigured ? (inventory ? "Mainnet inventory verified" : "Credentials configured · checking") : "Credentials required") : "Checking…"}</b></div>
+          <div><span className={status?.walrusConfigured ? "health-indicator ready" : "health-indicator"} /> Walrus Memory <b>{status ? (status.walrusConfigured ? (inventory ? "Mainnet inventory verified" : inventoryUnavailable ? "Relayer read temporarily unavailable" : "Credentials configured · checking") : "Credentials required") : "Checking…"}</b></div>
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
 
@@ -170,6 +175,8 @@ export default function Workspace() {
               <div className="evidence-row"><span>NETWORK</span><strong>{tx.network}</strong></div>
               <div className="evidence-row"><span>PROVIDER</span><strong>{tx.source}</strong></div>
               <div className="error-block"><span>EXECUTION STATUS</span><pre>{tx.errorText || (tx.outcome === "succeeded" ? "Transaction executed successfully." : "No reliable failure classification returned.")}</pre></div>
+              {tx.failedCommandIndex !== null && tx.failedCommandIndex !== undefined && <div className="evidence-row"><span>FAILED STEP</span><strong>Command #{tx.failedCommandIndex} · {tx.failedCommandKind || "unclassified"}</strong></div>}
+              {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
                 <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record verified fix"} ↗</button>

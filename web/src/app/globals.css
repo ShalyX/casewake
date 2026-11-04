@@ -213,3 +213,8 @@ button:disabled{opacity:.46;cursor:not-allowed}
 .inventory-count{padding:15px;border:1px solid #586e50;display:flex;gap:18px;align-items:center;background:#202e24;margin:18px 0}
 .inventory-count strong{font:600 37px 'Space Grotesk',sans-serif;color:#c8ed9b}
 .inventory-count span{font:10px/1.5 'DM Mono',monospace;color:#b3c5ae}
+
+.guidance-review{background:#273126;border:1px solid #6a7754;padding:18px;margin-top:17px}
+.guidance-review strong{font:10px 'DM Mono',monospace;letter-spacing:.04em;color:#d4e8ad}
+.guidance-review p{font-size:12px;line-height:1.65;color:#bfcfbb}
+.guidance-review a{font-size:11px;color:#caeeab;text-decoration:underline;text-underline-offset:3px}
