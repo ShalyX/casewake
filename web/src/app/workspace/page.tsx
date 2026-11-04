@@ -149,7 +149,7 @@ export default function Workspace() {
     <main className="workspace-shell">
       <header className="workspace-header">
         <Link href="/" className="brand"><span className="brand-mark"><span/></span><span>CASEWAKE</span></Link>
-        <nav><span className="workspace-env"><span className="pulse"/> SUI MAINNET</span><Link href="/">About <span>↗</span></Link></nav>
+        <nav><span className="workspace-env"><span className="pulse"/> SUI MAINNET</span><Link href="/journal/casewake">Field notes <span>↗</span></Link><Link href="/">About <span>↗</span></Link></nav>
       </header>
       <div className="workspace-container">
         <div className="workspace-title-row">

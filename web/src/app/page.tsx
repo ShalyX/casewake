@@ -10,7 +10,7 @@ export default function Home() {
       <div className="ambient ambient-one" aria-hidden="true" />
       <header className="site-header container">
         <Brand />
-        <nav aria-label="Primary"><a href="#method">Method</a><a href="#why">Why it matters</a><Link href="/workspace" className="nav-cta">Open workspace <span>↗</span></Link></nav>
+        <nav aria-label="Primary"><a href="#method">Method</a><Link href="/journal/casewake">Field notes</Link><a href="#why">Why it matters</a><Link href="/workspace" className="nav-cta">Open workspace <span>↗</span></Link></nav>
       </header>
       <section className="hero container">
         <div className="hero-copy">
