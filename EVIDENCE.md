@@ -20,3 +20,34 @@ Checked 2026-11-04. Statuses describe facts independently of a proposal.
 | Ecosystem users want a new product despite existing debuggers, docs, Rootly | UNPROVEN | proposed 1–2 engineer/operator interviews | No user interviews |
 
 Never describe synthetic test cases as real chain events, verified incident resolutions, production metrics, or sponsor integrations.
+
+## 2026-11-04 — Controlled splitCoins reproduction and tested-memory proof
+
+| Claim | Status | Method/source | Boundaries |
+|---|---|---|---|
+| A coin split overdraw triggers InsufficientCoinBalance | **VERIFIED (LIVE MAINNET SIMULATION)** | `web/scripts/simulate-splitcoins-repro.mjs` via authenticated Tatum `TransactionExecutionService.SimulateTransaction`: first splits 10,000,000 MIST, then tries 20,000,000; failed with `InsufficientCoinBalance in command 1`. Response `evidence/controlled-splitcoins-simulation.json` | Transaction was **not signed or executed**, `gasPaymentMocked=true`. Sender is an address from public chain evidence, not proof of sender consent or a repaired original |
+| Changing the second split amount to 5,000,000 MIST passes identical controlled structure | **VERIFIED (LIVE MAINNET SIMULATION)** | Same source script and Tatum simulator returned `Transaction`, `effectSuccess=true`, no execution error at 2026-11-04T12:59:19Z | This is a reproduced and *simulation-tested* remediation pattern, **not a successful fix executed on a historical sender's transaction** |
+| Simulation-tested procedure persisted on Walrus Memory Mainnet | **VERIFIED (LIVE MAINNET STORAGE AND RECALL)** | `web/scripts/publish-simulation-runbook.mjs`; completed blob `keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw`; job/receipt `evidence/simulation-runbook-receipt.json`; semantic recall found exact evidence hash `bb08e026fddaebfb1167484755cd088236cab4ed232966f6b706376e2b9aac0e` | Extra Mainnet memory distinct from ten factual observations and one smoke test. Status `simulation-tested-not-human-verified`. Doesn't fulfill human-reviewed repair claim |
+| WALRUS SDK's SEAL session built via authenticated Tatum native gRPC | **VERIFIED (INTEGRATION PROBE)** | `web/scripts/seal-session-tatum.mjs`: short-lived signed session via Tatum gRPC and public relayer `/config`; SDK accepted and completed Walrus write | Current MemWal SDK's fallback JSON-RPC endpoint returned HTTP 404. Temporary adapter uses a private SDK `sessionCache` property; pin/test SDK before updating |
+| Application recalls a simulation-tested runbook for a different genuine failed transaction | **VERIFIED (LIVE FULL APP)** | One Walrus query via `src/lib/unified-recall.ts`: `POST /api/recall` for `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` returned 1 simulation runbook, 1 prior real failure observation, 12 hits, `recallDegraded=false` in 5.6s; browser screenshot `evidence/screenshots/simulation-recall-workspace.png` shows runbook and proof link; `/proof/splitcoins` screenshot confirms displayed evidence | It is simulation-tested guidance, **not** a verified human repair of the original historical transaction |
+
+**Do not silently upgrade evidence tiers.** A controlled Mainnet simulation validates a troubleshooting pattern, not a user-approved correction or a successful Mainnet transfer. A genuine reviewer-verified historical incident remains blocked.
+
+## 2026-11-04 — Full in-app Walrus recall recovery and browser proof
+
+- **Root-cause observations:** Windows node fetch intermittently failed with `getaddrinfo EAI_AGAIN relayer.memory.walrus.xyz`; in a separate request Tatum gRPC returned an `RpcError`. DNS subsequently resolved both domains, and Walrus `/health` returned HTTP 200. These were transient network issues, not proof of corrupted memory or invalid credentials.
+- **Application inefficiency repaired:** old `POST /api/recall` executed three parallel MemWal semantic queries with maximum totals of 145 hits. `src/lib/unified-recall.ts` now executes **one** signed Walrus query capped at 25 hits, then independently validates/categorizes human-verified cases, genuine prior failure observations, and simulation-tested runbooks.
+- **Direct MemWal probe:** `web/scripts/probe-single-recall.mjs` returned **12 memories in 3,772 ms**, with runbook ranked first, 10 actual failed transaction observations and 1 older smoke test. This is a live Mainnet read with local delegate auth; no new write.
+- **Live full app:** `POST /api/recall` with real failed digest `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` returned HTTP 200 in **5.6s**, Tatum failure `InsufficientCoinBalance in command 16`, `splitCoins`, 12 Walrus hits, **1 simulation-runbook**, **1 prior observation**, and `recallDegraded=false`. Runbook contained `/proof/splitcoins` and matching evidence SHA-256 `bb08e026fddaebfb1167484755cd088236cab4ed232966f6b706376e2b9aac0e`.
+- **Second genuine positive control:** `XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue` returned one simulation-tested runbook with `recallDegraded=false`.
+- **Genuine negative control:** unrelated `MoveAbort` digest `Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp` returned **zero simulation runbooks**, `recallDegraded=false`, across the same 12 Walrus results.
+- **Browser evidence:** Headless Chrome rendered real `/workspace?digest=BbRZD...` with visible Tatum error evidence, matching saved runbook, correct warning, and proof link, at `evidence/screenshots/simulation-recall-workspace.png`. Separate `/proof/splitcoins` rendered at `evidence/screenshots/simulation-proof-page.png`.
+- **Read-only resilience:** `src/lib/retry-reads.ts` implements bounded retry on transient DNS/network errors for **reads only**; tests `web/scripts/test-retry-reads.mjs` passed (transient recovery, permanent error no-retry, bounded attempts). It is NOT applied to Walrus writes because doing so could duplicate a completed job.
+
+**Still not proven:** any human-reviewed, case-specific fix actually applied to a historical sender's transaction, full public deployment, final demo film or submission. There are 12 Mainnet memories total: 10 legitimate historical failure observations, 1 connection smoke test, 1 controlled simulation-tested runbook; **0 human-verified historical repair memories**.
+
+### Production verification (2026-11-04)
+- `pnpm lint` and `pnpm build` both returned exit code 0. Next.js 16.4.4 generated `/`, `/workspace`, `/proof/splitcoins`, and all server APIs.
+- Clean `pnpm start --hostname 127.0.0.1 --port 4217` served `/workspace` and `/proof/splitcoins` with HTTP 200.
+- Read-only production `POST /api/recall` with `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` returned HTTP 200, genuine Tatum outcome `failed`, **one** Walrus simulation-tested runbook from **12** hits, `recallDegraded=false`, and link `/proof/splitcoins`; elapsed **7,383 ms**.
+- **Status:** production app's Tatum → Walrus → categorized runbook recall is VERIFIED. Historical human-approved repair remains UNVERIFIED.

@@ -218,3 +218,32 @@ button:disabled{opacity:.46;cursor:not-allowed}
 .guidance-review strong{font:10px 'DM Mono',monospace;letter-spacing:.04em;color:#d4e8ad}
 .guidance-review p{font-size:12px;line-height:1.65;color:#bfcfbb}
 .guidance-review a{font-size:11px;color:#caeeab;text-decoration:underline;text-underline-offset:3px}
+
+/* Simulation-tested runbook: visually distinct from human-verified resolutions. */
+.simulation-card{margin:18px 0;padding:20px;background:#273323;border:1px solid #a0bb75}
+.simulation-card-kicker{font:9px 'DM Mono',monospace;letter-spacing:.055em;color:#c9e99d}
+.simulation-card h3{font:600 20px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.045em;margin:16px 0 10px}
+.simulation-card p{font-size:12px;line-height:1.65;color:#c8d6be}
+.simulation-card a{display:block;color:var(--green);font-size:11px;margin-top:14px;text-decoration:underline;text-underline-offset:3px}
+.simulation-card small{display:block;font:9px/1.6 'DM Mono',monospace;color:#9bac91;margin-top:16px}
+.simulation-comparison{display:grid;grid-template-columns:1fr 1fr;border:1px solid #5b7052;margin:17px 0}
+.simulation-comparison span{padding:13px 10px;color:#bcd0b2;font:9px/1.5 'DM Mono',monospace;border-right:1px solid #5b7052}
+.simulation-comparison span:last-child{border-right:0}
+.simulation-comparison strong{display:block;color:#f1f8e8;margin-top:7px;font-size:12px}
+.proof-page{min-height:100vh;padding:40px 4vw 110px;background:#101514}
+.proof-page .proof-container{max-width:1100px;margin:65px auto}
+.proof-page h1{font:600 clamp(46px,6vw,78px)/1.04 'Space Grotesk',sans-serif;letter-spacing:-.065em;margin:25px 0}
+.proof-page h1 em{font-style:normal;color:var(--green)}
+.proof-intro{color:#a9b8ad;line-height:1.8;max-width:750px}
+.proof-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:50px 0 24px}
+.proof-case{background:#1b2620;border:1px solid #5d6b53;padding:30px}
+.proof-case.bad{border-color:#8c6458}
+.proof-case span{font:10px 'DM Mono',monospace;color:#a9bf9b}
+.proof-case.bad span{color:#e4a98f}
+.proof-case h2{font:600 42px 'Space Grotesk',sans-serif;letter-spacing:-.06em;margin:20px 0 6px}
+.proof-case p{line-height:1.65;color:#b7c2b2;font-size:13px}
+.proof-hash{font:12px/1.8 'DM Mono',monospace;color:#c2e6ac;overflow-wrap:anywhere;border-top:1px solid #45604a;padding-top:25px}
+.proof-notes{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin-top:55px}
+.proof-notes h3{font:600 22px 'Space Grotesk',sans-serif}
+.proof-notes p{color:#a8baaa;line-height:1.7}
+@media(max-width:700px){.proof-compare,.proof-notes{grid-template-columns:1fr}.proof-page{padding:25px 22px 60px}.proof-page .proof-container{margin:40px auto}}

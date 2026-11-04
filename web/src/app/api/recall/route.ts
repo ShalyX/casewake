@@ -1,30 +1,59 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
-import { recallIncidentCandidates } from "@/lib/walrus";
-import { recallObservedCases } from "@/lib/observations";
+import { recallAllPrecedents } from "@/lib/unified-recall";
+
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 90;
+
 export async function POST(request: NextRequest) {
-  try{
-    const body=await request.json() as {digest?:unknown};
-    if(typeof body.digest!=="string" || body.digest.length>100)
-      return NextResponse.json({error:"Enter a Sui transaction digest."},{status:400});
-    const transaction=await getTatumTransaction(body.digest.trim());
-    if(transaction.outcome!=="failed")
-      return NextResponse.json({transaction,candidates:[],observedPrecedents:[],reason:"Only confirmed failed transactions are eligible for recall."});
-    const [candidates,observedPrecedents]=await Promise.all([
-      recallIncidentCandidates(transaction),
-      recallObservedCases(transaction),
-    ]);
+  let digest: string;
+  try {
+    const body = await request.json() as { digest?: unknown };
+    if (typeof body.digest !== "string" || !/^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(body.digest)) {
+      return NextResponse.json({error:"Enter a valid Sui transaction digest."},{status:400});
+    }
+    digest = body.digest;
+  } catch {
+    return NextResponse.json({error:"Invalid request body."},{status:400});
+  }
+
+  let transaction: Awaited<ReturnType<typeof getTatumTransaction>>;
+  try {
+    transaction = await getTatumTransaction(digest);
+  } catch (error) {
+    console.error("[incident-recall] Tatum lookup failed", error instanceof Error ? error.name : "UnknownError");
+    return NextResponse.json({error:"Tatum transaction lookup temporarily unavailable."},{status:502});
+  }
+
+  if (transaction.outcome !== "failed") {
     return NextResponse.json({
-      transaction,candidates,observedPrecedents,
-      reason:candidates.some(c=>c.verdict==="eligible-for-review")
-        ?"A compatible human-verified resolution exists for review."
-        :observedPrecedents.length
-        ?"Similar genuine onchain failures were previously observed. No engineering resolution is verified yet."
-        :"No compatible previously verified resolution or failure observation was found.",
+      transaction,candidates:[],observedPrecedents:[],simulationRunbooks:[],
+      recallDegraded:false,walrusHitsExamined:0,
+      reason:"Only confirmed onchain failed transactions are eligible for recall.",
     });
-  }catch{
-    return NextResponse.json({error:"Transaction lookup or Mainnet recall failed."},{status:502});
+  }
+
+  try {
+    const results = await recallAllPrecedents(transaction);
+    const { candidates, observedPrecedents, simulationRunbooks } = results;
+    const reason = candidates.some(c=>c.verdict==="eligible-for-review")
+      ? "A compatible human-reviewed resolution exists for review."
+      : simulationRunbooks.length
+      ? "A controlled Mainnet simulation reproduced the error and validated a correction. This is guidance for review, NOT a proven repair of the historical transaction."
+      : observedPrecedents.length
+      ? "Similar real onchain failures were observed before. No resolution has been independently verified for these historical transactions."
+      : "No compatible saved precedent or simulation-tested procedure was found in the returned Walrus results.";
+    return NextResponse.json({
+      transaction, ...results, recallDegraded:false, reason,
+    });
+  } catch (error) {
+    // Separate Walrus degradation from actual Tatum transaction evidence.
+    // Only error class is logged; credentials and server responses are not.
+    console.error("[incident-recall] Walrus read failed", error instanceof Error ? error.name : "UnknownError");
+    return NextResponse.json({
+      transaction,candidates:[],observedPrecedents:[],simulationRunbooks:[],
+      walrusHitsExamined:0,recallDegraded:true,
+      reason:"Walrus recall is temporarily unavailable. Tatum transaction evidence is still valid; no conclusion can be drawn about stored matching cases.",
+    });
   }
 }

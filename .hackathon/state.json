@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 7,
+  "revision": 8,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "BUILD_VERTICAL_SLICE",
   "active_specialist": "Engineering",
@@ -20,7 +20,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "PARTIAL_LIVE_PROOF",
+  "evidence_status": "LIVE_MAINNET_SIMULATION_RUNBOOK_RECALL_VERIFIED",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -48,14 +48,18 @@
     "TATUM_MAINNET_TX": "VERIFIED 2026-11-04: 100 executed real Mainnet tx scanned; 56 onchain failures in this specific sample; app fetched real failure",
     "WALRUS_MAINNET_OBSERVATIONS": "VERIFIED 2026-11-04: 10 distinct authentic failed-digest observations stored with ten completed blob IDs plus earlier smoke; listMemories 11",
     "CROSS_TRANSACTION_OBSERVATION_RECALL": "VERIFIED 2026-11-04: 3 distinct later failed digests recalled prior stored onchain failures; no verified resolution was asserted",
-    "HUMAN_VERIFIED_RESOLUTION": "BLOCKED: No documented case-specific successful remediation and no reviewer confirmation; do not assert repaired behavior"
+    "HUMAN_VERIFIED_RESOLUTION": "OPEN: controlled correction simulated successfully but NO engineer-approved repair for historic executed transaction; no verified case memory",
+    "TATUM_SPLITCOINS_SIMULATION": "VERIFIED 2026-11-04: overdraw failed, reduced split passed Tatum Mainnet read-only simulation; no onchain execution",
+    "WALRUS_SIMULATION_RUNBOOK": "VERIFIED 2026-11-04: completed Mainnet blob keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw and semantic recall",
+    "UNIFIED_WALRUS_RECALL": "VERIFIED 2026-11-04: one Walrus semantic search, 12 hits, one simulation runbook for real failed digest; second matching digest positive; different MoveAbort negative; no relayer degradation",
+    "LIVE_PRODUCTION_BROWSER": "VERIFIED 2026-11-04: Chrome workspace and proof screenshots; Next.js lint/build passed, production routes HTTP 200, production recall 1 matching runbook in 7.4s",
+    "READ_ONLY_NETWORK_RESILIENCE": "VERIFIED 2026-11-04: intermittent EAI_AGAIN identified; bounded retry for Tatum and Walrus reads only, retry safety tests passed"
   },
   "blockers": [
-    "Need independently reproduced/documented successful remedy plus genuine reviewer signoff for at least one failed transaction",
-    "Human-verified resolution write and later reuse not yet proven (onchain observation reuse only)",
-    "Final visual QA/Product Hygiene/demo video/public deployment/blog/submission not complete",
-    "Smart Agents track applicability to B2B developer workflows not organizer-confirmed"
+    "Historical incident-specific repair with independent engineering evidence and authorized human approval still missing",
+    "Brand/product name not locked; final product design QA and demo production incomplete",
+    "Public deployment, public repo/blog, organizer track-fit confirmation and submission receipt not complete"
   ],
-  "next_action": "Validate specific successful remediation to one onchain failed incident, have responsible reviewer confirm and store through /api/remember, then demonstrate later compatible failure with recalled verified fix. Finish remaining QA/brand/demo and submission package.",
-  "updated_at": "2026-11-04T00:38:30.137496+00:00"
+  "next_action": "Use actual simulation-tested runbook demo now working; obtain human-reviewed incident-specific successful remediation evidence, store as human-verified Walrus case, and prove later reuse; then finalize brand, public deploy, 2-3 min evidence-led video, blog and submission.",
+  "updated_at": "2026-11-04T21:25:34.495892+00:00"
 }

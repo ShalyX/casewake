@@ -63,3 +63,27 @@ BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Wal
 
 ## State checkpoint
 Revision 7 (pending state-json sync), 2026-11-04. Previous git commit `f924f07`; new commit after QA.
+
+## 2026-11-04 — Simulation-tested runbook milestone
+- Two unsigned, read-only Tatum Sui Mainnet `SimulateTransaction` runs completed with the same controlled splitCoins structure. 10M MIST source coin → request 20M MIST = `InsufficientCoinBalance in command 1`; request 5M MIST = successful simulation. Both used mock gas, executed **no** onchain transfers. Full evidence in `evidence/controlled-splitcoins-simulation.json`; source `web/scripts/simulate-splitcoins-repro.mjs`.
+- Distinct Mainnet Walrus memory written for this evidence under status `simulation-tested-not-human-verified`, with blob ID `keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw` and successful semantic recall. Source `web/scripts/publish-simulation-runbook.mjs`; receipt `evidence/simulation-runbook-receipt.json`.
+- MemWal SDK's SEAL session needed a compatibility adapter: public Sui JSON-RPC fallback returned 404. Signed short-lived SEAL session via our authenticated Tatum native gRPC worked. Refactored app server calls into `web/src/lib/memwal-secure.ts`. It touches version-specific SDK `sessionCache`: pin dependencies and retest before upgrades.
+- App code added `simulationRunbooks` as third explicit evidence tier distinct from **onchain observed** and **human verified**. Human-verified historical repairs remain ZERO. Proof page: `/proof/splitcoins`.
+- **Status:** production build, actual `POST /api/recall` replay, and screenshot verification are in progress; do not mark app route proven until tests complete. Tatum simulation and Walrus direct SDK memory write+recall are already VERIFIED.
+- Highest-value next: replay real failed `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` through the updated app, verify remembered runbook and proof link, capture screenshot; then pursue genuine human-reviewed resolution and presentation tasks.
+
+## 2026-11-04 — Recovery checkpoint, latest status
+- Remote PC reconnect completed. DNS for Walrus and Tatum was intermittently failing; read-only calls now have bounded retries (never apply automatic retries to writes).
+- One Walrus semantic search replaces three concurrent requests. Direct SDK single-recall returned 12 memories and simulation-tested runbook in 3.8s. Full app `POST /api/recall` returned 1 runbook + 1 prior observation, `recallDegraded=false`, 5.6s for real digest `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6`. Second matching real digest retrieved runbook; unrelated real `MoveAbort` excluded.
+- Browser Chrome proof captured at `evidence/screenshots/simulation-recall-workspace.png` and `evidence/screenshots/simulation-proof-page.png`. Visual QA shows matching runbook with disclaimer and working public proof page.
+- Read-only retry safety assertions passed. Final production lint/build and Git commit pending at time of this entry.
+- Core app recall blocker **CLEARED**. Honest remaining gates: human-reviewed historical incident resolution, name/brand lock, public deploy, final demo/blog, organizer track clarification, submission.
+
+### Final production verification — 2026-11-04
+- **PASS:** clean `pnpm lint` and Next.js production build/TypeScript.
+- **PASS:** production `/workspace` and `/proof/splitcoins` HTTP 200.
+- **PASS:** real failed transaction `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` gives 1 saved Walrus simulation-tested runbook, 12 retrieved memories, no degradation, 7.4s production response.
+- **PASS:** related second failed digest matches; unrelated MoveAbort yields zero runbook recommendations.
+- **PASS:** direct SDK and Chrome UI screenshots show the actual Walrus-backed runbook, caveats, and Tatum simulation proof.
+- **PASS:** bounded read-only retry tests; no automatic retry on writes.
+- **OPEN:** human reviewer-approved fix for a specific historical transaction, name/brand, public hosting, final demo/blog/submission. Core in-app recall blocker CLEARED.

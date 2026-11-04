@@ -1,5 +1,5 @@
 import "server-only";
-import { MemWal } from "@mysten-incubation/memwal";
+import { secureMemwalClient } from "./memwal-secure";
 import { type ObservedTransaction } from "./incidents";
 
 export type ObservedCaseMemory = {
@@ -15,16 +15,8 @@ export type ObservedCaseMemory = {
   sourceUrl: string;
 };
 
-export function memwalClient() {
-  const key = process.env.MEMWAL_PRIVATE_KEY?.trim();
-  const accountId = process.env.MEMWAL_ACCOUNT_ID?.trim();
-  if (!key || !accountId) throw new Error("Walrus Memory credentials are missing.");
-  return MemWal.create({
-    key,
-    accountId,
-    serverUrl: process.env.MEMWAL_SERVER_URL || "https://relayer.memory.walrus.xyz",
-    namespace: process.env.MEMWAL_NAMESPACE || "incident-memory-v1",
-  });
+export async function memwalClient() {
+  return secureMemwalClient();
 }
 export function observedCase(tx: ObservedTransaction): ObservedCaseMemory {
   if (tx.outcome !== "failed" || !tx.errorText || !tx.fingerprint) throw new Error("Transaction must be a Tatum-confirmed onchain failure.");
@@ -61,14 +53,14 @@ export function decodeObservedCase(text: string): ObservedCaseMemory | null {
 }
 export async function storeObservedCase(tx: ObservedTransaction) {
   const c=observedCase(tx);
-  const walrus=memwalClient();
+  const walrus=await memwalClient();
   const done=await walrus.rememberAndWait(encodeObservedCase(c));
   if(!done.blob_id) throw new Error("No completed Walrus Mainnet storage receipt.");
   return {case:c,proof:{jobId:done.job_id,blobId:done.blob_id,namespace:process.env.MEMWAL_NAMESPACE || "incident-memory-v1"}};
 }
 export async function recallObservedCases(tx: ObservedTransaction) {
   if(tx.outcome !== "failed" || !tx.fingerprint || !tx.errorText) return [];
-  const walrus=memwalClient();
+  const walrus=await memwalClient();
   const out=await walrus.recall({query:"Sui onchain failure with technical execution error: "+tx.errorText+" digest "+tx.digest,limit:40});
   return out.results
     .map(x=>{const c=decodeObservedCase(x.text);return c?{case:c,distance:x.distance}:null})
@@ -77,7 +69,7 @@ export async function recallObservedCases(tx: ObservedTransaction) {
     .sort((a,b)=>a.distance-b.distance).slice(0,8);
 }
 export async function memoryInventory() {
-  const walrus=memwalClient();
+  const walrus=await memwalClient();
   const namespace=process.env.MEMWAL_NAMESPACE || "incident-memory-v1";
   let cursor: string | undefined;
   let count=0;

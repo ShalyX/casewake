@@ -3,6 +3,7 @@ import { SuiGrpcClient } from "@mysten/sui/grpc";
 import { GrpcTransport } from "@protobuf-ts/grpc-transport";
 import { ChannelCredentials } from "@grpc/grpc-js";
 import { fingerprintError, type ObservedTransaction } from "./incidents";
+import { retryReadOnly } from "./retry-reads";
 
 export class ConfigurationError extends Error {}
 
@@ -16,9 +17,12 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     channelCredentials: ChannelCredentials.createSsl(),
   });
   const client = new SuiGrpcClient({ network: "mainnet", transport });
-  const { response } = await client.ledgerService.getTransaction(
-    { digest, readMask: { paths: ["digest", "effects", "transaction"] } },
-    { meta: { "x-api-key": apiKey }, timeout: 15000 },
+  // Read-only lookup: a single bounded retry handles intermittent DNS/gRPC outages.
+  const response = await retryReadOnly(
+    () => client.ledgerService.getTransaction(
+      { digest, readMask: { paths: ["digest", "effects", "transaction"] } },
+      { meta: { "x-api-key": apiKey }, timeout: 15000 },
+    ).response,
   );
   const transaction = response.transaction;
   if (!transaction) throw new Error("Tatum did not return transaction data for this digest.");

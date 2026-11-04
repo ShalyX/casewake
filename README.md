@@ -59,3 +59,12 @@ A confirmed successful engineering repair. The best first candidate is `Insuffic
 
 ## Submission prerequisites not yet completed
 Final product name/brand, UX/polish QA, real user validation, multi-tenant/shared access controls for public users, public deploy, public repository, blog, 2–3 min demo video, organizer track-fit confirmation and submission receipt. `DEMO.md` is a production plan, not a recording. Never call source code or a screenshot a completed submission.
+
+## Recovery / runbook proof — November 4, 2026
+The complete production app is verified locally after the Walrus read recovery.
+
+Open `http://localhost:4217/workspace?digest=BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` to inspect the live historical failed transaction and its **simulation-tested, not historical-repair-verified** Walrus runbook. The proof page at `http://localhost:4217/proof/splitcoins` displays the actual failed and successful controlled Tatum Mainnet simulations and Walrus blob receipt.
+
+Technical fix: one semantic search from `src/lib/unified-recall.ts` rather than three parallel MemWal queries, bounded read-only retry for transient DNS/network errors, deterministic evidence-tier classification, and separate errors for chain lookup vs Walrus recall. Production Tatum→Walrus returned one runbook from 12 stored memories in 7.4s; unrelated `MoveAbort` control returned no runbook.
+
+Regression check: `node --experimental-strip-types scripts/test-retry-reads.mjs`, `pnpm lint`, `pnpm build`, and app `POST /api/recall`. Never describe the simulated correction as a human-approved or onchain-executed repair.

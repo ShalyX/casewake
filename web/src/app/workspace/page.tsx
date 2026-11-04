@@ -10,6 +10,7 @@ type Candidate = { record: Case; distance: number; verdict: "eligible-for-review
 type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
 type ObservedPrecedent = { case: {digest: string; errorText: string; sourceUrl: string; resolutionVerified: false}; distance: number };
 type Inventory = { allStoredMemories: number; namespace: string; complete: boolean };
+type SimulationRunbook = { record: { id:string; diagnosis:string; safeProcedure:string; caveat:string; proofPath:string; evidenceDigest:string; failure:{firstSplitMist:string;secondSplitMist:string;errorText:string}; corrected:{secondSplitMist:string} }; matchReason:string; verdict:"simulation-tested-review-only" };
 
 async function postJson(path: string, body: unknown, key?: string) {
   const response = await fetch(path, {
@@ -30,6 +31,7 @@ export default function Workspace() {
   const [tx, setTx] = useState<Transaction | null>(null);
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [observedPrecedents, setObservedPrecedents] = useState<ObservedPrecedent[]>([]);
+  const [simulationRunbooks, setSimulationRunbooks] = useState<SimulationRunbook[]>([]);
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [inventoryUnavailable, setInventoryUnavailable] = useState(false);
   const [observationOnly, setObservationOnly] = useState(false);
@@ -72,10 +74,12 @@ export default function Workspace() {
       const recalled = await postJson("/api/recall", { digest: observed.digest });
       setCandidates((recalled.candidates || []) as Candidate[]);
       setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
+      setSimulationRunbooks((recalled.simulationRunbooks || []) as SimulationRunbook[]);
       setRecallNote(String(recalled.reason || ""));
     } catch {
       setCandidates([]);
       setObservedPrecedents([]);
+      setSimulationRunbooks([]);
       setRecallNote("Walrus recall is temporarily unavailable. Tatum transaction evidence and completed storage receipts remain valid. Try again when the relayer recovers.");
     }
   }
@@ -211,6 +215,15 @@ export default function Workspace() {
                <p className="muted">{recallNote || "No recall performed."}</p>}
               <div className="memory-results">
                 {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a><small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small></article>)}
+                {simulationRunbooks.map((hit)=> <article key={hit.record.id} className="simulation-card">
+                  <div className="simulation-card-kicker">SIMULATION-TESTED · HISTORICAL REPAIR NOT VERIFIED</div>
+                  <h3>One reproducible failure. One tested correction.</h3>
+                  <p>{hit.matchReason}</p>
+                  <div className="simulation-comparison"><span>FAIL <strong>{Number(hit.record.failure.secondSplitMist).toLocaleString()} MIST</strong></span><span>SIMULATED SUCCESS <strong>{Number(hit.record.corrected.secondSplitMist).toLocaleString()} MIST</strong></span></div>
+                  <p>{hit.record.safeProcedure}</p>
+                  <Link href={hit.record.proofPath}>Inspect the actual Tatum simulation evidence ↗</Link>
+                  <small>Walrus memory · evidence SHA-256 {hit.record.evidenceDigest.slice(0,16)}… · No transaction was repaired or executed</small>
+                </article>)}
                 {observedPrecedents.length > 0 && <div className="observed-group">
                   <div className="panel-kicker"><span>REPEATED ONCHAIN FAILURES / NO VERIFIED FIX</span><span>{observedPrecedents.length} MATCHES</span></div>
                   {observedPrecedents.map((hit) => <article className="observed-card" key={hit.case.digest}>
@@ -221,7 +234,7 @@ export default function Workspace() {
                   </article>)}
                 </div>}
                 {rejected.length > 0 && <details className="rejected"><summary>{rejected.length} related case(s) excluded by compatibility checks</summary>{rejected.map((c) => <div key={c.record.id}><strong>{c.record.diagnosis}</strong><p>{c.reasons.join(" ")}</p></div>)}</details>}
-                {!eligible.length && !observedPrecedents.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>No verified match to apply.</strong><p>Unmatched failures remain for human investigation. Similar words alone aren&apos;t proof.</p></div>}
+                {!eligible.length && !observedPrecedents.length && !simulationRunbooks.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>No verified match to apply.</strong><p>Unmatched failures remain for human investigation. Similar words alone aren&apos;t proof.</p></div>}
               </div>
             </div>
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>

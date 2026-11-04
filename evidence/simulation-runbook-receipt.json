@@ -1,0 +1,38 @@
+{
+  "jobId": "b783870c-7344-4955-bd9a-226380795e1c",
+  "blobId": "keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw",
+  "evidenceDigest": "bb08e026fddaebfb1167484755cd088236cab4ed232966f6b706376e2b9aac0e",
+  "record": {
+    "schema": "simulation-runbook/v1",
+    "id": "sui-splitcoins-overdraw-2026-11-04",
+    "network": "sui-mainnet",
+    "errorKind": "InsufficientCoinBalance",
+    "commandKind": "splitCoins",
+    "status": "simulation-tested-not-human-verified",
+    "diagnosis": "In a controlled programmable transaction, a 10,000,000 MIST coin was asked to split out 20,000,000 MIST; execution simulation failed with InsufficientCoinBalance.",
+    "safeProcedure": "Trace the exact coin balance and preceding commands. Reduce the requested split to a supported amount and simulate again with the actual gas context before any signing. A 5,000,000 MIST split passed our controlled simulation; this is not a guaranteed fix for another transaction.",
+    "caveat": "This is Tatum Mainnet SIMULATION with mock gas. It did not sign, execute or repair any historical transaction and has no independent human reviewer approval.",
+    "failure": {
+      "firstSplitMist": "10000000",
+      "secondSplitMist": "20000000",
+      "result": "FailedTransaction",
+      "errorText": "InsufficientCoinBalance in command 1"
+    },
+    "corrected": {
+      "firstSplitMist": "10000000",
+      "secondSplitMist": "5000000",
+      "result": "Transaction",
+      "statusSuccess": true
+    },
+    "provider": "Tatum Sui Mainnet gRPC",
+    "gasPaymentMocked": true,
+    "onchainExecuted": false,
+    "testSourcePath": "web/scripts/simulate-splitcoins-repro.mjs",
+    "proofPath": "/proof/splitcoins",
+    "evidenceDigest": "bb08e026fddaebfb1167484755cd088236cab4ed232966f6b706376e2b9aac0e",
+    "testedAt": "2026-11-04T12:59:19.482Z"
+  },
+  "status": "simulation-tested-not-human-verified",
+  "namespace": "incident-memory-v1",
+  "confirmedAt": "2026-11-04T13:06:20.964Z"
+}
