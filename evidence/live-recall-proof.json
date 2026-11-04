@@ -1,0 +1,37 @@
+{
+  "proofType": "live Tatum Sui Mainnet and Walrus recall, no human-verified resolutions",
+  "results": [
+    {
+      "queryDigest": "5sc7kDbnaEASo8vBZnrM3j2ZauutQ96CXoNicM9E841U",
+      "observedPrecedents": [
+        "6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v"
+      ],
+      "expectedKnownPrecedent": "6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v",
+      "verifiedResolutionCount": 0,
+      "finding": "MATCHED_REAL_ONCHAIN_OBSERVATION_NOT_VERIFIED_REPAIR"
+    },
+    {
+      "queryDigest": "2BB6Xqr7DhsmcK2yUgadP37KSLCtAXhyMff6XdFjiJ6m",
+      "observedPrecedents": [
+        "rsiVLqZ6qtWw1epmTj4fn3K3bnsmMko5bSpZwEo1vvD"
+      ],
+      "expectedKnownPrecedent": "rsiVLqZ6qtWw1epmTj4fn3K3bnsmMko5bSpZwEo1vvD",
+      "verifiedResolutionCount": 0,
+      "finding": "MATCHED_REAL_ONCHAIN_OBSERVATION_NOT_VERIFIED_REPAIR"
+    },
+    {
+      "queryDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+      "observedPrecedents": [
+        "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue"
+      ],
+      "expectedKnownPrecedent": "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",
+      "verifiedResolutionCount": 0,
+      "finding": "MATCHED_REAL_ONCHAIN_OBSERVATION_NOT_VERIFIED_REPAIR"
+    },
+    {
+      "queryDigest": "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",
+      "selfMatchRejected": true,
+      "finding": "SAME_DIGEST_NOT_MISTAKEN_FOR_REPEATED_INCIDENT"
+    }
+  ]
+}

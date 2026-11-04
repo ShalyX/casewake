@@ -1,44 +1,61 @@
-# Incident Memory — Total Recall 2026
+# Incident Memory — Sui engineering memory
 
-**Thesis selected Nov 3, 2026. Product brand/name pending deliberate naming.**
+An evidence-backed agent for Sui dApp builders: a real failed transaction is observed through Tatum, related past failures are recalled from Walrus Mainnet, and only human-confirmed resolutions can become recommended fixes.
 
-A deliberately narrow Sui incident-resolution system:
-real onchain failed transaction -> engineer-reviewed resolution -> completed Walrus Mainnet memory -> later analogous failed transaction gets a reviewed candidate, not an automatic fix.
+**Working title, not the final brand name.** Project thesis locked on 2026-11-03. Deadline: November 10, 2026, 17:00 UTC.
 
-## Workspaces
-- `web/` — Next.js 16 frontend, landing and /workspace; server-side Tatum gRPC and Walrus SDK routes.
-- `PRODUCT.md` — thesis/source of truth (locked).
-- `DEMO.md` — proposed judge film, not recorded.
-- `DEPENDENCY_ATTACK.md` / `EVIDENCE.md` — blockers and truth status.
-- `spikes/` — earlier synthetic deterministic safety spike (13 tests).
-- `web/scripts/test-incidents.mjs` — additional pure TypeScript safety tests.
+## Current verified state — November 4, 2026
+- Next.js 16.4.4 installed with pnpm; `pnpm lint` and `pnpm build` last executed during QA; see `PROJECT.md` for latest verified result.
+- Real server-side Tatum Sui Mainnet gRPC `GetTransaction` works; 100 recent transactions inspected, 56 failed in that particular sample (NOT overall failure rate).
+- Ten **distinct, real onchain failure observations** were independently re-fetched from Tatum and stored by the application to Walrus Memory Mainnet. Receipts saved in `evidence/observation-write-receipts.json`.
+- MemWal listMemories confirmed 11 namespace records: the 10 observations plus one earlier connection smoke-test.
+- Three real additional failed digests matched previous stored error memories through `POST /api/recall`. See `evidence/live-recall-proof.json`.
+- Reviewer auth and verification gates tested: unauthorized 403, unverified reviewer submission 400.
+- **ZERO genuine human-verified fixes have been confirmed or written.** Onchain failure observations are not fixes.
 
-## Setup
-1. Install Node >=22, run `cd web && npm install`.
-2. Copy `web/.env.example` to `web/.env.local`; add Tatum Mainnet API key from the Tatum dashboard and MemWal delegate key + Mainnet Account ID from memory.walrus.xyz. Keep them server-side.
-3. Set `WORKSPACE_WRITE_KEY` to a random value so writes are enabled. This is a temporary single-reviewer proof gate; do not expose a public deployment with an easily guessed key.
-4. `npm run dev`; open `http://localhost:3000` for landing and `/workspace` for app.
-5. Paste a real Base58 transaction digest; a Sui execution failure may be eligible for review. No key -> explicit setup blocker; no fake transaction.
-6. Investigate independently. With a human-confirmed resolution, provide diagnosis, concrete steps, HTTPS evidence and reviewer credentials, then mark personally verified. Wait for a real Walrus blob ID.
-7. Import another real comparable failed digest. Recall proposes compatible confirmed cases for human review; negative controls should show mismatch.
+## Launch locally
+```powershell
+cd C:\Users\USER\Documents\Codex\2026-11-01\total-recall\web
+pnpm install --frozen-lockfile
+pnpm build
+pnpm start --hostname 127.0.0.1 --port 4217
+```
 
-## Sponsor path
-- Tatum Sui gRPC host: `sui-mainnet-grpc.gateway.tatum.io:443`, x-api-key gRPC metadata. Read only.
-- Walrus `@mysten-incubation/memwal` relayer, `rememberAndWait` (not merely async acceptance) + semantic `recall`.
-- Matching involves strict error signature, network and known package constraints. Fuzzy hits without exact checks are not trusted.
-- No Mainnet memories or Tatum calls have been verified in this repository as of the initial build; actual integration proof requires credentials and authentic data.
+Open http://127.0.0.1:4217 for landing and http://127.0.0.1:4217/workspace for the app.
 
-## Tests
-`node --experimental-strip-types scripts/test-incidents.mjs` (8 deterministic assertions; synthetic fixtures only).
-Existing `spikes/test_ecosystem_spike.py` has 13 tests (synthetic fixtures only).
+To experience the genuine repeat-failure recall, use:
 
-## Security / deployment caveats
-- No API secrets in git, browser bundles, rendered JSON, screenshots or demo.
-- Only users with a reviewer token can write verified cases. Before public use, add real sign-in, server-side roles, request limiting, moderation and persistent account/organization isolation.
-- Never treat a “human-verified” checkbox alone as an independent audit. Evidence URL & human process are still needed.
-- Public content is untrusted and must not override executable behavior. No automatic code patch or chain execution.
-- On public demos, sanitize client tickets and omit private customer information.
-- Review suspicious matching and version-scoped cases manually. Current SDK/package version metadata is reviewer-provided; chain doesn't encode the client's SDK version.
+http://127.0.0.1:4217/workspace?digest=5sc7kDbnaEASo8vBZnrM3j2ZauutQ96CXoNicM9E841U
 
-## Hackathon
-Official deadline 10 Nov 2026 at 17:00 UTC. Submission requires 10+ **completed** Mainnet Walrus memories, live Tatum calls, 2–3 min demo, public repo and blog post. These are NOT currently satisfied by tests or UI scaffolding.
+This digest retrieves a previous observed onchain failure. The UI correctly says **resolution unverified**. It does not fake a fix.
+
+## Server-only secrets
+`web/.env.local` holds `TATUM_API_KEY`, `MEMWAL_PRIVATE_KEY`, `MEMWAL_ACCOUNT_ID`, relayer URL, namespace and a local randomly generated `WORKSPACE_WRITE_KEY`. The file is Git-ignored; never commit it, print keys, or paste them in chat. `web/.env.example` contains placeholders only.
+
+For public deployment, upgrade the single reviewer key to real role-based auth and add rate limits and audit logging; do not expose this prototype as a production multi-tenant system.
+
+## Product workflow
+1. Enter a genuine Sui Mainnet transaction digest; the server fetches its effects via authenticated Tatum gRPC.
+2. For a failed execution, Walrus semantic recall searches previous incident memories.
+3. The app filters by deterministic error fingerprint, matching original error detail and excludes same-digest matches.
+4. Previously observed failures are shown as **related onchain precedents, no confirmed fix**.
+5. An authorized human reviewer with actual case-specific evidence can submit a diagnosed and confirmed procedure. The Walrus SDK confirms a completed Mainnet blob ID before counting it. No such reviewer-confirmed case has been recorded.
+6. A later matching incident may show the reviewed procedure for human approval; the app does not automatically execute a fix.
+
+## Tests and evidence
+- `node --experimental-strip-types scripts/test-incidents.mjs` — 10 deterministic safety assertions using synthetic fixtures.
+- `pnpm lint` and `pnpm build` — project compile checks.
+- `python scripts/verify-live-recall.py` — 3 live Tatum→Walrus matched precedent cases plus negative same-digest control.
+- `python scripts/ingest-real-observations.py` — idempotent (against local receipts) import of the chosen ten real onchain failure observations. Do **not** run again unnecessarily: Mainnet writes cost quota and duplicates are possible if a write completed without a returned local receipt.
+- `evidence/failed-sui-transaction-candidates.json` — 100-trx sample, 56 actual failures.
+- `evidence/observation-write-receipts.json` — ten distinct Mainnet receipt/blob records.
+- `evidence/live-recall-proof.json` — three real repeated failure matches.
+- `evidence/screenshots/live-recall-workspace.png` — captured actual rendered UI with genuine transaction and recalled precedent.
+- `evidence/resolution-verification-queue.md` — source-documented InsufficientCoinBalance guidance that **cannot yet be described as a verified repair**.
+- `EVIDENCE.md` — all material claim statuses.
+
+## Current open blocker (do not fudge)
+A confirmed successful engineering repair. The best first candidate is `InsufficientCoinBalance` with official Sui troubleshooting guidance. To submit it as *verified*, a developer must demonstrate a case-specific fix (successful corrected operation or independently documented engineering resolution), cite evidence, and intentionally approve via the protected reviewer form. Only then is it honest to present the later memory recall as a verified-resolution recommendation.
+
+## Submission prerequisites not yet completed
+Final product name/brand, UX/polish QA, real user validation, multi-tenant/shared access controls for public users, public deploy, public repository, blog, 2–3 min demo video, organizer track-fit confirmation and submission receipt. `DEMO.md` is a production plan, not a recording. Never call source code or a screenshot a completed submission.

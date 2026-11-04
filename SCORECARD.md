@@ -80,3 +80,12 @@ Official 30/30/20/20 weights above remain unchanged. Because no judged product h
 | Presentation (20%) | Clear narrative, script-only | Clear narrative if metrics are real | Finished 2–3min video, source-visible proof, public working demo |
 
 Concept feasibility recommendation: Incident Memory first; Indexer Recovery only if authentic metrics are accessible. Original EchoLedger and Watchline remain parked. Product Critic verdicts: MODIFY, MODIFY/CONDITIONAL. Details: VALIDATION_ECOSYSTEM_FINALISTS.md and EVIDENCE.md.
+
+## Implementation evidence checkpoint — 2026-11-04 (not a judge score)
+- **Walrus + Tatum integration (30% official weight):** VERIFIED: 100 authentic transactions read via Tatum Sui Mainnet gRPC; 10 distinct true failed-transaction observations stored on Walrus Mainnet with completed blob receipts; 11 memories listed incl. 1 smoke. Three genuine later failure digests recalled matching earlier errors. **Human-confirmed repair loop remains unverified.**
+- **Technical quality (30%):** VERIFIED: pnpm dependency installation, Next.js build + TypeScript, ESLint, local app HTTP 200, black-box real API calls, protected reviewer 403/400 controls, 10 deterministic TypeScript synthetic assertions and 13 previous Python synthetic tests. Not production-ready shared auth.
+- **Creativity (20%):** Thesis differs from generic explorer/debugger through repeated-failure memory; value of engineer-approved resolution remains only a product hypothesis until a verified correction is stored.
+- **Presentation (20%):** Real screenshot in `evidence/screenshots/live-recall-workspace.png`; landing and app separated. Final 2–3 minute recording, blog, brand lock and public demo NOT DONE.
+- **Hard gate before judging:** Engineer-reviewed, case-specifically successful repair plus second real digest showing remembered verified recommendation. Do not score the app as if this already happened.
+
+Evidence register: `EVIDENCE.md`; source receipts: `evidence/observation-write-receipts.json`; matching proof: `evidence/live-recall-proof.json`.

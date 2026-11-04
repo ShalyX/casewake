@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; network: string; checksAreLive: boolean };
 type Transaction = { digest: string; network: string; source: string; observedAt: string; outcome: "failed" | "succeeded" | "unknown"; errorText: string | null; fingerprint: string | null; packageId: string | null };
 type Case = { id: string; digest: string; diagnosis: string; resolutionSteps: string; evidenceUrl: string; reviewer: string; verifiedAt: string; errorText: string; sdkVersion: string | null };
 type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[] };
-type Proof = { jobId: string; blobId: string; owner: string; namespace: string; status: string };
+type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
+type ObservedPrecedent = { case: {digest: string; errorText: string; sourceUrl: string; resolutionVerified: false}; distance: number };
+type Inventory = { allStoredMemories: number; namespace: string; complete: boolean };
 
 async function postJson(path: string, body: unknown, key?: string) {
   const response = await fetch(path, {
@@ -23,9 +25,13 @@ function shortDigest(value: string) { return value.length > 19 ? value.slice(0, 
 
 export default function Workspace() {
   const [status, setStatus] = useState<Status | null>(null);
+  const initialQueryLoaded = useRef(false);
   const [digest, setDigest] = useState("");
   const [tx, setTx] = useState<Transaction | null>(null);
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [observedPrecedents, setObservedPrecedents] = useState<ObservedPrecedent[]>([]);
+  const [inventory, setInventory] = useState<Inventory | null>(null);
+  const [observationOnly, setObservationOnly] = useState(false);
   const [recallNote, setRecallNote] = useState("");
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
   const [error, setError] = useState("");
@@ -38,12 +44,32 @@ export default function Workspace() {
   const [sdkVersion, setSdkVersion] = useState("");
   const [reviewerKey, setReviewerKey] = useState("");
   const [verified, setVerified] = useState(false);
-  useEffect(() => { fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable.")); }, []);
+  useEffect(() => {
+    fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
+    fetch("/api/memories").then((r) => r.ok ? r.json() : null).then(setInventory).catch(() => {});
+  }, []);
+  async function refreshInventory() {
+    try { const r=await fetch("/api/memories"); if(r.ok)setInventory(await r.json() as Inventory); } catch { /* inventory is supplementary */ }
+  }
+
+  useEffect(() => {
+    if (initialQueryLoaded.current || !status?.tatumConfigured) return;
+    const fromUrl = new URLSearchParams(window.location.search).get("digest");
+    if (fromUrl && /^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(fromUrl)) {
+      initialQueryLoaded.current = true;
+      queueMicrotask(() => {
+        setDigest(fromUrl);
+        void inspect(fromUrl);
+      });
+    }
+  // URL-based evidence replay triggers once after configuration is read.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status?.tatumConfigured]);
 
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
-    setError(""); setRecallNote(""); setProof(null); setCandidates([]); setTx(null);
+    setError(""); setRecallNote(""); setProof(null); setCandidates([]); setObservedPrecedents([]); setTx(null);
     try {
       setPhase("reading");
       const result = await postJson("/api/transaction", { digest: value });
@@ -53,6 +79,7 @@ export default function Workspace() {
         setPhase("recalling");
         const recalled = await postJson("/api/recall", { digest: observed.digest });
         setCandidates((recalled.candidates || []) as Candidate[]);
+        setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
         setRecallNote(String(recalled.reason || ""));
       } else if (observed.outcome === "failed") {
         setRecallNote("Walrus Memory has not been configured. Transaction evidence is separate from persistent recall.");
@@ -65,7 +92,7 @@ export default function Workspace() {
 
   async function remember() {
     if (!tx || tx.outcome !== "failed") return;
-    setError(""); setProof(null);
+    setError(""); setProof(null); setObservationOnly(false);
     try {
       setPhase("writing");
       const result = await postJson("/api/remember", {
@@ -73,12 +100,32 @@ export default function Workspace() {
       }, reviewerKey);
       setProof(result.proof as Proof);
       setShowEditor(false);
+      await refreshInventory();
       setPhase("recalling");
       const recalled = await postJson("/api/recall", { digest: tx.digest });
       setCandidates((recalled.candidates || []) as Candidate[]);
+        setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
       setRecallNote(String(recalled.reason || ""));
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
+  }
+
+  async function rememberObservation() {
+    if (!tx || tx.outcome !== "failed") return;
+    setError(""); setProof(null); setObservationOnly(true);
+    try {
+      setPhase("writing");
+      const result=await postJson("/api/observations",{digest:tx.digest},reviewerKey);
+      const stored = result.proof as Proof;
+      setProof(stored);
+      await refreshInventory();
+      setPhase("recalling");
+      const recalled=await postJson("/api/recall",{digest:tx.digest});
+      setCandidates((recalled.candidates || []) as Candidate[]);
+      setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
+      setRecallNote(String(recalled.reason || ""));
+    } catch(e){setError(e instanceof Error ? e.message : "Observation write failed.");}
+    finally{setPhase("idle");}
   }
 
   const eligible = candidates.filter((c) => c.verdict === "eligible-for-review");
@@ -97,8 +144,8 @@ export default function Workspace() {
         </div>
 
         <div className="health-row" role="status">
-          <div><span className={status?.tatumConfigured ? "health-indicator ready" : "health-indicator"} /> Tatum gRPC <b>{status ? (status.tatumConfigured ? "Key configured · not yet connection-tested" : "Key required") : "Checking…"}</b></div>
-          <div><span className={status?.walrusConfigured ? "health-indicator ready" : "health-indicator"} /> Walrus Memory <b>{status ? (status.walrusConfigured ? "Credentials configured · not yet connection-tested" : "Credentials required") : "Checking…"}</b></div>
+          <div><span className={status?.tatumConfigured ? "health-indicator ready" : "health-indicator"} /> Tatum gRPC <b>{status ? (status.tatumConfigured ? (tx ? "Live transaction fetched" : "Key configured · inspect to verify") : "Key required") : "Checking…"}</b></div>
+          <div><span className={status?.walrusConfigured ? "health-indicator ready" : "health-indicator"} /> Walrus Memory <b>{status ? (status.walrusConfigured ? (inventory ? "Mainnet inventory verified" : "Credentials configured · checking") : "Credentials required") : "Checking…"}</b></div>
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
 
@@ -139,7 +186,11 @@ export default function Workspace() {
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
                 <label>Private reviewer access key<input type="password" value={reviewerKey} onChange={(e) => setReviewerKey(e.target.value)} placeholder="Not saved in browser storage" /></label>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I personally verified the diagnosis and resolution, and the content is safe to share in this workspace.</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Save confirmed memory"} ↗</button>
+                <button type="button" className="primary-button compact" disabled={busy || !verified} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Save human-verified resolution"} ↗</button>
+                <div className="observation-action">
+                  <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
+                  <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
+                </div>
               </div>
             </div>}
           </section>
@@ -153,11 +204,23 @@ export default function Workspace() {
                <p className="muted">{recallNote || "No recall performed."}</p>}
               <div className="memory-results">
                 {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a><small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small></article>)}
+                {observedPrecedents.length > 0 && <div className="observed-group">
+                  <div className="panel-kicker"><span>REPEATED ONCHAIN FAILURES / NO VERIFIED FIX</span><span>{observedPrecedents.length} MATCHES</span></div>
+                  {observedPrecedents.map((hit) => <article className="observed-card" key={hit.case.digest}>
+                    <span>PREVIOUSLY OBSERVED · RESOLUTION UNVERIFIED</span>
+                    <strong>{shortDigest(hit.case.digest)}</strong>
+                    <p>{hit.case.errorText}</p>
+                    <a href={hit.case.sourceUrl} target="_blank" rel="noreferrer">View original Tatum-grounded transaction ↗</a>
+                  </article>)}
+                </div>}
                 {rejected.length > 0 && <details className="rejected"><summary>{rejected.length} related case(s) excluded by compatibility checks</summary>{rejected.map((c) => <div key={c.record.id}><strong>{c.record.diagnosis}</strong><p>{c.reasons.join(" ")}</p></div>)}</details>}
-                {!eligible.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>No verified match to apply.</strong><p>Unmatched failures remain for human investigation. Similar words alone aren't proof.</p></div>}
+                {!eligible.length && !observedPrecedents.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>No verified match to apply.</strong><p>Unmatched failures remain for human investigation. Similar words alone aren&apos;t proof.</p></div>}
               </div>
             </div>
-            <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div><h3>{proof ? "Write confirmed." : "Proof, not promises."}</h3><p>{proof ? "A real Walrus storage job completed. The receipt below is returned by the relayer." : "A memory only counts after its write job finishes and Walrus returns a blob ID."}</p>{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small></div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
+            <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
+              <h3>{proof ? "Mainnet write confirmed." : "Proof, not promises."}</h3>
+              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : "A reviewer-confirmed case was stored; the original evidence remains reviewable.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
+              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small></div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
             <div className="sidebar-note">INTEGRITY RULE <span>↗</span><p>Every reused fix is a suggestion for engineering review—not evidence that a new transaction is automatically repaired.</p></div>
           </aside>
         </div>

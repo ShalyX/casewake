@@ -1,0 +1,343 @@
+{
+  "date": "2026-11-04T00:20:18.554Z",
+  "source": "Tatum Sui Mainnet gRPC",
+  "scanned": 100,
+  "failures": [
+    {
+      "digest": "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953, name: Identifier(\"guard\") }, function: 0, instruction: 11, function_name: Some(\"check\") }, 21117270) in command 3",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "HZd6TYfbQ9gJ7pdKwZ3aTndVHPY3Vdu6oNk5ncg818zo",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953, name: Identifier(\"guard\") }, function: 0, instruction: 11, function_name: Some(\"check\") }, 14193672) in command 3",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "7HgAa6YDG7TREXhxdF3AZY8fNwixQU3ajuhpk9sPT2Wx",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: b4710f830aec8c3ec47168c09d6a35b1f1e3d8fcad16c3f09bba6dfd2fead0d5, name: Identifier(\"checkpoint\") }, function: 8, instruction: 13, function_name: Some(\"settle\") }, 0) in command 82",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 0, instruction: 19, function_name: Some(\"gc\") }, 101) in command 1",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "5sc7kDbnaEASo8vBZnrM3j2ZauutQ96CXoNicM9E841U",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 0, instruction: 19, function_name: Some(\"gc\") }, 101) in command 1",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "rsiVLqZ6qtWw1epmTj4fn3K3bnsmMko5bSpZwEo1vvD",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dae8a7db98f75c87cac8d8f915262c77e070a7265eb68acdcd0a89a222de1eeb, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 2",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2BB6Xqr7DhsmcK2yUgadP37KSLCtAXhyMff6XdFjiJ6m",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dae8a7db98f75c87cac8d8f915262c77e070a7265eb68acdcd0a89a222de1eeb, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 2",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2BTX2xema662yKTfWPwnz4E7A4ErB8u4zkZjojVZ7Mrm",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dae8a7db98f75c87cac8d8f915262c77e070a7265eb68acdcd0a89a222de1eeb, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 2",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "Gv5UmRqEvnR4P6pu7xZcL6JRMmceD1Tf6FXg8YgWSv2Z",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dae8a7db98f75c87cac8d8f915262c77e070a7265eb68acdcd0a89a222de1eeb, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 2",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "jCPaKYDDUow14RrJCusE3h4V5rmSKq3RNyj9bMpDFtm",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 0000000000000000000000000000000000000000000000000000000000000001, name: Identifier(\"option\") }, function: 14, instruction: 5, function_name: Some(\"destroy_some\") }, 262145) in command 5",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "DZrXy9vpqkx6mQs226HYZ2PQXtCTULA4H98dwaRbRXBu",
+      "error": "InsufficientCoinBalance in command 15",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "AnWMDqatkYsNQjWCDrw1HNeHPWkCwUmgJdc4iV3v4MfE",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 5143e9f8797040cda1cecde268824d3dc9a02840f29fb1e00ffa1f215874e483, name: Identifier(\"utils\") }, function: 2, instruction: 9, function_name: Some(\"check_profit\") }, 511) in command 4",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",
+      "error": "InsufficientCoinBalance in command 16",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+      "error": "InsufficientCoinBalance in command 16",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "HCYcfpukBjZXGm5mMUmyt8GNT6wDsbi3qXMfM3z2EEc8",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 79fa20e2a4cebf9ca7cdc044dc3fb284b092183c5834a835ce416969f8df3a87, name: Identifier(\"validation\") }, function: 0, instruction: 7, function_name: Some(\"check_min_amount\") }, 0) in command 9",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "AyPnU5UU4obW1DwHK7L9eTBYauRbK1QUMffELTMqyiFE",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: e2cb5a3d08bb3ddfb730543f805d5f1ea5872e52168689d99e5d51719f28a433, name: Identifier(\"router\") }, function: 25, instruction: 77, function_name: Some(\"finalize\") }, 1) in command 8",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "Af9kF3VJWCjmcikCfNxfeERWboxx3uwMGfkkCkWcf91n",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 0, instruction: 19, function_name: Some(\"gc\") }, 101) in command 1",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "8jVSiiDBG72mCdsThYNo8CJUG22Y8cTWGxFruimuLBZ6",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407, 0x3378c2a237037fe4b32abadb74aa90b2e8a7f2c65c0b391b688af9fe287afd67]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "4uMLBw9Gq4KmfpX9FdT8dQyrL6GQHa3Rrm6vD6zjD4Un",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 9daf5d36d7a5f137008d2f8656141ebc6af80f4134cb173a461182f3e4097089, name: Identifier(\"probe\") }, function: 29, instruction: 10, function_name: Some(\"choose\") }, 1) in command 48",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2LRGC1PSu2tqCWvYaQ6RBic9tKJxM9gjEMcGkF8hSxdX",
+      "error": "InsufficientCoinBalance in command 14",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "FKZvyQHRJpLvbwY473gxWaW6iUkRX2N8m1t7WGg2w1fG",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 0000000000000000000000000000000000000000000000000000000000000002, name: Identifier(\"balance\") }, function: 7, instruction: 10, function_name: Some(\"split\") }, 2) in command 18",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "3ydjJo1WTeYUrZKzyBL6Luxn9KYH2Ek46MrsF4UwL14n",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: fa555fe81f851f45d4aa9f1e7d825fa94ee564eeaf424fb941378991274c9ae1, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 0",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2bHBeTgGSrjKc2CMffXZ96U391iJQHyqs2WhwmdbrvE9",
+      "error": "InsufficientCoinBalance in command 16",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "HgWgSRK6L1G5L3y1mTCwg4Y9KbM967LKFxr51rPddCQb",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 0000000000000000000000000000000000000000000000000000000000000002, name: Identifier(\"balance\") }, function: 7, instruction: 10, function_name: Some(\"split\") }, 2) in command 10",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "Gr1dDBj5Ap72sZCEt4maptrPm9V9mYypMvDEGMpuUcr7",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xa374264d43e6baa5aa8b35ff18ff24fdba7443b4bcb884cb4c2f568d32cdac36, 0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "GgELNFx396mCAtyMJRWKTzQrJ1PQZtCetAdA8yaMMzJi",
+      "error": "InsufficientCoinBalance in command 14",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "GHh4Z7kxWJeYpnj5E1SYrt5x3UURjxuSPC7sfgCSfjMh",
+      "error": "InsufficientCoinBalance in command 14",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "DkbaEH21SYTLpyJjUayT5gFenn71xByfH2FntYJ6btkc",
+      "error": "InsufficientCoinBalance in command 16",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "DEaPQFYt8LkWTE8u9CiR41Ptkt9xHaHmjauw1gNC424a",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xa374264d43e6baa5aa8b35ff18ff24fdba7443b4bcb884cb4c2f568d32cdac36, 0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "AgVovBsGb9NQo11U85BbbiJpCR6PDwM5FsD1qhGH1QVE",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: d4934f3552743e31c1450b41bd4601d4b423bef0696167127c64cf5e88942367, name: Identifier(\"f\") }, function: 44, instruction: 14, function_name: Some(\"brde\") }, 1) in command 6",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "9gUizEcjoyXPV8biFWYbH4A65SB8R4CuFxCYpdcyCoAr",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "9YgJVnMR9bd57FbNqLWPU3TVD5iW7ZS9fJTnuFvsDPrC",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 1, instruction: 19, function_name: Some(\"gb\") }, 101) in command 0",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "9CSdXHi36sCqYGo5zFhjFuCC6HzosX72LrphvF1QCdiH",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xa374264d43e6baa5aa8b35ff18ff24fdba7443b4bcb884cb4c2f568d32cdac36, 0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "8f4fHVCSktLNY3tacnB42eYJguuL5J21w9dobAXdXnQt",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "8Ehs4W9GJsPhmqZhkDZYCTQyQpQwvw222RrZvP5pPR6u",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 1, instruction: 19, function_name: Some(\"gb\") }, 101) in command 0",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "5Vbiqpod5DEM9twhqhPKYt55AoGjMUif1wfstPLuPHw8",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "3XcrePdEex7GBzDnhhxTinMWQxLVuVjqPvwr5d54ZKLt",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xa374264d43e6baa5aa8b35ff18ff24fdba7443b4bcb884cb4c2f568d32cdac36, 0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "FMXBnU7ij3tCxXAeqAQ322ZfJEe7xufR2ppt3qwCPvQY",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 0000000000000000000000000000000000000000000000000000000000000002, name: Identifier(\"balance\") }, function: 7, instruction: 10, function_name: Some(\"split\") }, 2) in command 9",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "3K8RRoUwBkAGvGzMppdJGUsPnfg81qH7aE3JZ8Pe5FFq",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 9daf5d36d7a5f137008d2f8656141ebc6af80f4134cb173a461182f3e4097089, name: Identifier(\"probe\") }, function: 29, instruction: 10, function_name: Some(\"choose\") }, 1) in command 47",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "3BVGg6JbNj9to9gSU5dqfuAqL7R6wQk3RTM4P6aXyTdM",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2vDbqHNmhNPh2VN2R9P881EZGnG9ZD5jasZGcio5yBRZ",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xa374264d43e6baa5aa8b35ff18ff24fdba7443b4bcb884cb4c2f568d32cdac36, 0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "2BDU49xLRC5rW7Wa1HiH6xnRX4Q6drBgJhbu76QkLYGk",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 79fa20e2a4cebf9ca7cdc044dc3fb284b092183c5834a835ce416969f8df3a87, name: Identifier(\"validation\") }, function: 0, instruction: 7, function_name: Some(\"check_min_amount\") }, 0) in command 9",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "jWY3HNA1SQiw87abuagaqP9z9Qhj8jAh8DxGVx8Puh7",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dfd3bd9d887422391608a2fc9cdeaaab1d2f85009a1fe59609f315e3918293a3, name: Identifier(\"m\") }, function: 0, instruction: 19, function_name: Some(\"gc\") }, 101) in command 1",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "KzuFz4YDndCXixVAsKJKNNnxh4EC7LV5zwUYbxqvvjN",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "JEFQCkZhEGgKEhACcaHUskwvVTggVwKwa3Cjycer1AgB",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "HYxmmJtY44oS98u9mkCaxqRyYhHrpBSheJNki4ncoAvo",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "HXAdapmbSR1XbeqjKySY65W9xj4aWGLCCzjrCK43qiHA",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "FcCiLNCMVkTj5M93WsetEyYsAFBkM2KJ21t3yMS2p1De",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "E7aw1HLdJbrBZ5WiBtLybcV8SQZUDPGWeZQKZTcDby3n",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "DwJGbpxiMjA1iZREG2etgX38uMPGLuoScEt2BG9TThnW",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "DiaFUhSckmfLNCNeFZAhrg2VBpRtRcRwn1DFWUXM75ob",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: dae8a7db98f75c87cac8d8f915262c77e070a7265eb68acdcd0a89a222de1eeb, name: Identifier(\"m\") }, function: 0, instruction: 15, function_name: Some(\"z\") }, 101) in command 2",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "CYb76XUfDGV67FCn8nDmM4HnXxuQq5iLPppMQvuj6Je4",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "BrSyhaFRQEFT5heXWwrx2YQrA7mU5xTvFz9AFeG6gH1Q",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "BARKvEMnPHVSuYtgR3ftm9vzbsGSi2km7aNa3K4Vt64j",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "Auw9t4zh7WoxcbLw8r6HNdLpHY5zjhr31TVEajfN8pPV",
+      "error": "ExecutionCancelledDueToSharedObjectCongestion { congested_objects: CongestedObjects([0x0df4f02d0e210169cb6d5aabd03c3058328c06f2c4dbb0804faa041159c78443]) }",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    },
+    {
+      "digest": "AhsVW7RHNWaFbJMtm73PmsHFeqrBL146VwCGcaBengUj",
+      "error": "MoveAbort(MoveLocation { module: ModuleId { address: 79fa20e2a4cebf9ca7cdc044dc3fb284b092183c5834a835ce416969f8df3a87, name: Identifier(\"validation\") }, function: 0, instruction: 7, function_name: Some(\"check_min_amount\") }, 0) in command 9",
+      "status": "onchain-failed",
+      "source": "Tatum Sui Mainnet gRPC"
+    }
+  ]
+}

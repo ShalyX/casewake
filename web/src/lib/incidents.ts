@@ -77,6 +77,8 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   if (record.network !== observation.network) reasons.push("Network mismatch.");
   if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error fingerprint differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");
+  if (record.errorText !== observation.errorText) reasons.push("Original error detail differs; do not automatically reuse this resolution.");
+  if (record.sdkVersion) reasons.push("Cannot verify the caller's SDK version from an onchain digest; manual version confirmation required.");
   if (record.status !== "human-verified") reasons.push("Unverified case.");
   if (!record.evidenceUrl.startsWith("https://")) reasons.push("Missing secure evidence URL.");
   return { record, distance, verdict: reasons.length ? "incompatible" : "eligible-for-review", reasons };

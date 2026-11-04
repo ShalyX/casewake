@@ -1,84 +1,65 @@
 # PROJECT — Total Recall / Incident Memory
 
 ## Current milestone
-PRODUCT_LOCK completed at thesis level. DEPENDENCY_ATTACK is partially cleared: live Tatum authenticated Mainnet service read and a real Walrus Mainnet write/recall succeeded. The complete incident-resolution vertical slice remains UNPROVEN.
+BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Walrus recall are **VERIFIED**. Human-verified repair/recommendation loop is **NOT VERIFIED** and remains an open high-priority proof gate.
 
-## Selected thesis
-User explicitly selected Incident Memory on 2026-11-03. PRODUCT.md revision 1 is source of truth; product *brand name* remains unselected. No merge with Indexer Recovery or personal finance candidates.
+## Selected product / boundaries
+- Thesis explicitly selected by user on 2026-11-03: Incident Memory (name remains a descriptive working title; final brand name not locked).
+- User/problem/primary loop: PRODUCT.md revision 1; real Sui transaction → human-approved fix → persistent Walrus memory → safe later recommendation, always reviewed by a person.
+- EchoLedger, Watchline and Indexer Recovery are parked, not discarded. No feature merge.
+- No autonomous repair, blockchain signing or automatic financial action. No fake cases, fake transaction data or unverified "fixed" claims.
 
-## Completed
-- Intake, rubric decode and ecosystem research/ideation, plus deep competitive validation.
-- Human idea gate: Incident Memory chosen on 2026-11-03.
-- Locked user/problem/workflow/magic moment/non-goals in PRODUCT.md revision 1.
-- Wrote DEMO.md architecture, DEPENDENCY_ATTACK.md, and root README.
-- First implementation scaffold written in web/: separate Next landing and /workspace; server-side Tatum gRPC, Walrus memory and protected review routes; explicit configuration/missing-proof states.
-- Previous synthetic safety spike: 13/13 Python tests passed (2026-11-03).
-- Current TypeScript incident fingerprint/matching/serialization logic: 8/8 synthetic assertions passed using Node 24 (2026-11-03). This is NOT Mainnet integration proof.
-- 2026-11-04: Tatum authenticated Mainnet gRPC `LedgerService/GetServiceInfo` returned HTTP 200 / gRPC 0, 118-byte protobuf response. Proof: web/scripts/probe-tatum-grpc.cjs.
-- 2026-11-04: Walrus Mainnet relayer health, authenticated recall, one accepted/completed memory job, and exact-marker recall ALL succeeded. Job: c05c5968-9aef-4c6f-af02-fd71100bcb7e; blob: fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA. It is ONLY an explicitly labeled integration-test memory, not a verified case.
+## Completed and verified — 2026-11-04
+1. Recovered failed npm setup using `pnpm`; installed Next.js 16.4.4, React 19.3, Sui SDK 2.39, native gRPC, MemWal 0.1.12; `pnpm-lock.yaml` generated.
+2. Next.js production build and TS compilation passed; app runs locally via `pnpm start --hostname 127.0.0.1 --port 4217`. `GET /workspace` returned HTTP 200. Separate landing and app.
+3. Tatum gRPC authentication HTTP 200/gRPC 0; live `POST /api/transaction` returned a true Sui Mainnet `MoveAbort` failed transaction. `web/scripts/discover-failures.mjs` sampled 100 recent executed tx and found 56 failures (24 distinct error strings IN THIS SAMPLE, not network-wide rates). Candidates in `evidence/failed-sui-transaction-candidates.json`.
+4. MemWal SDK signed auth, completed Mainnet storage job and later recall proven. One older smoke-test blob `fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA`.
+5. `POST /api/observations` (reviewer-key protected) independently re-fetched ten **distinct real failed Sui transactions from Tatum**, then completed ten separate Walrus Mainnet writes; job IDs and blob receipts in `evidence/observation-write-receipts.json`.
+6. `GET /api/memories` independently listed 11 stored memories (10 authentic onchain observations + prior smoke), with complete pagination.
+7. `POST /api/recall` retrieved matching onchain observations for **three different later genuine failed digests**, while returning ZERO human-verified resolutions. Exact matches and negative self-match checks saved in `evidence/live-recall-proof.json`.
+8. Unauthenticated reviewer request rejected 403; authenticated request without human verified checkbox rejected 400. `WORKSPACE_WRITE_KEY` generated privately and kept in ignored `web/.env.local`.
+9. Pure deterministic TS safety tests now 10/10 (synthetic fixtures); earlier Python spike 13/13 (synthetic). Production app screenshot `evidence/screenshots/workspace.png` captured on real local host.
+10. Web app proof panel distinguishes observed failure precedents from human-reviewed resolutions, shows Mainnet namespace inventory, and hides reviewer keys from git/browser persistent storage.
 
-## Active work
-- Dependency installation on connected Windows PC via npm, which is taking unusually long. The scaffold may not be fully installable/buildable yet; do not call the UI compiled or deployed without test evidence.
-- Remaining end-to-end proof: Tatum GetTransaction against a genuine failed digest, authentic comparable failed digest pair, human-confirmed fix, and the APP's Walrus remember/recall route with validated data. The isolated sponsor credential probes already succeeded.
-- Naming, design lock, actual visual QA, demo video, blog and submission remain future milestones.
+## Active work / required verification
+- Final build and lint QA after last changes (source is written; check new command results before passing).
+- Reviewer-approved resolution still **UNPROVEN**: two genuine analogous failure digests exist, and official Sui docs provide generic troubleshooting, but NO demonstrated successful fix and NO human signoff. See `evidence/resolution-verification-queue.md`.
+- The required ten Mainnet memories are genuine **observations**, not ten verified repairs. Do not count smoke or observations as human-verified fixes.
+- Brand naming, Product Hygiene, Demo Production/QA, public repository, deployment, blog, organizer track-fit clarification and submission remain NOT DONE.
+- Read-only Sui chain lookup works; no automatic repair, notifications or transfers.
 
-## External blockers
-- The Tatum and Walrus secrets are now configured privately in web/.env.local; never copy or log them. Both were verified by live isolated probes on 2026-11-04.
-- No verified compatible pair of genuine failed Sui transaction digests and real resolved diagnosis.
-- No organizer confirmation yet that B2B engineering incidents fit the Smart Agents track.
-- Write gateway disabled until WORKSPACE_WRITE_KEY configured.
+## Source-of-truth / proof artifacts
+- `PRODUCT.md` thesis, `HACKATHON.md` rules, `DEMO.md` planned film, `DEPENDENCY_ATTACK.md`.
+- `EVIDENCE.md` claim statuses and proof register.
+- `evidence/failed-sui-transaction-candidates.json`: real Tatum sample, only onchain execution failures.
+- `evidence/observation-write-receipts.json`: 10 authentic Mainnet observation writes, one job and blob ID each.
+- `evidence/live-recall-proof.json`: 3 repeat-failure matches plus self-match rejection.
+- `evidence/resolution-verification-queue.md`: pending documented `InsufficientCoinBalance` candidate, not a verified fix.
+- `web/scripts/discover-failures.mjs`, `ingest-real-observations.py`, `verify-live-recall.py`, `test-incidents.mjs`.
+- `evidence/screenshots/workspace.png`: initial local UI capture; additional real-data screenshot recommended.
 
-## Technical risks / caveats
-- Tatum official gRPC endpoint uses x-api-key metadata, not old Sui JSON-RPC.
-- Walrus remember acceptance is asynchronous; only completed blob_id proves storage.
-- Walrus namespace is owner-scoped; shared case catalog requires careful operator-mediated access.
-- Sui SDK/client version is not encoded in a chain digest and must be reviewer-supplied. Never infer it from transaction alone.
-- Source error/status normalization must be confirmed with live Tatum output, not only assumed from SDK generated types.
-- Current reviewer token is a local MVP guard, not a production auth system. Do not publicly enable writes without more security.
+## Highest-value next move
+1. Collect an independently verified engineering repair for at least one failure class: reproduce failure → apply fix → confirm succeeded test/chain action or maintainer-backed issue resolution → reviewer signs off → `POST /api/remember`.
+2. Import another genuinely compatible failed digest and prove a previously verified resolution is recalled and recommended with evidence; the existing three onchain-observation pairs are ready to use for validation but cannot substitute for an actual confirmed fix.
+3. Complete visual review, Product Hygiene, demo production, narrative, blog, source publication and submission. Keep actual evidence, not placeholders.
+4. Confirm Sui developer-ops workflow fits Smart Agents for Real Life track with organizer if feasible. Deadline: 2026-11-10 17:00 UTC.
 
-## Evidence gaps
-Authenticated Tatum service-read and ONE completed Walrus Mainnet smoke memory have been verified. Still missing: actual Tatum failed-transaction lookup, ten verified incident memories, integrated production routes, app build and visual QA, public deployment, independently validated user demand, real incident pair, and completed demo. See EVIDENCE.md.
+## Constraints / safeguards
+- SDK versions of a failed transaction cannot be inferred from chain evidence; version-scoped fixes require manual confirmation.
+- A fuzzy Walrus hit without deterministic exact matching is a related observation, not an eligible fix.
+- Walrus owner+namespace isolation does NOT automatically provide multi-tenant access control. Current reviewer-key protection is local MVP, not a production user auth system. Production public deployment needs real roles/rate limits.
+- Never leak private API key, delegate key, reviewer secret, or wallet seed. `web/.env.local` is gitignored and was checked.
 
-## Product and design risks
-- Never become a generic AI error-explainer. The product must reuse verified cases, not merely summarize failures.
-- Must distinguish transport errors, onchain failures and successful transactions.
-- Nonmatches must be explicitly rejected, and matching only offers review recommendations.
-- Name and brand kit deliberately postponed until a collision-checked shortlist exists.
-- Visual QA still required after dependency installation; CSS/JSX existing is not proof of UI quality.
+## Decisions and handoffs
+- 2026-11-01: Generic memory bot killed; original personal finalists EchoLedger and Watchline compared.
+- 2026-11-03: User directed exploration to ecosystem problems; both personal finalists parked.
+- 2026-11-03: Incident Memory selected over Indexer Recovery; PRODUCT_LOCK revision 1.
+- 2026-11-04: User instructed five-point execution; 10 genuine onchain observations completed, 3 real cross-transaction recall paths verified, actual repair approval blocked on missing successful-remediation proof.
+- Research: sources and public issue context.
+- Engineering: build/live Tatum/Walrus observation path passed; reviewed repair gate open.
+- Proof: EVIDENCE.md statuses reconciled.
+- Demo Director: early architecture only; final recording not made.
+- Operator: persist true status; no submission-ready claims.
 
-## Deployment / submission
-Deployment: NOT STARTED. Submission: NOT STARTED. Official deadline 2026-11-10 17:00 UTC.
-
-## Next action
-1. Install the Next.js/SDK dependencies cleanly (initial npm and pnpm attempts were interrupted); run build, inspect the actual UI, and fix type/API errors.
-2. Use verified Tatum credentials to query an authentic onchain FAILED transaction (GetTransaction), then find a second comparable genuine failure with independently documented resolution.
-3. Run the app's complete reviewer-confirmation → Walrus write → second-case recall loop, not just the successful standalone SDK smoke test.
-4. Collect at least 10 distinct completed Mainnet memories with documented provenance. Never pretend the one integration smoke memory represents a real incident.
-5. Capture timestamps and proof in EVIDENCE.md; no fabricated demo activity.
-
-## Evidence register
-- HACKATHON.md, RESEARCH.md, IDEATION.md
-- VALIDATION_1_2.md (parked original finalists)
-- ECOSYSTEM_RESEARCH.md, ECOSYSTEM_IDEATION.md, VALIDATION_ECOSYSTEM_FINALISTS.md
-- PRODUCT.md (locked thesis), DEMO.md, DEPENDENCY_ATTACK.md
-- EVIDENCE.md, SCORECARD.md
-- spikes/ (previous synthetic tests), web/scripts/test-incidents.mjs (8 synthetic assertions)
-
-## Decision log
-- 2026-11-01: Original three ideas assessed, EchoLedger initially recommended.
-- 2026-11-01: EchoLedger + Watchline deepened, kept alive.
-- 2026-11-03: User parked two personal finalists, requested ecosystem research.
-- 2026-11-03: Incident Memory vs Indexer Recovery validated; both MODIFY, Incident Memory recommended.
-- 2026-11-03: User explicitly selected Incident Memory; thesis lock revision 1. Product brand is not yet locked.
-- 2026-11-03: Never fabricate an incident, Tatum response, Walrus Mainnet write or video.
-
-## Specialist handoffs
-Research: evidence-backed ecosystem need; real case pair still missing.
-Product Critic: MODIFY inside approved incident-memory thesis; no auto-fix.
-Engineering: code scaffold present; deterministic tests pass; isolated live Tatum/Walrus credential probes VERIFIED. Integrated product routes and real incident-case workflow still unproven.
-Demo Director: early architecture specified but no recording or verified demo.
-Proof: EVIDENCE.md now records real authenticated Tatum service read and first Walrus Mainnet smoke blob+recall, with remaining integration gaps.
-HQ: continue build/technical gate; do not advance to product review or submission.
-
-## Checkpoint
-Revision 6 — 2026-11-04. Previous implementation commit 836331c; new evidence checkpoint to be recorded.
+## State checkpoint
+Revision 7 (pending state-json sync), 2026-11-04. Previous git commit `f924f07`; new commit after QA.
