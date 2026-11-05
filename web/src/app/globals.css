@@ -313,3 +313,9 @@ button:disabled{opacity:.46;cursor:not-allowed}
 .journal-sources{display:flex;flex-wrap:wrap;gap:15px 25px;padding:45px 0 0;color:#93a594;font-size:10px}
 .journal-sources a:hover{color:#c8ed9b}
 @media(max-width:740px){.journal-header{padding:0 20px}.journal-container{padding:55px 20px 90px}.journal-container>h1{font-size:48px}.journal-lead{font-size:17px}.journal-byline{flex-direction:column}.journal-figure{margin-bottom:70px}.journal-comparison{grid-template-columns:1fr}.journal-stats>div{padding:12px}.journal-stats strong{font-size:35px}.journal-stats span{font-size:9px}.journal-end h2{font-size:60px}.journal-container>section{margin-bottom:75px}}
+
+/* Private reviewer access: the key stays in React memory and is never persisted. */
+.reviewer-access{display:grid;gap:8px;margin-top:18px;padding:14px 15px;border:1px solid #51664c;background:#19231b}
+.reviewer-access>span{font:10px 'DM Mono',monospace;letter-spacing:.06em;color:#c8ed9b}
+.reviewer-access input{width:100%;min-width:0;background:#0e1410;border:1px solid #52634e;color:#f1f5ec;padding:11px 12px;font:12px 'DM Mono',monospace}
+.reviewer-access small{font-size:10px;line-height:1.5;color:#aab9a8}

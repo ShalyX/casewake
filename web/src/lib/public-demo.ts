@@ -1,6 +1,8 @@
-/** A public judge demo exposes ONLY these genuine, preverified public Sui digests.
- *  Local/private developer mode continues to support arbitrary authentic digests.
- *  Read-only sponsor credentials stay on the server.
+import { timingSafeEqual } from "node:crypto";
+
+/** Anonymous public visitors see only genuine, preverified Sui example digests.
+ *  An authenticated reviewer may inspect other authentic digests and submit a reviewed memory.
+ *  Sponsor credentials and the reviewer key stay server-side.
  */
 export const PUBLIC_DEMO_TRANSACTIONS = [
   {
@@ -22,7 +24,15 @@ export const PUBLIC_DEMO_TRANSACTIONS = [
 
 export const isPublicDemoMode = () => process.env.PUBLIC_DEMO_MODE === "true";
 
-export function isAllowedPublicDemoDigest(digest: string) {
-  return !isPublicDemoMode() ||
+export function isReviewerKeyValid(suppliedKey: string | null | undefined) {
+  const requiredKey = process.env.WORKSPACE_WRITE_KEY;
+  if (!requiredKey || !suppliedKey) return false;
+  const supplied = Buffer.from(suppliedKey, "utf8");
+  const expected = Buffer.from(requiredKey, "utf8");
+  return supplied.length === expected.length && timingSafeEqual(supplied, expected);
+}
+
+export function isAllowedPublicDemoDigest(digest: string, reviewerAuthorized = false) {
+  return !isPublicDemoMode() || reviewerAuthorized ||
     PUBLIC_DEMO_TRANSACTIONS.some(item => item.digest === digest);
 }

@@ -76,7 +76,7 @@ export default function Workspace() {
 
   async function loadRecall(observed: Transaction) {
     try {
-      const recalled = await postJson("/api/recall", { digest: observed.digest });
+      const recalled = await postJson("/api/recall", { digest: observed.digest }, reviewerKey);
       setCandidates((recalled.candidates || []) as Candidate[]);
       setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
       setSimulationRunbooks((recalled.simulationRunbooks || []) as SimulationRunbook[]);
@@ -95,7 +95,7 @@ export default function Workspace() {
     setError(""); setRecallNote(""); setProof(null); setCandidates([]); setObservedPrecedents([]); setTx(null);
     try {
       setPhase("reading");
-      const result = await postJson("/api/transaction", { digest: value });
+      const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
       const observed = result.transaction as Transaction;
       setTx(observed);
       if (observed.outcome === "failed" && status?.walrusConfigured) {
@@ -173,12 +173,17 @@ export default function Workspace() {
                 <label htmlFor="digest">SUI TRANSACTION DIGEST</label>
                 <div className="input-inline"><input id="digest" value={digest} onChange={(e) => setDigest(e.target.value)} placeholder="Paste a real Sui transaction digest" autoComplete="off" spellCheck={false} /><button type="submit" disabled={busy || !status?.tatumConfigured}>{phase === "reading" ? "Reading…" : "Inspect"} <span>↗</span></button></div>
               </form>
+              {status?.reviewerWritesEnabled && <label className="reviewer-access">
+                <span>PRIVATE REVIEWER ACCESS</span>
+                <input type="password" value={reviewerKey} onChange={(e) => setReviewerKey(e.target.value)} placeholder="Enter the private workspace key" autoComplete="off" />
+                <small>Unlocks custom digest lookup and protected case recording. Kept in page memory only.</small>
+              </label>}
               {status?.publicDemoMode && <div className="demo-presets">
                 <span className="demo-presets-label">REAL MAINNET EVIDENCE / CHOOSE A CASE</span>
                 <div className="demo-preset-list">
                   {PUBLIC_EXAMPLES.map((item, i) => <button key={item.digest} type="button" disabled={busy} onClick={() => {setDigest(item.digest); void inspect(item.digest);}}><small>{String(i+1).padStart(2,"0")}</small>{item.label}<span>GO</span></button>)}
                 </div>
-                <p>Public read-only demo: these are genuine onchain transactions. Tatum and Walrus are queried live. No keys or wallets are required.</p>
+                <p>Public visitors can inspect genuine onchain transactions. Tatum and Walrus are queried live. Only an authorized reviewer with a private access key can record a confirmed case.</p>
               </div>}
               {!status?.tatumConfigured && <p className="inline-warning">TATUM_API_KEY is not set. Configure the server environment to enable real chain reads.</p>}
               {error && <div className="inline-error" role="alert">⚠ {error}</div>}
@@ -195,11 +200,11 @@ export default function Workspace() {
               {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
-                <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record verified fix"} ↗</button>
+                <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record verified fix"} ↗</button>
               </div>
             </div> : <div className="panel empty-evidence"><span className="empty-target">✳</span><div className="eyebrow dim">EVIDENCE WAITING ROOM</div><h2>The chain tells us what happened.</h2><p>Import a transaction to reveal its evidence before assigning an explanation.</p><div className="empty-grid"><span>STATUS / —</span><span>ERROR / —</span><span>SOURCE / —</span></div></div>}
 
-              {tx && showEditor && !status?.publicDemoMode && <div className="panel editor-panel">
+              {tx && showEditor && <div className="panel editor-panel">
               <div className="panel-kicker"><span>03 / HUMAN REVIEW</span><span>WRITE RESTRICTED</span></div>
               <h2>Make this lesson reusable.</h2><p>Only record a procedure actually confirmed by a human. This becomes a future recommendation, not an automatic fix.</p>
               <div className="editor-form">
@@ -207,9 +212,8 @@ export default function Workspace() {
                 <label>Resolution steps<textarea value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What did the engineer do, and what worked?"/></label>
                 <label>HTTPS evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} placeholder="https://github.com/..."/></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
-                <label>Private reviewer access key<input type="password" value={reviewerKey} onChange={(e) => setReviewerKey(e.target.value)} placeholder="Not saved in browser storage" /></label>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I personally verified the diagnosis and resolution, and the content is safe to share in this workspace.</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Save human-verified resolution"} ↗</button>
+                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Save human-verified resolution"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
                   <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>

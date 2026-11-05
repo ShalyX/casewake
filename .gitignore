@@ -5,3 +5,6 @@ __pycache__/
 .env.*.local
 node_modules/
 .hackathon/state.json.prev
+
+.vercel
+.env*

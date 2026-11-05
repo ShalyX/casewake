@@ -1,18 +1,18 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { safeText, type VerifiedCase } from "@/lib/incidents";
 import { storeVerifiedIncident } from "@/lib/walrus";
-import { isPublicDemoMode } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
 export async function POST(request: NextRequest) {
-  if (isPublicDemoMode()) return NextResponse.json({error:"Public demo is read-only; reviewer storage is disabled."},{status:403});
   const requiredKey = process.env.WORKSPACE_WRITE_KEY;
   if (!requiredKey) return NextResponse.json({ error: "Write access is disabled until WORKSPACE_WRITE_KEY is configured." }, { status: 503 });
   // Reviewer token is never persisted in the browser; this route must remain server-only.
-  if (request.headers.get("x-workspace-key") !== requiredKey)
+  const suppliedKey = Buffer.from(request.headers.get("x-workspace-key") || "", "utf8");
+  const expectedKey = Buffer.from(requiredKey, "utf8");
+  if (suppliedKey.length !== expectedKey.length || !timingSafeEqual(suppliedKey, expectedKey))
     return NextResponse.json({ error: "Reviewer access token is incorrect." }, { status: 403 });
   try {
     const body = await request.json() as Record<string, unknown>;
