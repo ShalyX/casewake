@@ -22,10 +22,10 @@ Status checked: 2026-11-04. Submission deadline: **2026-11-10 17:00 UTC**.
 - `MEMWAL_AGENT_ID`: **delegate public key**, *not* the Walrus MemWalAccount object ID. Official event site explains this. User already has the public key in the Walrus dashboard; **do not use the delegate private key or seed phrase**.
 - Experience building with Walrus: mention durable Mainnet memory, completed write receipts, semantic recall, SEAL-session compatibility workaround.
 - Experience with Tatum AI Builder: indicate accurately if not used; do not claim bonus.
-- Public GitHub repository: **PENDING verification**.
-- Public live demo URL: **PENDING verification**.
+- Public GitHub repository: **VERIFIED** — https://github.com/ShalyX/casewake (public, master commit 40e93fd).
+- Public live demo URL: **LIVE END-TO-END VERIFIED** — https://casewake.vercel.app. Production deployment dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym READY on commit 40e93fd; Tatum real transaction lookup and Walrus semantic recall work in Vercel production.
 - 2–3 minute video URL: **NOT RECORDED / NOT PUBLISHED**.
-- Published blog URL: **NOT PUBLISHED** (`BLOG_DRAFT.md` exists).
+- Published blog URL: **LIVE** — https://casewake.vercel.app/journal/casewake (HTTP 200; actual captured workspace and simulation screenshots both HTTP 200).
 
 ## Judge-proof sequence
 1. `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` — observed InsufficientCoinBalance at splitCoins command 16; retrieves 1 controlled runbook and 1 prior observation from 12 stored memories.
@@ -35,16 +35,40 @@ Status checked: 2026-11-04. Submission deadline: **2026-11-10 17:00 UTC**.
 5. `Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp` — unrelated MoveAbort gets **zero** coin-split runbook suggestions.
 6. `/api/memories` — namespace stored count measured live; ten real observations, one test runbook, one smoke record (as of Nov 4).
 
+## 2026-11-05 — Live Vercel production verification
+
+- Both TATUM_API_KEY and MEMWAL_PRIVATE_KEY are present in Vercel as sensitive/secret environment variables, scoped to Production. Values were never retrieved or logged. MEMWAL_ACCOUNT_ID, relayer URL, namespace and PUBLIC_DEMO_MODE=true remain configured.
+- Production deployment dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym is READY on commit 40e93fdf8191ff74da36deb926c870fb89ccec9b.
+- /api/status: publicDemoMode=true, reviewerWritesEnabled=false, tatumConfigured=true, walrusConfigured=true.
+- Approved real failed digest BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6: Tatum transaction lookup returned failed; Walrus recall returned 1 simulation-tested runbook + 1 observed precedent from 12 hits; recallDegraded=false.
+- Second distinct matching failure XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue: 1 runbook, no degradation.
+- Unrelated MoveAbort Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp: 0 runbooks, no degradation.
+- Unlisted digest: 403. Public observation writes: 403. Public verified-memory writes: 403.
+- /api/memories: 12 records, complete=true, namespace incident-memory-v1.
+- Landing, workspace, simulation proof, field-notes article and both screenshots: HTTP 200.
+
+## 2026-11-05 — Live Vercel production verification
+
+- Both TATUM_API_KEY and MEMWAL_PRIVATE_KEY are present in Vercel as sensitive/secret environment variables, scoped to Production. Values were never retrieved or logged. MEMWAL_ACCOUNT_ID, relayer URL, namespace and PUBLIC_DEMO_MODE=true remain configured.
+- Production deployment dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym is READY on commit 40e93fdf8191ff74da36deb926c870fb89ccec9b.
+- /api/status: publicDemoMode=true, reviewerWritesEnabled=false, tatumConfigured=true, walrusConfigured=true.
+- Approved real failed digest BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6: Tatum transaction lookup returned failed; Walrus recall returned 1 simulation-tested runbook + 1 observed precedent from 12 hits; recallDegraded=false.
+- Second distinct matching failure XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue: 1 runbook, no degradation.
+- Unrelated MoveAbort Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp: 0 runbooks, no degradation.
+- Unlisted digest: 403. Public observation writes: 403. Public verified-memory writes: 403.
+- /api/memories: 12 records, complete=true, namespace incident-memory-v1.
+- Landing, workspace, simulation proof, field-notes article and both screenshots: HTTP 200.
+
 ## Final submission gate
 - [x] Real Tatum Mainnet gRPC integration / genuine transaction failure.
 - [x] 10+ Walrus Mainnet writes (12 total; only 10 are true onchain failure observations, one simulated runbook, one smoke).
 - [x] Actual runbook recall in public-mode local test, correct negative control.
-- [x] Public-mode hard blocks writes and unknown digests.
+- [x] Public-mode hard blocks writes and unknown digests (unknown digest 403; /api/observations 403; /api/remember 403).
 - [x] Script and blog draft are prepared.
-- [ ] GitHub repository publicly accessible.
-- [ ] Live deployed app publicly accessible and functioning, no secret leakage.
+- [x] GitHub repository publicly accessible.
+- [x] Vercel production deployment publicly accessible; Tatum and Walrus production integrations verified end-to-end. Public mode remains read-only by design.
 - [ ] Video recorded and reviewed at 2–3 minutes.
-- [ ] Blog **published** with real URLs and screenshot proof.
+- [x] Blog published with public app links, chain explorer links, actual UI screenshots, simulation proof and Walrus blob receipt.
 - [ ] Organizer track fit optionally confirmed.
 - [ ] Required user identity/account form fields filled.
 - [ ] Submission sent and receipt captured.

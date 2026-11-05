@@ -42,3 +42,18 @@ Current Product Hygiene gate: **IN PROGRESS** until all P0 and relevant public r
 - Public read-only per-digest whitelist protects against *scope abuse*, but does not provide distributed per-IP rate limiting. Monitor sponsor quotas and Vercel function usage. Network cache is process-local, not global.
 - A public GitHub repo alone does not grant an open-source license. The owner should choose an explicit license if desired.
 - No final trademark clearance or domain ownership implied by preliminary exact-name search.
+
+
+## Re-run after Vercel production secret configuration — 2026-11-05
+
+- Both secret values present as Vercel sensitive / secret, decrypted=false, Production target, no security issues. No values fetched into this audit.
+- Latest production deployment READY, no password or SSO protection.
+- /api/status: Tatum configured true; Walrus configured true; publicDemoMode true; reviewerWritesEnabled false.
+- Live first transaction and Walrus recall: 1 simulation runbook + 1 observation / 12 hits / no degraded fallback.
+- Separate analogue: 1 runbook / no degraded fallback.
+- Negative control: 0 runbooks / no degraded fallback.
+- Unknown digest and both write endpoints return 403 as expected.
+- /api/memories complete 12. All judge-facing routes and screenshot assets HTTP 200.
+- P0 remains: approved historical repair does not exist; public reviewer write path is disabled. Product completeness cannot pass while this original P0 is missing.
+- Demo QA remains open: no actual MP4 has been recorded or reviewed.
+- Canonical Product Hygiene skill was not found/invoked; fallback_used=true. The previous local fallback audit is extended here; do not claim canonical skill passed.

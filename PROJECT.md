@@ -87,3 +87,14 @@ Revision 7 (pending state-json sync), 2026-11-04. Previous git commit `f924f07`;
 - **PASS:** direct SDK and Chrome UI screenshots show the actual Walrus-backed runbook, caveats, and Tatum simulation proof.
 - **PASS:** bounded read-only retry tests; no automatic retry on writes.
 - **OPEN:** human reviewer-approved fix for a specific historical transaction, name/brand, public hosting, final demo/blog/submission. Core in-app recall blocker CLEARED.
+
+
+## 2026-11-05 — Cloud integration verified; resume full-product BUILD_LOOP
+
+Completed: Vercel Production Tatum + Walrus secrets configured securely; deployment READY on 40e93fd; live transaction read, semantic recall, second analogue, negative control, write blocks and public route/assets verified. Mainnet memory inventory = 12 complete. Public field notes article is live.
+
+Product Integrity: current deliverable is an integrated vertical slice, not the complete locked product. The user-approved P0 for engineer-confirmed resolution capture and completed Walrus receipt is present in the original Product Lock but blocked by the public read-only mode. No historical case-specific repair has been independently approved. Do not call this JUDGE_READY or full product.
+
+Current phase: BUILD_LOOP. Next Engineering action: safely restore reviewer-only WORKSPACE_WRITE_KEY flow for public production while preserving anonymous 403s; then capture a genuine human-approved resolution only when an authorized engineer supplies independent evidence, and prove later cross-incident recall. Also acceptance-test succeeded/unknown transaction branches and workspace states.
+
+Presentation: public app/repo/article are live; actual demo video not recorded. Submission fields and organizer track-fit still open. Deadline remains Nov 10 17:00 UTC.

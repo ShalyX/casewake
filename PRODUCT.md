@@ -65,3 +65,31 @@ Each stored memory is a JSON string containing a readable explanation + structur
 
 ## Accepted scope after validation
 Verdict: MODIFY within selected thesis. One Sui failure class first; no dangerous automation. Actual sponsor/API proof is a separate required technical gate, not implied by this lock.
+
+
+## Product-to-implementation coverage ledger — 2026-11-05
+
+This ledger preserves the original Product Lock revision 1. A working read/recall slice does NOT replace the approved human-confirmed resolution loop.
+
+| Locked P0 capability | Implementation / surface | Current status | Acceptance evidence / remaining gap |
+|---|---|---|---|
+| Read-only real Sui digest lookup via Tatum with source provenance | src/app/api/transaction/route.ts, src/lib/tatum.ts, /workspace | VERIFIED | Vercel Production POST /api/transaction for approved genuine digest returns onchain outcome failed; public source explorer link is visible. |
+| Distinguish failure / success / unknown; never submit or sign | src/lib/tatum.ts, /workspace, simulation proof | IMPLEMENTED; PARTIAL ACCEPTANCE | Real failed outcome proven; controlled Tatum simulation has failed and successful cases. Still add/record explicit live-API acceptance for successful and unknown transaction lookup branches. No signing or execution path is present. |
+| Submit a human-confirmed case and receive completed Walrus receipt/blob ID | src/app/api/remember/route.ts, workspace reviewer editor | BLOCKED IN PUBLIC PRODUCT | API and editor exist locally with WORKSPACE_WRITE_KEY + explicit verified=true, reviewer, diagnosis, steps and HTTPS evidence. Public mode intentionally hard-blocks this route; no reviewer key configured in Vercel and no approved historical case stored. Restore protected reviewer-only access; never permit anonymous writes. |
+| Walrus recall with transparent candidate filtering and exact/mismatch reasoning | src/app/api/recall/route.ts, src/lib/unified-recall.ts, workspace | VERIFIED for simulation-tested guidance / PARTIAL for human-confirmed case | Production: first failure -> 1 runbook + 1 observed precedent; second comparable failure -> 1 runbook; unrelated MoveAbort -> 0; all recallDegraded=false. The eligible human-verified case path remains unproven because no such case exists. |
+| Saved-case count from completed real Mainnet writes | src/app/api/memories/route.ts, workspace inventory | VERIFIED | Production /api/memories: 12, complete=true, namespace incident-memory-v1. Ten real failed observations + one simulation runbook + one integration smoke memory. |
+| Workspace empty / missing keys / loading / live / failed / result states | src/app/workspace/page.tsx | IMPLEMENTED; PARTIAL VISUAL/STATE QA | Public live state verified. Full empty/no-key/timeout/success/failure state-by-state browser matrix still required. |
+| Landing and workspace as separate routes | /, /workspace | VERIFIED | Both public production routes HTTP 200. |
+| Server-only keys; no anonymous production write access | Vercel sensitive env; API guards | VERIFIED for public demo | Both private secrets server-side and redacted. Public writes return 403; unknown digest returns 403. Reviewer workflow must remain authenticated when restored. |
+
+### Product Integrity checkpoint — 2026-11-05
+- Approved product: Incident Memory, Product Lock revision 1, selected by user 2026-11-03; Casewake is the adopted brand, not a changed thesis.
+- Current deliverable: integrated vertical slice, NOT full product.
+- Mechanism proven: Tatum Mainnet transaction read -> Walrus Mainnet semantic recall -> deterministic runbook eligibility; second analogue matches, negative control does not.
+- Full journey: digest intake -> real chain evidence -> matching memory -> evidence-backed procedure. Missing end-of-journey step: authorized engineer records a specific historical resolution, receives a completed Walrus receipt, and later recurrence retrieves that human-verified case.
+- Locked P0 total: 7 grouped requirements above; see per-row status rather than aggregate.
+- P0 missing/blocked: reviewer-authenticated case creation in public production; an actual independently human-approved historical repair; success/unknown lookup acceptance; complete UI state matrix.
+- Differentiator retained: durable resolution memory + human verification gate + cross-incident reuse. Simulation runbook is explicitly separate from human-approved case.
+- New/replaced thesis: NO. No unauthorized de-scope; public demo read-only restriction is a deployment safety configuration, not a product thesis change.
+- Next action: restore the protected reviewer-only write path in production without anonymous writes, then obtain genuine human-approved repair evidence and prove later reuse.
+- Verdict: BLOCKED for FULL_PRODUCT_VERIFIED / JUDGE_READY. Vertical slice is verified; original P0 case-resolution loop remains incomplete.

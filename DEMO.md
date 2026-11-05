@@ -59,3 +59,15 @@ All are genuine Sui Mainnet digests previously tested through Tatum; C is a diff
 - `evidence/live-recall-proof.json`
 
 **Current evidence boundary:** We have reproduced the error pattern and tested a correction under Sui Mainnet *simulation*. We have **not** independently verified that the original historical transaction was successfully repaired or that a human reviewed a case-specific fix.
+
+
+## 2026-11-05 — Public production rehearsal status
+
+- Production URL: https://casewake.vercel.app; deployment READY at dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym, commit 40e93fd.
+- Tatum + Walrus private env credentials configured in Vercel Production as sensitive values; never expose in video or logs.
+- Live first case: one simulation runbook + one observation from 12 hits, no degradation.
+- Live second comparable failure: one runbook, no degradation.
+- Live negative control: zero runbooks, no degradation.
+- Public write endpoints and unlisted digest are 403; do not show any anonymous write path.
+- Landing, workspace, proof page, article and both screenshots return HTTP 200.
+- Video status remains NOT RECORDED. Script still requires a complete timed recording, full watch-through and judge QA.

@@ -51,3 +51,19 @@ Never describe synthetic test cases as real chain events, verified incident reso
 - Clean `pnpm start --hostname 127.0.0.1 --port 4217` served `/workspace` and `/proof/splitcoins` with HTTP 200.
 - Read-only production `POST /api/recall` with `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` returned HTTP 200, genuine Tatum outcome `failed`, **one** Walrus simulation-tested runbook from **12** hits, `recallDegraded=false`, and link `/proof/splitcoins`; elapsed **7,383 ms**.
 - **Status:** production app's Tatum → Walrus → categorized runbook recall is VERIFIED. Historical human-approved repair remains UNVERIFIED.
+
+
+## 2026-11-05 — Vercel Production secrets + live end-to-end verification
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Production Tatum and Walrus secrets are configured securely | VERIFIED (VERCEL CONFIG) | Vercel project casewake, production env listing with decrypt=false: TATUM_API_KEY and MEMWAL_PRIVATE_KEY appear as sensitive, visibility=secret, decrypted=false, no security issues. Values were not fetched. | Both variables target Production only. |
+| Latest production deployment is live | VERIFIED (DEPLOYMENT) | dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym, READY, commit 40e93fdf8191ff74da36deb926c870fb89ccec9b, alias https://casewake.vercel.app. | Serverless region iad1. |
+| Live Tatum transaction read + Walrus recall | VERIFIED (LIVE PRODUCTION) | Public /api/status: both configured true. POST /api/transaction for BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6 returned outcome failed. POST /api/recall returned 1 simulation runbook, 1 observation, 12 hits, recallDegraded=false. | The runbook is simulation-tested, not a historical repair. |
+| Separate matching real failure retrieves same runbook | VERIFIED (LIVE PRODUCTION) | POST /api/recall digest XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue: 1 runbook, recallDegraded=false. | Same simulation-tested limitations apply. |
+| Unrelated real MoveAbort is rejected | VERIFIED (LIVE PRODUCTION NEGATIVE CONTROL) | POST /api/recall digest Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp: 0 runbooks, recallDegraded=false. | Does not establish all possible false-positive rates. |
+| Public API abuse boundaries | VERIFIED (LIVE PRODUCTION) | Unlisted digest -> HTTP 403; /api/observations -> HTTP 403; /api/remember -> HTTP 403. /api/status says publicDemoMode=true and reviewerWritesEnabled=false. | Human-verified write P0 remains inaccessible in public demo until authenticated reviewer flow is restored. |
+| Durable Mainnet inventory | VERIFIED (LIVE PRODUCTION) | GET /api/memories: allStoredMemories=12, complete=true, namespace incident-memory-v1. | 10 observed failures + 1 simulation runbook + 1 smoke test; zero human-verified resolution records. |
+| Public judge-facing pages and assets | VERIFIED (LIVE PRODUCTION) | /, /workspace, /proof/splitcoins, /journal/casewake, /images/casewake-live-workspace.png, /images/casewake-simulation-proof.png all HTTP 200. | Blog is an in-product engineering article; external third-party blog publication not done if event requires a separate blog URL. |
+
+Evidence boundary: The full Tatum -> Walrus simulation-tested guidance loop now works on the deployed Vercel production service. The original Product Lock's human-approved historical resolution and later reuse loop remains unproven and must not be described as completed.
