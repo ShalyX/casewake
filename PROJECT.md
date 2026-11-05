@@ -98,3 +98,21 @@ Product Integrity: current deliverable is an integrated vertical slice, not the 
 Current phase: BUILD_LOOP. Next Engineering action: safely restore reviewer-only WORKSPACE_WRITE_KEY flow for public production while preserving anonymous 403s; then capture a genuine human-approved resolution only when an authorized engineer supplies independent evidence, and prove later cross-incident recall. Also acceptance-test succeeded/unknown transaction branches and workspace states.
 
 Presentation: public app/repo/article are live; actual demo video not recorded. Submission fields and organizer track-fit still open. Deadline remains Nov 10 17:00 UTC.
+
+
+## 2026-11-06 — Restoring the locked human-review P0
+
+The prior public-demo restriction had hidden and blocked the original Product Lock capability to submit a human-confirmed case. This was a safety restriction, not a product thesis change, but it left the public product incomplete.
+
+Engineering restored the reviewer-only path: timing-safe WORKSPACE_WRITE_KEY comparison, private-key input held only in page memory, authorized reviewer custom-digest access, and human verification/evidence gates before Walrus writes. Anonymous public visitors remain limited to three genuine example digests and cannot write.
+
+Local ESLint + Next.js production build + TypeScript pass. Wrong-key and anonymous custom-digest requests are 403 locally. The new production code is deployed READY on commit dcd555a. The cloud WORKSPACE_WRITE_KEY is not configured yet; status reports reviewerWritesEnabled=false and write endpoints fail closed.
+
+Next: user adds this one additional encrypted Vercel secret. Then test the authenticated path with a deliberately invalid verified=false submission (expected 400, no write), plus unauthorized 403. Only after a real engineer-supplied resolution with independent proof may a human-verified memory be written.
+
+
+## 2026-11-06 — Reviewer secret configured; production protection verified
+
+Vercel Production now has WORKSPACE_WRITE_KEY as an encrypted secret. Deployment dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ is READY on commit dcd555a. Live status confirms reviewerWritesEnabled=true alongside Tatum and Walrus. Anonymous custom digest, remember and observation calls all return 403; public sample recall remains healthy. No memory write was performed.
+
+The only auth acceptance gap is a positive request using the correct reviewer key. Next, enter the key in the private reviewer field at /workspace and run a custom-digest lookup. Do not submit a resolution until an authorized engineer provides real diagnosis, resolution steps and independent evidence. The original human-confirmed resolution/reuse P0 remains open.

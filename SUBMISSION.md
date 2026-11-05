@@ -74,3 +74,11 @@ Status checked: 2026-11-04. Submission deadline: **2026-11-10 17:00 UTC**.
 - [ ] Submission sent and receipt captured.
 
 **Do not submit early as complete or invent a response from the organizers.**
+
+
+## 2026-11-06 — Production reviewer configuration update
+
+- Production deployment READY: dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ, commit dcd555a.
+- WORKSPACE_WRITE_KEY configured in Vercel Production as sensitive/secret; /api/status reports reviewerWritesEnabled=true.
+- Anonymous custom lookup and all reviewer write endpoints are 403; public sample recall still passes.
+- Positive reviewer-auth request remains to be tested. No genuine human-approved resolution record has been stored; full-product submission gate remains open.

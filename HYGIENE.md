@@ -57,3 +57,24 @@ Current Product Hygiene gate: **IN PROGRESS** until all P0 and relevant public r
 - P0 remains: approved historical repair does not exist; public reviewer write path is disabled. Product completeness cannot pass while this original P0 is missing.
 - Demo QA remains open: no actual MP4 has been recorded or reviewed.
 - Canonical Product Hygiene skill was not found/invoked; fallback_used=true. The previous local fallback audit is extended here; do not claim canonical skill passed.
+
+
+## Reviewer-path hardening — 2026-11-06
+
+- Removed unconditional public-demo write block, replacing it with mandatory WORKSPACE_WRITE_KEY authentication for both reviewer write endpoints.
+- Added timing-safe secret comparison. No key is returned by status endpoint; status only exposes boolean configuration presence.
+- Anonymous public digest scope remains three authentic preverified digests. Only a valid reviewer key can unlock arbitrary real digests in transaction/recall endpoints.
+- UI keeps reviewer key in component memory only; it is never written to localStorage or logged.
+- Local lint/build pass. Wrong-key requests return 403. No Walrus writes performed in the hardening test.
+- Remaining configuration action: add WORKSPACE_WRITE_KEY to Vercel Production as Encrypted. Until then reviewerWritesEnabled=false and write routes fail closed with 503.
+
+
+## 2026-11-06 — Cloud reviewer secret enabled
+
+- WORKSPACE_WRITE_KEY confirmed in Vercel as encrypted/sensitive Production-only secret; never decrypted or logged.
+- New production deployment READY on dcd555a.
+- /api/status: reviewerWritesEnabled=true; Tatum/Walrus configured.
+- Anonymous custom digest, /api/remember, /api/observations: all HTTP 403.
+- Public sample recall remains healthy: one eligible simulation runbook, no degraded fallback.
+- Positive auth request with the correct reviewer key remains untested; key has not been retrieved from either environment.
+- No Walrus writes performed. A genuine engineer-approved historical resolution is still absent.

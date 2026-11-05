@@ -1,11 +1,21 @@
 {
   "schema_version": 2,
-  "revision": 9,
+  "revision": 11,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "BUILD_LOOP",
   "active_specialist": "Engineering",
-  "human_input_required": false,
-  "pending_gate": null,
+  "human_input_required": true,
+  "pending_gate": {
+    "id": "REVIEWER_AUTH_POSITIVE",
+    "type": "USER_ACTION",
+    "reason": "Production reviewer access is enabled and anonymous write protection is verified. A positive auth test requires the private reviewer key to be entered into the workspace UI; the key is intentionally not retrieved into chat or automation.",
+    "question": "Open /workspace, enter WORKSPACE_WRITE_KEY from web/.env.local in the private reviewer field, and run a custom-digest lookup. Tell me when the result appears.",
+    "recommendation": "Use an authentic Sui digest not among the three public presets. Do not submit a memory or create a Walrus write for this auth check.",
+    "choices": [
+      "Run authenticated custom-digest lookup"
+    ],
+    "scope": "Proves the private reviewer credential unlocks the protected lookup path without performing a memory write."
+  },
   "product_locked": true,
   "product_lock_revision": 1,
   "demo_defined": true,
@@ -65,16 +75,22 @@
     "PUBLIC_BLOG": "VERIFIED 2026-11-05: https://casewake.vercel.app/journal/casewake and screenshot assets HTTP 200",
     "REVIEWER_WRITE_PRODUCT_LOOP": "OPEN: original P0 code exists locally but production public mode disables writes; safely restore authenticated reviewer path without anonymous writes",
     "DEMO_VIDEO": "OPEN: 2-3 minute script exists; MP4 not recorded/reviewed",
-    "SUBMISSION_AUDIT": "IN_PROGRESS: repo, deployment, article and live sponsor integration verified; form fields, external track fit, final video and receipt remain"
+    "SUBMISSION_AUDIT": "IN_PROGRESS: repo, deployment, article and live sponsor integration verified; form fields, external track fit, final video and receipt remain",
+    "REVIEWER_WRITE_PATH_CODE": "VERIFIED 2026-11-06: timing-safe reviewer gate, public sample whitelist, private key held in page memory; local lint/build pass",
+    "REVIEWER_WRITE_CLOUD_CONFIG": "VERIFIED 2026-11-06: WORKSPACE_WRITE_KEY is sensitive/secret, Production target; never decrypted",
+    "REVIEWER_WRITE_DEPLOYMENT": "VERIFIED 2026-11-06: dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ READY on dcd555a",
+    "REVIEWER_WRITE_STATUS": "VERIFIED 2026-11-06: /api/status reviewerWritesEnabled=true; Tatum and Walrus true",
+    "ANONYMOUS_REVIEWER_PROTECTION": "VERIFIED 2026-11-06: custom digest, remember and observations all HTTP 403; public sample recall still passes",
+    "REVIEWER_AUTH_POSITIVE": "OPEN: correct key not used in a positive custom-digest lookup test"
   },
   "blockers": [
-    "Original P0: authenticated engineer must record a case-specific historical resolution with independent proof, completed Walrus receipt, and later compatible recall; no human-verified repair exists yet",
-    "Original P0 workflow: restore a protected reviewer-only production write path while keeping anonymous public writes blocked",
-    "Success/unknown transaction branches and complete workspace state matrix still need acceptance tests",
+    "Positive reviewer authentication test: enter the private key in /workspace and perform a custom-digest lookup; do not write a memory during this check",
+    "No independently human-approved historical repair exists; original P0 requires a real engineer's diagnosis, resolution steps, independent proof, Walrus receipt and later reuse",
+    "Success/unknown transaction branches and full workspace state matrix still need acceptance tests",
     "Actual 2-3 minute MP4 not recorded or reviewed",
     "Required personal/account form fields and organizer track-fit confirmation remain open",
     "Submission not sent; receipt not captured"
   ],
-  "next_action": "BUILD_LOOP / Engineering: restore reviewer-only WORKSPACE_WRITE_KEY path in public production without anonymous writes; then obtain authorized engineer's independently evidenced historical fix and prove later recall. Keep the current read-only public judge demo working. Next finish success/unknown acceptance tests, Product Hygiene, actual 2-3 minute video and submission audit.",
-  "updated_at": "2026-11-05T23:28:43.939272+00:00"
+  "next_action": "Positive reviewer auth acceptance: user enters WORKSPACE_WRITE_KEY in /workspace and runs a custom authentic digest lookup. Then obtain a genuine engineer-approved historical resolution and prove later compatible recall; never fabricate the case or receipt.",
+  "updated_at": "2026-11-05T23:45:11.869443+00:00"
 }

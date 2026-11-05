@@ -67,3 +67,27 @@ Never describe synthetic test cases as real chain events, verified incident reso
 | Public judge-facing pages and assets | VERIFIED (LIVE PRODUCTION) | /, /workspace, /proof/splitcoins, /journal/casewake, /images/casewake-live-workspace.png, /images/casewake-simulation-proof.png all HTTP 200. | Blog is an in-product engineering article; external third-party blog publication not done if event requires a separate blog URL. |
 
 Evidence boundary: The full Tatum -> Walrus simulation-tested guidance loop now works on the deployed Vercel production service. The original Product Lock's human-approved historical resolution and later reuse loop remains unproven and must not be described as completed.
+
+
+## 2026-11-06 — Protected reviewer path implementation (cloud key pending)
+
+- Added a timing-safe WORKSPACE_WRITE_KEY verifier shared by public-mode digest gates. Anonymous visitors remain restricted to the three published real examples; an authorized reviewer can inspect other genuine Sui digests.
+- /api/remember and /api/observations require the reviewer key regardless of PUBLIC_DEMO_MODE. The human-verified route still requires verified=true, diagnosis, concrete resolution steps, reviewer identity and HTTPS evidence URL, then independently re-fetches the failed transaction through Tatum before a Walrus write.
+- UI exposes the private reviewer key only when the server reports reviewerWritesEnabled. Key is held in React memory, not localStorage. It is passed only as x-workspace-key to same-origin server APIs.
+- Local production build: ESLint + Next.js production build + TypeScript passed.
+- Local public-mode tests: reviewerWritesEnabled=true with local env present; custom digest without key 403; custom digest with wrong key 403; remember with wrong key 403. No memory write was attempted.
+- New production deployment commit dcd555a READY. Vercel WORKSPACE_WRITE_KEY is NOT YET CONFIGURED; public status still reviewerWritesEnabled=false. Unauthenticated remember returns 503 until the secret is added; this is fail-closed.
+- Next proof: user adds WORKSPACE_WRITE_KEY as Vercel Encrypted / Production; redeploy; status true; unauthorized request 403; reviewer-authenticated custom digest lookup succeeds; invalid verified=false case returns 400 without writing. Do not test a real write without an independently verified case.
+
+
+## 2026-11-06 — Reviewer credential configured in Vercel Production
+
+- Vercel project casewake environment listing (decrypt=false) shows WORKSPACE_WRITE_KEY as type=sensitive, visibility=secret, target=production, decrypted=false, and securityIssues=[]. Secret value was not fetched or logged.
+- Production deployment dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ is READY on commit dcd555a5d8892158134a90286f207174baf1bc9e, alias https://casewake.vercel.app.
+- Live /api/status: publicDemoMode=true, reviewerWritesEnabled=true, tatumConfigured=true, walrusConfigured=true.
+- Anonymous custom transaction lookup: HTTP 403.
+- Anonymous /api/remember: HTTP 403.
+- Anonymous /api/observations: HTTP 403.
+- Public approved sample recall still works: one simulation runbook, recallDegraded=false.
+- Positive authenticated reviewer request has NOT yet been exercised; do not mark reviewer authentication fully tested until a correct key is used for a custom digest lookup.
+- No memory write was performed during these checks. No human-confirmed historical resolution exists yet.
