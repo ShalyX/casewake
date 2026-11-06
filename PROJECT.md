@@ -145,3 +145,18 @@ PRODUCT INTEGRITY
 - verdict: BLOCKED for FULL_PRODUCT_VERIFIED / JUDGE_READY.
 
 No memory was written in this checkpoint.
+
+
+## Operator v0.5.0 phase audit — November 6, 2026 (latest checkpoint)
+
+Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](OPERATOR_PHASE_AUDIT_2026-11-06.md). This checkpoint supersedes earlier assertions that TECHNICAL_DERISK and BUILD_VERTICAL_SLICE had passed. A past state flag did not satisfy the actual Operator exit proof.
+
+**Product Integrity: DRIFT (engineering focus), not an authorized thesis change.** The original product remains Incident Memory / Casewake, revision 1: Tatum observes a real failure, an engineer confirms a case-specific resolution, Walrus stores the completed human-verified case with a real blob ID, and a different matching failure retrieves that exact case for a safe human-reviewed recommendation. This is not a DeFi arbitrage/flashloan product. The 8 grouped original P0s remain in PRODUCT.md.
+
+**Actually verified:** Tatum real Sui Mainnet read, Walrus signed observation and simulation-runbook writes/retrieval, 12 completed Mainnet memories (ten authentic failure observations, one test runbook, one integration smoke), real comparable failure positive recall and unrelated MoveAbort negative control, separate landing/workspace/proof pages, protected reviewer endpoints, compiled/deployed web app. These prove mechanisms and partial product behavior, not the full reviewer-verified magic moment.
+
+**Blocking product gap:** ZERO human-verified repairs stored in Walrus and ZERO demonstrated recurrence retrieval of an engineer-reviewed resolved case. The newer user-approved three-gate criterion for the original DeepBook source remains strictly enforced. One 1.25 SUI partial-size trade briefly simulated a full 65.265188650 SUI flashloan repayment, but the same serialized candidate later failed splitCoins at command #19 with insufficient SUI on both Tatum and public Mainnet. Proof in `evidence/ephemeral-route-repair-replay-audit.json`; no human approval or new Walrus verified case was written. This does not prove a durable viable historical route or profitable arbitrage.
+
+**Operator re-entry:** TECHNICAL_DERISK with product integrity and supporting evidence unfinished; BUILD_VERTICAL_SLICE and PRODUCT_REVIEW must be reassessed against the original approval before any BUILD_LOOP completion claim. Downstream NAME_LOCK adversarial review, EVIDENCE_PLAN closure, DESIGN.md/reference/motion/visual QA, installed-skill Product Hygiene execution, demo recording, four-lens judge simulation and final submission audit remain open as noted in the full audit. No prevention-only promotion is authorized; the earlier pending approval question is superseded by the user's explicit hold.
+
+**Next action:** close the strict case-specific simulation proof with repeatable independent results or maintain Gate 1 blocked, then demonstrate the actual Casewake user journey from reviewer-authorized resolution through completed Walrus receipt and exact-blob recurrence. Continue all other missing original P0/product and judge-facing phases without inventing results. Deadline: 2026-11-10 17:00 UTC.
