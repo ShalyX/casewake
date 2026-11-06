@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       resolutionKind, validatedEvidence,
     };
     const proof = await storeVerifiedIncident(record);
-    return NextResponse.json({ record, proof, gates: { simulationEvidence: "validated", humanReview: "approved", walrusWrite: "completed" } }, { status: 201 });
+    return NextResponse.json({ record, proof, gates: { guardControlEvidence: "validated", originalThreeHopCorrection: "unproven", humanReview: "approved", walrusWrite: "completed" } }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Memory write failed." }, { status: 502 });
   }
