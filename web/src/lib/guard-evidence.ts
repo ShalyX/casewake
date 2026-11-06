@@ -93,6 +93,12 @@ export async function validateCasewakeEvidence(
       corrected?.commandResultCount !== 4) {
     throw new Error("Gate 1 blocked: repayment proof does not match the failed transaction and successful control.");
   }
+  // Strict three-gate acceptance: a different successful DeepBook control does
+  // not satisfy the user's requirement to correct and successfully simulate
+  // the ORIGINAL three-hop transaction. Do not promote a prevention runbook to
+  // a human-verified historical resolution on this evidence alone.
+  throw new Error("Gate 1 incomplete: original three-hop route was blocked, but no corrected version of that same route passed Tatum Mainnet simulation. This prevention procedure remains a simulation-tested runbook, not a verified incident resolution.");
+  /*
   return {
     schema: "casewake-validated-evidence/v1",
     sourceCommit: PROOF_COMMIT,
@@ -105,4 +111,5 @@ export async function validateCasewakeEvidence(
     mockedGas: true,
     onchainExecuted: false,
   };
+  */
 }
