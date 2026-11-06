@@ -44,6 +44,7 @@ export default function Workspace() {
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
   const [error, setError] = useState("");
   const [proof, setProof] = useState<Proof | null>(null);
+  const [threeGatePassed, setThreeGatePassed] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
   const [diagnosis, setDiagnosis] = useState("");
   const [resolutionSteps, setResolutionSteps] = useState("");
@@ -92,7 +93,7 @@ export default function Workspace() {
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
-    setError(""); setRecallNote(""); setProof(null); setCandidates([]); setObservedPrecedents([]); setTx(null);
+    setError(""); setRecallNote(""); setProof(null); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setTx(null);
     try {
       setPhase("reading");
       const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
@@ -112,24 +113,36 @@ export default function Workspace() {
 
   async function remember() {
     if (!tx || tx.outcome !== "failed") return;
-    setError(""); setProof(null); setObservationOnly(false);
+    setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(false);
     try {
       setPhase("writing");
       const result = await postJson("/api/remember", {
         digest: tx.digest, diagnosis, resolutionSteps, evidenceUrl, reviewer, sdkVersion, verified, resolutionKind: "prevention-guard",
       }, reviewerKey);
-      setProof(result.proof as Proof);
+      const stored = result.proof as Proof;
+      setProof(stored);
       setShowEditor(false);
       await refreshInventory();
       setPhase("recalling");
-      await loadRecall(tx);
+      const secondDigest = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
+      const acceptance = await postJson("/api/verify-recall", {
+        sourceDigest: tx.digest, secondDigest, expectedBlobId: stored.blobId,
+      }, reviewerKey);
+      setTx(acceptance.secondTransaction as Transaction);
+      setDigest(secondDigest);
+      setCandidates([acceptance.matchedCandidate as Candidate]);
+      setObservedPrecedents([]);
+      setSimulationRunbooks([]);
+      setRecallNote(String(acceptance.note || "Exact stored Walrus blob recalled for a second independent Tatum failure."));
+      setThreeGatePassed(true);
+      setVerified(false);
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
   }
 
   async function rememberObservation() {
     if (!tx || tx.outcome !== "failed") return;
-    setError(""); setProof(null); setObservationOnly(true);
+    setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(true);
     try {
       setPhase("writing");
       const result=await postJson("/api/observations",{digest:tx.digest},reviewerKey);
@@ -254,8 +267,8 @@ export default function Workspace() {
               </div>
             </div>
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
-              <h3>{proof ? "Mainnet write confirmed." : "Proof, not promises."}</h3>
-              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : "A reviewer-confirmed case was stored; the original evidence remains reviewable.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
+              <h3>{threeGatePassed ? "Three-gate acceptance verified." : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : threeGatePassed ? "The second independent real failed transaction recalled the reviewer-approved prevention guard with the exact Walrus blob ID. The historical three-hop route remains unrepaired." : "Walrus storage completed, but the second-incident recall gate has not passed yet.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
               {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small></div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
             <div className="sidebar-note">INTEGRITY RULE <span>↗</span><p>Every reused fix is a suggestion for engineering review—not evidence that a new transaction is automatically repaired.</p></div>
           </aside>
