@@ -37,9 +37,15 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     : null;
   const commandNumber = errorText?.match(/\bin command (\d+)\b/);
   const failedCommandIndex = commandNumber ? Number(commandNumber[1]) : null;
-  type TxCommands = {sender?:string;kind?:{data?:{programmableTransaction?:{commands?:Array<{command?:{oneofKind?:string}}>}}}};
+  type TxCommands = {sender?:string;kind?:{data?:{programmableTransaction?:{commands?:Array<{command?:{oneofKind?:string;moveCall?:{package?:string;module?:string;function?:string}}}>}}}};
   const decodedTransaction = transaction.transaction as TxCommands | undefined;
   const txCommands = decodedTransaction?.kind?.data?.programmableTransaction?.commands;
+  const commandKinds = (txCommands || []).map(c => c.command?.oneofKind || "unknown");
+  const operationMarkers = (txCommands || []).flatMap(c => {
+    const call = c.command?.moveCall;
+    if (c.command?.oneofKind !== "moveCall" || !call?.package || !call.module || !call.function) return [];
+    return ["move:" + call.package.toLowerCase() + "::" + call.module + "::" + call.function];
+  });
   const sender = typeof decodedTransaction?.sender === "string" && /^0x[a-f0-9]{1,64}$/i.test(decodedTransaction.sender)
     ? decodedTransaction.sender.toLowerCase() : null;
   const failedCommandKind = failedCommandIndex !== null ? txCommands?.[failedCommandIndex]?.command?.oneofKind ?? null : null;
@@ -56,5 +62,7 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     failedCommandIndex,
     failedCommandKind,
     sender,
+    operationMarkers,
+    commandKinds,
   };
 }
