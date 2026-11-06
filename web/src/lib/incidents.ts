@@ -11,6 +11,8 @@ export type ObservedTransaction = {
   failedCommandIndex?: number | null;
   failedCommandKind?: string | null;
   sender?: string | null;
+  operationMarkers?: string[];
+  commandKinds?: string[];
 };
 
 export type VerifiedCase = {
@@ -99,6 +101,8 @@ export function decodeMemory(text: string): VerifiedCase | null {
         typeof proof.successorSender === "string" &&
         /^0x[a-f0-9]{1,64}$/i.test(proof.originalSender) &&
         proof.originalSender === proof.successorSender &&
+        Array.isArray(proof.matchedOperations) && proof.matchedOperations.length > 0 &&
+        proof.matchedOperations.every((marker: unknown) => typeof marker === "string" && marker.length >= 8) &&
         typeof proof.reviewedChange === "string" && proof.reviewedChange.length >= 30 &&
         c.evidenceUrl === "https://suivision.xyz/txblock/" + proof.successorDigest;
     if (!prevention && !repaired && !successor) return null;
