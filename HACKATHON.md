@@ -69,3 +69,14 @@ Checked 2026-11-01:
 ## Unknowns and verification needed
 - Resolve the special-prize discrepancy via current Discord/event updates before optimizing for it.
 - Formal Event Rules contain an apparently stale sentence describing a feedback/form-platform goal that conflicts with the published Total Recall tracks; do not treat it as product scope without sponsor clarification.
+
+## Rule freshness and track-fit checkpoint — November 6, 2026
+
+Verified official current formal rules at https://thewalrussessions.wal.app/tatum-total-recall :
+- Deadline remains **November 10, 2026, 17:00 UTC**.
+- Sponsor integration rubric remains Walrus + Tatum **30%**, technical quality **30%**, creativity **20%**, presentation **20%**.
+- Mainnet Walrus Memory writes, **at least 10 memories**, Tatum RPC where relevant, published blog, public GitHub, working demo and **2–3 minute video** are mandatory.
+- The published **Smart Agents for Real Life** track explicitly includes workflow agents that resume memory across sessions/tools. Casewake plausibly fits as an engineering investigation workflow, but **no organizer has expressly confirmed B2B Sui incident response eligibility**. Keep as UNCERTAIN; do not assert a sponsor endorsement.
+- The formal rules' older paragraph about a feedback/forms product conflicts with the specific Total Recall tracks. Treat it as a documented discrepancy, not authority for replacing the locked Casewake product.
+
+Phase-6 VALIDATION is therefore **PARTIAL**: published track language supports a plausible fit; independent external engineer utility feedback and organizer confirmation remain unobserved. This does not justify changing the approved thesis.
