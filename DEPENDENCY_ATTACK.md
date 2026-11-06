@@ -19,3 +19,16 @@ Updated: 2026-11-04. Never store API keys, delegate keys or reviewer tokens in t
 Source-backed generic guidance for `InsufficientCoinBalance` and two genuine matching failure digests are documented in `evidence/resolution-verification-queue.md`. No human verified a case-specific successful repair. Do not mark its `verified` checkbox merely because the docs discuss the error.
 
 Next: engineer proves fix; app stores approved resolution on Walrus; second case recalls it; negative controls verify no wrong version/package match. Product lock unchanged.
+
+## Phase 11 re-audit — November 6, 2026
+
+- **Tatum gRPC actual failure evidence: VERIFIED.** Extended branch requests sender from authenticated transaction payload for generic follow-up validation; correctness of the new sender comparison still requires real runtime positive/negative acceptance.
+- **Walrus Mainnet observation writes and recall: VERIFIED** for 12 completed existing memories, not for any new human-verified resolution.
+- **Generic incident evidence route: IMPLEMENTED ON DRAFT BRANCH, CI PASS; NOT IN PRODUCTION.** Requires a distinct executed successful Sui transaction from the same Tatum-observed sender, identical chain, explicit documented technical correction, named reviewer, secure reviewer token and affirmative human causal attestation. It does not prove causality from blockchain alone. If Tatum cannot supply sender, reject rather than accept arbitrary proof.
+- **DeepBook historical corrected route: BLOCKED** by failed repeat replay and unproven net repayment. No prevention-only bypass or user approval gate remains.
+- **Exact later-case Walrus blob recall: BLOCKED** until a completed reviewed-case blob exists.
+- **Organizer track fit: UNCERTAIN** despite published workflow-agent examples; no external confirmation.
+- **Preview environment: BUILD VERIFIED; LIVE SPONSOR TEST BLOCKED** because the private Tatum, Walrus delegate and reviewer secrets target Production, not Preview. Do not copy/reveal sensitive values merely to run a preview.
+- **Visual QA and final demo: OPEN.**
+
+Phase 11 is **PARTIAL**, not PASSED. Do not promote TECHNICAL_DERISK to verified until an actual independently evidenced case passes full product acceptance. No additional arbitrary DEX route feature is authorized.
