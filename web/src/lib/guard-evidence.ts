@@ -10,7 +10,7 @@ export const GUARD_EVIDENCE_URL = `https://github.com/ShalyX/casewake/blob/${PRO
 const RAW_PROOF_URL = `https://raw.githubusercontent.com/ShalyX/casewake/${PROOF_COMMIT}/${PROOF_PATH}`;
 export const DEEPBOOK_SOURCE_DIGEST = "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
 
-export type ResolutionKind = "prevention-guard" | "route-repair";
+export type ResolutionKind = "prevention-guard" | "route-repair" | "onchain-successor";
 export type ValidatedEvidence = {
   schema: "casewake-validated-evidence/v1";
   sourceCommit: string;
@@ -27,7 +27,21 @@ export type ValidatedEvidence = {
   scope: "full-flashloan-route-repair";
   proofType: "mainnet-simulation";
   originalHistoricalRouteRepaired: true;
-});
+}) | {
+  schema: "casewake-validated-evidence/v1";
+  scope: "human-reviewed-successor-transaction";
+  proofType: "tatum-executed-successor";
+  originalDigest: string;
+  successorDigest: string;
+  provider: "Tatum Sui gRPC";
+  originalSender: string;
+  successorSender: string;
+  successorOutcome: "succeeded";
+  reviewerConfirmedCausality: true;
+  reviewedChange: string;
+  verifiedAt: string;
+  originalHistoricalRouteRepaired: false;
+};
 
 type Result = {
   case?: string; digest?: string; provider?: string;
