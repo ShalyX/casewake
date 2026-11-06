@@ -9,7 +9,7 @@ async function client() {
 export async function storeVerifiedIncident(record: VerifiedCase) {
   const memwal = await client();
   // Completion proof requires the blob ID; accepted jobs do not count.
-  const stored = await memwal.rememberAndWait(encodeMemory(record));
+  const stored = await memwal.rememberAndWait(encodeMemory(record), undefined, { dedupe: true });
   if (!stored.blob_id) throw new Error("Walrus did not confirm a completed Mainnet memory write.");
   return {
     jobId: stored.job_id, blobId: stored.blob_id,
