@@ -31,6 +31,7 @@ const incident = {
     proofType: "tatum-executed-successor",
     originalDigest: source, successorDigest: successor,
     originalSender: sender, successorSender: sender,
+    matchedOperations: ["move:0x123::module::method"],
     provider: "Tatum Sui gRPC", successorOutcome: "succeeded",
     reviewerConfirmedCausality: true, reviewedChange: explanation,
     verifiedAt: new Date().toISOString(), originalHistoricalRouteRepaired: false,
@@ -60,6 +61,7 @@ assert.equal(corrupted((_, p) => { p.reviewerConfirmedCausality = false; }), nul
 assert.equal(corrupted((_, p) => { p.successorSender = "0x" + "2".repeat(64); }), null);
 assert.equal(corrupted((c) => { c.evidenceUrl = "https://example.com/unrelated"; }), null);
 assert.equal(corrupted((_, p) => { p.reviewedChange = "OK"; }), null);
+assert.equal(corrupted((_, p) => { p.matchedOperations = []; }), null);
 assert.equal(corrupted((c) => { c.resolutionKind = "prevention-guard"; }), null);
 assert.equal(corrupted((_, p) => { p.scope = "full-flashloan-route-repair"; }), null);
 console.log("PASS: general verified-case memory contract, exact-match guards and tamper negatives (synthetic fixtures only).");
