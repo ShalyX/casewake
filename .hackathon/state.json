@@ -20,7 +20,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "TATUM_WALRUS_MAINNET_OBSERVATION_RECALL_VERIFIED; ZERO_HUMAN_VERIFIED_REPAIRS; DEEPBOOK_FULL_ROUTE_REPAIR_INDEPENDENT_REPLAY_FAILED; GATE_1_BLOCKED; GATE_2_AND_3_LOCKED; PRODUCT_DRIFT_CORRECTION_REQUIRED",
+  "evidence_status": "TATUM_WALRUS_MAINNET_OBSERVATION_RECALL_VERIFIED; ZERO_HUMAN_VERIFIED_REPAIRS; DEEPBOOK_FULL_ROUTE_REPAIR_INDEPENDENT_REPLAY_FAILED; GATE_1_BLOCKED; GATE_2_AND_3_LOCKED; PRODUCT_DRIFT_CORRECTION_REQUIRED; GENERIC_VERIFIED_CASE_WRITE_P0_REGRESSED",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -77,9 +77,11 @@
     "OPERATOR_PHASE_AUDIT_2026_11_06": "ALL 35 phases audited in OPERATOR_PHASE_AUDIT_2026-11-06.md; previous BUILD_LOOP claim premature. Return to technical derisk, vertical slice, and product review.",
     "VERIFIED_RESOLUTION_LOOP": "BLOCKED: original approved Casewake magic moment—real reviewed fix→completed Walrus blob→distinct compatible recall—not demonstrated. No approved resolution memory.",
     "PARTIAL_FLASHLOAN_REPLAY": "2026-11-06 one successful 1.25-SUI partial trade/65.265188650-SUI repayment read-only simulation; exact 3596-byte transaction subsequently FAILED Mainnet repayment command 19 on Tatum and public Sui nodes; not independently verified or economic after gas.",
-    "USER_DECISION_2026_11_06": "HOLD prevention-only resolution. Never promote prevention runbook as a verified historical correction. Do not automatically approve reviewer signoff."
+    "USER_DECISION_2026_11_06": "HOLD prevention-only resolution. Never promote prevention runbook as a verified historical correction. Do not automatically approve reviewer signoff.",
+    "CORE_VERIFIED_CASE_WRITE_REGRESSION": "CODE-CONFIRMED 2026-11-06: POST /api/remember only allows route-repair for BbRZD...; all other kinds/digests blocked by guard-evidence's unconditional rejection. No generic human-verified resolution recording for a legitimate different Sui incident. This violates approved P0."
   },
   "blockers": [
+    "P0 REGRESSION: /api/remember accepts route-repair only for BbRZD...; /src/lib/guard-evidence.ts rejects all prevention writes, so the original generic human-confirmed case memory write path is absent. Restore case-specific credible evidence validation for other genuine Sui incidents without bypassing the selected DeepBook three-gate proof.",
     "An independently repeatable self-funded corrected flashloan route for the chosen strict Gate 1 remains unproven; partial-size one-off simulation failed later byte-for-byte.",
     "Original product magic moment is incomplete: engineer-reviewed genuine fix→completed Walrus blob ID→later comparable failure retrieves exactly that approved case.",
     "Human review and authorization have NOT occurred; prevent automatic Walrus resolution write.",
@@ -87,6 +89,6 @@
     "Operator v0.5.0 NAME_LOCK adversarial check, full evidence plan, design/reference/visual QA and Product Hygiene gate have incomplete or absent mandatory artifacts.",
     "Final 2–3 minute recorded/demo-QA-approved video, four-lens judge simulation, organizer track-fit check, final submission audit and receipt missing."
   ],
-  "next_action": "Follow OPERATOR_PHASE_AUDIT_2026-11-06.md. Restore Product Lock revision 1 as controlling contract. Complete necessary technical derisk without treating swap-profit research as Casewake; verify accepted full-route proof repeatably or keep Gate 1 locked, then build actual reviewer-approved Casewake Walrus case→distinct recurrence with exact blob ID. Parallelize missing P0/visual/demo requirements; do not relabel prevention-only or one-off simulation as a verified fix.",
+  "next_action": "First restore the original Casewake generalized human-reviewed verified-resolution write P0 (credible case-specific evidence, protected reviewer and completed Walrus receipt) while retaining the user-approved strict DeepBook gate for that showcase. Then close the repeatable DeepBook simulation or keep it blocked, demonstrate second-incident exact-blob recall, and complete missing Operator phases. See OPERATOR_PHASE_AUDIT_2026-11-06.md.",
   "updated_at": "2026-11-06T20:00:00+01:00"
 }
