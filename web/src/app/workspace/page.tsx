@@ -55,6 +55,10 @@ export default function Workspace() {
   const [reviewerKey, setReviewerKey] = useState("");
   const [verified, setVerified] = useState(false);
   const [repairTransactionBcs, setRepairTransactionBcs] = useState("");
+  const [successorDigest, setSuccessorDigest] = useState("");
+  const [reviewedChange, setReviewedChange] = useState("");
+  const [confirmedCausalLink, setConfirmedCausalLink] = useState(false);
+  const [recurrenceDigest, setRecurrenceDigest] = useState("");
   useEffect(() => {
     fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
     fetch("/api/memories").then((r) => { if (!r.ok) throw new Error("Relayer unavailable"); return r.json(); }).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
@@ -101,6 +105,16 @@ export default function Workspace() {
       const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
       const observed = result.transaction as Transaction;
       setTx(observed);
+      setShowEditor(false);
+      setVerified(false);
+      setConfirmedCausalLink(false);
+      setSuccessorDigest("");
+      setReviewedChange("");
+      setResolutionSteps("");
+      setEvidenceUrl("");
+      setRepairTransactionBcs("");
+      setDiagnosis(observed.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6"
+        ? "The original DeepBook route fails at repayment because the available SUI cannot cover the borrowed principal." : "");
       if (observed.outcome === "failed" && status?.walrusConfigured) {
         setPhase("recalling");
         await loadRecall(observed);
@@ -113,11 +127,13 @@ export default function Workspace() {
     finally { setPhase("idle"); }
   }
 
-  async function verifySavedRecall(saved: Proof, source: string) {
+  async function verifySavedRecall(saved: Proof, source: string, recurrence?: string) {
     setError("");
     setPhase("recalling");
     try {
-      const secondDigest = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
+      const secondDigest = source === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6"
+        ? "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" : (recurrence || "").trim();
+      if (!secondDigest || secondDigest === source) throw new Error("Enter a distinct real failed transaction digest to prove recurrence.");
       const acceptance = await postJson("/api/verify-recall", {
         sourceDigest: source, secondDigest, expectedBlobId: saved.blobId,
       }, reviewerKey);
@@ -136,20 +152,28 @@ export default function Workspace() {
   }
 
   async function remember() {
-    if (!tx || tx.outcome !== "failed" || tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6") return;
+    if (!tx || tx.outcome !== "failed" || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue") return;
+    const strictDeepbook = tx.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
     setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(false);
     try {
       setPhase("writing");
       const result = await postJson("/api/remember", {
-        digest: tx.digest, diagnosis, resolutionSteps, evidenceUrl, reviewer, sdkVersion, verified,
-        resolutionKind: "route-repair", repairTransactionBcs: repairTransactionBcs.trim(),
+        digest: tx.digest, diagnosis, resolutionSteps,
+        evidenceUrl: strictDeepbook ? evidenceUrl : "https://suivision.xyz/txblock/" + successorDigest.trim(),
+        reviewer, sdkVersion, verified,
+        resolutionKind: strictDeepbook ? "route-repair" : "onchain-successor",
+        repairTransactionBcs: strictDeepbook ? repairTransactionBcs.trim() : undefined,
+        successorDigest: strictDeepbook ? undefined : successorDigest.trim(),
+        reviewedChange: strictDeepbook ? undefined : reviewedChange.trim(),
+        confirmedCausalLink: strictDeepbook ? undefined : confirmedCausalLink,
       }, reviewerKey);
       const stored = result.proof as Proof;
       setProof(stored);
       setWrittenSourceDigest(tx.digest);
       setShowEditor(false);
       await refreshInventory();
-      await verifySavedRecall(stored, tx.digest);
+      if (strictDeepbook) await verifySavedRecall(stored, tx.digest);
+      else setRecallNote("A reviewer-attested successful follow-up was stored with a completed Walrus receipt. Enter a different comparable failed digest below to verify the exact memory is recalled.");
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
   }
@@ -169,6 +193,7 @@ export default function Workspace() {
     finally{setPhase("idle");}
   }
 
+  const strictDeepbook = tx?.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
   const eligible = candidates.filter((c) => c.verdict === "eligible-for-review");
   const rejected = candidates.filter((c) => c.verdict === "incompatible");
   const busy = phase !== "idle";
