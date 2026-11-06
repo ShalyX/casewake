@@ -1,6 +1,6 @@
 # Casewake: three-gate production acceptance (Nov 6, 2026)
 
-This is an **enforced workflow**, not a claim that all three production milestones have already passed.
+This is an **enforced prevention-and-memory workflow**, not a claim that the strict full-route three-gate acceptance or the production memory write has already passed. The originally failed three-hop route still has no successful corrected simulation.
 
 ## Gate 1 — simulation-based repayment prevention
 
@@ -28,7 +28,7 @@ Source: `evidence/deepbook-repayment-guard-proof.json` at Git revision
 
 - After Gate 2, `/api/verify-recall` retrieves the second real digest `XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue` from Tatum.
 - It requires a compatible onchain failure, executes signed Walrus recall, rejects self-matches and incompatible human cases, and matches **the same completed blob ID** from Gate 2.
-- Only then does the UI say **Three-gate acceptance verified**. If Walrus cannot retrieve the match or Tatum is unavailable, the gate remains unproven.
+- Only then does the UI say **Prevention and recall verified · original route still unproven**. If Walrus cannot retrieve the match or Tatum is unavailable, the gate remains unproven.
 - `web/src/lib/unified-recall.ts` attaches each recovered case's actual `blob_id` to the returned recommendation, not a fabricated receipt.
 
 ## Manual acceptance
