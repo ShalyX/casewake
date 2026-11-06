@@ -107,3 +107,33 @@ Evidence boundary: The full Tatum -> Walrus simulation-tested guidance loop now 
 - observed_at: 2026-11-06.
 - limitations: Original three-hop route still fails at command 16 and is not repaired/proven profitable. Per-hop output shortfall is not isolated. A fresh simulation can become stale if pool state changes; rerun immediately before signing. Human approval and Walrus memory write remain pending.
 - judge_location: evidence/deepbook-repayment-guard-report.md.
+
+## Operator v0.5.0 critical-claim closure plan — November 6, 2026
+
+Source of truth: PRODUCT.md revision 1, immutable original eight P0 groups; deadline Nov 10, 17:00 UTC. A proof plan is **not** proof. "Deadline" here is the internal target to investigate; a BLOCKED item does not turn PASS on that date.
+
+| Critical claim | Status Nov 6 | Owner | Verification method and exact artifact target | Internal target | Judge surface |
+|---|---|---|---|---|---|
+| Tatum fetches a genuine failed Mainnet transaction | VERIFIED | Engineering | Live `POST /api/transaction`; evidence/live-recall-proof.json and production source | Nov 7 | /workspace |
+| Failure/success/unknown classification | PARTIAL | QA | Distinct live-API outcome cases; `evidence/transaction-outcomes.json` | Nov 7 | /workspace |
+| 10+ authentic Mainnet Walrus memories | VERIFIED (12 total; 10 observations) | Proof | Completed job IDs/blob IDs in evidence/observation-write-receipts.json, GET /api/memories | Nov 7 | /workspace memory inventory |
+| Authenticated reviewer and denied anonymous writes | VERIFIED (production prior revision) | Security | Unauthorized 403 + authorized custom digest lookup; EVIDENCE.md/release screenshots | Nov 7 | /workspace private reviewer |
+| Generic reviewer-reviewed case path | CODED ON DRAFT BRANCH; LIVE UNPROVEN | Engineering + QA | PR #1, TypeScript, synthetic tests/CI, real Tatum success pair from same sender, authorized UI acceptance | Nov 8 | /workspace reviewer editor |
+| General case proof cannot be forged by a URL/checkbox | CODED; LIVE UNPROVEN | Proof + Security | Tatum executed success + sender match, honest reviewer causal attestation, strict memory schema; regression tests | Nov 8 | /workspace + repo |
+| Historical DeepBook corrected full repayment | BLOCKED | Engineering | Repeatable independent full-PTB simulation, exact original principal/no wallet funding, gas-aware evidence; evidence/ephemeral-route-repair-replay-audit.json records replay FAIL | Nov 8 | /workspace strict three gates |
+| Human reviewed a specific engineering fix | BLOCKED | Real human reviewer | Explicit confirmation after independent evidence, not an AI guess or prevention-only runbook; approved-case receipt | Nov 8 | /workspace |
+| Completed Walrus verified-case receipt | BLOCKED | Engineering + Proof | Protected POST /api/remember; completed job/blob ID persisted; `evidence/human-verified-case-receipt.json` | Nov 8 | /workspace receipt |
+| Distinct matching failure recalls exact verified-case blob | BLOCKED | Proof + QA | Live Tatum second digest, Walrus signed recall, same blob ID; `evidence/verified-case-second-incident.json` | Nov 8 | /workspace match |
+| Different failure receives no false recommendation | VERIFIED for simulation runbook; GENERAL CASE PENDING | QA | Real unrelated MoveAbort + synthetic compatibility negatives; `evidence/negative-controls.json` | Nov 8 | /workspace |
+| Complete empty/loading/failed/results workspace state matrix | PARTIAL | QA | Browser acceptance at desktop/mobile; `evidence/workspace-state-matrix.md` | Nov 9 | /workspace |
+| Original P0s still visible across product | PARTIAL | Product Critic | Updated PRODUCT.md coverage ledger with distinct code/proof per original P0 | Nov 9 | product and repo |
+| Brand naming and identity | PASS naming; visual QA partial | Brand/Art Director | BRAND.md naming attack; real rendered favicon/desktop/mobile capture | Nov 9 | landing and workspace |
+| Full UI visual design | NOT DONE | Art Director/Design Engineer | DESIGN.md, references, asset and motion specs; real screenshots QA | Nov 9 | live demo |
+| Product Hygiene | PARTIAL | Product Hygiene | HYGIENE.md skill/fallback, secret scan and re-run | Nov 9 | repo |
+| External engineer utility and track-fit claim | UNPROVEN | Research | External engineer feedback + organizer reply, or label unconfirmed | Nov 9 | README/blog |
+| Published blog with learning timeline | PARTIAL | Pitch | Public readable article describing actual observed learning; verify external vs in-app publication requirement | Nov 9 | blog URL |
+| Final video is authentic and watchable | NOT DONE | Demo Director | 2–3 minute real UI recording, full playback QA and script concordance | Nov 10 | public MP4 |
+| Product/technical/sponsor/30-second judge QA | NOT DONE | Judge | Four-lens independent simulation report, failed claims logged | Nov 10 | SCORECARD.md |
+| Final submission is complete | NOT DONE | HQ/QA | Public repo/live app/video/blog/form checks and observed submission receipt | Nov 10 before 17:00 UTC | submission |
+
+**Hard constraints:** A successful simulation of an unrelated route does not prove the original DeepBook correction. A Tatum-successor record is independently corroborated onchain but still relies on a named human reviewer to establish the causal fix. Tests and CI are never represented as a completed real reviewed memory. No Walrus write may be triggered for unverified proof.
