@@ -91,3 +91,19 @@ Evidence boundary: The full Tatum -> Walrus simulation-tested guidance loop now 
 - Public approved sample recall still works: one simulation runbook, recallDegraded=false.
 - Positive authenticated reviewer request has NOT yet been exercised; do not mark reviewer authentication fully tested until a correct key is used for a custom digest lookup.
 - No memory write was performed during these checks. No human-confirmed historical resolution exists yet.
+
+
+## 2026-11-06 — DEEPBOOK_REPAYMENT_GUARD
+
+- claim: A full-PTB Tatum Mainnet simulation gate blocks the observed underfunded DeepBook flash-loan route and allows an exact repayment control.
+- criticality: CRITICAL
+- category: technical | reliability
+- status: VERIFIED (simulation; prevention only)
+- proof_standard: Reproducible Tatum Sui Mainnet gRPC simulation of original route, negative overdraw control and positive exact-repayment control.
+- method: Run web/scripts/prove-deepbook-repayment-guard.mjs from the web directory with local TATUM_API_KEY configured.
+- owner: Engineering
+- artifacts: evidence/deepbook-repayment-guard-proof.json; evidence/deepbook-repayment-guard-report.md; evidence/refreshed-flashloan-simulation-attempts.json; evidence/flashloan-guard-small-variants.json.
+- environment: Tatum Sui Mainnet gRPC; gas mocked; no signature, submission or chain execution.
+- observed_at: 2026-11-06.
+- limitations: Original three-hop route still fails at command 16 and is not repaired/proven profitable. Per-hop output shortfall is not isolated. A fresh simulation can become stale if pool state changes; rerun immediately before signing. Human approval and Walrus memory write remain pending.
+- judge_location: evidence/deepbook-repayment-guard-report.md.

@@ -38,3 +38,20 @@ The amount requested by `splitCoins` may exceed the coin value available at that
 ## Investigation limitations
 The provider's sender-filtered `ListTransactions` attempt returned `INTERNAL`; no successful follow-up transaction could be established with that query. Authenticated Tatum service checks later succeeded but some GetTransaction calls were intermittently `UNAVAILABLE` or `DEADLINE_EXCEEDED`. This does not invalidate the two previously saved response proofs but it prevents new confirmation until the endpoint responds reliably.
 Walrus relayer public `/health` returned HTTP 200, while authenticated `listMemories` returned HTTP 504 after the PC restart. No duplicate memories were written in this recovery session.
+
+
+## 2026-11-06 — Mainnet replay and repayment guard acceptance
+
+The two saved transaction BCS payloads were replayed through Tatum Mainnet simulation after clearing only the expired epoch constraint. The original command sequences, input amounts, package IDs and shared-object references were retained. Both replayed as FailedTransaction with InsufficientCoinBalance in command 16.
+
+Decoded command 16 splits the exact SUI principal borrowed in command 0. The preceding route swaps SUI through USDSUI and USDC, then merges the returned SUI coin with any SUI remainder before attempting repayment. The final DeepBook swap_exact_quote_for_base call has min_base_out set to zero.
+
+For the BbRZD7... transaction, only the shared borrow/repayment amount was reduced. Variants at 75%, 50%, 25%, 10% and 1% of the original 65,265,188,650 MIST all still failed at command 16. Do not present size reduction alone as a fix.
+
+A read-only Tatum Mainnet control then exercised the actual DeepBook pool:
+- Borrow 10,000,000 MIST and attempt to split 20,000,000 MIST: simulation blocked at command 1.
+- Borrow 10,000,000 MIST, split exactly 10,000,000 MIST, return the FlashLoan hot potato and transfer the remainder: simulation succeeded, all four commands completed.
+
+The tested preflight guard permits signing only when the complete fresh simulation returns Transaction with effects.status.success=true. It blocks the historical route and the overdraw control, while allowing the exact repayment control. All simulations used mocked gas; no signatures, submissions or onchain execution occurred.
+
+This verifies a prevention guard, not a profitable correction of the historical three-hop route. The exact shortfall contributed by each hop and a corrected successful route remain unproven. Reviewer approval is still required before this prevention procedure can be stored as a human-verified Casewake memory.

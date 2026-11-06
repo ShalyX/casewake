@@ -1,0 +1,54 @@
+[
+  {
+    "digest": "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",
+    "replay": "original-bcs-with-expiration-cleared",
+    "originalExpiration": {
+      "ValidDuring": {
+        "minEpoch": "1301",
+        "maxEpoch": "1302",
+        "minTimestamp": null,
+        "maxTimestamp": null,
+        "chain": "4btiuiMPvEENsttpZC7CZ53DruC3MAgfznDbASZ7DR6S",
+        "nonce": 3664197064
+      },
+      "$kind": "ValidDuring"
+    },
+    "submittedExpiration": null,
+    "originalCommandCount": 19,
+    "provider": "Tatum Sui Mainnet gRPC TransactionExecutionService.SimulateTransaction",
+    "outcome": "FailedTransaction",
+    "statusSuccess": false,
+    "error": "InsufficientCoinBalance in command 16",
+    "gasPaymentMocked": true,
+    "commandResultCount": 0,
+    "checkedAt": "2026-11-06T00:39:33.516Z",
+    "signed": false,
+    "onchainExecuted": false
+  },
+  {
+    "digest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+    "replay": "original-bcs-with-expiration-cleared",
+    "originalExpiration": {
+      "ValidDuring": {
+        "minEpoch": "1301",
+        "maxEpoch": "1302",
+        "minTimestamp": null,
+        "maxTimestamp": null,
+        "chain": "4btiuiMPvEENsttpZC7CZ53DruC3MAgfznDbASZ7DR6S",
+        "nonce": 3058942018
+      },
+      "$kind": "ValidDuring"
+    },
+    "submittedExpiration": null,
+    "originalCommandCount": 19,
+    "provider": "Tatum Sui Mainnet gRPC TransactionExecutionService.SimulateTransaction",
+    "outcome": "FailedTransaction",
+    "statusSuccess": false,
+    "error": "InsufficientCoinBalance in command 16",
+    "gasPaymentMocked": true,
+    "commandResultCount": 0,
+    "checkedAt": "2026-11-06T00:39:33.757Z",
+    "signed": false,
+    "onchainExecuted": false
+  }
+]

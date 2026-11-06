@@ -1,0 +1,305 @@
+[
+  {
+    "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+    "moduleName": "pool",
+    "name": "borrow_flashloan_base",
+    "visibility": "public",
+    "typeParameters": [
+      {
+        "isPhantom": false,
+        "constraints": []
+      },
+      {
+        "isPhantom": false,
+        "constraints": []
+      }
+    ],
+    "parameters": [
+      {
+        "reference": "mutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              },
+              {
+                "$kind": "typeParameter",
+                "index": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "u64"
+        }
+      },
+      {
+        "reference": "mutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+            "typeParameters": []
+          }
+        }
+      }
+    ],
+    "returns": [
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan",
+            "typeParameters": []
+          }
+        }
+      }
+    ]
+  },
+  {
+    "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+    "moduleName": "pool",
+    "name": "return_flashloan_base",
+    "visibility": "public",
+    "typeParameters": [
+      {
+        "isPhantom": false,
+        "constraints": []
+      },
+      {
+        "isPhantom": false,
+        "constraints": []
+      }
+    ],
+    "parameters": [
+      {
+        "reference": "mutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              },
+              {
+                "$kind": "typeParameter",
+                "index": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan",
+            "typeParameters": []
+          }
+        }
+      }
+    ],
+    "returns": []
+  },
+  {
+    "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+    "moduleName": "pool",
+    "name": "swap_exact_quote_for_base",
+    "visibility": "public",
+    "typeParameters": [
+      {
+        "isPhantom": false,
+        "constraints": []
+      },
+      {
+        "isPhantom": false,
+        "constraints": []
+      }
+    ],
+    "parameters": [
+      {
+        "reference": "mutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              },
+              {
+                "$kind": "typeParameter",
+                "index": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "datatype",
+                "datatype": {
+                  "typeName": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+                  "typeParameters": []
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "u64"
+        }
+      },
+      {
+        "reference": "immutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+            "typeParameters": []
+          }
+        }
+      },
+      {
+        "reference": "mutable",
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+            "typeParameters": []
+          }
+        }
+      }
+    ],
+    "returns": [
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "typeParameter",
+                "index": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "reference": null,
+        "body": {
+          "$kind": "datatype",
+          "datatype": {
+            "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+            "typeParameters": [
+              {
+                "$kind": "datatype",
+                "datatype": {
+                  "typeName": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+                  "typeParameters": []
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "packageId": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64",
+    "moduleName": "swap_router",
+    "name": "swap_b_a_with_return_",
+    "error": "Received HTTP status code 429",
+    "code": "UNAVAILABLE"
+  },
+  {
+    "packageId": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c",
+    "moduleName": "pool",
+    "name": "swap",
+    "error": "Received HTTP status code 429",
+    "code": "UNAVAILABLE"
+  }
+]

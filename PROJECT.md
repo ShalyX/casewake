@@ -116,3 +116,32 @@ Next: user adds this one additional encrypted Vercel secret. Then test the authe
 Vercel Production now has WORKSPACE_WRITE_KEY as an encrypted secret. Deployment dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ is READY on commit dcd555a. Live status confirms reviewerWritesEnabled=true alongside Tatum and Walrus. Anonymous custom digest, remember and observation calls all return 403; public sample recall remains healthy. No memory write was performed.
 
 The only auth acceptance gap is a positive request using the correct reviewer key. Next, enter the key in the private reviewer field at /workspace and run a custom-digest lookup. Do not submit a resolution until an authorized engineer provides real diagnosis, resolution steps and independent evidence. The original human-confirmed resolution/reuse P0 remains open.
+
+
+## 2026-11-06 — DeepBook repayment guard proof / BUILD_LOOP checkpoint
+
+Engineering reproduced the original three-hop DeepBook flash-loan failures through Tatum Sui Mainnet simulation after clearing only the expired epoch constraint. Both historical transactions again fail at command 16 with InsufficientCoinBalance. The Bb route still fails when the borrow/repayment amount alone is reduced to 75%, 50%, 25%, 10% and 1%.
+
+A read-only Mainnet guard acceptance test now proves:
+- Original three-hop route: BLOCK at command 16.
+- Actual DeepBook overdraw control: borrow 0.01 SUI, split 0.02 SUI -> BLOCK at command 1.
+- Actual DeepBook exact-repayment control: borrow 0.01 SUI, split and return exactly 0.01 SUI -> ALLOW; all four PTB commands succeed.
+
+The tested prevention guard allows signing only after a fresh full-PTB Tatum simulation succeeds. All tests used mocked gas and no transaction was signed, submitted or executed. See evidence/deepbook-repayment-guard-report.md and evidence/deepbook-repayment-guard-proof.json.
+
+Important boundary: this proves the prevention gate and exact flash-loan repayment control. It does NOT prove the historical three-hop route is profitable or corrected. The final DeepBook swap has min_base_out=0. Non-zero per-hop minimum outputs are follow-up hardening, not part of the verified prevention memory; a successful corrected route has not been demonstrated.
+
+PRODUCT INTEGRITY
+- approved_product: Incident Memory / Casewake, Product Lock revision 1.
+- current_deliverable: partial product plus a verified technical prevention-guard proof.
+- mechanism_proven: Tatum Mainnet detects the failure; full-PTB simulation guard blocks it; exact DeepBook repayment control passes.
+- full_user_journey: digest intake -> Tatum evidence -> recall -> human-approved prevention/resolution -> Walrus receipt -> later compatible recall. The human approval, resolution memory, receipt and subsequent human-case recall remain incomplete.
+- locked_P0_total: 8 grouped capabilities.
+- P0_verified: real transaction lookup, protected reviewer custom lookup, observation memory writes, observed-case recall, simulation runbook recall, anonymous write protection, and prevention-guard simulation proof.
+- P0_missing_or_blocked: human approval and Walrus write of a reviewed resolution; later recall of that human-approved case; success/unknown lookup acceptance; full workspace state QA.
+- differentiators_retained: evidence-linked human-reviewed resolution memory and safe later reuse.
+- new_or_replaced_thesis: NO.
+- next_action: user approval of the exact prevention resolution and reviewer label; then write one genuine Mainnet case through Casewake and verify its Walrus receipt and recall on the second matching digest.
+- verdict: BLOCKED for FULL_PRODUCT_VERIFIED / JUDGE_READY.
+
+No memory was written in this checkpoint.

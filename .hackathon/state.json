@@ -1,27 +1,28 @@
 {
   "schema_version": 2,
-  "revision": 11,
+  "revision": 12,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "BUILD_LOOP",
-  "active_specialist": "Engineering",
+  "active_specialist": "Proof",
   "human_input_required": true,
   "pending_gate": {
-    "id": "REVIEWER_AUTH_POSITIVE",
-    "type": "USER_ACTION",
-    "reason": "Production reviewer access is enabled and anonymous write protection is verified. A positive auth test requires the private reviewer key to be entered into the workspace UI; the key is intentionally not retrieved into chat or automation.",
-    "question": "Open /workspace, enter WORKSPACE_WRITE_KEY from web/.env.local in the private reviewer field, and run a custom-digest lookup. Tell me when the result appears.",
-    "recommendation": "Use an authentic Sui digest not among the three public presets. Do not submit a memory or create a Walrus write for this auth check.",
+    "id": "HUMAN_APPROVAL_DEEPBOOK_PREVENTION",
+    "type": "USER_APPROVAL",
+    "reason": "The preflight repayment guard is verified in Tatum Mainnet simulation, but the historical three-hop route itself is not repaired or proven profitable. Casewake requires an explicit human reviewer approval before the prevention procedure is written as a human-verified memory.",
+    "question": "Do you approve this simulation-backed prevention procedure as the human-verified resolution, using the reviewer label 'Casewake maintainer'?",
+    "recommendation": "Approve only the tested prevention guard: require a fresh full-PTB Tatum Mainnet simulation to return Transaction with effects.status.success=true before signing; block failed, unknown, timed-out or degraded simulations; re-simulate immediately before signing and re-quote/re-route after failure. Non-zero per-hop min-output hardening remains unproven and is excluded from this memory.",
     "choices": [
-      "Run authenticated custom-digest lookup"
+      "Approve prevention resolution and store one Casewake memory",
+      "Hold for a successful corrected three-hop route"
     ],
-    "scope": "Proves the private reviewer credential unlocks the protected lookup path without performing a memory write."
+    "scope": "Approval authorizes one human-verified prevention memory for the first genuine InsufficientCoinBalance digest. It does not claim a corrected profitable three-hop route or verify the additional min-output hardening."
   },
   "product_locked": true,
   "product_lock_revision": 1,
   "demo_defined": true,
   "technical_risks_cleared": true,
   "vertical_slice_complete": true,
-  "happy_path_complete": true,
+  "happy_path_complete": false,
   "brand_direction_locked": true,
   "references_synthesized": false,
   "visual_asset_strategy_complete": false,
@@ -30,7 +31,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "LIVE_PRODUCTION_TATUM_WALRUS_RECALL_VERIFIED; HUMAN_REPAIR_P0_OPEN",
+  "evidence_status": "LIVE_PRODUCTION_TATUM_WALRUS_RECALL_VERIFIED; REVIEWER_AUTH_POSITIVE_VERIFIED; DEEPBOOK_REPAYMENT_PREVENTION_GUARD_SIMULATED_AND_VERIFIED; HUMAN_APPROVAL_AND_WALRUS_CASE_WRITE_PENDING",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -58,7 +59,7 @@
     "TATUM_MAINNET_TX": "VERIFIED 2026-11-04: 100 executed real Mainnet tx scanned; 56 onchain failures in this specific sample; app fetched real failure",
     "WALRUS_MAINNET_OBSERVATIONS": "VERIFIED 2026-11-04: 10 distinct authentic failed-digest observations stored with ten completed blob IDs plus earlier smoke; listMemories 11",
     "CROSS_TRANSACTION_OBSERVATION_RECALL": "VERIFIED 2026-11-04: 3 distinct later failed digests recalled prior stored onchain failures; no verified resolution was asserted",
-    "HUMAN_VERIFIED_RESOLUTION": "OPEN: no independently approved historical repair; original P0 remains",
+    "HUMAN_VERIFIED_RESOLUTION": "PENDING USER APPROVAL: prevention procedure proven; no Casewake memory or Walrus receipt written",
     "TATUM_SPLITCOINS_SIMULATION": "VERIFIED 2026-11-04: overdraw failed, reduced split passed Tatum Mainnet read-only simulation; no onchain execution",
     "WALRUS_SIMULATION_RUNBOOK": "VERIFIED 2026-11-04: completed Mainnet blob keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw and semantic recall",
     "UNIFIED_WALRUS_RECALL": "VERIFIED 2026-11-04: one Walrus semantic search, 12 hits, one simulation runbook for real failed digest; second matching digest positive; different MoveAbort negative; no relayer degradation",
@@ -73,7 +74,7 @@
     "PRODUCTION_MEMORY_INVENTORY": "VERIFIED 2026-11-05: 12 complete Mainnet memories in incident-memory-v1",
     "PUBLIC_DEPLOYMENT": "VERIFIED 2026-11-05: Vercel READY dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym, commit 40e93fd",
     "PUBLIC_BLOG": "VERIFIED 2026-11-05: https://casewake.vercel.app/journal/casewake and screenshot assets HTTP 200",
-    "REVIEWER_WRITE_PRODUCT_LOOP": "OPEN: original P0 code exists locally but production public mode disables writes; safely restore authenticated reviewer path without anonymous writes",
+    "REVIEWER_WRITE_PRODUCT_LOOP": "IMPLEMENTED; reviewer auth and custom lookup verified in production; human approval and human-case Walrus write remain pending",
     "DEMO_VIDEO": "OPEN: 2-3 minute script exists; MP4 not recorded/reviewed",
     "SUBMISSION_AUDIT": "IN_PROGRESS: repo, deployment, article and live sponsor integration verified; form fields, external track fit, final video and receipt remain",
     "REVIEWER_WRITE_PATH_CODE": "VERIFIED 2026-11-06: timing-safe reviewer gate, public sample whitelist, private key held in page memory; local lint/build pass",
@@ -81,16 +82,19 @@
     "REVIEWER_WRITE_DEPLOYMENT": "VERIFIED 2026-11-06: dpl_8wM7EBC9zv5MzUECWwEueRsgKCKQ READY on dcd555a",
     "REVIEWER_WRITE_STATUS": "VERIFIED 2026-11-06: /api/status reviewerWritesEnabled=true; Tatum and Walrus true",
     "ANONYMOUS_REVIEWER_PROTECTION": "VERIFIED 2026-11-06: custom digest, remember and observations all HTTP 403; public sample recall still passes",
-    "REVIEWER_AUTH_POSITIVE": "OPEN: correct key not used in a positive custom-digest lookup test"
+    "REVIEWER_AUTH_POSITIVE": "VERIFIED 2026-11-06: user entered private reviewer key and production workspace returned a genuine custom Tatum Sui Mainnet failure",
+    "HISTORICAL_DEEPBOOK_REPLAY": "VERIFIED 2026-11-06: both original PTBs replayed after clearing only expired epoch; both fail at command 16",
+    "DEEPBOOK_REPAYMENT_GUARD": "VERIFIED 2026-11-06: original route BLOCK; DeepBook overdraw BLOCK; exact 0.01 SUI repayment ALLOW; mocked gas; no chain write"
   },
   "blockers": [
-    "Positive reviewer authentication test: enter the private key in /workspace and perform a custom-digest lookup; do not write a memory during this check",
-    "No independently human-approved historical repair exists; original P0 requires a real engineer's diagnosis, resolution steps, independent proof, Walrus receipt and later reuse",
+    "Human reviewer approval of the simulation-backed DeepBook prevention procedure and reviewer label",
+    "After approval, write one real InsufficientCoinBalance case through Casewake; verify completed Walrus blob receipt and subsequent recall on the second genuine matching digest",
+    "A successful corrected profitable version of the historical three-hop route is NOT proven; do not claim it is fixed",
     "Success/unknown transaction branches and full workspace state matrix still need acceptance tests",
     "Actual 2-3 minute MP4 not recorded or reviewed",
     "Required personal/account form fields and organizer track-fit confirmation remain open",
     "Submission not sent; receipt not captured"
   ],
-  "next_action": "Positive reviewer auth acceptance: user enters WORKSPACE_WRITE_KEY in /workspace and runs a custom authentic digest lookup. Then obtain a genuine engineer-approved historical resolution and prove later compatible recall; never fabricate the case or receipt.",
-  "updated_at": "2026-11-05T23:45:11.869443+00:00"
+  "next_action": "Wait for human approval of the tested preflight simulation guard only. If approved, submit the XkAz... case through production Casewake, capture the completed Walrus receipt, and prove the BbRZD... matching failure recalls it. Keep per-hop min-output hardening and successful route repair as separate unproven work.",
+  "updated_at": "2026-11-06T00:56:36.007407+00:00"
 }
