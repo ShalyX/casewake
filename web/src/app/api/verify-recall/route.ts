@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json({
       gate3: "verified",
+      originalThreeHopCorrection: "unproven",
       originalDigest: DEEPBOOK_SOURCE_DIGEST,
       secondTransaction: second,
       matchedCandidate: match,
