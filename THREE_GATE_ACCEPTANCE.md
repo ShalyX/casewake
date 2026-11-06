@@ -1,6 +1,6 @@
 # Casewake: three-gate production acceptance (Nov 6, 2026)
 
-This is an **enforced prevention-and-memory workflow**, not a claim that the strict full-route three-gate acceptance or the production memory write has already passed. The originally failed three-hop route still has no successful corrected simulation.
+This is a **strict fail-closed three-gate workflow**, not a claim that production acceptance has passed. The original three-hop route still has no corrected successful simulation.
 
 ## Gate 1 — simulation-based repayment prevention
 
@@ -17,8 +17,8 @@ Source: `evidence/deepbook-repayment-guard-proof.json` at Git revision
 ## Gate 2 — human review, independent test evidence, completed Walrus write
 
 - `/api/remember` checks the private workspace key, the failed transaction from Tatum, a reviewer's explicit signoff, and the exact Git-commit-pinned machine-readable Tatum proof.
-- Both diagnosis and resolution must describe a repayment-failure **prevention guard**, not a fictional repaired route.
-- Walrus storage only begins **after** evidence validation.
+- A prevention-only proof remains a **simulation runbook**, not a human-verified repair. The current endpoint rejects promotion until Gate 1 has a corrected successful full-route simulation.
+- Walrus storage only begins **after** evidence validation, including proof of successful correction of the same full route. The present evidence fails that requirement, so verified-memory storage is blocked.
 - `rememberAndWait(..., {dedupe:true})` waits for a completed blob ID. The write response returns job ID, blob ID, namespace and stored record.
 - The UI cannot label the historical route repaired, and it cannot claim a human verification until a real reviewer signs the checkbox.
 
@@ -33,7 +33,7 @@ Source: `evidence/deepbook-repayment-guard-proof.json` at Git revision
 
 ## Manual acceptance
 
-1. Open [Casewake](https://casewake.vercel.app/workspace), enter the private reviewer access key, and inspect `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6`.
+1. After proving a corrected successful original-route simulation and registering immutable evidence, open [Casewake](https://casewake.vercel.app/workspace), enter the private reviewer access key, and inspect `BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6`.
 2. Independently inspect the pinned proof and actual reviewer diagnosis. Record only the verified prevention guard and approve the checkbox.
 3. Store through Casewake. The backend verifies proof, completes a Walrus write, and runs the second-incident Tatum/Walrus acceptance check. Capture the exact job ID and blob ID.
 4. Confirm the UI transitions to the *different* failure and presents the same blob ID next to the recalled reviewed procedure.
