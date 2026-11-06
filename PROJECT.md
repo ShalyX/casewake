@@ -162,3 +162,19 @@ Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](
 **Next action:** close the strict case-specific simulation proof with repeatable independent results or maintain Gate 1 blocked, then demonstrate the actual Casewake user journey from reviewer-authorized resolution through completed Walrus receipt and exact-blob recurrence. Continue all other missing original P0/product and judge-facing phases without inventing results. Deadline: 2026-11-10 17:00 UTC.
 
 **Audit addendum — confirmed P0 regression:** The current `web/src/app/api/remember/route.ts` only accepts `route-repair` proof for one hardcoded DeepBook digest, and `web/src/lib/guard-evidence.ts` rejects other resolution kinds even after proof parsing. Consequently Casewake cannot store a verified reviewer-approved resolution for an otherwise independently proven unrelated Sui incident. This is a concrete general-product functionality regression. Restore the generic evidence-linked human-reviewed memory write path without weakening the stricter proof rules applicable to the selected DeepBook demo. The corrected audit is in `OPERATOR_PHASE_AUDIT_2026-11-06.md`.
+
+## 2026-11-06 — Operator execution checkpoint / draft PR #1
+
+**Phase discipline:** 35-phase audit in OPERATOR_PHASE_AUDIT_2026-11-06.md remains controlling. Historical phases 1–5, 7 and 9 have existing accepted artifacts; phase 6 remains partial (outside-user/organizer proof); phase 8 naming attack now completed in BRAND.md; phase 10 owner/method/deadline claim plan now completed in EVIDENCE.md; phase 11 dependency attack remains partial; phase 12 TECHNICAL_DERISK is still blocked on real successful correction and later reviewed-memory acceptance. Do not jump to BUILD_VERTICAL_SLICE/FULL_PRODUCT_VERIFIED.
+
+**Product-integrity correction built on isolated branch** `fix/general-verified-resolution` in draft https://github.com/ShalyX/casewake/pull/1:
+1. Added general `onchain-successor` resolution kind alongside strict DeepBook `route-repair`.
+2. Requires a real, distinct Tatum-confirmed succeeded follow-up from the same observed onchain sender, exact canonical onchain evidence link, named human reviewer and documented technical change; no arbitrary URL/checkbox alone can create a memory.
+3. Kept original DeepBook source digest strict; prevention-only proof still cannot be promoted. The selected second DeepBook digest remains reserved.
+4. Restored reviewer UI for unrelated genuine Sui incidents; added manually entered distinct later digest + signed Walrus exact-blob recurrence validation.
+5. Removed hardcoded DeepBook error language from the general Walrus recall query while retaining deterministic fingerprint/package/version safeguards.
+6. Added synthetic compatibility/tamper regression assertions and GitHub CI. First PR CI run passed install, tests, ESLint and Next production build. Current head must be checked again before integration acceptance.
+
+**NOT DONE:** production merge; authorized live general-case acceptance (failed + successful same-sender Tatum pair), actual human signoff, any new verified Walrus write and exact later-case blob recall. Preview deployment READY but private sponsor/reviewer credentials remain Production-only. A BUILD success is not a proof of a working real reviewed resolution.
+
+**Next action:** reconcile current CI result, securely acceptance-test the new general source/successor Tatum checks using a *genuinely related* pair with a human reviewer, preserve the locked DeepBook Gate 1 until a repeatable corrected full principal repayment exists, then create a completed Walrus record and prove eligible exact-blob recall. Resume phase 13 only after phase 12's existential evidence is legitimately closed. No fake reviewer or memory.
