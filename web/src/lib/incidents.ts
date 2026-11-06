@@ -10,6 +10,7 @@ export type ObservedTransaction = {
   packageId: string | null;
   failedCommandIndex?: number | null;
   failedCommandKind?: string | null;
+  sender?: string | null;
 };
 
 export type VerifiedCase = {
@@ -84,7 +85,23 @@ export function decodeMemory(text: string): VerifiedCase | null {
         proof.scope === "full-flashloan-route-repair" && proof.originalHistoricalRouteRepaired === true &&
         proof.simulationSucceeded === true && proof.provider === "Tatum Sui Mainnet gRPC" &&
         proof.principalMist === "65265188650" && /^[a-f0-9]{64}$/.test(String(proof.routeTransactionSha256||""));
-    if (!prevention && !repaired) return null;
+    const successor = c.resolutionKind === "onchain-successor" &&
+        proof.scope === "human-reviewed-successor-transaction" &&
+        proof.proofType === "tatum-executed-successor" &&
+        proof.originalHistoricalRouteRepaired === false &&
+        proof.provider === "Tatum Sui gRPC" &&
+        proof.successorOutcome === "succeeded" &&
+        proof.reviewerConfirmedCausality === true &&
+        typeof proof.successorDigest === "string" &&
+        /^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(proof.successorDigest) &&
+        proof.successorDigest !== c.digest &&
+        typeof proof.originalSender === "string" &&
+        typeof proof.successorSender === "string" &&
+        /^0x[a-f0-9]{1,64}$/i.test(proof.originalSender) &&
+        proof.originalSender === proof.successorSender &&
+        typeof proof.reviewedChange === "string" && proof.reviewedChange.length >= 30 &&
+        c.evidenceUrl === "https://suivision.xyz/txblock/" + proof.successorDigest;
+    if (!prevention && !repaired && !successor) return null;
     return c as VerifiedCase;
   } catch { return null; }
 }
@@ -95,7 +112,8 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   if (record.network !== observation.network) reasons.push("Network mismatch.");
   if (record.digest === observation.digest) reasons.push("Self-match cannot prove comparable-incident recall.");
   if (!((record.resolutionKind === "prevention-guard" && record.validatedEvidence?.scope === "prevention-guard-only") ||
-        (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true)))
+        (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true) ||
+        (record.resolutionKind === "onchain-successor" && record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && record.validatedEvidence.reviewerConfirmedCausality === true)))
     reasons.push("Unsupported or unproven fix scope.");
   if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error fingerprint differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");
