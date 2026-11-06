@@ -1,5 +1,6 @@
 import "server-only";
 import type { ObservedTransaction } from "./incidents";
+import type { VerifiedRouteSimulation } from "./route-repair-proof";
 
 // This immutable GitHub revision is the independently inspectable output of
 // web/scripts/prove-deepbook-repayment-guard.mjs, not an asserted repaired swap.
@@ -21,7 +22,12 @@ export type ValidatedEvidence = {
   originalHistoricalRouteRepaired: false;
   mockedGas: true;
   onchainExecuted: false;
-};
+} | (VerifiedRouteSimulation & {
+  schema: "casewake-validated-evidence/v1";
+  scope: "full-flashloan-route-repair";
+  proofType: "mainnet-simulation";
+  originalHistoricalRouteRepaired: true;
+});
 
 type Result = {
   case?: string; digest?: string; provider?: string;

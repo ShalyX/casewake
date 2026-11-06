@@ -32,6 +32,9 @@ export async function POST(request: NextRequest) {
     const recall = await recallAllPrecedents(second);
     const match = recall.candidates.find(candidate =>
       candidate.record.digest === DEEPBOOK_SOURCE_DIGEST &&
+      candidate.record.resolutionKind === "route-repair" &&
+      candidate.record.validatedEvidence?.scope === "full-flashloan-route-repair" &&
+      candidate.record.validatedEvidence.originalHistoricalRouteRepaired === true &&
       candidate.verdict === "eligible-for-review" &&
       candidate.walrusReceipt?.blobId === body.expectedBlobId
     );
@@ -44,13 +47,13 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json({
       gate3: "verified",
-      originalThreeHopCorrection: "unproven",
+      originalThreeHopCorrection: "full-route-simulation-passed",
       originalDigest: DEEPBOOK_SOURCE_DIGEST,
       secondTransaction: second,
       matchedCandidate: match,
       walrusReceipt: match.walrusReceipt,
       walrusHitsExamined: recall.walrusHitsExamined,
-      note: "Independent Tatum recurrence retrieved the reviewer-approved prevention procedure from the exact Walrus blob. This is not proof the historical swap was repaired.",
+      note: "Independent Tatum recurrence recalled the same human-reviewed full-route repair simulation evidence from the exact Walrus blob. The repair passed simulation only; no onchain execution is claimed.",
     });
   } catch (error) {
     console.error("[casewake-three-gates] proof unavailable", error instanceof Error ? error.name : "UnknownError");

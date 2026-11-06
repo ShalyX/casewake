@@ -73,12 +73,18 @@ export function decodeMemory(text: string): VerifiedCase | null {
     if (c.schema !== "incident-memory/v1" || c.status !== "human-verified" || c.network !== "sui-mainnet" ||
         !required.every((key) => typeof c[key] === "string" && (c[key] as string).length > 0)) return null;
     if (!String(c.evidenceUrl).startsWith("https://") ||
-        c.resolutionKind !== "prevention-guard" ||
-        !c.validatedEvidence || typeof c.validatedEvidence !== "object" ||
-        (c.validatedEvidence as Record<string, unknown>).schema !== "casewake-validated-evidence/v1" ||
-        (c.validatedEvidence as Record<string, unknown>).scope !== "prevention-guard-only" ||
-        (c.validatedEvidence as Record<string, unknown>).originalHistoricalRouteRepaired !== false ||
-        (c.validatedEvidence as Record<string, unknown>).originalDigest !== c.digest) return null;
+        !c.validatedEvidence || typeof c.validatedEvidence !== "object") return null;
+    const proof=c.validatedEvidence as Record<string,unknown>;
+    if (proof.schema !== "casewake-validated-evidence/v1" || proof.originalDigest !== c.digest ||
+        c.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue") return null;
+    const prevention = c.resolutionKind === "prevention-guard" &&
+        proof.scope === "prevention-guard-only" && proof.originalHistoricalRouteRepaired === false;
+    const repaired = c.resolutionKind === "route-repair" &&
+        c.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" &&
+        proof.scope === "full-flashloan-route-repair" && proof.originalHistoricalRouteRepaired === true &&
+        proof.simulationSucceeded === true && proof.provider === "Tatum Sui Mainnet gRPC" &&
+        proof.principalMist === "65265188650" && /^[a-f0-9]{64}$/.test(String(proof.routeTransactionSha256||""));
+    if (!prevention && !repaired) return null;
     return c as VerifiedCase;
   } catch { return null; }
 }
@@ -88,7 +94,9 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   if (observation.outcome !== "failed") reasons.push("The current transaction is not a confirmed onchain failure.");
   if (record.network !== observation.network) reasons.push("Network mismatch.");
   if (record.digest === observation.digest) reasons.push("Self-match cannot prove comparable-incident recall.");
-  if (record.resolutionKind !== "prevention-guard" || record.validatedEvidence?.scope !== "prevention-guard-only") reasons.push("Unsupported or unproven fix scope.");
+  if (!((record.resolutionKind === "prevention-guard" && record.validatedEvidence?.scope === "prevention-guard-only") ||
+        (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true)))
+    reasons.push("Unsupported or unproven fix scope.");
   if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error fingerprint differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");
   if (record.errorText !== observation.errorText) reasons.push("Original error detail differs; do not automatically reuse this resolution.");
