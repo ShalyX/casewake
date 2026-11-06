@@ -1,0 +1,31 @@
+name: Casewake flashloan repayment safety
+on:
+  pull_request:
+    paths:
+      - "web/scripts/repayment-safety.mjs"
+      - "web/scripts/test-repayment-safety.mjs"
+      - "web/scripts/simulate-route-repair-v2.mjs"
+      - ".github/workflows/route-safety.yml"
+  push:
+    branches: ["fix/casewake-route-economics-20261106"]
+permissions:
+  contents: read
+jobs:
+  safety:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: corepack prepare pnpm@10.22.0 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: node --test scripts/test-repayment-safety.mjs
+      - run: pnpm lint
+      - run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
