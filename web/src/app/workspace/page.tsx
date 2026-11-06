@@ -44,10 +44,11 @@ export default function Workspace() {
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
   const [error, setError] = useState("");
   const [proof, setProof] = useState<Proof | null>(null);
+  const [writtenSourceDigest, setWrittenSourceDigest] = useState("");
   const [threeGatePassed, setThreeGatePassed] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
-  const [diagnosis, setDiagnosis] = useState("");
-  const [resolutionSteps, setResolutionSteps] = useState("");
+  const [diagnosis, setDiagnosis] = useState("The DeepBook three-hop flash-loan transaction fails at repayment split command 16 with InsufficientCoinBalance: the returned SUI is not sufficient to split out the exact borrowed principal.");
+  const [resolutionSteps, setResolutionSteps] = useState("Before signing, simulate the complete flash-loan transaction with Tatum Sui Mainnet gRPC, including every swap, the repayment split, and return_flashloan_base. Block signing unless the full simulation returns a successful Transaction with effects.status.success=true. On any failure, reject/re-quote the route and re-simulate immediately before signing. The actual three-hop route remained BLOCKED; the exact-repayment DeepBook control simulation passed. This is prevention only, not repair of the original route.");
   const [evidenceUrl, setEvidenceUrl] = useState("https://github.com/ShalyX/casewake/blob/f9d3ea32e24f84f2306cd2533d92dbfd0cb62f2e/evidence/deepbook-repayment-guard-proof.json");
   const [reviewer, setReviewer] = useState("");
   const [sdkVersion, setSdkVersion] = useState("");
@@ -93,7 +94,7 @@ export default function Workspace() {
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
-    setError(""); setRecallNote(""); setProof(null); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setTx(null);
+    setError(""); setRecallNote(""); setProof(null); setWrittenSourceDigest(""); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setTx(null);
     try {
       setPhase("reading");
       const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
@@ -111,8 +112,30 @@ export default function Workspace() {
     finally { setPhase("idle"); }
   }
 
+  async function verifySavedRecall(saved: Proof, source: string) {
+    setError("");
+    setPhase("recalling");
+    try {
+      const secondDigest = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
+      const acceptance = await postJson("/api/verify-recall", {
+        sourceDigest: source, secondDigest, expectedBlobId: saved.blobId,
+      }, reviewerKey);
+      setTx(acceptance.secondTransaction as Transaction);
+      setDigest(secondDigest);
+      setCandidates([acceptance.matchedCandidate as Candidate]);
+      setObservedPrecedents([]);
+      setSimulationRunbooks([]);
+      setRecallNote(String(acceptance.note || "Exact stored Walrus blob recalled for the second independent Tatum failure."));
+      setThreeGatePassed(true);
+      setVerified(false);
+    } catch (e) {
+      setThreeGatePassed(false);
+      setError((e instanceof Error ? e.message : "Recall failed.") + " The Walrus write receipt remains valid. Retry recall without storing another memory.");
+    } finally { setPhase("idle"); }
+  }
+
   async function remember() {
-    if (!tx || tx.outcome !== "failed") return;
+    if (!tx || tx.outcome !== "failed" || tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6") return;
     setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(false);
     try {
       setPhase("writing");
@@ -121,21 +144,10 @@ export default function Workspace() {
       }, reviewerKey);
       const stored = result.proof as Proof;
       setProof(stored);
+      setWrittenSourceDigest(tx.digest);
       setShowEditor(false);
       await refreshInventory();
-      setPhase("recalling");
-      const secondDigest = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
-      const acceptance = await postJson("/api/verify-recall", {
-        sourceDigest: tx.digest, secondDigest, expectedBlobId: stored.blobId,
-      }, reviewerKey);
-      setTx(acceptance.secondTransaction as Transaction);
-      setDigest(secondDigest);
-      setCandidates([acceptance.matchedCandidate as Candidate]);
-      setObservedPrecedents([]);
-      setSimulationRunbooks([]);
-      setRecallNote(String(acceptance.note || "Exact stored Walrus blob recalled for a second independent Tatum failure."));
-      setThreeGatePassed(true);
-      setVerified(false);
+      await verifySavedRecall(stored, tx.digest);
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
   }
@@ -176,6 +188,12 @@ export default function Workspace() {
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
 
+        <div className="panel" role="status" style={{marginBottom:"20px"}}>
+          <div className="panel-kicker"><span>LIVE ACCEPTANCE / THREE GATES</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Read live audit ↗</a></div>
+          <p><strong>01 / Simulation:</strong> Original swap route BLOCKED; corrected exact-repayment control ALLOW. Historical three-hop correction remains unproven.</p>
+          <p><strong>02 / Reviewer and Walrus:</strong> {proof && !observationOnly ? "Completed blob " + shortDigest(proof.blobId) : "Awaiting approved evidence and completed memory write."}</p>
+          <p><strong>03 / Independent recall:</strong> {threeGatePassed ? "Passed — exact stored Walrus blob recalled for second real failure." : "Awaiting exact-blob recall from second real failed transaction."}</p>
+        </div>
         <div className="workspace-grid">
           <section className="workspace-primary">
             <div className="panel panel-search">
@@ -213,7 +231,7 @@ export default function Workspace() {
               {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
-                <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record tested prevention"} ↗</button>
+                <button disabled={tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" || tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record tested prevention"} ↗</button>
               </div>
             </div> : <div className="panel empty-evidence"><span className="empty-target">✳</span><div className="eyebrow dim">EVIDENCE WAITING ROOM</div><h2>The chain tells us what happened.</h2><p>Import a transaction to reveal its evidence before assigning an explanation.</p><div className="empty-grid"><span>STATUS / —</span><span>ERROR / —</span><span>SOURCE / —</span></div></div>}
 
@@ -223,7 +241,7 @@ export default function Workspace() {
               <div className="editor-form">
                 <label>Confirmed diagnosis<textarea value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} rows={2} placeholder="What caused the failure?"/></label>
                 <label>Resolution steps<textarea value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What did the engineer do, and what worked?"/></label>
-                <label>Immutable simulation evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} readOnly /><small>The server retrieves and validates all three pinned Mainnet simulation results before permitting storage.</small></label>
+                <label>Immutable simulation evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} readOnly /><small>The server retrieves and validates all three pinned Mainnet simulation results before permitting storage.</small> <a href={evidenceUrl} target="_blank" rel="noreferrer">Inspect original simulation evidence ↗</a></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I reviewed the original failed route, the blocked overdraw, and the successful repayment control. I approve only the pre-signing prevention guard; I do not claim the three-hop route was repaired.</span></label>
                 <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Store reviewer-approved guard"} ↗</button>
@@ -269,7 +287,7 @@ export default function Workspace() {
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
               <h3>{threeGatePassed ? "Prevention and recall verified · original route still unproven." : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
               <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : threeGatePassed ? "The second independent real failed transaction recalled the reviewer-approved prevention guard with the exact Walrus blob ID. The historical three-hop route remains unrepaired." : "Walrus storage completed, but the second-incident recall gate has not passed yet.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
-              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small></div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
+              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!threeGatePassed && !observationOnly && writtenSourceDigest && <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void verifySavedRecall(proof, writtenSourceDigest)}>Retry independent recall — no new Walrus write ↗</button>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
             <div className="sidebar-note">INTEGRITY RULE <span>↗</span><p>Every reused fix is a suggestion for engineering review—not evidence that a new transaction is automatically repaired.</p></div>
           </aside>
         </div>
