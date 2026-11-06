@@ -52,7 +52,12 @@ export async function recallAllPrecedents(tx: ObservedTransaction): Promise<AllR
     if (verified) {
       if (!seen.has("v:" + verified.id)) {
         seen.add("v:" + verified.id);
-        candidates.push(assessCase(tx, verified, distance));
+        if (typeof hit.blob_id === "string" && hit.blob_id.length > 0) {
+          candidates.push({ ...assessCase(tx, verified, distance),
+            walrusReceipt: { blobId: hit.blob_id,
+              namespace: process.env.MEMWAL_NAMESPACE || "incident-memory-v1",
+              verifiedThrough: "signed-walrus-recall" } });
+        }
       }
       continue;
     }
