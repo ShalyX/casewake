@@ -36,6 +36,7 @@ export type ValidatedEvidence = {
   provider: "Tatum Sui gRPC";
   originalSender: string;
   successorSender: string;
+  matchedOperations: string[];
   successorOutcome: "succeeded";
   reviewerConfirmedCausality: true;
   reviewedChange: string;
