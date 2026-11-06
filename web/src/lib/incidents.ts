@@ -1,3 +1,4 @@
+import type { ResolutionKind, ValidatedEvidence } from "./guard-evidence";
 export type ObservedTransaction = {
   digest: string;
   network: "sui-mainnet";
@@ -26,6 +27,8 @@ export type VerifiedCase = {
   reviewer: string;
   verifiedAt: string;
   status: "human-verified";
+  resolutionKind: ResolutionKind;
+  validatedEvidence: ValidatedEvidence;
 };
 
 export type Candidate = {
@@ -33,6 +36,7 @@ export type Candidate = {
   distance: number;
   verdict: "eligible-for-review" | "incompatible";
   reasons: string[];
+  walrusReceipt?: { blobId: string; namespace: string; verifiedThrough: "signed-walrus-recall" };
 };
 
 const PREFIX = "SUI_INCIDENT_MEMORY_V1\n";
@@ -68,7 +72,13 @@ export function decodeMemory(text: string): VerifiedCase | null {
     const required = ["id", "digest", "fingerprint", "errorText", "diagnosis", "resolutionSteps", "evidenceUrl", "reviewer", "verifiedAt"];
     if (c.schema !== "incident-memory/v1" || c.status !== "human-verified" || c.network !== "sui-mainnet" ||
         !required.every((key) => typeof c[key] === "string" && (c[key] as string).length > 0)) return null;
-    if (!String(c.evidenceUrl).startsWith("https://")) return null;
+    if (!String(c.evidenceUrl).startsWith("https://") ||
+        c.resolutionKind !== "prevention-guard" ||
+        !c.validatedEvidence || typeof c.validatedEvidence !== "object" ||
+        (c.validatedEvidence as Record<string, unknown>).schema !== "casewake-validated-evidence/v1" ||
+        (c.validatedEvidence as Record<string, unknown>).scope !== "prevention-guard-only" ||
+        (c.validatedEvidence as Record<string, unknown>).originalHistoricalRouteRepaired !== false ||
+        (c.validatedEvidence as Record<string, unknown>).originalDigest !== c.digest) return null;
     return c as VerifiedCase;
   } catch { return null; }
 }
@@ -77,6 +87,8 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   const reasons: string[] = [];
   if (observation.outcome !== "failed") reasons.push("The current transaction is not a confirmed onchain failure.");
   if (record.network !== observation.network) reasons.push("Network mismatch.");
+  if (record.digest === observation.digest) reasons.push("Self-match cannot prove comparable-incident recall.");
+  if (record.resolutionKind !== "prevention-guard" || record.validatedEvidence?.scope !== "prevention-guard-only") reasons.push("Unsupported or unproven fix scope.");
   if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error fingerprint differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");
   if (record.errorText !== observation.errorText) reasons.push("Original error detail differs; do not automatically reuse this resolution.");
