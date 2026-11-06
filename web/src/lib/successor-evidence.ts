@@ -36,6 +36,18 @@ export async function verifyOnchainSuccessor(
     throw new Error("The failed and successful transactions must have the same independently observed sender.");
   if (original.packageId && successor.packageId && original.packageId !== successor.packageId)
     throw new Error("The successful transaction targets a different confirmed package.");
+  const originalCalls = original.operationMarkers || [];
+  const confirmedCalls = new Set(successor.operationMarkers || []);
+  const matchedCalls = originalCalls.filter(m => confirmedCalls.has(m));
+  const sourceKinds = original.commandKinds || [];
+  const successorKinds = successor.commandKinds || [];
+  const sameProgramShape = sourceKinds.length > 0 && sourceKinds.length === successorKinds.length &&
+    sourceKinds.every((kind, index) => kind !== "unknown" && kind === successorKinds[index]);
+  if (originalCalls.length > 0 && matchedCalls.length === 0)
+    throw new Error("No matching Move call target between the failed and successful transaction; a same-sender unrelated success is not a verified correction.");
+  if (originalCalls.length === 0 && !sameProgramShape)
+    throw new Error("No shared independently decoded operation or matching programmable transaction shape was found.");
+  const matchedOperations = matchedCalls.length > 0 ? matchedCalls : ["sequence:" + sourceKinds.join(">")];
   return {
     schema: "casewake-validated-evidence/v1",
     scope: "human-reviewed-successor-transaction",
@@ -44,6 +56,7 @@ export async function verifyOnchainSuccessor(
     successorDigest: successor.digest,
     originalSender: original.sender.toLowerCase(),
     successorSender: successor.sender.toLowerCase(),
+    matchedOperations,
     provider: "Tatum Sui gRPC",
     successorOutcome: "succeeded",
     reviewerConfirmedCausality: true,
