@@ -98,18 +98,4 @@ export async function validateCasewakeEvidence(
   // the ORIGINAL three-hop transaction. Do not promote a prevention runbook to
   // a human-verified historical resolution on this evidence alone.
   throw new Error("Gate 1 incomplete: original three-hop route was blocked, but no corrected version of that same route passed Tatum Mainnet simulation. This prevention procedure remains a simulation-tested runbook, not a verified incident resolution.");
-  /*
-  return {
-    schema: "casewake-validated-evidence/v1",
-    sourceCommit: PROOF_COMMIT,
-    sourceUrl: GUARD_EVIDENCE_URL,
-    originalDigest: observed.digest,
-    proofType: "mainnet-simulation",
-    scope: "prevention-guard-only",
-    acceptedTests: ["original-three-hop-route", "deepbook-overdraw-control", "deepbook-exact-repayment-control"],
-    originalHistoricalRouteRepaired: false,
-    mockedGas: true,
-    onchainExecuted: false,
-  };
-  */
 }
