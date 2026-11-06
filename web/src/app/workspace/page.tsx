@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; publicDemoMode?: boolean; network: string; checksAreLive: boolean };
 type Transaction = { digest: string; network: string; source: string; observedAt: string; outcome: "failed" | "succeeded" | "unknown"; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
 type Case = { id: string; digest: string; diagnosis: string; resolutionSteps: string; evidenceUrl: string; reviewer: string; verifiedAt: string; errorText: string; sdkVersion: string | null };
-type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[] };
+type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[]; walrusReceipt?: {blobId:string;namespace:string;verifiedThrough:string} };
 type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
 type ObservedPrecedent = { case: {digest: string; errorText: string; sourceUrl: string; resolutionVerified: false}; distance: number };
 type Inventory = { allStoredMemories: number; namespace: string; complete: boolean };
@@ -47,7 +47,7 @@ export default function Workspace() {
   const [showEditor, setShowEditor] = useState(false);
   const [diagnosis, setDiagnosis] = useState("");
   const [resolutionSteps, setResolutionSteps] = useState("");
-  const [evidenceUrl, setEvidenceUrl] = useState("");
+  const [evidenceUrl, setEvidenceUrl] = useState("https://github.com/ShalyX/casewake/blob/f9d3ea32e24f84f2306cd2533d92dbfd0cb62f2e/evidence/deepbook-repayment-guard-proof.json");
   const [reviewer, setReviewer] = useState("");
   const [sdkVersion, setSdkVersion] = useState("");
   const [reviewerKey, setReviewerKey] = useState("");
@@ -116,7 +116,7 @@ export default function Workspace() {
     try {
       setPhase("writing");
       const result = await postJson("/api/remember", {
-        digest: tx.digest, diagnosis, resolutionSteps, evidenceUrl, reviewer, sdkVersion, verified,
+        digest: tx.digest, diagnosis, resolutionSteps, evidenceUrl, reviewer, sdkVersion, verified, resolutionKind: "prevention-guard",
       }, reviewerKey);
       setProof(result.proof as Proof);
       setShowEditor(false);
@@ -200,20 +200,20 @@ export default function Workspace() {
               {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
-                <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record verified fix"} ↗</button>
+                <button disabled={tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record tested prevention"} ↗</button>
               </div>
             </div> : <div className="panel empty-evidence"><span className="empty-target">✳</span><div className="eyebrow dim">EVIDENCE WAITING ROOM</div><h2>The chain tells us what happened.</h2><p>Import a transaction to reveal its evidence before assigning an explanation.</p><div className="empty-grid"><span>STATUS / —</span><span>ERROR / —</span><span>SOURCE / —</span></div></div>}
 
               {tx && showEditor && <div className="panel editor-panel">
               <div className="panel-kicker"><span>03 / HUMAN REVIEW</span><span>WRITE RESTRICTED</span></div>
-              <h2>Make this lesson reusable.</h2><p>Only record a procedure actually confirmed by a human. This becomes a future recommendation, not an automatic fix.</p>
+              <h2>Verify the prevention, not a repaired route.</h2><p>This proof blocks the failing three-hop route and passes an exact-repayment DeepBook control. It does NOT repair the original route. A reviewer must approve the diagnosis and the tested pre-signing guard before any Walrus write.</p>
               <div className="editor-form">
                 <label>Confirmed diagnosis<textarea value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} rows={2} placeholder="What caused the failure?"/></label>
                 <label>Resolution steps<textarea value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What did the engineer do, and what worked?"/></label>
-                <label>HTTPS evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} placeholder="https://github.com/..."/></label>
+                <label>Immutable simulation evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} readOnly /><small>The server retrieves and validates all three pinned Mainnet simulation results before permitting storage.</small></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
-                <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I personally verified the diagnosis and resolution, and the content is safe to share in this workspace.</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Save human-verified resolution"} ↗</button>
+                <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I reviewed the original failed route, the blocked overdraw, and the successful repayment control. I approve only the pre-signing prevention guard; I do not claim the three-hop route was repaired.</span></label>
+                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Store reviewer-approved guard"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
                   <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
@@ -230,7 +230,7 @@ export default function Workspace() {
                !tx ? <p className="muted">Once you import a failed transaction, compatible reviewed cases appear here—with their origin and mismatch reasons.</p> :
                <p className="muted">{recallNote || "No recall performed."}</p>}
               <div className="memory-results">
-                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a><small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small></article>)}
+                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a><small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small>{c.walrusReceipt ? <div className="proof-receipt"><span>RECALLED WALRUS BLOB · {c.walrusReceipt.namespace}</span><code>{c.walrusReceipt.blobId}</code><small>Signed Walrus recall · same blob returned on retrieval</small></div> : <p>Walrus receipt unavailable — not a completed proof of recall.</p>}</article>)}
                 {simulationRunbooks.map((hit)=> <article key={hit.record.id} className="simulation-card">
                   <div className="simulation-card-kicker">SIMULATION-TESTED · HISTORICAL REPAIR NOT VERIFIED</div>
                   <h3>One reproducible failure. One tested correction.</h3>
