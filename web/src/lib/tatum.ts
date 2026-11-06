@@ -37,8 +37,11 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     : null;
   const commandNumber = errorText?.match(/\bin command (\d+)\b/);
   const failedCommandIndex = commandNumber ? Number(commandNumber[1]) : null;
-  type TxCommands = {kind?:{data?:{programmableTransaction?:{commands?:Array<{command?:{oneofKind?:string}}>}}}};
-  const txCommands = (transaction.transaction as TxCommands | undefined)?.kind?.data?.programmableTransaction?.commands;
+  type TxCommands = {sender?:string;kind?:{data?:{programmableTransaction?:{commands?:Array<{command?:{oneofKind?:string}}>}}}};
+  const decodedTransaction = transaction.transaction as TxCommands | undefined;
+  const txCommands = decodedTransaction?.kind?.data?.programmableTransaction?.commands;
+  const sender = typeof decodedTransaction?.sender === "string" && /^0x[a-f0-9]{1,64}$/i.test(decodedTransaction.sender)
+    ? decodedTransaction.sender.toLowerCase() : null;
   const failedCommandKind = failedCommandIndex !== null ? txCommands?.[failedCommandIndex]?.command?.oneofKind ?? null : null;
   return {
     digest: transaction.digest || digest,
@@ -52,5 +55,6 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
     packageId: null,
     failedCommandIndex,
     failedCommandKind,
+    sender,
   };
 }
