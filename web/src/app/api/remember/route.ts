@@ -5,6 +5,7 @@ import { safeText, type VerifiedCase } from "@/lib/incidents";
 import { storeVerifiedIncident } from "@/lib/walrus";
 import { validateCasewakeEvidence, type ResolutionKind, type ValidatedEvidence } from "@/lib/guard-evidence";
 import { ROUTE_INCIDENT_DIGEST, RECALL_TEST_DIGEST, independentlyVerifyRouteRepair } from "@/lib/route-repair-proof";
+import { verifyOnchainSuccessor } from "@/lib/successor-evidence";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
@@ -35,6 +36,8 @@ export async function POST(request: NextRequest) {
     // BEFORE touching Walrus. Reviewer attestation or a URL alone never passes Gate 2.
     if (observed.digest === RECALL_TEST_DIGEST)
       return NextResponse.json({ error: "This second incident is reserved for independent recall, not resolution storage." }, {status:409});
+    if (observed.digest === ROUTE_INCIDENT_DIGEST && resolutionKind !== "route-repair")
+      return NextResponse.json({ error: "This DeepBook incident requires the strict full-route three-gate verification; generic evidence cannot bypass it." }, { status: 409 });
     let validatedEvidence: ValidatedEvidence;
     if (resolutionKind === "route-repair") {
       if (observed.digest !== ROUTE_INCIDENT_DIGEST)
@@ -45,8 +48,23 @@ export async function POST(request: NextRequest) {
       } catch(error) {
         return NextResponse.json({error:"Gate 1 locked: " + (error instanceof Error ? error.message : "Independent flashloan simulation failed.")},{status:409});
       }
+    } else if (resolutionKind === "onchain-successor") {
+      if (body.confirmedCausalLink !== true)
+        return NextResponse.json({ error: "A reviewer must explicitly confirm the specific causal relationship between the failed and successful transaction." }, { status: 400 });
+      try {
+        validatedEvidence = await verifyOnchainSuccessor(
+          observed,
+          safeText(body.successorDigest, 100),
+          evidenceUrl,
+          safeText(body.reviewedChange, 1000),
+        );
+      } catch (error) {
+        return NextResponse.json({ error: "General verified-case proof blocked: " + (error instanceof Error ? error.message : "Independent successful execution could not be confirmed.") }, { status: 409 });
+      }
     } else {
-      validatedEvidence = await validateCasewakeEvidence(observed, resolutionKind, evidenceUrl, diagnosis, resolutionSteps);
+      // Historical prevention-only evidence is a runbook, not a verified fix.
+      await validateCasewakeEvidence(observed, resolutionKind, evidenceUrl, diagnosis, resolutionSteps);
+      return NextResponse.json({ error: "A prevention runbook cannot be saved as a human-verified historical repair." }, { status: 409 });
     }
     const record: VerifiedCase = {
       schema: "incident-memory/v1", id: randomUUID(),
