@@ -71,3 +71,11 @@ All are genuine Sui Mainnet digests previously tested through Tatum; C is a diff
 - Public write endpoints and unlisted digest are 403; do not show any anonymous write path.
 - Landing, workspace, proof page, article and both screenshots return HTTP 200.
 - Video status remains NOT RECORDED. Script still requires a complete timed recording, full watch-through and judge QA.
+
+## Operator Phase 9 — original-product demo architecture guardrail (Nov 6)
+
+The existing 02:35 script is an **honest fallback recording plan for the observation + simulation-tested runbook slice only**, not demonstration of the original locked Casewake magic moment. Never silently treat the fallback script as proof of full-product completion.
+
+**Required full-product film, conditional on actual proof:** (a) real failed Sui digest read from Tatum; (b) engineer explains and confirms a specific independently corroborated correction; (c) protected Casewake reviewer approval; (d) completed Mainnet Walrus job/blob receipt; (e) a *different* genuine comparable failed Sui transaction retrieves the exact reviewed blob; (f) unrelated failure is correctly excluded. Identify the provenance/evidence tier at each beat. No fabricated engineer, transaction, evidence or memory. The DeepBook three-gate full-route scenario stays a featured proof, not the whole product.
+
+Before DEMO_PRODUCTION, replace the fallback script or explicitly show what failed to meet the original locked P0. Never manufacture the missing human-approved memory simply to capture an idealized demo. Recording reset must show real app state and avoid secrets.
