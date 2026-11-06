@@ -54,6 +54,7 @@ export default function Workspace() {
   const [sdkVersion, setSdkVersion] = useState("");
   const [reviewerKey, setReviewerKey] = useState("");
   const [verified, setVerified] = useState(false);
+  const historicalRouteCorrected = false; // The original three-hop correction has not passed Mainnet simulation.
   useEffect(() => {
     fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
     fetch("/api/memories").then((r) => { if (!r.ok) throw new Error("Relayer unavailable"); return r.json(); }).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
@@ -231,20 +232,20 @@ export default function Workspace() {
               {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
-                <button disabled={tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" || tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Record tested prevention"} ↗</button>
+                <button disabled={tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" || tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Review guard evidence"} ↗</button>
               </div>
             </div> : <div className="panel empty-evidence"><span className="empty-target">✳</span><div className="eyebrow dim">EVIDENCE WAITING ROOM</div><h2>The chain tells us what happened.</h2><p>Import a transaction to reveal its evidence before assigning an explanation.</p><div className="empty-grid"><span>STATUS / —</span><span>ERROR / —</span><span>SOURCE / —</span></div></div>}
 
               {tx && showEditor && <div className="panel editor-panel">
               <div className="panel-kicker"><span>03 / HUMAN REVIEW</span><span>WRITE RESTRICTED</span></div>
-              <h2>Verify the prevention, not a repaired route.</h2><p>This proof blocks the failing three-hop route and passes an exact-repayment DeepBook control. It does NOT repair the original route. A reviewer must approve the diagnosis and the tested pre-signing guard before any Walrus write.</p>
+              <h2>Verify the prevention, not a repaired route.</h2><p>This proof blocks the failing three-hop route and passes an exact-repayment DeepBook control. It does NOT repair the original route. Strict Gate 1 still requires a successful corrected simulation of the SAME three-hop route. The existing proof is prevention-only; a human-verified Walrus write is blocked until that evidence exists.</p>
               <div className="editor-form">
                 <label>Confirmed diagnosis<textarea value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} rows={2} placeholder="What caused the failure?"/></label>
                 <label>Resolution steps<textarea value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What did the engineer do, and what worked?"/></label>
                 <label>Immutable simulation evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} readOnly /><small>The server retrieves and validates all three pinned Mainnet simulation results before permitting storage.</small> <a href={evidenceUrl} target="_blank" rel="noreferrer">Inspect original simulation evidence ↗</a></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I reviewed the original failed route, the blocked overdraw, and the successful repayment control. I approve only the pre-signing prevention guard; I do not claim the three-hop route was repaired.</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Store reviewer-approved guard"} ↗</button>
+                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey || !historicalRouteCorrected} onClick={() => void remember()}>{phase === "writing" ? "Writing to Walrus…" : "Gate 1 incomplete — storage blocked"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
                   <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
