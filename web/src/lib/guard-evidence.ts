@@ -1,0 +1,108 @@
+import "server-only";
+import type { ObservedTransaction } from "./incidents";
+
+// This immutable GitHub revision is the independently inspectable output of
+// web/scripts/prove-deepbook-repayment-guard.mjs, not an asserted repaired swap.
+const PROOF_COMMIT = "f9d3ea32e24f84f2306cd2533d92dbfd0cb62f2e";
+const PROOF_PATH = "evidence/deepbook-repayment-guard-proof.json";
+export const GUARD_EVIDENCE_URL = `https://github.com/ShalyX/casewake/blob/${PROOF_COMMIT}/${PROOF_PATH}`;
+const RAW_PROOF_URL = `https://raw.githubusercontent.com/ShalyX/casewake/${PROOF_COMMIT}/${PROOF_PATH}`;
+export const DEEPBOOK_SOURCE_DIGEST = "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
+
+export type ResolutionKind = "prevention-guard" | "route-repair";
+export type ValidatedEvidence = {
+  schema: "casewake-validated-evidence/v1";
+  sourceCommit: string;
+  sourceUrl: string;
+  originalDigest: string;
+  proofType: "mainnet-simulation";
+  scope: "prevention-guard-only";
+  acceptedTests: ["original-three-hop-route", "deepbook-overdraw-control", "deepbook-exact-repayment-control"];
+  originalHistoricalRouteRepaired: false;
+  mockedGas: true;
+  onchainExecuted: false;
+};
+
+type Result = {
+  case?: string; digest?: string; provider?: string;
+  decision?: string; simulationOutcome?: string; statusSuccess?: boolean;
+  error?: string | null; failedAtCommand?: string | null;
+  gasPaymentMocked?: boolean; signed?: boolean; onchainExecuted?: boolean;
+  commandResultCount?: number;
+};
+type GuardProof = { schema?: string; results?: Result[] };
+
+function assertResult(
+  result: Result | undefined,
+  label: string,
+  decision: string,
+  outcome: string,
+  success: boolean,
+) {
+  if (!result || result.case !== label || result.decision !== decision ||
+      result.simulationOutcome !== outcome || result.statusSuccess !== success ||
+      result.provider !== "Tatum Sui Mainnet gRPC SimulateTransaction" ||
+      result.gasPaymentMocked !== true || result.signed !== false ||
+      result.onchainExecuted !== false) {
+    throw new Error("Gate 1 rejected: missing or inconsistent independent Mainnet simulation evidence.");
+  }
+}
+
+export async function validateCasewakeEvidence(
+  observed: ObservedTransaction,
+  kind: ResolutionKind,
+  evidenceUrl: string,
+  diagnosis: string,
+  resolutionSteps: string,
+): Promise<ValidatedEvidence> {
+  if (kind === "route-repair") {
+    throw new Error("Gate 1 blocked: no corrected successful simulation of the historical three-hop route has been proven.");
+  }
+  if (kind !== "prevention-guard" || observed.digest !== DEEPBOOK_SOURCE_DIGEST ||
+      observed.outcome !== "failed" || !observed.errorText?.includes("InsufficientCoinBalance") ||
+      observed.failedCommandIndex !== 16 || observed.failedCommandKind !== "splitCoins") {
+    throw new Error("Gate 1 blocked: this incident is not covered by the independently tested DeepBook prevention proof.");
+  }
+  if (evidenceUrl !== GUARD_EVIDENCE_URL) {
+    throw new Error("Gate 2 blocked: attach the exact commit-pinned independent guard evidence URL, not an arbitrary link.");
+  }
+  if (!/insufficientcoinbalance/i.test(diagnosis) || !/repayment/i.test(diagnosis) ||
+      !/simulat/i.test(resolutionSteps) || !/block/i.test(resolutionSteps) ||
+      !/sign/i.test(resolutionSteps) || /(?:route|swap)\s+(?:was\s+)?(?:repaired|fixed|profitable)/i.test(resolutionSteps)) {
+    throw new Error("Gate 2 blocked: describe the proven repayment failure and pre-signing simulation guard without claiming a repaired or profitable historical route.");
+  }
+  const response = await fetch(RAW_PROOF_URL, { cache: "no-store", signal: AbortSignal.timeout(12000) });
+  if (!response.ok) throw new Error("Gate 2 blocked: immutable proof could not be independently retrieved.");
+  const proof = await response.json() as GuardProof;
+  if (proof.schema !== "deepbook-repayment-guard-proof/v1" ||
+      !Array.isArray(proof.results) || proof.results.length !== 3) {
+    throw new Error("Gate 1 blocked: the independent evidence is incomplete.");
+  }
+  const [original, overdraw, corrected] = [
+    proof.results.find(r => r.case === "original-three-hop-route"),
+    proof.results.find(r => r.case === "deepbook-overdraw-control"),
+    proof.results.find(r => r.case === "deepbook-exact-repayment-control"),
+  ];
+  assertResult(original, "original-three-hop-route", "BLOCK", "FailedTransaction", false);
+  assertResult(overdraw, "deepbook-overdraw-control", "BLOCK", "FailedTransaction", false);
+  assertResult(corrected, "deepbook-exact-repayment-control", "ALLOW", "Transaction", true);
+  if (original?.digest !== observed.digest || original.failedAtCommand !== "16" ||
+      !String(original.error).includes("InsufficientCoinBalance") ||
+      overdraw?.failedAtCommand !== "1" ||
+      !String(overdraw.error).includes("InsufficientCoinBalance") ||
+      corrected?.commandResultCount !== 4) {
+    throw new Error("Gate 1 blocked: repayment proof does not match the failed transaction and successful control.");
+  }
+  return {
+    schema: "casewake-validated-evidence/v1",
+    sourceCommit: PROOF_COMMIT,
+    sourceUrl: GUARD_EVIDENCE_URL,
+    originalDigest: observed.digest,
+    proofType: "mainnet-simulation",
+    scope: "prevention-guard-only",
+    acceptedTests: ["original-three-hop-route", "deepbook-overdraw-control", "deepbook-exact-repayment-control"],
+    originalHistoricalRouteRepaired: false,
+    mockedGas: true,
+    onchainExecuted: false,
+  };
+}
