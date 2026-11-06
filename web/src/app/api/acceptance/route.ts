@@ -55,12 +55,12 @@ async function inspect() {
       note: "A successful exact-repayment control is NOT a successful correction of the original three-hop swap.",
     },
     gate2: {
-      state: eligible ? "stored-human-reviewed-prevention" : "awaiting-human-reviewed-memory",
-      reviewerWrite: eligible ? "confirmed-by-recall" : "unconfirmed",
+      state: eligible ? "stored-human-reviewed-prevention" : "blocked-pending-successful-original-route-simulation",
+      reviewerWrite: eligible ? "confirmed-by-recall" : "not-allowed-with-current-proof",
       walrusBlobId: eligible?.walrusReceipt?.blobId ?? null,
     },
     gate3: {
-      state: comparable && eligible && !negativeAccepted ? "verified-repeat-recall" : "not-yet-proven",
+      state: comparable && eligible && !negativeAccepted ? "verified-repeat-recall" : "blocked-until-gate1-and-gate2-pass",
       originalDigest: original.digest,
       secondDigest: recurrence.digest,
       comparableFailedTransactions: comparable,
