@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 13,
+  "revision": 14,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "TECHNICAL_DERISK",
-  "active_specialist": "Engineering + Product Critic",
+  "active_specialist": "Engineering + Proof",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -20,7 +20,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "TATUM_WALRUS_MAINNET_OBSERVATION_RECALL_VERIFIED; ZERO_HUMAN_VERIFIED_REPAIRS; DEEPBOOK_FULL_ROUTE_REPAIR_INDEPENDENT_REPLAY_FAILED; GATE_1_BLOCKED; GATE_2_AND_3_LOCKED; PRODUCT_DRIFT_CORRECTION_REQUIRED; GENERIC_VERIFIED_CASE_WRITE_P0_REGRESSED",
+  "evidence_status": "ORIGINAL P0 PRESERVED; GENERAL_REVIEWER_SUCCESSOR_PATH_DRAFT_CI_PASS_LIVE_UNPROVEN; DEEPBOOK_GATE1_BLOCKED; NO_HUMAN_APPROVED_WALRUS_CASE; PHASE12_OPEN",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -78,17 +78,22 @@
     "VERIFIED_RESOLUTION_LOOP": "BLOCKED: original approved Casewake magic moment—real reviewed fix→completed Walrus blob→distinct compatible recall—not demonstrated. No approved resolution memory.",
     "PARTIAL_FLASHLOAN_REPLAY": "2026-11-06 one successful 1.25-SUI partial trade/65.265188650-SUI repayment read-only simulation; exact 3596-byte transaction subsequently FAILED Mainnet repayment command 19 on Tatum and public Sui nodes; not independently verified or economic after gas.",
     "USER_DECISION_2026_11_06": "HOLD prevention-only resolution. Never promote prevention runbook as a verified historical correction. Do not automatically approve reviewer signoff.",
-    "CORE_VERIFIED_CASE_WRITE_REGRESSION": "CODE-CONFIRMED 2026-11-06: POST /api/remember only allows route-repair for BbRZD...; all other kinds/digests blocked by guard-evidence's unconditional rejection. No generic human-verified resolution recording for a legitimate different Sui incident. This violates approved P0."
+    "CORE_VERIFIED_CASE_WRITE_REGRESSION": "CODE-CONFIRMED 2026-11-06: POST /api/remember only allows route-repair for BbRZD...; all other kinds/digests blocked by guard-evidence's unconditional rejection. No generic human-verified resolution recording for a legitimate different Sui incident. This violates approved P0.",
+    "NAME_LOCK": "PASS: expanded 18-candidate naming territories, genericity attack and preliminary collision review in BRAND.md; Casewake unchanged; no legal trademark clearance claimed",
+    "EVIDENCE_PLAN": "PASS (planning only): every critical claim assigned status, owner, verification method, artifact, internal target and judge surface in EVIDENCE.md",
+    "RESTORED_GENERAL_CASE_CODE": "IMPLEMENTED IN DRAFT PR #1, FIRST CI PASS: independent Tatum same-sender successful successor; human causal attestation; UI; exact-blob cross-case recall; no live write tested",
+    "GENERIC_WALRUS_RECALL": "CODE-UPDATED: remove DeepBook error bias; live cross-case memory eligibility proof pending"
   },
   "blockers": [
-    "P0 REGRESSION: /api/remember accepts route-repair only for BbRZD...; /src/lib/guard-evidence.ts rejects all prevention writes, so the original generic human-confirmed case memory write path is absent. Restore case-specific credible evidence validation for other genuine Sui incidents without bypassing the selected DeepBook three-gate proof.",
+    "Original general verified-case P0 restored in draft PR #1 but not yet accepted in authorized live Tatum/Walrus reviewer flow; no merge or real memory proof.",
     "An independently repeatable self-funded corrected flashloan route for the chosen strict Gate 1 remains unproven; partial-size one-off simulation failed later byte-for-byte.",
     "Original product magic moment is incomplete: engineer-reviewed genuine fix→completed Walrus blob ID→later comparable failure retrieves exactly that approved case.",
     "Human review and authorization have NOT occurred; prevent automatic Walrus resolution write.",
     "Complete product acceptance for original P0s (success/unknown transaction cases and workspace UI state matrix), product-review drift checkpoint and proof registry.",
     "Operator v0.5.0 NAME_LOCK adversarial check, full evidence plan, design/reference/visual QA and Product Hygiene gate have incomplete or absent mandatory artifacts.",
-    "Final 2–3 minute recorded/demo-QA-approved video, four-lens judge simulation, organizer track-fit check, final submission audit and receipt missing."
+    "Final 2–3 minute recorded/demo-QA-approved video, four-lens judge simulation, organizer track-fit check, final submission audit and receipt missing.",
+    "Draft Vercel Preview is READY but credentials required for live private reviewer acceptance are restricted to Production; do not copy or expose secrets by default."
   ],
-  "next_action": "First restore the original Casewake generalized human-reviewed verified-resolution write P0 (credible case-specific evidence, protected reviewer and completed Walrus receipt) while retaining the user-approved strict DeepBook gate for that showcase. Then close the repeatable DeepBook simulation or keep it blocked, demonstrate second-incident exact-blob recall, and complete missing Operator phases. See OPERATOR_PHASE_AUDIT_2026-11-06.md.",
-  "updated_at": "2026-11-06T20:00:00+01:00"
+  "next_action": "Check latest PR #1 CI and preview status; require genuine same-sender failed/succeeded incident proof and named reviewer before any actual memory write. DeepBook strict Gate 1 stays blocked and must be independently reproducible; no prevention-only bypass. Then prove exact Walrus blob recurrence, continue Operator phases in order.",
+  "updated_at": "2026-11-06"
 }
