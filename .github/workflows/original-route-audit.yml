@@ -1,0 +1,38 @@
+name: Casewake original-route reconstruction
+on:
+  push:
+    branches: ["fix/casewake-route-economics-20261106"]
+    paths:
+      - "web/scripts/audit-original-route.mjs"
+      - "evidence/context-BbRZD7YfTiiN.json"
+      - ".github/workflows/original-route-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+          cache: "pnpm"
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: corepack enable
+      - run: corepack prepare pnpm@10.22.0 --activate
+      - run: pnpm install --frozen-lockfile
+      - name: Resolve exact original PTB signatures and object state
+        run: node scripts/audit-original-route.mjs
+      - name: Preserve machine-readable audit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: casewake-original-route-ptb-audit
+          path: evidence/original-route-ptb-audit.json
+          if-no-files-found: error
+          retention-days: 14
