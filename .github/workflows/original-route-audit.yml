@@ -11,7 +11,7 @@ on:
       - ".github/workflows/original-route-audit.yml"
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   actions: write
 jobs:
   audit:
@@ -36,6 +36,19 @@ jobs:
         run: node scripts/quote-upstream-alternatives.mjs
       - name: Quote complete three-hop alternatives without pool reuse
         run: node scripts/quote-full-route-alternatives.mjs
+      - name: Commit generated Mainnet route evidence to this branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/original-route-ptb-audit.json evidence/original-route-live-quotes.json evidence/original-upstream-route-candidates.json evidence/full-three-hop-alternatives.json
+          if git diff --cached --quiet; then
+            echo "No evidence changes to commit."
+            exit 0
+          fi
+          git commit -m "evidence(casewake): refresh live Mainnet route diagnostics"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
       - name: Preserve machine-readable audit and live quotes
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
