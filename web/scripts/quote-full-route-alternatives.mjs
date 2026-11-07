@@ -69,10 +69,11 @@ async function findRoute(from,target,amount,splitCount,excluded){
    amountOutMist:String(p.amount_out),feeRate:p.fee_rate,extendedDetails:p.extended_details||null}))};
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
-const tradeSizes=[PRINCIPAL,65000000000n,64900000000n];
+const tradeSizes=[PRINCIPAL,65250000000n,65200000000n,65100000000n,65000000000n,64950000000n,64900000000n,64800000000n,64700000000n,64600000000n];
+const splitCounts=[1,2,3,4];
 const results=[];
 for(const tradeSize of tradeSizes){
- for(const splitCount of [1,2]){
+ for(const splitCount of splitCounts){
   const leg1=await findRoute(SUI,USDSUI,tradeSize,splitCount,ORIGINAL_POOLS);
   if(!leg1.available||!leg1.paths.length){
    results.push({tradeSizeMist:tradeSize.toString(),splitCount,complete:false,failedLeg:1,leg1});
@@ -96,17 +97,22 @@ for(const tradeSize of tradeSizes){
   }
   const reserve=PRINCIPAL-tradeSize;
   const available=reserve+BigInt(leg3.amountOutMist);
+  const usedPools=[...leg1.paths,...leg2.paths,...leg3.paths].map(p=>p.id);
+  const originalPoolReuse=usedPools.filter(id=>ORIGINAL_POOLS.includes(id));
+  const duplicatePools=usedPools.filter((id,index)=>usedPools.indexOf(id)!==index);
   results.push({tradeSizeMist:tradeSize.toString(),untouchedReserveMist:reserve.toString(),splitCount,
-   complete:true,leg1,leg2,leg3,
+   complete:true,leg1,leg2,leg3,poolReuseCheck:{originalPoolReuse,duplicatePools,passed:originalPoolReuse.length===0&&duplicatePools.length===0},
    repayment:{availableSuiMist:available.toString(),principalMist:PRINCIPAL.toString(),
     marginMist:(available-PRINCIPAL).toString(),repayable:available>=PRINCIPAL}});
   await delay(250);
  }
 }
-const report={schema:'casewake-full-three-hop-alternatives/v1',originalDigest:saved.digest,
+const completeResults=results.filter(x=>x.complete);
+const bestMarginCandidate=completeResults.sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null;
+const report={schema:'casewake-full-three-hop-alternatives/v2',originalDigest:saved.digest,
  network:'sui-mainnet',routeIntent:'Flashloan SUI -> USDSUI -> USDC -> SUI; each leg uses a route distinct from all original pools and all previously used pools.',
- originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),results,
- bestRepayable:results.filter(x=>x.complete&&x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,
+ originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),splitCounts,results,
+ bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,
  limitations:['Aggregator outputs are read-only quotes, not a built transaction or a full PTB simulation.',
   'Each leg excludes original pools and every pool used by previous legs to prevent artificial round-trip reuse.',
   'A candidate must still be assembled into the exact flashloan PTB and pass full Tatum Mainnet and independent simulation.',
@@ -119,5 +125,5 @@ console.log('FULL_THREE_HOP_ALTERNATIVES',JSON.stringify({results:results.map(x=
  tradeSizeMist:x.tradeSizeMist,splitCount:x.splitCount,complete:x.complete,failedLeg:x.failedLeg,
  leg1Providers:x.leg1?.paths?.map(p=>p.provider),leg2Providers:x.leg2?.paths?.map(p=>p.provider),
  leg3Providers:x.leg3?.paths?.map(p=>p.provider),marginMist:x.repayment?.marginMist,
- repayable:x.repayment?.repayable,error:x.leg1?.error||x.leg2?.error||x.leg3?.error})),
- bestRepayable:report.bestRepayable?.repayment?.marginMist||null,file:out}));
+ repayable:x.repayment?.repayable,poolReusePassed:x.poolReuseCheck?.passed,error:x.leg1?.error||x.leg2?.error||x.leg3?.error})),
+ bestMargin:report.bestMarginCandidate?.repayment?.marginMist||null,bestRepayable:report.bestRepayable?.repayment?.marginMist||null,file:out}));
