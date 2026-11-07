@@ -10,7 +10,13 @@ export const GUARD_EVIDENCE_URL = `https://github.com/ShalyX/casewake/blob/${PRO
 const RAW_PROOF_URL = `https://raw.githubusercontent.com/ShalyX/casewake/${PROOF_COMMIT}/${PROOF_PATH}`;
 export const DEEPBOOK_SOURCE_DIGEST = "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
 
-export type ResolutionKind = "prevention-guard" | "route-repair" | "onchain-successor";
+export type ResolutionKind = "prevention-guard" | "route-repair" | "onchain-successor" | "reviewed-evidence";
+export type VerificationMethod =
+  | "reproduction-test"
+  | "unit-test"
+  | "integration-test"
+  | "deployed-fix"
+  | "maintainer-confirmed-fix";
 export type ValidatedEvidence = {
   schema: "casewake-validated-evidence/v1";
   sourceCommit: string;
@@ -42,6 +48,25 @@ export type ValidatedEvidence = {
   successorSender: string;
   matchedOperations: string[];
   successorOutcome: "succeeded";
+  reviewerConfirmedCausality: true;
+  reviewedChange: string;
+  verifiedAt: string;
+  originalHistoricalRouteRepaired: false;
+} | {
+  schema: "casewake-validated-evidence/v1";
+  scope: "human-reviewed-engineering-artifact";
+  proofType: "reviewer-attested-github-artifact";
+  originalDigest: string;
+  originalTimestampMs: number;
+  originalCheckpoint: string;
+  provider: "GitHub public API";
+  evidenceUrl: string;
+  evidenceApiUrl: string;
+  evidenceTitle: string;
+  evidenceCommitSha: string;
+  evidenceFileCount: number;
+  evidenceSha256: string;
+  verificationMethod: VerificationMethod;
   reviewerConfirmedCausality: true;
   reviewedChange: string;
   verifiedAt: string;

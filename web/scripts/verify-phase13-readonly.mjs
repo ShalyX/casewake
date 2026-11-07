@@ -84,4 +84,20 @@ const unapproved = await post('/api/remember', {
 assert.equal(unapproved.status, 400, 'reviewer without causal approval must be rejected');
 assert.match(String(unapproved.data.error || ''), /explicitly confirm/i);
 console.log('PASS: authenticated reviewer without explicit causal approval rejected; no Walrus write attempted');
+
+const unapprovedArtifact = await post('/api/remember', {
+  digest: '6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v',
+  diagnosis: 'TEST ONLY: the example failure is not being recorded as a real resolution.',
+  resolutionSteps: 'TEST ONLY: no case-specific correction or Walrus write is authorized.',
+  evidenceUrl: 'https://github.com/example/sui-app/pull/42',
+  reviewer: 'Casewake QA (test only)',
+  verified: true,
+  resolutionKind: 'reviewed-evidence',
+  verificationMethod: 'integration-test',
+  reviewedChange: 'TEST ONLY: deliberately missing a real engineering change and causal approval.',
+  confirmedCausalLink: false,
+}, reviewerKey);
+assert.equal(unapprovedArtifact.status, 400, 'reviewed-artifact method without causal approval must be rejected');
+assert.match(String(unapprovedArtifact.data.error || ''), /explicitly confirm/i);
+console.log('PASS: reviewed-artifact method also rejects missing human causal approval before fetching GitHub or writing Walrus');
 console.log('PHASE13_READ_ONLY_CONTROLS=PASS (not the human-reviewed case acceptance gate)');
