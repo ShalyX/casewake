@@ -178,3 +178,21 @@ The exact original PTB is being reconstructed separately from `evidence/context-
 A GitHub Actions-only audit now resolves the original PTB's Move signatures and current shared-object metadata against public Sui Mainnet. This is reconstruction only, not an execution or economic proof. Next implementation must preserve these exact three hops and correctly account for every returned coin/balance. The alternative Cetus route is not a substitute.
 
 **Current gate:** Gate 1 BLOCKED; no reviewer approval, verified-resolution Walrus write, or second-digest exact-blob recall. No secrets or local PC workload are required for the signature audit. Tatum full replay must remain read-only and independently repeated.
+
+
+## 2026-11-07 — Exact original-route Mainnet quote sweep
+
+GitHub Actions reconstructed the original PTB's on-chain Move signatures and exact result handoffs, then ran read-only per-hop quotes on public Sui Mainnet for the original Turbos → Bluefin → DeepBook path. This is **quote evidence only**, not a full PTB simulation.
+
+Baseline full-principal quote at the sweep timestamp:
+- Turbos: 65,265,188,650 MIST SUI → 56,659,720 MIST USDSUI; SUI remainder 0.
+- Bluefin: 56,659,720 MIST USDSUI → 56,649,623 MIST USDC; USDSUI remainder 0.
+- DeepBook (input-token fee mode, matching the original zero-DEEP input): 56,649,623 MIST USDC → 65,000,000,000 MIST SUI; USDC remainder 20,470 MIST; DEEP required 0.
+- Total SUI for repayment: 65,000,000,000 MIST against 65,265,188,650 MIST principal. **Shortfall: 265,188,650 MIST (0.265188650 SUI).**
+- A separate DeepBook quote of the 20,470-MIST USDC remainder returned 0 SUI. It cannot close the deficit.
+
+The exact PTB's command 15 handoff is correctly typed: DeepBook's SUI output (command 12, subresult 0) is the merge destination; Turbos' SUI remainder (command 3, subresult 1) is the source. Both the Turbos SUI remainder and Bluefin USDSUI remainder were zero in the live quote. The failure at command 16 is therefore an **upstream economic deficit**, not a missing SUI coin merge.
+
+A reserve-aware size sweep tested 65.265188650, 65.0, 64.9, 64.8, 64.7, 64.5, 64.0 and 63.5 SUI trade sizes, leaving the balance untouched. **None was repayable**; the best margin was still -265,188,650 MIST. Reducing the traded size also reduced DeepBook's output in 0.1-SUI lot steps, so the untouched reserve did not recover the deficit.
+
+Next: find and quote a better **SUI → USDSUI upstream pool/path**, while preserving the original USDSUI → USDC Bluefin hop and USDC → SUI DeepBook hop. Do not substitute a generic SUI/USDC round trip. Only build the corrected PTB after a candidate's complete per-hop quote plus untouched reserve covers principal with safety margin; then repeat full Tatum and independent simulations. Gate 1 remains BLOCKED; no approval or Walrus write.
