@@ -1,0 +1,94 @@
+{
+  "schema": "casewake-phase13-readonly-acceptance/v1",
+  "checkedOn": "2026-11-07",
+  "revisionUnderTest": "75f81ff44da67ef5104c321eaf45396e7e68086f",
+  "environment": "Isolated Windows worktree, Next.js production build, local loopback server on port 4218",
+  "readOnlyControls": {
+    "status": {
+      "status": 200,
+      "tatumConfigured": true,
+      "walrusConfigured": true,
+      "reviewerWritesEnabled": true,
+      "pass": true
+    },
+    "failedTransaction": {
+      "digest": "6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v",
+      "status": 200,
+      "outcome": "failed",
+      "timestampPresent": true,
+      "checkpointPresent": true,
+      "pass": true
+    },
+    "successfulTransaction": {
+      "digest": "DmskUFSYixcpEcNgJyyquQH6q8t7fA856Y6rzZuVbBQv",
+      "status": 200,
+      "outcome": "succeeded",
+      "timestampPresent": true,
+      "checkpointPresent": true,
+      "pass": true
+    },
+    "unavailableTransaction": {
+      "digest": "3AkKcrSrqPqD8JA2UBgecq3fES6Tm73v4aDHbdSnyUzt",
+      "status": 200,
+      "outcome": "unknown",
+      "reason": "Tatum gRPC NOT_FOUND",
+      "pass": true
+    },
+    "unknownRecall": {
+      "status": 200,
+      "outcome": "unknown",
+      "candidates": 0,
+      "walrusHitsExamined": 0,
+      "walrusReadPerformed": false,
+      "pass": true
+    },
+    "anonymousResolutionWrite": {
+      "status": 403,
+      "walrusWriteAttempted": false,
+      "pass": true
+    },
+    "reviewerWithoutCausalApproval": {
+      "status": 400,
+      "reason": "explicit causal confirmation missing",
+      "walrusWriteAttempted": false,
+      "pass": true
+    }
+  },
+  "quality": {
+    "operatorTestScripts": 7,
+    "tapAssertions": 17,
+    "additionalAssertionSuites": 4,
+    "lint": "PASS",
+    "productionBuild": "PASS",
+    "routesGenerated": [
+      "/",
+      "/workspace",
+      "/journal/casewake",
+      "/proof/splitcoins",
+      "/api/acceptance",
+      "/api/memories",
+      "/api/observations",
+      "/api/recall",
+      "/api/remember",
+      "/api/status",
+      "/api/transaction",
+      "/api/verify-recall"
+    ],
+    "buildExitCode": 0
+  },
+  "safety": {
+    "walrusResolutionWritePerformed": false,
+    "walletSigningPerformed": false,
+    "transactionSubmissionPerformed": false,
+    "secretsIncluded": false
+  },
+  "status": "READ_ONLY_ACCEPTANCE_PASS_GENERAL_CASE_ACCEPTANCE_STILL_OPEN",
+  "remainingPhase13ExitCriteria": [
+    "One genuine representative non-flashloan Sui developer incident with case-specific diagnosis and proof",
+    "Explicit authorized human reviewer approval",
+    "Completed Walrus Mainnet resolution blob receipt",
+    "Distinct compatible real failure recalls the exact same blob",
+    "Complete workspace state matrix and visual QA"
+  ],
+  "note": "The Tatum failed/succeeded/unknown fixtures are control cases only. They are not asserted to be causal pairs or representative human-reviewed fixes. The existing 10 observation pool is DeFi/flashloan-heavy and is not used as general-case validation. The DeepBook route investigation remains separate and blocked."
+}
