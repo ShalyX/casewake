@@ -14,8 +14,8 @@ const ROOT=path.resolve(import.meta.dirname,'../..');
 const saved=JSON.parse(fs.readFileSync(path.join(ROOT,'evidence','context-BbRZD7YfTiiN.json'),'utf8'));
 const SENDER=saved.transactionData.sender;
 const PRINCIPAL=65265188650n;
-const TRADE_SIZE=64600000000n;
-const SLIPPAGE=0.00005;
+const TRADE_SIZE=BigInt(process.env.CASEWAKE_TRADE_SIZE_MIST||'64600000000');
+const SLIPPAGE=Number(process.env.CASEWAKE_SLIPPAGE||'0.001');
 const SUI='0x2::sui::SUI';
 const SUI_USDE='0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE';
 const USDSUI='0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI';
@@ -91,7 +91,14 @@ const routePools=[...pools1,...pools2,...pools3];
 const duplicatePools=routePools.filter((id,index)=>routePools.indexOf(id)!==index);
 const originalSwapPoolReuse=routePools.filter(id=>ORIGINAL_SWAP_POOLS.includes(id));
 const loanPoolUseCount=routePools.filter(id=>id===LOAN_POOL).length;
-const commandCount=tx.getData().commands.length;
+const commandData=tx.getData().commands;
+const commandCount=commandData.length;
+const commandSummary=commandData.map((command,index)=>{
+ const kind=Object.keys(command||{})[0]||'unknown';
+ const body=command?.[kind]||{};
+ return {index,kind,target:kind==='MoveCall'?[body.package,body.module,body.function].filter(Boolean).join('::'):null,
+  summary:JSON.stringify(command).slice(0,900)};
+});
 let simulation;
 let simulationError=null;
 try{
@@ -111,7 +118,8 @@ const report={
  routes:{suiToUsdsui:summarizeRoute(route1),usdsuiToUsdc:summarizeRoute(route2),usdcToSui:summarizeRoute(route3)},
  poolIsolation:{loanPoolId:LOAN_POOL,loanPoolUseCount,originalSwapPoolReuse,duplicatePools,
   passed:originalSwapPoolReuse.length===0&&duplicatePools.length===0&&loanPoolUseCount>=1},
- transaction:{commandCount,flashloanBorrowCommand:0,flashloanRepaymentCommand:commandCount-2,
+ transaction:{commandCount,commandSummary,commandResultsSummary:(simulation?.commandResults||[]).map((result,index)=>({index,returnValues:(result.returnValues||[]).map(value=>({type:value.type||null,bcsLength:value.bcs?.length||0}))})),
+  flashloanBorrowCommand:0,flashloanRepaymentCommand:commandCount-2,
   simulationKind:simulation?.$kind||null,status,success:simulationSuccess,error:simulationError||
    simulation?.FailedTransaction?.status?.error||null,gasUsed,balanceChanges},
  safety:{signed:false,onchainExecuted:false,walletFundedRepayment:false,gasPaidFromWallet:true,
