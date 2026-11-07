@@ -79,7 +79,7 @@ const report={
  digest:saved.digest,network:'sui-mainnet',checkpoint:saved.checkpoint,originalOutcome:saved.success?'success':'failed',
  originalError:saved.error,sender:saved.transactionData.sender,
  flashloanPrincipalMist:inputs[1]?.u64LE??null,gasPayment:saved.transactionData.gasPayment,
- inputs,commands,signatures,objects,
+ inputs,commands:enrichedCommands,signatures,objects,coinFlow,
  routeSummary:[
   {step:1,protocol:'DeepBook',function:'borrow_flashloan_base',from:'SUI flashloan pool',to:'borrowed SUI + FlashLoan receipt'},
   {step:2,protocol:'router package 0xa5a0…',function:'swap_b_a_with_return_',from:'SUI',to:'Coin<USDSUI> + Coin<SUI> remainder'},
