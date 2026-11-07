@@ -1,10 +1,10 @@
-# PROJECT — Total Recall / Incident Memory
+# PROJECT — Casewake / Incident Memory
 
 ## Current milestone
 BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Walrus recall are **VERIFIED**. Human-verified repair/recommendation loop is **NOT VERIFIED** and remains an open high-priority proof gate.
 
 ## Selected product / boundaries
-- Thesis explicitly selected by user on 2026-11-03: Incident Memory (name remains a descriptive working title; final brand name not locked).
+- Thesis explicitly selected by user on 2026-11-03: Incident Memory. Final product identity locked as Casewake in BRAND.md on 2026-11-06.
 - User/problem/primary loop: PRODUCT.md revision 1; real Sui transaction → human-approved fix → persistent Walrus memory → safe later recommendation, always reviewed by a person.
 - EchoLedger, Watchline and Indexer Recovery are parked, not discarded. No feature merge.
 - No autonomous repair, blockchain signing or automatic financial action. No fake cases, fake transaction data or unverified "fixed" claims.
@@ -25,7 +25,7 @@ BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Wal
 - Final build and lint QA after last changes (source is written; check new command results before passing).
 - Reviewer-approved resolution still **UNPROVEN**: two genuine analogous failure digests exist, and official Sui docs provide generic troubleshooting, but NO demonstrated successful fix and NO human signoff. See `evidence/resolution-verification-queue.md`.
 - The required ten Mainnet memories are genuine **observations**, not ten verified repairs. Do not count smoke or observations as human-verified fixes.
-- Brand naming, Product Hygiene, Demo Production/QA, public repository, deployment, blog, organizer track-fit clarification and submission remain NOT DONE.
+- Brand naming and brand kit: PASS. Public repository and Vercel Production deployment: live. Product Hygiene: PARTIAL pending release-candidate rerun. Final demo MP4/QA, external blog publication if required, organizer track-fit confirmation, judge simulation and submission receipt remain open.
 - Read-only Sui chain lookup works; no automatic repair, notifications or transfers.
 
 ## Source-of-truth / proof artifacts
@@ -39,10 +39,10 @@ BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Wal
 - `evidence/screenshots/workspace.png`: initial local UI capture; additional real-data screenshot recommended.
 
 ## Highest-value next move
-1. Collect an independently verified engineering repair for at least one failure class: reproduce failure → apply fix → confirm succeeded test/chain action or maintainer-backed issue resolution → reviewer signs off → `POST /api/remember`.
-2. Import another genuinely compatible failed digest and prove a previously verified resolution is recalled and recommended with evidence; the existing three onchain-observation pairs are ready to use for validation but cannot substitute for an actual confirmed fix.
-3. Complete visual review, Product Hygiene, demo production, narrative, blog, source publication and submission. Keep actual evidence, not placeholders.
-4. Confirm Sui developer-ops workflow fits Smart Agents for Real Life track with organizer if feasible. Deadline: 2026-11-10 17:00 UTC.
+1. Finish the general Casewake vertical slice: authentic Tatum intake → deterministic Walrus recall → evidence-tiered human review → protected case write → completed blob receipt → distinct compatible failure recalls the exact blob. Do not make the blocked DeepBook route the product workflow.
+2. Keep the strict DeepBook three-gate acceptance separate and blocked; do not promote prevention-only proof or the mismatched successor pair.
+3. Complete the success/unknown outcome matrix and workspace state matrix; then complete Product Review, design lock, visual QA, red team and the installed Product Hygiene skill.
+4. Record and review the real 2–3 minute demo, publish the required external blog if the rules require it, run four-lens judge simulation, and obtain the actual submission receipt. Deadline: 2026-11-10 17:00 UTC.
 
 ## Constraints / safeguards
 - SDK versions of a failed transaction cannot be inferred from chain evidence; version-scoped fixes require manual confirmation.
@@ -62,7 +62,7 @@ BUILD_VERTICAL_SLICE — authentic onchain-observation and cross-transaction Wal
 - Operator: persist true status; no submission-ready claims.
 
 ## State checkpoint
-Revision 7 (pending state-json sync), 2026-11-04. Previous git commit `f924f07`; new commit after QA.
+Revision 15, 2026-11-07. Current working branch: fix/general-verified-resolution (draft PR #1); latest verified preview commit 5da03e8.
 
 ## 2026-11-04 — Simulation-tested runbook milestone
 - Two unsigned, read-only Tatum Sui Mainnet `SimulateTransaction` runs completed with the same controlled splitCoins structure. 10M MIST source coin → request 20M MIST = `InsufficientCoinBalance in command 1`; request 5M MIST = successful simulation. Both used mock gas, executed **no** onchain transfers. Full evidence in `evidence/controlled-splitcoins-simulation.json`; source `web/scripts/simulate-splitcoins-repro.mjs`.
@@ -178,3 +178,12 @@ Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](
 **NOT DONE:** production merge; authorized live general-case acceptance (failed + successful same-sender Tatum pair), actual human signoff, any new verified Walrus write and exact later-case blob recall. Preview deployment READY but private sponsor/reviewer credentials remain Production-only. A BUILD success is not a proof of a working real reviewed resolution.
 
 **Next action:** reconcile current CI result, securely acceptance-test the new general source/successor Tatum checks using a *genuinely related* pair with a human reviewer, preserve the locked DeepBook Gate 1 until a repeatable corrected full principal repayment exists, then create a completed Walrus record and prove eligible exact-blob recall. Resume phase 13 only after phase 12's existential evidence is legitimately closed. No fake reviewer or memory.
+
+
+## Current Operator checkpoint — 2026-11-07
+
+- Phase 12 TECHNICAL_DERISK is closed as a risk-disposition phase, not as proof that every claim passed. Tatum Mainnet reads and Walrus Mainnet observation/simulation-runbook storage and recall are proven. The general human-review path is implemented in draft PR #1 and passes CI/Preview. A human-reviewed case write and exact-blob recurrence remain blocked until a genuinely case-specific proof and explicit reviewer approval exist.
+- Active phase: 13 / BUILD_VERTICAL_SLICE. The generic Casewake workspace now foregrounds chain evidence → human review → Walrus recall. The DeepBook strict repayment acceptance is isolated as a separate evidence case, still blocked; no acceptance rule was weakened.
+- Latest PR head: 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; GitHub Actions run 42335361421 passed install, deterministic tests, ESLint and Next production build. Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF is READY at https://casewake-1840fh0xz-shalyxs-projects.vercel.app. Preview credentials are absent by design; no live reviewer write was attempted.
+- Production remains on master commit 94194282650a217c67adcecf0df559abdbcf713b. No Production promotion or Walrus resolution write occurred in this checkpoint.
+- The Windows workspace was left untouched; current implementation work is on the GitHub PR branch to avoid mixing the stale local checkpoint and untracked investigation artifacts.

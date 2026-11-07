@@ -137,3 +137,16 @@ Source of truth: PRODUCT.md revision 1, immutable original eight P0 groups; dead
 | Final submission is complete | NOT DONE | HQ/QA | Public repo/live app/video/blog/form checks and observed submission receipt | Nov 10 before 17:00 UTC | submission |
 
 **Hard constraints:** A successful simulation of an unrelated route does not prove the original DeepBook correction. A Tatum-successor record is independently corroborated onchain but still relies on a named human reviewer to establish the causal fix. Tests and CI are never represented as a completed real reviewed memory. No Walrus write may be triggered for unverified proof.
+
+
+## 2026-11-07 — General Casewake workflow restoration and product-shell correction
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Generic reviewer-approved case path exists for legitimate non-DeepBook Sui incidents | VERIFIED (CODE + CI + PREVIEW) | Draft PR #1, successor-evidence.ts, remember/route.ts and verify-recall/route.ts; same Tatum-observed sender, matching Move operation, exact explorer link, documented technical change and explicit human causal attestation; GitHub Actions run 42335361421 passed tests/lint/build | No live human-approved case write or exact-blob recurrence has been performed. This is not a verified resolution claim. |
+| Product workspace foregrounds the approved general Incident Memory workflow | VERIFIED (PREVIEW HTTP 200) | Commit 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF; generic CASE MEMORY / PROOF STATUS panel; no Featured DeepBook / three-gate shell and no false route-success copy | Preview has no Tatum/Walrus credentials; visual browser QA and live acceptance remain open. |
+| Strict DeepBook acceptance remains separate and honest | VERIFIED (CODE/STATE) | DEEPBOOK_SOURCE_DIGEST, strict route-repair validator and /api/acceptance; original route remains blocked, no prevention-only bypass | This selected evidence case remains incomplete; it is not the product's generic workflow. |
+| Latest PR build | VERIFIED (CI) | GitHub Actions run 42335361421 at 5da03e89; install, deterministic incident tests, ESLint and Next production build all passed | PR #1 remains draft and unmerged. |
+| Production baseline | VERIFIED (LIVE STATUS) | Production deployment dpl_HrWrFZ2XbQwJCHQyFpq3G83Z4bHa on master 94194282650a217c67adcecf0df559abdbcf713b; /api/status reports Tatum, Walrus and reviewer writes configured, publicDemoMode true | Draft PR code is not yet deployed to Production. |
+
+No new Walrus resolution memory was written in this checkpoint. Do not infer a successful reviewer write from CI, a Preview build, a Tatum read or the existing simulation runbook.
