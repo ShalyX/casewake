@@ -74,7 +74,7 @@ async function findRoute(from,target,amount,splitCount,excluded){
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const tradeSizes=[64600000000n,64500000000n,64400000000n,64300000000n,64200000000n,64100000000n,64000000000n,63900000000n,63800000000n,63700000000n,63600000000n,63500000000n];
 const MIN_SAFETY_MARGIN=100000000n; // 0.1 SUI reserve above flashloan principal
-const splitCounts=[1,2,3,4];
+const splitCounts=[1,2,3,4,5,6];
 const results=[];
 for(const tradeSize of tradeSizes){
  for(const splitCount of splitCounts){
