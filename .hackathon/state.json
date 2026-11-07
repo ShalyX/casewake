@@ -1,24 +1,11 @@
 {
   "schema_version": 2,
-  "revision": 25,
+  "revision": 26,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "NAME_LOCK",
   "active_specialist": "Brand \u2014 naming and Phase15 preparation",
-  "human_input_required": true,
-  "pending_gate": {
-    "id": "final-name-2026-11-07",
-    "type": "naming_preference",
-    "reason": "User explicitly calls Casewake provisional; final identity depends on name.",
-    "question": "Which name should be taken into the final brand kit?",
-    "recommendation": "Casewake",
-    "choices": [
-      "Casewake",
-      "Triedwell",
-      "Aftercase"
-    ],
-    "scope": "Name preference only; product purpose unchanged. No public rename or final mark approved.",
-    "resume_phase": "BRAND_KIT"
-  },
+  "human_input_required": false,
+  "pending_gate": null,
   "product_locked": true,
   "product_lock_revision": 1,
   "demo_defined": true,
@@ -48,7 +35,7 @@
     "HUMAN_IDEA_GATE": "PASS: User selected Incident Memory Nov3.",
     "VALIDATION": "PARTIAL: External engineer utility and organizer track fit unconfirmed.",
     "PRODUCT_LOCK": "PASS: PRODUCT.md revision1 and original eight P0s.",
-    "NAME_LOCK": "PENDING USER PREFERENCE:40 candidates screened; recommend Casewake; alternatives Triedwell/Aftercase; NAMING_REVIEW_2026-11-07.md",
+    "NAME_LOCK": "OPEN: previous shortlist explicitly rejected; user proposes something like Awaken. Active adjacent crypto brand collision observed; no public rename.",
     "DEMO_ARCHITECTURE": "PASS \u2014 PLAN: Existing sequence; final capture should foreground approved reviewed case.",
     "EVIDENCE_PLAN": "PARTIAL: Core proof reconciled; final complete claim/owner/artifact register remains.",
     "DEPENDENCY_ATTACK": "PARTIAL: Technical dependencies proven; utility/track assumptions open.",
@@ -85,7 +72,7 @@
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Record final-name preference, then refine an ownable mark and complete Phase15 brand assets/QA. Keep current public application unchanged while preference is pending.",
+  "next_action": "Continue naming from the Awaken direction: short, vivid, pronounceable, with character. Do not revive the rejected descriptive-compound shortlist or claim final approval.",
   "updated_at": "2026-11-07",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -95,5 +82,16 @@
     "url": "https://casewake.vercel.app",
     "status": "READY_AND_READ_ONLY_ACCEPTED",
     "evidence": "evidence/phase14/release-verification.md"
+  },
+  "naming_direction": {
+    "rejected_by_user": [
+      "Casewake",
+      "Triedwell",
+      "Aftercase"
+    ],
+    "candidate": "Awaken",
+    "status": "User-proposed evocative direction; not a final-name lock",
+    "collision": "Active crypto tax software uses Awaken: https://awaken.tax/",
+    "next": "Develop the awakening/resurfacing territory; report adjacent crypto collision without treating it as a legal prohibition."
   }
 }

@@ -1,3 +1,9 @@
+# Latest naming steering — 2026-11-07
+
+User rejected Casewake/Triedwell/Aftercase as dead names; proposed something like Awaken. Previous recommendation and pending multiple-choice gate are superseded. Continue a short, evocative awakening/resurfacing territory. Awaken has an active adjacent crypto-tax use at https://awaken.tax/; report the tradeoff without claiming a legal restriction. No final name lock or public rename. Product purpose and Phase14 acceptance remain unchanged.
+
+---
+
 # Current checkpoint — naming preference pending, 2026-11-07
 
 Phase 14 remains passed. Naming work resumed: 40 candidates, current collision screen, shortlist Casewake/Triedwell/Aftercase; recommend Casewake. User preference requested asynchronously because final name was explicitly provisional. See NAMING_REVIEW_2026-11-07.md.

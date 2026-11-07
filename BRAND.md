@@ -2,7 +2,7 @@
 
 Version: 1.0 / 2026-11-04. Hackathon product identity. Final trademark clearance NOT completed.
 
-> Current override — 2026-11-07: the user explicitly describes Casewake as “not final name.” NAME_LOCK is REOPENED. The identity below is a draft direction, not final approval.
+> Current override — 2026-11-07: user rejected Casewake, Triedwell and Aftercase as “dead names” and proposed “something like Awaken.” The sections below retain historical naming work, not current recommendations or approval. NAME_LOCK remains open.
 
 ## Provisional naming direction
 **CASEWAKE** / pronounced KAYS-wayk.
@@ -76,3 +76,9 @@ See NAMING_REVIEW_2026-11-07.md: 40 candidates, current collision screening and 
 Three vector mark studies were rendered and rejected as final: Repeat cut reads as chain/copy icon; Carry slip as generic document; Witness span as code brackets. Drafts remain process evidence. No Phase 15 PASS or visual collision clearance.
 
 Three palette territories compared; recommend preserving current Trace Instrument for functional roles and continuity. Final mark, canonical favicon/header/avatar/OG family and actual font delivery remain. Public product unchanged.
+
+## User steering — Awaken territory
+
+The previous three-name shortlist is rejected. User prefers the character and energy of Awaken: a short, evocative word rather than a literal case/memory compound. This guides naming, not a product pivot.
+
+Current collision screen: [Awaken](https://awaken.tax/) is active crypto tax software; its [official introduction](https://help.awaken.tax/en/articles/10422066-what-is-awaken-how-can-i-use-it) uses the name Awaken. This is a practical adjacent-market confusion concern, not a legal conclusion or prohibition. Final name, domains and handles remain unselected. No public rename performed.
