@@ -22,8 +22,6 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "22"
-          cache: "pnpm"
-          cache-dependency-path: web/pnpm-lock.yaml
       - run: corepack enable
       - run: corepack prepare pnpm@10.22.0 --activate
       - run: pnpm install --frozen-lockfile
