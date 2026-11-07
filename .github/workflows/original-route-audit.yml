@@ -40,6 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add evidence/original-route-ptb-audit.json evidence/original-route-live-quotes.json evidence/original-upstream-route-candidates.json evidence/full-three-hop-alternatives.json
