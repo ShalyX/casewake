@@ -60,8 +60,9 @@ const completeCoinType=type=>{
 };
 const ROUTER_ENDPOINT='https://api-sui.cetus.zone/router_v3';
 const AGGREGATOR_SDK_VERSION=1010705;
-// Never reuse any of the three original incident pools in the upstream candidate.
+// Never reuse the original flashloan pool or any of the three original swap pools in the upstream candidate.
 const EXCLUDED_ORIGINAL_POOLS=[
+ '0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7', // original DeepBook SUI/SUI_USDE flashloan source pool
  '0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056', // original Turbos SUI/USDSUI
  '0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90', // original Bluefin USDSUI/USDC
  '0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407'  // original DeepBook SUI/USDC
