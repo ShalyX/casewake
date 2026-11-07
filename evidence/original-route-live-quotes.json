@@ -1,0 +1,553 @@
+{
+  "schema": "casewake-original-route-live-quote-sweep/v1",
+  "originalDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "network": "sui-mainnet",
+  "source": "Sui Mainnet gRPC simulateTransaction view calls",
+  "principalMist": "65265188650",
+  "exactOriginalParameters": {
+    "turbosDirection": "B->A (SUI->USDSUI)",
+    "turbosByAmountIn": true,
+    "turbosSqrtPriceLimit": "79226673515401279992447579055",
+    "bluefinDirection": "A->B (USDSUI->USDC)",
+    "bluefinByAmountIn": true,
+    "bluefinSqrtPriceLimit": "4295048017",
+    "deepbookDirection": "quote USDC -> base SUI",
+    "deepbookFeeMode": "input token (original PTB supplies zero DEEP coin)",
+    "deepbookMinBaseOutMist": "0"
+  },
+  "sweep": [
+    {
+      "tradeSizeMist": "65265188650",
+      "untouchedReserveMist": "0",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56759276",
+          "rawReturnHex": "ec1362030000000000000000000000002abf1b320f000000000000000000000000000000000000000000000000000000ec13620300000000000000000000000088aa2640caba03e421000000000000004213010076008ed2becec87e0000000000000000f623c001000000000000000000000000941298f586040000000000000000000037cdd505000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "65265188650"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56749168",
+          "rawReturnHex": "0101ec13620300000000000000000000000070ec61030000000056bc0e4ec1e400000000000000000000bd110000000000006f04000000000000626789ebf670fdff000000000000000084ae070bec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff0000000000000000c0fd61030000000070ec610300000000bd110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56759276"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "65000000000",
+          "usdcRemainderMist": "33543",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56749168"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "33543",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "65000000000"
+      },
+      "repayment": {
+        "availableSuiMist": "65000000000",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-265188650",
+        "shortfallMist": "265188650",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "65000000000",
+      "untouchedReserveMist": "265188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56528738",
+          "rawReturnHex": "628f5e03000000000000000000000000004a4d220f000000000000000000000000000000000000000000000000000000628f5e030000000000000000000000009460d94b513e00e4210000000000000042130100722f9090cecdc87e0000000000000000d051be01000000000000000000000000941298f586040000000000000000000060bbcf05000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "65000000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56518671",
+          "rawReturnHex": "0101628f5e030000000000000000000000000f685e030000000074820e4ec1e400000000000000000000ab110000000000006a04000000000000626789ebf670fdff000000000000000011fc5616ec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff00000000000000004d795e03000000000f685e0300000000ab110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56528738"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "64700000000",
+          "usdcRemainderMist": "64811",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56518671"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "64811",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "64700000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64900000000",
+      "untouchedReserveMist": "365188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56441804",
+          "rawReturnHex": "cc3b5d030000000000000000000000000069571c0f000000000000000000000000000000000000000000000000000000cc3b5d0300000000000000000000000033896c6bc6edfee321000000000000004213010021b157f773cdc87e000000000000000008a2bd01000000000000000000000000941298f58604000000000000000000007071cd05000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "64900000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56431752",
+          "rawReturnHex": "0101cc3b5d0300000000000000000000000088145d0300000000f26b0e4ec1e400000000000000000000a4110000000000006904000000000000626789ebf670fdff0000000000000000c9c99a1aec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff0000000000000000bf255d030000000088145d0300000000a4110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56441804"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "64600000000",
+          "usdcRemainderMist": "65793",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56431752"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "65793",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "64600000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64800000000",
+      "untouchedReserveMist": "465188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56354870",
+          "rawReturnHex": "36e85b03000000000000000000000000008861160f00000000000000000000000000000000000000000000000000000036e85b03000000000000000000000000d2b1ff8a3b9dfde3210000000000000042130100d0321f5e19cdc87e000000000000000040f2bc01000000000000000000000000941298f58604000000000000000000008027cb05000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "64800000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56344833",
+          "rawReturnHex": "010136e85b0300000000000000000000000001c15b030000000070550e4ec1e4000000000000000000009d110000000000006704000000000000626789ebf670fdff00000000000000004a94de1eec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff000000000000000032d25b030000000001c15b03000000009d110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56354870"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "64500000000",
+          "usdcRemainderMist": "66127",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56344833"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "66127",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "64500000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64700000000",
+      "untouchedReserveMist": "565188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56267936",
+          "rawReturnHex": "a0945a0300000000000000000000000000a76b100f000000000000000000000000000000000000000000000000000000a0945a0300000000000000000000000071da92aab04cfce32100000000000000421301007fb4e6c4beccc87e00000000000000007842bc01000000000000000000000000941298f586040000000000000000000090ddc805000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "64700000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56257915",
+          "rawReturnHex": "0101a0945a030000000000000000000000007b6d5a0300000000ed3e0e4ec1e40000000000000000000096110000000000006504000000000000626789ebf670fdff0000000000000000ca5e2223ec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff0000000000000000a57e5a03000000007b6d5a030000000096110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56267936"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "64400000000",
+          "usdcRemainderMist": "66463",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56257915"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "66463",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "64400000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64500000000",
+      "untouchedReserveMist": "765188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "56094067",
+          "rawReturnHex": "73ed570300000000000000000000000000e57f040f00000000000000000000000000000000000000000000000000000073ed5703000000000000000000000000af2bb9e99aabf9e3210000000000000042130100ddb7759209ccc87e0000000000000000e8e2ba01000000000000000000000000941298f5860400000000000000000000b049c405000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "64500000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "56084077",
+          "rawReturnHex": "010173ed57030000000000000000000000006dc6570300000000e8110e4ec1e40000000000000000000088110000000000006204000000000000626789ebf670fdff00000000000000003afaa92bec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff000000000000000089d75703000000006dc657030000000088110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "56094067"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "64200000000",
+          "usdcRemainderMist": "67133",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "56084077"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "67133",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "64200000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64000000000",
+      "untouchedReserveMist": "1265188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "55659394",
+          "rawReturnHex": "824b51030000000000000000000000000080b2e60e000000000000000000000000000000000000000000000000000000824b5103000000000000000000000000c9f69887e418f3e321000000000000004213010048405b9444cac87e00000000000000000074b701000000000000000000000000941298f586040000000000000000000000d8b805000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "64000000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "55649482",
+          "rawReturnHex": "0101824b5103000000000000000000000000ca245103000000005ca10d4ec1e40000000000000000000065110000000000005904000000000000626789ebf670fdff00000000000000009afbfc40ec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff0000000000000000c435510300000000ca2451030000000065110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "55659394"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "63700000000",
+          "usdcRemainderMist": "68807",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "55649482"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "68807",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "63700000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "63500000000",
+      "untouchedReserveMist": "1765188650",
+      "hop1": {
+        "label": "turbos-sui-to-usdsui",
+        "decoded": {
+          "suiRemainderMist": "0",
+          "usdsuiOutMist": "55224719",
+          "rawReturnHex": "8fa94a03000000000000000000000000001be5c80e0000000000000000000000000000000000000000000000000000008fa94a03000000000000000000000000e4c178252e86ece3210000000000000042130100b3c840967fc8c87e00000000000000001805b401000000000000000000000000941298f58604000000000000000000005066ad05000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "6308000",
+          "storageRebate": "5319468",
+          "nonRefundableStorageFee": "532"
+        },
+        "inputSuiMist": "63500000000"
+      },
+      "hop2": {
+        "label": "bluefin-usdsui-to-usdc",
+        "decoded": {
+          "usdsuiRemainderMist": "0",
+          "usdcOutMist": "55214884",
+          "rawReturnHex": "01018fa94a0300000000000000000000000024834a030000000007340d4ec1e40000000000000000000043110000000000005004000000000000626789ebf670fdff00000000000000009f065056ec70fdff0000000000000000ffffffff00470478b0549c4f000000000000000000470478b0549c4f000000000000000000010000000000000001ffffffff01626789ebf670fdff000000000000000037ad6fbd33b9fcff0000000000000000fc934a030000000024834a030000000043110000000000000000000000000000"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdsuiMist": "55224719"
+      },
+      "hop3": {
+        "label": "deepbook-usdc-to-sui",
+        "decoded": {
+          "suiOutMist": "63200000000",
+          "usdcRemainderMist": "70478",
+          "deepRequiredMist": "0"
+        },
+        "gasUsed": {
+          "computationCost": "100000",
+          "storageCost": "988000",
+          "storageRebate": "0",
+          "nonRefundableStorageFee": "0"
+        },
+        "inputUsdcMist": "55214884"
+      },
+      "handoffs": {
+        "turbosSuiRemainderMist": "0",
+        "bluefinUsdsuiRemainderMist": "0",
+        "deepbookUsdcRemainderMist": "70478",
+        "deepbookDeepFeeMist": "0",
+        "deepbookSuiOutputMist": "63200000000"
+      },
+      "repayment": {
+        "availableSuiMist": "64965188650",
+        "requiredPrincipalMist": "65265188650",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
+        "repayable": false
+      }
+    }
+  ],
+  "bestRepayableCandidate": null,
+  "residualUsdcQuote": {
+    "label": "deepbook-usdc-to-sui",
+    "decoded": {
+      "suiOutMist": "0",
+      "usdcRemainderMist": "33543",
+      "deepRequiredMist": "0"
+    },
+    "gasUsed": {
+      "computationCost": "100000",
+      "storageCost": "988000",
+      "storageRebate": "0",
+      "nonRefundableStorageFee": "0"
+    }
+  },
+  "limitations": [
+    "These are live per-hop view quotes, not a full PTB simulation.",
+    "Quotes are sequential and pool states may move between calls; no state is committed.",
+    "A repayable quote is only a candidate. Gate 1 requires a complete Tatum Mainnet and independent full transaction simulation.",
+    "The untouched reserve is hypothetical until the corrected PTB explicitly splits it from the borrowed SUI and merges it back before repayment."
+  ],
+  "safety": {
+    "signed": false,
+    "onchainExecuted": false,
+    "walletFunded": false,
+    "walrusWritten": false,
+    "gate1Eligible": false
+  },
+  "generatedAt": "2026-11-07T01:47:41.478Z"
+}

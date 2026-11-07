@@ -1,0 +1,386 @@
+{
+  "schema": "casewake-full-flashloan-repair-simulation/v2",
+  "originalDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "network": "sui-mainnet",
+  "provider": "Tatum Sui Mainnet gRPC TransactionExecutionService.SimulateTransaction",
+  "principalMist": "65265188650",
+  "swapSizeMist": "500000000",
+  "reservedSuiMist": "64765188650",
+  "providers": [],
+  "splitCount": 1,
+  "slippage": 0.005,
+  "quote": {
+    "forwardQuoteId": "71643996-5413-4b80-bdf1-929c327fbe86",
+    "forwardAmountIn": "500000000",
+    "forwardAmountOut": "435301",
+    "forwardPaths": [
+      {
+        "provider": "CETUS",
+        "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "to": "0xbde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+        "amountIn": "500000000",
+        "amountOut": "461434248"
+      },
+      {
+        "provider": "CETUS",
+        "from": "0xbde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+        "to": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+        "amountIn": "461434248",
+        "amountOut": "435301"
+      }
+    ],
+    "backQuoteId": "17c5947a-8294-4211-bcb6-21987f2750db",
+    "backAmountIn": "435296",
+    "backAmountOut": "499987545",
+    "backPaths": [
+      {
+        "provider": "BLUEFIN",
+        "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+        "to": "0xd1b72982e40348d069bb1ff701e634c117bb5f741f44dff91e472d3b01461e55::stsui::STSUI",
+        "amountIn": "435296",
+        "amountOut": "480543406"
+      },
+      {
+        "provider": "BLUEFIN",
+        "from": "0xd1b72982e40348d069bb1ff701e634c117bb5f741f44dff91e472d3b01461e55::stsui::STSUI",
+        "to": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "amountIn": "480543406",
+        "amountOut": "499987545"
+      }
+    ],
+    "quotedGrossNetMist": "-12455"
+  },
+  "simulation": {
+    "outcome": "FailedTransaction",
+    "success": false,
+    "error": "InsufficientCoinBalance in command 19",
+    "gasPaymentMocked": true,
+    "commandResultCount": 0,
+    "commandMap": [
+      {
+        "i": 0,
+        "kind": "MoveCall",
+        "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::borrow_flashloan_base",
+        "types": [
+          "0x2::sui::SUI",
+          "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE"
+        ],
+        "args": [
+          "I0",
+          "I1"
+        ]
+      },
+      {
+        "i": 1,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "N0:0"
+        ]
+      },
+      {
+        "i": 2,
+        "kind": "SplitCoins",
+        "coin": "N0:0",
+        "amounts": [
+          "I2"
+        ]
+      },
+      {
+        "i": 3,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "N0:0"
+        ]
+      },
+      {
+        "i": 4,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "N2:0"
+        ]
+      },
+      {
+        "i": 5,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::new_swap_context_v3",
+        "types": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+        ],
+        "args": [
+          "I3",
+          "I4",
+          "I5",
+          "I6",
+          "I7",
+          "N2:0",
+          "I8",
+          "I9"
+        ]
+      },
+      {
+        "i": 6,
+        "kind": "MoveCall",
+        "target": "0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7::cetus::swap",
+        "types": [
+          "0xbde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+        ],
+        "args": [
+          "R5",
+          "I10",
+          "I11",
+          "I12",
+          "I13",
+          "I14",
+          "I15"
+        ]
+      },
+      {
+        "i": 7,
+        "kind": "MoveCall",
+        "target": "0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7::cetus::swap",
+        "types": [
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "0xbde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI"
+        ],
+        "args": [
+          "R5",
+          "I10",
+          "I16",
+          "I12",
+          "I17",
+          "I18",
+          "I15"
+        ]
+      },
+      {
+        "i": 8,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::confirm_swap_v3",
+        "types": [
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+        ],
+        "args": [
+          "R5"
+        ]
+      },
+      {
+        "i": 9,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+        ],
+        "args": [
+          "R8"
+        ]
+      },
+      {
+        "i": 10,
+        "kind": "SplitCoins",
+        "coin": "R8",
+        "amounts": [
+          "I19"
+        ]
+      },
+      {
+        "i": 11,
+        "kind": "TransferObjects",
+        "objects": [
+          "R8"
+        ],
+        "address": "I20"
+      },
+      {
+        "i": 12,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::new_swap_context_v3",
+        "types": [
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+        ],
+        "args": [
+          "I21",
+          "I22",
+          "I23",
+          "I24",
+          "I25",
+          "N10:0",
+          "I26",
+          "I27"
+        ]
+      },
+      {
+        "i": 13,
+        "kind": "MoveCall",
+        "target": "0x4e7c4ba436f8fd5b3c6bb514880ccd11c5109c83c45b5e037394b94204dbbb80::bluefin::swap",
+        "types": [
+          "0xd1b72982e40348d069bb1ff701e634c117bb5f741f44dff91e472d3b01461e55::stsui::STSUI",
+          "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+        ],
+        "args": [
+          "R12",
+          "I28",
+          "I29",
+          "I30",
+          "I31",
+          "I15"
+        ]
+      },
+      {
+        "i": 14,
+        "kind": "MoveCall",
+        "target": "0x4e7c4ba436f8fd5b3c6bb514880ccd11c5109c83c45b5e037394b94204dbbb80::bluefin::swap",
+        "types": [
+          "0xd1b72982e40348d069bb1ff701e634c117bb5f741f44dff91e472d3b01461e55::stsui::STSUI",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+        ],
+        "args": [
+          "R12",
+          "I28",
+          "I32",
+          "I33",
+          "I34",
+          "I15"
+        ]
+      },
+      {
+        "i": 15,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::confirm_swap_v3",
+        "types": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+        ],
+        "args": [
+          "R12"
+        ]
+      },
+      {
+        "i": 16,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "R15"
+        ]
+      },
+      {
+        "i": 17,
+        "kind": "MergeCoins",
+        "destination": "N0:0",
+        "sources": [
+          "R15"
+        ]
+      },
+      {
+        "i": 18,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "N0:0"
+        ]
+      },
+      {
+        "i": 19,
+        "kind": "SplitCoins",
+        "coin": "N0:0",
+        "amounts": [
+          "I35"
+        ]
+      },
+      {
+        "i": 20,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+        "types": [
+          "0x2::sui::SUI"
+        ],
+        "args": [
+          "N0:0"
+        ]
+      },
+      {
+        "i": 21,
+        "kind": "MoveCall",
+        "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::return_flashloan_base",
+        "types": [
+          "0x2::sui::SUI",
+          "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE"
+        ],
+        "args": [
+          "I0",
+          "N19:0",
+          "N0:1"
+        ]
+      },
+      {
+        "i": 22,
+        "kind": "TransferObjects",
+        "objects": [
+          "N0:0"
+        ],
+        "address": "I36"
+      }
+    ],
+    "borrowedSuiMist": null,
+    "reservedAfterSplitMist": null,
+    "actualSwapInputMist": null,
+    "actualUsdcMicros": null,
+    "actualReturnedSuiMist": null,
+    "beforeRepaymentSuiMist": null,
+    "afterRepaymentSuiMist": null,
+    "gasBalanceChangeMist": "-1091118",
+    "gasCostMist": "1091118",
+    "actualGrossNetMist": null,
+    "netAfterGasMist": null,
+    "balanceChanges": [
+      {
+        "coinType": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "address": "0x457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce",
+        "amount": "-1091118"
+      }
+    ]
+  },
+  "guard": {
+    "verdict": "BLOCK",
+    "principalMist": "65265188650",
+    "quotedOutputMist": "65265176195",
+    "untouchedReserveMist": "64765188650",
+    "quotedTradedOutputMist": "499987545",
+    "conservativeTradedOutputMist": "497487607",
+    "conservativeOutputMist": "65262676257",
+    "minimumRequiredMist": "65266188650",
+    "slippageBps": 50,
+    "quotePass": false,
+    "simulationPass": false,
+    "walletCoinFunding": false,
+    "reasons": [
+      "Slippage-protected traded output plus untouched reserve cannot cover principal and profit floor",
+      "Atomic Mainnet simulation is not confirmed successful"
+    ]
+  },
+  "walletOwnedObjectInputs": 0,
+  "signed": false,
+  "onchainExecuted": false,
+  "walrusWritten": false,
+  "checkedAt": "2026-11-06T22:42:44.013Z",
+  "acceptedForGate1": false
+}

@@ -1,0 +1,426 @@
+{
+  "schema": "casewake-original-upstream-route-candidates/v1",
+  "originalDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "network": "sui-mainnet",
+  "routeIntent": "SUI -> USDSUI -> USDC -> SUI (preserve original Bluefin and DeepBook downstream legs)",
+  "baselineOriginalTurbos": {
+    "tradeSizeMist": "65265188650",
+    "usdsuiOutMist": "56759276",
+    "bluefinUsdcOutMist": "56749168",
+    "deepbookSuiOutMist": "65000000000",
+    "availableSuiMist": "65000000000",
+    "marginMist": "-265188650"
+  },
+  "candidates": [
+    {
+      "tradeSizeMist": "65265188650",
+      "untouchedReserveMist": "0",
+      "splitCount": 1,
+      "quoteId": "0f8b209a-de24-4852-8001-b44387786471",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "65265188650",
+          "amountOutMist": "56919311",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000d46019311903000000000000000000a9226db21a000000000000000000000000828015301903000000000000000000dce175b21a00000000000000000000000030a0112f190300000000000000000015a17eb21a000000000000000000000000debf0d2e1903000000000000000000a6c00e65350000000000000000000000008cdf092d19030000000000000000002e3f2065350000000000000000000000003aff052c1903000000000000000000a39cca17500000000000000000000000005a48d007190300000000000000000045c143cf6a0000000000000000000000000868cc06190300000000000000000090221a37a00000000000000000000000801df190b5180300000000000000000085501bfeba000000000000000000000080c91256641803000000000000000000fc45403d0b01000000000000000000008075341b13180300000000000000000072c5da8c5b0100000000000000000000008bbddfc1170300000000000000000081388e6ae101000000000000000000000037dfa470170300000000000000000050412ea24c020000000000000000000000e3006a1f170300000000000000000017e0060123030000000000000000000080f8892ece16030000000000000000007829041a2f040000000000000000000080a4abf37c1603000000000000000000d9f314882f0400000000000000000000e80300000a00e5a6b0b3a1010000151cb1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c216f5713f94d75ac5e3707a6fca651ad02f65e2d61cdcba71967a3dc2598d52e346272f816735b8e28a9fa23fb8fca00797efdaa9fc11d41871be53ac1c1cb0a06",
+              "quote_hash": "0x13e9efaba93761129e42863673abcf39845c73909f3ae1f681d2833723863153",
+              "sig_expiry_ms": 1794016091157
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56919311",
+          "amountOutMist": "56918048",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461849081420000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56918048",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56907911"
+      },
+      "deepbook": {
+        "suiOutMist": "65200000000",
+        "usdcRemainderMist": "18429",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65200000000",
+        "principalMist": "65265188650",
+        "marginMist": "-65188650",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "65265188650",
+      "untouchedReserveMist": "0",
+      "splitCount": 2,
+      "quoteId": "b44e1bd7-dab0-47d2-b424-2517a0116ec9",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "65265188650",
+          "amountOutMist": "56919311",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000d46019311903000000000000000000a9226db21a000000000000000000000000828015301903000000000000000000dce175b21a00000000000000000000000030a0112f190300000000000000000015a17eb21a000000000000000000000000debf0d2e1903000000000000000000a6c00e65350000000000000000000000008cdf092d19030000000000000000002e3f2065350000000000000000000000003aff052c1903000000000000000000a39cca17500000000000000000000000806691e1071903000000000000000000486d41cf6a0000000000000000000000007e18dd06190300000000000000000065c31637a00000000000000000000000002a3aa2b51803000000000000000000b13c17feba000000000000000000000000d65b676418030000000000000000009c713a3d0b010000000000000000000080ebe42b131803000000000000000000c172d38c5b0100000000000000000000809706f1c11703000000000000000000ebb5836ae10100000000000000000000804328b67017030000000000000000002f6621a24c020000000000000000000080ef497b1f17030000000000000000009654f5002303000000000000000000000005d33fce1603000000000000000000fdbfec192f040000000000000000000000b1f4047d16030000000000000000008e85fd872f0400000000000000000000e80300000a00e9abb0b3a10100001921b1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c2129b55f0795af7c9c5e7bb9ef69e4045eba82af7cdf0d8087042730573d01184ad39c952256c9b0a62cc813a350595065a0aa131bb6b860727d87feac9db6940d",
+              "quote_hash": "0xcaa7f7e11d8bf817b3e309c7548b6735522c9a0eb36c8bddb63c124432a06ff8",
+              "sig_expiry_ms": 1794016092441
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56919311",
+          "amountOutMist": "56918048",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461849081420000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56918048",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56907911"
+      },
+      "deepbook": {
+        "suiOutMist": "65200000000",
+        "usdcRemainderMist": "18429",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65200000000",
+        "principalMist": "65265188650",
+        "marginMist": "-65188650",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "65000000000",
+      "untouchedReserveMist": "265188650",
+      "splitCount": 1,
+      "quoteId": "88687086-5757-475f-b4c2-070cefd0b341",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "65000000000",
+          "amountOutMist": "56684784",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000602575251903000000000000000000e472d1b21a0000000000000000000000000e45712419030000000000000000005832dab21a000000000000000000000000bc646d231903000000000000000000d2f1e2b21a0000000000000000000000006a8469221903000000000000000000a562d7653500000000000000000000000018a465211903000000000000000000b1e1e86535000000000000000000000000c6c3612019030000000000000000002b91f71850000000000000000000000080ac730f0219030000000000000000001f210ad06a0000000000000000000000805a930b01190300000000000000000019b34338a00000000000000000000000009d4dd1af1803000000000000000000517876ffba000000000000000000000080df07975e1803000000000000000000ef67303f0b0100000000000000000000808b295c0d1803000000000000000000b242608f5b010000000000000000000000cee321bc17030000000000000000007cf70b6ee1010000000000000000000080109ee76a17030000000000000000004c0b73a64c020000000000000000000080bcbfac191703000000000000000000df3cda0623030000000000000000000000ff7972c816030000000000000000006aa0c8212f040000000000000000000080413438771603000000000000000000b334da8f2f0400000000000000000000e80300000a00ecafb0b3a10100001c25b1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c2175fbade6707ce8a789c03170302cbf7db2254cc8a2b5f3c49c6469e797ae2f1e552c99d26324cbbfe5e525b43503c21d74703b1c492f8a486325b7ac0282d605",
+              "quote_hash": "0x3c4e3f8008fc8360e8531d5ea50d547a0dd86501555f6836fb88bd91b306fb88",
+              "sig_expiry_ms": 1794016093468
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56684784",
+          "amountOutMist": "56683526",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461849997540000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56683526",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56673431"
+      },
+      "deepbook": {
+        "suiOutMist": "64900000000",
+        "usdcRemainderMist": "45710",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65165188650",
+        "principalMist": "65265188650",
+        "marginMist": "-100000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "65000000000",
+      "untouchedReserveMist": "265188650",
+      "splitCount": 2,
+      "quoteId": "c6a539ed-5aec-4346-ac7f-c4fad9e74d85",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "65000000000",
+          "amountOutMist": "56684784",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000602575251903000000000000000000e472d1b21a0000000000000000000000000e45712419030000000000000000005832dab21a000000000000000000000000bc646d231903000000000000000000d2f1e2b21a0000000000000000000000006a8469221903000000000000000000a562d7653500000000000000000000000018a465211903000000000000000000b1e1e86535000000000000000000000000c6c3612019030000000000000000002b91f71850000000000000000000000080ac730f0219030000000000000000001f210ad06a0000000000000000000000805a930b01190300000000000000000019b34338a00000000000000000000000009d4dd1af1803000000000000000000517876ffba000000000000000000000080df07975e1803000000000000000000ef67303f0b0100000000000000000000808b295c0d1803000000000000000000b242608f5b010000000000000000000000cee321bc17030000000000000000007cf70b6ee1010000000000000000000080109ee76a17030000000000000000004c0b73a64c020000000000000000000080bcbfac191703000000000000000000df3cda0623030000000000000000000000ff7972c816030000000000000000006aa0c8212f040000000000000000000080413438771603000000000000000000b334da8f2f0400000000000000000000e80300000a0004b4b0b3a10100003429b1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c21bd026ba43d68e8ee9088b8cf34fda1f7a854265448d2e090bbc7ddc014d7682447aa801a78b2d1707552736adcc43ea067469a0b54a99715bb4a181bab2e9c09",
+              "quote_hash": "0x600e1cb09ba71670b484e15801629f36b5e208d03a923d281f65dadda654ba03",
+              "sig_expiry_ms": 1794016094516
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56684784",
+          "amountOutMist": "56683526",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461849997540000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56683526",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56673431"
+      },
+      "deepbook": {
+        "suiOutMist": "64900000000",
+        "usdcRemainderMist": "51553",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65165188650",
+        "principalMist": "65265188650",
+        "marginMist": "-100000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64900000000",
+      "untouchedReserveMist": "365188650",
+      "splitCount": 1,
+      "quoteId": "78cafe25-e3da-4bf2-84be-6f850c94a27f",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "64900000000",
+          "amountOutMist": "56597576",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000602575251903000000000000000000e472d1b21a0000000000000000000000000e45712419030000000000000000005832dab21a000000000000000000000000bc646d231903000000000000000000d2f1e2b21a0000000000000000000000006a8469221903000000000000000000a562d7653500000000000000000000000018a465211903000000000000000000b1e1e86535000000000000000000000000c6c3612019030000000000000000002b91f71850000000000000000000000080ac730f0219030000000000000000001f210ad06a0000000000000000000000805a930b01190300000000000000000019b34338a00000000000000000000000009d4dd1af1803000000000000000000517876ffba000000000000000000000080df07975e1803000000000000000000ef67303f0b0100000000000000000000808b295c0d1803000000000000000000b242608f5b010000000000000000000000cee321bc17030000000000000000007cf70b6ee1010000000000000000000080109ee76a17030000000000000000004c0b73a64c020000000000000000000080bcbfac191703000000000000000000df3cda0623030000000000000000000000ff7972c816030000000000000000006aa0c8212f040000000000000000000080413438771603000000000000000000b334da8f2f0400000000000000000000e80300000a0007b9b0b3a1010000372eb1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c21456e19df98176aa4d1c1015b1b648d6493930537a2f9bb42de84c786745e67a4a18e07d27dcf118553862def02c0285a0e70fd7ad3b0f56c5ce19a46b233590f",
+              "quote_hash": "0x5d7596d43c49ab6b819c2a08db03964291836d003dd58a5c7f3925b43c28a4ef",
+              "sig_expiry_ms": 1794016095799
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56597576",
+          "amountOutMist": "56596320",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461850338193000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56596320",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56586240"
+      },
+      "deepbook": {
+        "suiOutMist": "64800000000",
+        "usdcRemainderMist": "51606",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65165188650",
+        "principalMist": "65265188650",
+        "marginMist": "-100000000",
+        "repayable": false
+      }
+    },
+    {
+      "tradeSizeMist": "64900000000",
+      "untouchedReserveMist": "365188650",
+      "splitCount": 2,
+      "quoteId": "f2b461b7-2f67-489a-a603-b50a40cbfd5e",
+      "upstreamProviders": [
+        "CETUS_TIDE",
+        "CETUS"
+      ],
+      "upstreamPaths": [
+        {
+          "id": "0x7ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f",
+          "direction": true,
+          "provider": "CETUS_TIDE",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "feeRate": "0",
+          "amountInMist": "64900000000",
+          "amountOutMist": "56597576",
+          "extendedDetails": {
+            "cetus_tide_fill": {
+              "envelope": "0x2043657475732d5051462d5375692d4f72646572426f6f6b2d763100000000000013497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b37ec188f8fc960ac7e9dd4ff2c5a67e21be3922e28e158319b48785621fc3001f011000602575251903000000000000000000e472d1b21a0000000000000000000000000e45712419030000000000000000005832dab21a000000000000000000000000bc646d231903000000000000000000d2f1e2b21a0000000000000000000000006a8469221903000000000000000000a562d7653500000000000000000000000018a465211903000000000000000000b1e1e86535000000000000000000000000c6c3612019030000000000000000002b91f71850000000000000000000000080ac730f0219030000000000000000001f210ad06a0000000000000000000000805a930b01190300000000000000000019b34338a00000000000000000000000009d4dd1af1803000000000000000000517876ffba000000000000000000000080df07975e1803000000000000000000ef67303f0b0100000000000000000000808b295c0d1803000000000000000000b242608f5b010000000000000000000000cee321bc17030000000000000000007cf70b6ee1010000000000000000000080109ee76a17030000000000000000004c0b73a64c020000000000000000000080bcbfac191703000000000000000000df3cda0623030000000000000000000000ff7972c816030000000000000000006aa0c8212f040000000000000000000080413438771603000000000000000000b334da8f2f0400000000000000000000e80300000a000dbdb0b3a10100003d32b1b3a1010000000000000000000000",
+              "signature": "0x22813b5bc759f279213ac642ab0723067f72fc4b3cb78e4a0455190060715c21afb79f38fb628cc62611136463e4a9218f13d6eef008e0932fabc720b17b9e3c79286047eeeaa5ba571350b7b5e4ddcbf5a445e0e8e742c7b2d47c14a5315f0c",
+              "quote_hash": "0x725d4d99b6bc4b5570c83f29c5d1e015cb56e6f54d3aa8acd1b85f4ca7e0413f",
+              "sig_expiry_ms": 1794016096829
+            },
+            "cetus_tide_mm_object_id": "0x13497cadbe0217a2f04aa3ed19d203744150e4bc14c65c84dc2a0caacab1b0b3",
+            "cetus_tide_versioned": "0x39e4f67dd46256f33c8d32b114ff1558c29aaf33e8219359ec32a9fb4e35844d",
+            "cetus_tide_global_config": "0x21db52fe9402e215127158df97d8421ee259a7dde37ba78becd5a320117212b9",
+            "cetus_tide_orderbook_version": 1
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "direction": true,
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "feeRate": "0.0001",
+          "amountInMist": "56597576",
+          "amountOutMist": "56596320",
+          "extendedDetails": {
+            "after_sqrt_price": 18447461850338193000,
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ],
+      "usdsuiOutMist": "56596320",
+      "bluefin": {
+        "usdsuiRemainderMist": "0",
+        "usdcOutMist": "56586240"
+      },
+      "deepbook": {
+        "suiOutMist": "64800000000",
+        "usdcRemainderMist": "51606",
+        "deepRequiredMist": "0"
+      },
+      "repayment": {
+        "availableSuiMist": "65165188650",
+        "principalMist": "65265188650",
+        "marginMist": "-100000000",
+        "repayable": false
+      }
+    }
+  ],
+  "bestRepayable": null,
+  "limitations": [
+    "Cetus Aggregator quotes are upstream quote candidates only; all three original pools (Turbos, Bluefin, DeepBook) are excluded so the candidate cannot route through the original pools; no PTB built or simulated.",
+    "Downstream Bluefin and DeepBook quotes are read-only live view calls.",
+    "A quote candidate must be assembled into a complete flashloan PTB and pass Tatum plus an independent full simulation before Gate 1."
+  ],
+  "safety": {
+    "signed": false,
+    "onchainExecuted": false,
+    "walletFunded": false,
+    "walrusWritten": false,
+    "gate1Eligible": false
+  },
+  "generatedAt": "2026-11-07T01:47:48.566Z"
+}

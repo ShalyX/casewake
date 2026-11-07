@@ -1,0 +1,35 @@
+{
+  "schema": "casewake-route-screen-v2/v1",
+  "originalDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "provider": "Cetus Aggregator Mainnet",
+  "principalMist": "65265188650",
+  "swapSizeMist": "1250000000",
+  "handoffBufferPpm": 5000,
+  "forwardQuoteId": "907b47c6-5e0a-4a2b-8a89-eb85a305b414",
+  "backQuoteId": "686f2ba5-fd3a-4b81-9f8a-564b24c5e31e",
+  "grossNetMist": "-5630941",
+  "economicScreen": {
+    "verdict": "BLOCK",
+    "principalMist": "65265188650",
+    "quotedOutputMist": "65259557709",
+    "untouchedReserveMist": "64015188650",
+    "quotedTradedOutputMist": "1244369059",
+    "conservativeTradedOutputMist": "1238147213",
+    "conservativeOutputMist": "65253335863",
+    "minimumRequiredMist": "65266188650",
+    "slippageBps": 50,
+    "quotePass": false,
+    "simulationPass": false,
+    "walletCoinFunding": false,
+    "reasons": [
+      "Slippage-protected traded output plus untouched reserve cannot cover principal and profit floor",
+      "Atomic Mainnet simulation is not confirmed successful"
+    ]
+  },
+  "verdict": "BLOCK_NO_FINANCIALLY_SAFE_ROUTE",
+  "simulated": false,
+  "signed": false,
+  "onchainExecuted": false,
+  "walrusWritten": false,
+  "checkedAt": "2026-11-06T22:46:50.082Z"
+}

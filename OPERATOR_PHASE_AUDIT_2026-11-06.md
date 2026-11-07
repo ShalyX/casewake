@@ -67,3 +67,25 @@ Status: PASS = required phase proof present; PARTIAL = meaningful work but missi
 6. Favor product value and authentic memory/reuse proof over optimizing profit of an arbitrary DEX route, except insofar as the user's explicit chosen acceptance gate requires that exact demonstration.
 
 Competition: Total Recall; deadline **2026-11-10 17:00 UTC**, 10+ real Walrus Mainnet memories, Tatum RPC, published blog, public GitHub and 2–3 minute video. Source: https://thewalrussessions.wal.app/tatum-total-recall .
+
+
+## 2026-11-07 addendum — prevent route substitution drift
+
+The Cetus round-trip introduced during the latest technical-dersik attempt is an alternative route experiment, **not the historical route being repaired**. It does not reproduce the original upstream swaps and must never be counted as the selected DeepBook case's Gate 1 proof. Its fresh Tatum replay failed and its quoted economics were negative after the 50-bps handoff reserve and gas.
+
+The selected historical PTB remains the exact path recorded in `evidence/context-BbRZD7YfTiiN.json`: DeepBook flashloan SUI → router `swap_b_a_with_return_` SUI/USDSUI → Bluefin CLMM `pool::swap` USDSUI/USDC → DeepBook `swap_exact_quote_for_base` USDC/SUI → merge returned SUI → split 65.265188650 SUI → return flashloan receipt. The latest changes add a GitHub Actions-only signature/object audit for those exact package calls. It must resolve output tuple order and every coin/balance remainder before any original-hop correction is authored.
+
+Operator state is unchanged: phase 12 TECHNICAL_DERISK BLOCKED, phase 13 BUILD_VERTICAL_SLICE PARTIAL, phase 14 PRODUCT_REVIEW REOPEN. Phases 2 onward must not be claimed complete based on the alternative route, guard tests, or a successful isolated control. Gates 2–3 remain locked. Product thesis stays Incident Memory / Casewake; no DEX trading product substitution.
+
+Execution environment: the user's Windows C: volume was confirmed at zero free bytes. Heavy installs, builds, quote sweeps and replays are moved to GitHub Actions; do not retry local dependency installation or broad disk cleanup.
+
+
+## 2026-11-07 addendum — exact original-route economics
+
+The live Sui Mainnet quote audit resolved the original three-hop PTB and its coin handoffs. The original `mergeCoins` is correctly wired: destination = DeepBook SUI output (command 12, subresult 0); source = Turbos SUI remainder (command 3, subresult 1). Both Turbos SUI remainder and Bluefin USDSUI remainder were zero at quote time. The original failure is not a missing merge.
+
+Full-principal quote: Turbos 65.265188650 SUI → 56.659720 USDSUI; Bluefin → 56.649623 USDC; DeepBook → 65.000000000 SUI + 0.020470 USDC remainder. Required principal is 65.265188650 SUI, leaving a 0.265188650 SUI shortfall. The residual 0.020470 USDC produced zero SUI in a DeepBook quote. An 8-size reserve sweep (65.265188650 down to 63.5 SUI) found no repayable candidate; the best margin remained -0.265188650 SUI.
+
+Therefore the original route is still economically unsafe. The next derisk is to find a better **SUI→USDSUI** upstream pool/path, while keeping the approved USDSUI→USDC Bluefin and USDC→SUI DeepBook legs intact. The earlier generic Cetus SUI/USDC round trip is a different route and cannot be used as evidence for this incident. No full corrected PTB has passed; Gate 1, human approval, Walrus write and exact-blob recall remain locked.
+
+The original route's actual coin flow is now mapped and the size sweep is run in GitHub Actions, not on the user's full C: drive. Continue all quote scans and simulations remotely.

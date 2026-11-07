@@ -1,0 +1,309 @@
+{
+  "schema": "casewake-flashloan-sequential-pool-reuse-simulation/v2",
+  "originalDigest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "network": "sui-mainnet",
+  "sender": "0x457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce",
+  "strategy": "Borrow from the original DeepBook SUI/SUI_USDE pool, then use that same pool in the first swap only after the borrow command. All later swap pools are distinct from the loan pool and from previously used pools.",
+  "inputs": {
+    "principalMist": "65265188650",
+    "tradeSizeMist": "61000000000",
+    "untouchedReserveMist": "4265188650",
+    "quoteSlippage": 0.001,
+    "swapSlippage": 0.005,
+    "gasBudget": 100000000,
+    "gasPrice": 333
+  },
+  "expectedRepayment": {
+    "quotedSuiOutputMist": "60960546637",
+    "untouchedReserveMist": "4265188650",
+    "totalQuotedSuiMist": "65225735287",
+    "principalMist": "65265188650",
+    "marginMist": "-39453363",
+    "shortfallMist": "39453363",
+    "quoteCoversPrincipal": false
+  },
+  "routes": {
+    "suiToUsdsui": {
+      "quoteId": "a854d64c-6f04-4854-a265-ee3f661d9585",
+      "amountInMist": "61000000000",
+      "amountOutMist": "53237924",
+      "paths": [
+        {
+          "id": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+          "provider": "DEEPBOOKV3",
+          "from": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "target": "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE",
+          "direction": true,
+          "amountInMist": "61000000000",
+          "amountOutMist": "53240800",
+          "feeRate": "0.001",
+          "extendedDetails": {
+            "deepbookv3_deep_fee": 0,
+            "aux_shared_versions": {
+              "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7": 773317532
+            }
+          }
+        },
+        {
+          "id": "0x93372a4880cb4cbd4a9974a822c097aa36279a1dbeed7ebd7249d07b923238cf",
+          "provider": "CETUS",
+          "from": "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "direction": false,
+          "amountInMist": "53240800",
+          "amountOutMist": "53239110",
+          "feeRate": "0.0001",
+          "extendedDetails": {
+            "after_sqrt_price": "18446903529702606379",
+            "aux_shared_versions": {
+              "0x93372a4880cb4cbd4a9974a822c097aa36279a1dbeed7ebd7249d07b923238cf": 775211034
+            }
+          }
+        },
+        {
+          "id": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+          "provider": "CETUS",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "direction": true,
+          "amountInMist": "53239110",
+          "amountOutMist": "53237924",
+          "feeRate": "0.0001",
+          "extendedDetails": {
+            "after_sqrt_price": "18447460968219539781",
+            "aux_shared_versions": {
+              "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56": 808620267
+            }
+          }
+        }
+      ]
+    },
+    "usdsuiToUsdc": {
+      "quoteId": "ec6a1148-7177-4e5e-8a8d-f06b47280564",
+      "amountInMist": "53237924",
+      "amountOutMist": "53228504",
+      "paths": [
+        {
+          "id": "0xe9750931401fd6e9592d489760d8ad264cdc0bb41e4ce7b334cd66fbacdd04d6",
+          "provider": "TURBOS",
+          "from": "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+          "target": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "direction": true,
+          "amountInMist": "53237924",
+          "amountOutMist": "53228504",
+          "feeRate": "0.0001",
+          "extendedDetails": {
+            "turbos_fee_type": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS",
+            "aux_shared_versions": {
+              "0xe9750931401fd6e9592d489760d8ad264cdc0bb41e4ce7b334cd66fbacdd04d6": 808591106
+            }
+          }
+        }
+      ]
+    },
+    "usdcToSui": {
+      "quoteId": "cc9e9a68-e1e0-4834-acf1-e633a9471a46",
+      "amountInMist": "53228504",
+      "amountOutMist": "60960546637",
+      "paths": [
+        {
+          "id": "0x64e590b0e4d4f7dfc7ae9fae8e9983cd80ad83b658d8499bf550a9d4f6667076",
+          "provider": "CETUSDLMM",
+          "from": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+          "target": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+          "direction": true,
+          "amountInMist": "53228504",
+          "amountOutMist": "60960546637",
+          "feeRate": "0.004000018486335817",
+          "extendedDetails": {
+            "aux_shared_versions": {
+              "0x64e590b0e4d4f7dfc7ae9fae8e9983cd80ad83b658d8499bf550a9d4f6667076": 643563051
+            }
+          }
+        }
+      ]
+    }
+  },
+  "poolIsolation": {
+    "loanPoolId": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+    "loanPoolUseCount": 1,
+    "originalSwapPoolReuse": [],
+    "duplicatePools": [],
+    "passed": true
+  },
+  "transaction": {
+    "commandCount": 18,
+    "commandSummary": [
+      {
+        "index": 0,
+        "kind": "MoveCall",
+        "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::borrow_flashloan_base",
+        "summary": "{\"MoveCall\":{\"package\":\"0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748\",\"module\":\"pool\",\"function\":\"borrow_flashloan_base\",\"typeArguments\":[\"0x2::sui::SUI\",\"0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE\"],\"arguments\":[{\"Input\":0,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":1,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 1,
+        "kind": "SplitCoins",
+        "target": null,
+        "summary": "{\"SplitCoins\":{\"coin\":{\"NestedResult\":[0,0],\"$kind\":\"NestedResult\"},\"amounts\":[{\"Input\":2,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"SplitCoins\"}"
+      },
+      {
+        "index": 2,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::new_swap_context_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"new_swap_context_v3\",\"typeArguments\":[\"0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI\",\"0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI\"],\"arguments\":[{\"Input\":3,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":4,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":5,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":6,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":7,\"type\":\"pure\",\"$kind\":\"Input\"},{\"NestedResult\":[1,0],\"$kind\":\"NestedResult\"},{\"Input\":8,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":9,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 3,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+        "summary": "{\"MoveCall\":{\"package\":\"0x0000000000000000000000000000000000000000000000000000000000000002\",\"module\":\"coin\",\"function\":\"zero\",\"typeArguments\":[\"0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP\"],\"arguments\":[]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 4,
+        "kind": "MoveCall",
+        "target": "0x8d565f1addbc6d7b91f67e0ed0cc049b3f40c7e5baf8f648172778aeb9b25f13::deepbookv3::swap",
+        "summary": "{\"MoveCall\":{\"package\":\"0x8d565f1addbc6d7b91f67e0ed0cc049b3f40c7e5baf8f648172778aeb9b25f13\",\"module\":\"deepbookv3\",\"function\":\"swap\",\"typeArguments\":[\"0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI\",\"0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE\"],\"arguments\":[{\"Result\":2,\"$kind\":\"Result\"},{\"Input\":10,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":0,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":11,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":12,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Result\":3,\"$kind\":\"Result\"},{\"Input\":13,\"type\":\"object\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 5,
+        "kind": "MoveCall",
+        "target": "0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7::cetus::swap",
+        "summary": "{\"MoveCall\":{\"package\":\"0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7\",\"module\":\"cetus\",\"function\":\"swap\",\"typeArguments\":[\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\",\"0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE\"],\"arguments\":[{\"Result\":2,\"$kind\":\"Result\"},{\"Input\":14,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":15,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":16,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":17,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":18,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":13,\"type\":\"object\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 6,
+        "kind": "MoveCall",
+        "target": "0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7::cetus::swap",
+        "summary": "{\"MoveCall\":{\"package\":\"0x87b17d7f0b448b83ab934a13eb64b05b60e17d0a371e2a721c241bcf3f5ec9e7\",\"module\":\"cetus\",\"function\":\"swap\",\"typeArguments\":[\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\",\"0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI\"],\"arguments\":[{\"Result\":2,\"$kind\":\"Result\"},{\"Input\":14,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":19,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":16,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":20,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":21,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":13,\"type\":\"object\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 7,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::confirm_swap_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"confirm_swap_v3\",\"typeArguments\":[\"0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI\"],\"arguments\":[{\"Result\":2,\"$kind\":\"Result\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 8,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::new_swap_context_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"new_swap_context_v3\",\"typeArguments\":[\"0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI\",\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\"],\"arguments\":[{\"Input\":22,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":23,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":24,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":25,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":26,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Result\":7,\"$kind\":\"Result\"},{\"Input\":27,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":28,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 9,
+        "kind": "MoveCall",
+        "target": "0x626c8509478fe57ddf69e4141080b062911063f541c55cd0e8d602c6a0874573::turbos::swap",
+        "summary": "{\"MoveCall\":{\"package\":\"0x626c8509478fe57ddf69e4141080b062911063f541c55cd0e8d602c6a0874573\",\"module\":\"turbos\",\"function\":\"swap\",\"typeArguments\":[\"0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI\",\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\",\"0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS\"],\"arguments\":[{\"Result\":8,\"$kind\":\"Result\"},{\"Input\":29,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":30,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":31,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":32,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":13,\"type\":\"object\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 10,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::confirm_swap_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"confirm_swap_v3\",\"typeArguments\":[\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\"],\"arguments\":[{\"Result\":8,\"$kind\":\"Result\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 11,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::new_swap_context_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"new_swap_context_v3\",\"typeArguments\":[\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\",\"0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI\"],\"arguments\":[{\"Input\":33,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":34,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":35,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":36,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":37,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Result\":10,\"$kind\":\"Result\"},{\"Input\":38,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":39,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 12,
+        "kind": "MoveCall",
+        "target": "0x8e094a372cdea3af6ccb58a5fd70689f3000b6101777b24db980fa4e3d740861::cetus_dlmm::swap",
+        "summary": "{\"MoveCall\":{\"package\":\"0x8e094a372cdea3af6ccb58a5fd70689f3000b6101777b24db980fa4e3d740861\",\"module\":\"cetus_dlmm\",\"function\":\"swap\",\"typeArguments\":[\"0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC\",\"0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI\"],\"arguments\":[{\"Result\":11,\"$kind\":\"Result\"},{\"Input\":40,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":41,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":42,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":43,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":44,\"type\":\"pure\",\"$kind\":\"Input\"},{\"Input\":45,\"type\":\"object\",\"$kind\":\"Input\"},{\"Input\":13,\"type\":\"object\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 13,
+        "kind": "MoveCall",
+        "target": "0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9::router::confirm_swap_v3",
+        "summary": "{\"MoveCall\":{\"package\":\"0xffd4058af7d6f6d66c335930cced8c91e38ec943e2392232aee27e8127e684e9\",\"module\":\"router\",\"function\":\"confirm_swap_v3\",\"typeArguments\":[\"0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI\"],\"arguments\":[{\"Result\":11,\"$kind\":\"Result\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 14,
+        "kind": "MergeCoins",
+        "target": null,
+        "summary": "{\"MergeCoins\":{\"destination\":{\"NestedResult\":[0,0],\"$kind\":\"NestedResult\"},\"sources\":[{\"Result\":13,\"$kind\":\"Result\"}]},\"$kind\":\"MergeCoins\"}"
+      },
+      {
+        "index": 15,
+        "kind": "SplitCoins",
+        "target": null,
+        "summary": "{\"SplitCoins\":{\"coin\":{\"NestedResult\":[0,0],\"$kind\":\"NestedResult\"},\"amounts\":[{\"Input\":46,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"SplitCoins\"}"
+      },
+      {
+        "index": 16,
+        "kind": "MoveCall",
+        "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::return_flashloan_base",
+        "summary": "{\"MoveCall\":{\"package\":\"0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748\",\"module\":\"pool\",\"function\":\"return_flashloan_base\",\"typeArguments\":[\"0x2::sui::SUI\",\"0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE\"],\"arguments\":[{\"Input\":0,\"type\":\"object\",\"$kind\":\"Input\"},{\"NestedResult\":[15,0],\"$kind\":\"NestedResult\"},{\"NestedResult\":[0,1],\"$kind\":\"NestedResult\"}]},\"$kind\":\"MoveCall\"}"
+      },
+      {
+        "index": 17,
+        "kind": "MoveCall",
+        "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::send_funds",
+        "summary": "{\"MoveCall\":{\"package\":\"0x0000000000000000000000000000000000000000000000000000000000000002\",\"module\":\"coin\",\"function\":\"send_funds\",\"typeArguments\":[\"0x2::sui::SUI\"],\"arguments\":[{\"NestedResult\":[0,0],\"$kind\":\"NestedResult\"},{\"Input\":47,\"type\":\"pure\",\"$kind\":\"Input\"}]},\"$kind\":\"MoveCall\"}"
+      }
+    ],
+    "simulationKeys": [
+      "$kind",
+      "FailedTransaction",
+      "commandResults",
+      "gasPaymentMocked"
+    ],
+    "failedTransactionKeys": [
+      "digest",
+      "epoch",
+      "timestampMs",
+      "checkpoint",
+      "status",
+      "effects",
+      "objectTypes",
+      "transaction",
+      "bcs",
+      "signatures",
+      "balanceChanges",
+      "events"
+    ],
+    "commandResultsSummary": [],
+    "flashloanBorrowCommand": 0,
+    "flashloanRepaymentCommand": 16,
+    "simulationKind": "FailedTransaction",
+    "status": {
+      "success": false,
+      "error": {
+        "$kind": "Unknown",
+        "message": "InsufficientCoinBalance in command 15",
+        "command": 15,
+        "Unknown": null
+      }
+    },
+    "success": false,
+    "error": {
+      "$kind": "Unknown",
+      "message": "InsufficientCoinBalance in command 15",
+      "command": 15,
+      "Unknown": null
+    },
+    "gasUsed": {
+      "computationCost": "333000",
+      "storageCost": "37810000",
+      "storageRebate": "37806219",
+      "nonRefundableStorageFee": "3781"
+    },
+    "balanceChanges": []
+  },
+  "safety": {
+    "signed": false,
+    "onchainExecuted": false,
+    "walletFundedRepayment": false,
+    "gasPaidFromWallet": true,
+    "humanApproved": false,
+    "walrusWritten": false,
+    "gate1Eligible": false
+  },
+  "limitations": [
+    "This is an official Sui Mainnet full-PTB simulation only; Tatum and a second independent simulator are still required.",
+    "The transaction is not signed or submitted.",
+    "A successful simulation does not authorize human approval or Walrus memory storage."
+  ],
+  "generatedAt": "2026-11-07T01:58:39.120Z"
+}

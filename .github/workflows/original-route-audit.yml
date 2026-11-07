@@ -1,0 +1,63 @@
+name: Casewake original-route reconstruction
+on:
+  push:
+    branches: ["fix/casewake-route-economics-20261106"]
+    paths:
+      - "web/scripts/audit-original-route.mjs"
+      - "web/scripts/quote-original-route.mjs"
+      - "web/scripts/quote-upstream-alternatives.mjs"
+      - "web/scripts/quote-full-route-alternatives.mjs"
+      - "evidence/context-BbRZD7YfTiiN.json"
+      - ".github/workflows/original-route-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: corepack prepare pnpm@10.22.0 --activate
+      - run: pnpm install --frozen-lockfile
+      - name: Resolve exact original PTB signatures and object state
+        run: node scripts/audit-original-route.mjs
+      - name: Quote each exact original route hop on Mainnet
+        run: node scripts/quote-original-route.mjs
+      - name: Search better SUI to USDSUI upstream paths
+        run: node scripts/quote-upstream-alternatives.mjs
+      - name: Quote complete three-hop alternatives without pool reuse
+        run: node scripts/quote-full-route-alternatives.mjs
+      - name: Commit generated Mainnet route evidence to this branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/original-route-ptb-audit.json evidence/original-route-live-quotes.json evidence/original-upstream-route-candidates.json evidence/full-three-hop-alternatives.json
+          if git diff --cached --quiet; then
+            echo "No evidence changes to commit."
+            exit 0
+          fi
+          git commit -m "evidence(casewake): refresh live Mainnet route diagnostics"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Preserve machine-readable audit and live quotes
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: casewake-original-route-ptb-audit
+          path: |
+            evidence/original-route-ptb-audit.json
+            evidence/original-route-live-quotes.json
+            evidence/original-upstream-route-candidates.json
+            evidence/full-three-hop-alternatives.json
+          if-no-files-found: error
+          retention-days: 14
