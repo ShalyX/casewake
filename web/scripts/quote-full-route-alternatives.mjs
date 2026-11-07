@@ -119,11 +119,11 @@ for(const tradeSize of tradeSizes){
 }
 const completeResults=results.filter(x=>x.complete);
 const bestMarginCandidate=completeResults.sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null;
-const bestSafetyCandidate=completeResults.filter(x=>x.repayment.safetyMarginPassed).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null;
+const bestSafetyCandidate=completeResults.filter(x=>x.repayment.safetyMarginPassed).sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null;
 const report={schema:'casewake-full-three-hop-alternatives/v3',originalDigest:saved.digest,
  network:'sui-mainnet',routeIntent:'Flashloan SUI -> USDSUI -> USDC -> SUI; each leg excludes the original flashloan source pool, all three original swap pools, and all previously used pools.',
  originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),splitCounts,minimumSafetyMarginMist:MIN_SAFETY_MARGIN.toString(),results,
- bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,bestSafetyCandidate,
+ bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null,bestSafetyCandidate,
  limitations:['Aggregator outputs are read-only quotes, not a built transaction or a full PTB simulation.',
   'Each leg excludes the flashloan source pool, all original swap pools and every pool used by previous legs to prevent stale same-pool quotes and artificial round-trip reuse.',
   'A candidate must still be assembled into the exact flashloan PTB and pass full Tatum Mainnet and independent simulation.',
