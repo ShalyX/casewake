@@ -45,7 +45,7 @@ export default function Workspace() {
   const [error, setError] = useState("");
   const [proof, setProof] = useState<Proof | null>(null);
   const [writtenSourceDigest, setWrittenSourceDigest] = useState("");
-  const [threeGatePassed, setThreeGatePassed] = useState(false);
+  const [exactBlobRecallPassed, setThreeGatePassed] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
   const [diagnosis, setDiagnosis] = useState("The DeepBook three-hop flash-loan transaction fails at repayment split command 16 with InsufficientCoinBalance: the returned SUI is not sufficient to split out the exact borrowed principal.");
   const [resolutionSteps, setResolutionSteps] = useState("");
@@ -215,11 +215,14 @@ export default function Workspace() {
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
 
-        <div className="panel" role="status" style={{marginBottom:"20px"}}>
-          <div className="panel-kicker"><span>FEATURED DEEPBOOK CASE / STRICT THREE GATES</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Read live audit ↗</a></div>
-          <p><strong>01 / Simulation:</strong> {proof && !observationOnly ? "Corrected full flashloan route independently passed Tatum Mainnet simulation; the exact original principal was repaid." : "Original swap route BLOCKED; prevention control ALLOW. A corrected complete flashloan repayment has not been proven."}</p>
-          <p><strong>02 / Reviewer and Walrus:</strong> {proof && !observationOnly ? "Completed blob " + shortDigest(proof.blobId) : "Awaiting approved evidence and completed memory write."}</p>
-          <p><strong>03 / Independent recall:</strong> {threeGatePassed ? "Passed — exact stored Walrus blob recalled for second real failure." : "Awaiting exact-blob recall from second real failed transaction."}</p>
+        <div className="panel case-progress" role="status" style={{marginBottom:"20px"}}>
+          <div className="panel-kicker"><span>CASE MEMORY / PROOF STATUS</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Inspect acceptance ledger ↗</a></div>
+          <div className="case-progress-grid">
+            <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? `Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
+            <div><strong>02 / HUMAN REVIEW</strong><span>{proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
+            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : proof && !observationOnly ? "Write complete · recurrence check pending" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
+          </div>
+          <p className="muted">Observed failures, simulation-tested procedures and human-reviewed resolutions are separate evidence tiers. Casewake never signs or executes a repair.</p>
         </div>
         <div className="workspace-grid">
           <section className="workspace-primary">
@@ -320,9 +323,9 @@ export default function Workspace() {
               </div>
             </div>
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
-              <h3>{threeGatePassed ? (writtenSourceDigest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" ? "Full-route simulation and exact-blob recall verified." : "Human-reviewed onchain follow-up recalled across incidents.") : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
-              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : threeGatePassed ? (writtenSourceDigest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" ? "The second independent failed transaction recalled the approved full-route simulation from the exact blob. No repair was submitted onchain." : "A distinct Tatum-confirmed failed incident recalled the reviewed successful follow-up from the exact Walrus blob. Human causal review remains visible.") : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
-              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!threeGatePassed && !observationOnly && writtenSourceDigest && <>
+              <h3>{exactBlobRecallPassed ? (writtenSourceDigest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" ? "Full-route simulation and exact-blob recall verified." : "Human-reviewed onchain follow-up recalled across incidents.") : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? (writtenSourceDigest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" ? "The second independent failed transaction recalled the approved full-route simulation from the exact blob. No repair was submitted onchain." : "A distinct Tatum-confirmed failed incident recalled the reviewed successful follow-up from the exact Walrus blob. Human causal review remains visible.") : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
+              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
                     {writtenSourceDigest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" && <label className="reviewer-access"><span>SECOND DISTINCT REAL FAILURE</span><input value={recurrenceDigest} onChange={(e) => setRecurrenceDigest(e.target.value)} placeholder="Digest of a comparable later failed incident" spellCheck={false}/><small>Casewake will independently fetch it through Tatum and require a compatible error before accepting the exact Walrus blob match.</small></label>}
                     <button type="button" className="secondary-button" disabled={busy || !reviewerKey || (writtenSourceDigest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" && !recurrenceDigest.trim())} onClick={() => void verifySavedRecall(proof, writtenSourceDigest, recurrenceDigest)}>Verify exact-blob recurrence — no new Walrus write ↗</button>
                   </>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
