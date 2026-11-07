@@ -5,7 +5,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import dns from 'node:dns';
 import https from 'node:https';
-import { AggregatorClient, Env } from '@cetusprotocol/aggregator-sdk';
 import { SuiGrpcClient } from '@mysten/sui/grpc';
 import { Transaction } from '@mysten/sui/transactions';
 import { GrpcTransport } from '@protobuf-ts/grpc-transport';
@@ -52,9 +51,39 @@ const CLOCK='0x6',CLOCK_ISV='1';
 const BLUEFIN_SQRT_LIMIT=4295048017n;
 const transport=new GrpcTransport({host:'dns://8.8.8.8/fullnode.mainnet.sui.io:443',channelCredentials:ChannelCredentials.createSsl()});
 const client=new SuiGrpcClient({network:'mainnet',transport});
-const aggregator=new AggregatorClient({env:Env.Mainnet,signer:SENDER,client});
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const decodeLE=bytes=>{const b=Buffer.from(bytes||[]);let n=0n;for(let i=b.length-1;i>=0;i--)n=(n<<8n)|BigInt(b[i]);return n;};
+const completeCoinType=type=>{
+ const index=type.indexOf('::');if(index<0)return type;
+ const prefix=type.slice(0,index);if(!prefix.startsWith('0x'))return type;
+ return '0x'+prefix.slice(2).padStart(64,'0')+type.slice(index);
+};
+const ROUTER_ENDPOINT='https://api-sui.cetus.zone/router_v3';
+const AGGREGATOR_SDK_VERSION=1010705;
+// Exclude TURBOS so the candidate is genuinely an alternative upstream pool/path.
+const ALTERNATIVE_PROVIDERS=[
+ 'CETUS','KRIYA','DIPCOIN','FLOWX','FLOWXV3','KRIYAV3','AFTERMATH','HAEDAL',
+ 'VOLO','AFSUI','BLUEMOVE','DEEPBOOKV3','SCALLOP','SUILEND','BLUEFIN',
+ 'HAEDALPMM','ALPHAFI','SPRINGSUI','STEAMM','METASTABLE','OBRIC','HAWAL',
+ 'STEAMM_OMM','MOMENTUM','STEAMM_OMM_V2','MAGMA','HAEDALHMMV2','FULLSAIL',
+ 'CETUSDLMM','FERRADLMM','FERRACLMM','BOLT','MAGMAPROPAMM','HAEDALPROPAMM','CETUS_TIDE'
+];
+async function findAlternativeRoute(amount,splitCount){
+ const params=new URLSearchParams({
+  from:completeCoinType(SUI),target:completeCoinType(USDSUI),amount:amount.toString(),
+  by_amount_in:'true',split_count:String(splitCount),providers:ALTERNATIVE_PROVIDERS.join(','),
+  v:String(AGGREGATOR_SDK_VERSION)
+ });
+ const response=await fetch(ROUTER_ENDPOINT+'/find_routes?'+params.toString());
+ const body=await response.json();
+ if(!response.ok)throw new Error('Cetus route API HTTP '+response.status+': '+JSON.stringify(body).slice(0,500));
+ if(!body?.data)return {available:false,error:body?.msg||body?.message||JSON.stringify(body).slice(0,500)};
+ const data=body.data;
+ return {available:true,quoteId:data.request_id||null,amountInMist:String(data.amount_in),amountOutMist:String(data.amount_out),
+  paths:(data.paths||[]).map(p=>({id:p.id,direction:p.direction,provider:p.provider,from:p.from,target:p.target,
+   feeRate:p.fee_rate,amountInMist:String(p.amount_in),amountOutMist:String(p.amount_out),version:p.version,
+   extendedDetails:p.extended_details||null}))};
+}
 async function quoteBluefin(usdsuiIn){
  const tx=new Transaction();tx.setSender(SENDER);tx.setGasBudget(50000000);
  const pool=tx.sharedObjectRef({objectId:BLUEFIN_POOL,initialSharedVersion:BLUEFIN_POOL_ISV,mutable:false});
@@ -82,10 +111,10 @@ const sizes=[PRINCIPAL,65000000000n,64900000000n];
 const candidates=[];
 for(const tradeSize of sizes){
  for(const splitCount of [1,2]){
-  const route=await aggregator.findRouters({from:SUI,target:USDSUI,amount:tradeSize,byAmountIn:true,slippage:0.005,splitCount});
-  const amountOut=BigInt(route?.amountOut?.toString()||'0');
-  if(!route?.quoteID||!route.paths?.length||amountOut<=0n){
-   candidates.push({tradeSizeMist:tradeSize.toString(),splitCount,available:false,error:route?.error||'no route'});
+  const route=await findAlternativeRoute(tradeSize,splitCount);
+  const amountOut=BigInt(route?.amountOutMist||'0');
+  if(!route?.available||!route.quoteId||!route.paths?.length||amountOut<=0n){
+   candidates.push({tradeSizeMist:tradeSize.toString(),splitCount,available:false,error:route?.error||'no alternative route'});
    continue;
   }
   await delay(250);
@@ -95,7 +124,7 @@ for(const tradeSize of sizes){
   const reserve=PRINCIPAL-tradeSize;
   const availableSui=reserve+BigInt(deepbook.suiOutMist);
   candidates.push({tradeSizeMist:tradeSize.toString(),untouchedReserveMist:reserve.toString(),splitCount,
-   quoteId:route.quoteID,upstreamProviders:route.paths.map(p=>p.provider),upstreamPaths:route.paths.map(p=>({provider:p.provider,from:p.from,to:p.target,amountIn:p.amountIn?.toString(),amountOut:p.amountOut?.toString()})),
+   quoteId:route.quoteId,upstreamProviders:route.paths.map(p=>p.provider),upstreamPaths:route.paths,
    usdsuiOutMist:amountOut.toString(),bluefin,deepbook,
    repayment:{availableSuiMist:availableSui.toString(),principalMist:PRINCIPAL.toString(),
     marginMist:(availableSui-PRINCIPAL).toString(),repayable:availableSui>=PRINCIPAL}});
@@ -111,7 +140,7 @@ const report={schema:'casewake-original-upstream-route-candidates/v1',originalDi
   availableSuiMist:baseline.sweep[0].repayment.availableSuiMist,
   marginMist:baseline.sweep[0].repayment.marginMist},
  candidates,bestRepayable:candidates.filter(x=>x.repayment?.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,
- limitations:['Cetus Aggregator quotes are upstream quote candidates only; no PTB built or simulated.',
+ limitations:['Cetus Aggregator quotes are upstream quote candidates only; Turbos is excluded so each candidate is an alternative upstream path; no PTB built or simulated.',
   'Downstream Bluefin and DeepBook quotes are read-only live view calls.',
   'A quote candidate must be assembled into a complete flashloan PTB and pass Tatum plus an independent full simulation before Gate 1.'],
  safety:{signed:false,onchainExecuted:false,walletFunded:false,walrusWritten:false,gate1Eligible:false},generatedAt:new Date().toISOString()};
