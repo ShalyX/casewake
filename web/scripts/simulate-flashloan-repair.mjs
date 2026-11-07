@@ -110,16 +110,22 @@ const status=simulation?.Transaction?.status||simulation?.FailedTransaction?.sta
 const simulationSuccess=simulation?.$kind==='Transaction'&&status?.success===true;
 const gasUsed=simulation?.Transaction?.effects?.gasUsed||simulation?.FailedTransaction?.effects?.gasUsed||null;
 const balanceChanges=simulation?.balanceChanges||simulation?.Transaction?.effects?.balanceChanges||[];
+const expectedAvailable=reserveMist+BigInt(route3.amountOut.toString());
+const expectedMargin=expectedAvailable-PRINCIPAL;
 const report={
- schema:'casewake-flashloan-sequential-pool-reuse-simulation/v1',
+ schema:'casewake-flashloan-sequential-pool-reuse-simulation/v2',
  originalDigest:saved.digest,network:'sui-mainnet',sender:SENDER,
  strategy:'Borrow from the original DeepBook SUI/SUI_USDE pool, then use that same pool in the first swap only after the borrow command. All later swap pools are distinct from the loan pool and from previously used pools.',
  inputs:{principalMist:PRINCIPAL.toString(),tradeSizeMist:TRADE_SIZE.toString(),untouchedReserveMist:reserveMist.toString(),
   quoteSlippage:QUOTE_SLIPPAGE,swapSlippage:SWAP_SLIPPAGE,gasBudget:100000000,gasPrice:333},
+ expectedRepayment:{quotedSuiOutputMist:route3.amountOut.toString(),untouchedReserveMist:reserveMist.toString(),
+  totalQuotedSuiMist:expectedAvailable.toString(),principalMist:PRINCIPAL.toString(),marginMist:expectedMargin.toString(),
+  shortfallMist:expectedMargin<0n?(-expectedMargin).toString():'0',quoteCoversPrincipal:expectedMargin>=0n},
  routes:{suiToUsdsui:summarizeRoute(route1),usdsuiToUsdc:summarizeRoute(route2),usdcToSui:summarizeRoute(route3)},
  poolIsolation:{loanPoolId:LOAN_POOL,loanPoolUseCount,originalSwapPoolReuse,duplicatePools,
   passed:originalSwapPoolReuse.length===0&&duplicatePools.length===0&&loanPoolUseCount>=1},
- transaction:{commandCount,commandSummary,commandResultsSummary:(simulation?.commandResults||[]).map((result,index)=>({index,returnValues:(result.returnValues||[]).map(value=>({type:value.type||null,bcsLength:value.bcs?.length||0}))})),
+ transaction:{commandCount,commandSummary,simulationKeys:Object.keys(simulation||{}),failedTransactionKeys:Object.keys(simulation?.FailedTransaction||{}),
+  commandResultsSummary:(simulation?.commandResults||simulation?.FailedTransaction?.commandResults||[]).map((result,index)=>({index,returnValues:(result.returnValues||[]).map(value=>({type:value.type||null,bcsLength:value.bcs?.length||0}))})),
   flashloanBorrowCommand:0,flashloanRepaymentCommand:commandCount-2,
   simulationKind:simulation?.$kind||null,status,success:simulationSuccess,error:simulationError||
    simulation?.FailedTransaction?.status?.error||null,gasUsed,balanceChanges},
@@ -130,7 +136,7 @@ const report={
   'A successful simulation does not authorize human approval or Walrus memory storage.'],
  generatedAt:new Date().toISOString()
 };
-const out=path.join(ROOT,'evidence','flashloan-sequential-pool-simulation.json');
+const out=path.join(ROOT,'evidence',`flashloan-sequential-pool-simulation-${TRADE_SIZE}.json`);
 fs.writeFileSync(out,JSON.stringify(report,null,2)+'\n');
 console.log('FLASHLOAN_SEQUENTIAL_POOL_SIMULATION',JSON.stringify({
  success:simulationSuccess,status,error:report.transaction.error,commandCount,gasUsed,
