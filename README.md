@@ -4,7 +4,13 @@ An evidence-backed agent for Sui dApp builders: a real failed transaction is obs
 
 **Casewake is the release-candidate brand.** The underlying Incident Memory thesis was locked on 2026-11-03. Naming collision checks are preliminary, not trademark clearance. Deadline: November 10, 2026, 17:00 UTC.
 
-## Current verified state — November 4, 2026
+## First reviewed resolution loop — November 7, 2026
+
+ShalyX explicitly approved the duplicate-cancellation integration case. Casewake recorded one human-reviewed engineering-artifact resolution to Walrus Mainnet and recalled the exact completed blob for a distinct genuine Tatum-confirmed failure. Self-match and unrelated-failure controls were rejected; the namespace now contains 13 memories, including this one reviewed resolution.
+
+Blob: `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`. Evidence and scope limits: [case review](evidence/real-case/REVIEW.md), [write receipt](evidence/real-case/reviewed-memory-receipt.json), [exact-blob recall](evidence/real-case/exact-blob-recall.json). The original operator's application deployment remains unknown; this is an independently validated integration reconciliation procedure, not an onchain contract repair. Verified through the local production build against actual Mainnet services; public deployment has not been promoted.
+
+## Historical verification snapshot — November 4, 2026
 - Next.js 16.4.4 installed with pnpm; `pnpm lint` and `pnpm build` last executed during QA; see `PROJECT.md` for latest verified result.
 - Real server-side Tatum Sui Mainnet gRPC `GetTransaction` works; 100 recent transactions inspected, 56 failed in that particular sample (NOT overall failure rate).
 - Ten **distinct, real onchain failure observations** were independently re-fetched from Tatum and stored by the application to Walrus Memory Mainnet. Receipts saved in `evidence/observation-write-receipts.json`.

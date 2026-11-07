@@ -89,3 +89,8 @@ Concept feasibility recommendation: Incident Memory first; Indexer Recovery only
 - **Hard gate before judging:** Engineer-reviewed, case-specifically successful repair plus second real digest showing remembered verified recommendation. Do not score the app as if this already happened.
 
 Evidence register: `EVIDENCE.md`; source receipts: `evidence/observation-write-receipts.json`; matching proof: `evidence/live-recall-proof.json`.
+# First reviewed memory loop — 2026-11-07
+
+New integration evidence: one explicitly approved Sui incident resolution was stored through Casewake to a completed Walrus Mainnet blob and recalled by exact blob ID for a distinct Tatum-confirmed failure. Self and unrelated-case controls were rejected. Inventory changed from 12 to 13; only one of those records is this human-reviewed integration resolution. Evidence is under `evidence/real-case/`.
+
+This strengthens the Walrus/Tatum integration and technical-quality evidence. It is not an assigned judge score, external user validation, proof of original-operator deployment, or acceptance of the entire submission. Public production release is still separate.

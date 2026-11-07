@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-11-07T15:37:25.861Z",
+  "environment": "http://127.0.0.1:4220",
+  "anonymous": {
+    "status": 403,
+    "data": {
+      "error": "Reviewer access token is incorrect."
+    }
+  },
+  "unapproved": {
+    "status": 400,
+    "data": {
+      "error": "A reviewer must explicitly confirm that the linked engineering artifact resolves this specific incident."
+    }
+  },
+  "walrusWrites": 0
+}

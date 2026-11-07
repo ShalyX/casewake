@@ -114,3 +114,12 @@ This ledger preserves the original Product Lock revision 1. A working read/recal
 - Responsive QA: 1440px desktop and true 390×844 mobile captures inspected for landing, empty workspace and simulation-runbook result. Both routes report no horizontal overflow at 390px. Captures are in `evidence/screenshots/`.
 - Current inventory remains 12 completed Mainnet memories: ten genuine observations, one simulation-tested runbook, one integration smoke record; zero human-verified resolutions.
 - Phase 13 remains IN PROGRESS. Missing gate: one representative non-DeFi Sui developer incident, its genuine failed digest and case-specific fix evidence, explicit reviewer approval, completed Walrus receipt and exact-blob recall from a second compatible failure. The first eight-digest DeFi candidate pool is excluded.
+
+## First reviewed case acceptance — 2026-11-07
+
+- ShalyX explicitly approved the independently validated duplicate-cancellation integration case, allowing this DeepBook order-management case as a case-specific exception to the previous non-DeFi sourcing target. No blanket change to the product thesis or representativeness claim is made.
+- Real source failure `8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA`; exact earlier successful cancellation and matching `OrderCanceled` event establish that the target was already cancelled. The reference integration correction reconciles the terminal state and stops duplicate retries. Original operator application changes remain unknown; no onchain repair is claimed.
+- Protected Casewake `/api/remember` returned 201 with a completed Walrus Mainnet blob `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`, reviewer ShalyX, method `integration-test`, evidence kind `reviewed-evidence`.
+- Distinct real failure `HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV` recalled that exact blob through the actual signed Walrus recall path; `gate3=verified`, eligible for review. Self-match and unrelated-failure controls were rejected.
+- First reviewed case's API loop: VERIFIED on local application build against actual Tatum/Walrus Mainnet. Public production release and complete P0/UI/submission acceptance remain separate.
+- Evidence: `evidence/real-case/human-approval.json`, `reviewed-memory-receipt.json`, `exact-blob-recall.json`, `recall-negative-controls.json` and `namespace-inventory-after.json`. Inventory is now 13 total memories, including one human-reviewed integration resolution.

@@ -1,8 +1,8 @@
 # Real Sui case: an already-cancelled order retried
 
-Status: independently validated resolution procedure, **awaiting named human review**. No human-verified Walrus memory has been written. This is a reference integration correction, not evidence of a fix deployed by the original operator.
+Status: **human-reviewed memory stored and exact-blob cross-incident recall VERIFIED**. ShalyX explicitly approved this case and its procedure in chat. This is an independently validated reference integration correction, not evidence of a fix deployed by the original operator.
 
-Scope decision still required: the existing Phase 13 plan asks for a representative **non-DeFi** incident. This is a DeepBook order-management integration case. It does not satisfy that narrower sourcing requirement without an explicit user decision to accept it as the first case. The original flashloan repair remains blocked and separate.
+Scope decision: the existing Phase 13 plan asked for a representative **non-DeFi** incident. ShalyX explicitly accepted this DeepBook order-management integration case as the first reviewed case, including the original-operator limitation. This approval applies to this case; it does not establish broader user representativeness. The original flashloan repair remains blocked and separate.
 
 ## Product purpose
 
@@ -44,7 +44,7 @@ The actual application's Tatum reader independently confirmed both failed digest
 
 A live-read check exposed overescaped whitespace matching in Tatum package extraction. The one-line correction now captures the actual MoveLocation package; both live provenance assertions pass.
 
-## Remaining end-to-end steps
+## End-to-end verification procedure (now completed)
 
 1. Publish the correction and evidence at an immutable public commit; use that commit as the case artifact.
 2. A named human reviews this exact procedure and explicitly approves its relevance to the incident. Record it as `reviewed-evidence` / `integration-test`, with the limitations above. Never substitute an unrelated successful transaction under `onchain-successor`.
@@ -53,7 +53,11 @@ A live-read check exposed overescaped whitespace matching in Tatum package extra
 5. Call `/api/verify-recall` for `HvDzt...` with the stored blob ID. Require the exact same blob and an eligible human-reviewed case.
 6. Self-match must be rejected; an unrelated MoveAbort must not retrieve the resolution as eligible. Capture receipts and update product acceptance only after the checks actually pass.
 
-`web/scripts/finish-cancel-case.mjs` prepares and executes these API steps. It defaults to showing the review payload. A write requires an explicit approval file with reviewer identity and the immutable artifact URL. No approval file has been fabricated.
+`web/scripts/finish-cancel-case.mjs` executed these API steps after the explicit approval was recorded in `human-approval.json`. It defaults to showing the review payload and never retries a write automatically. The immutable engineering artifact is commit `fa78ff8a458dd9d61855b43f67ff9fd575fba215`.
+
+Observed result: `/api/remember` returned HTTP 201, completed job `edfdbf0f-931b-464f-a5e7-f009de08498c`, namespace `incident-memory-v1`, blob `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`. `/api/verify-recall` returned HTTP 200, `gate3=verified`, `eligible-for-review` and that exact same blob for `HvDzt...`. Self-match returned 400; unrelated MoveAbort returned 409. The live inventory increased from 12 to 13. No other memory write was attempted.
+
+Environment: locally built Casewake at `http://127.0.0.1:4220` using real Tatum Sui Mainnet and Walrus Mainnet. These results do not claim that the public production deployment has been updated.
 
 ## Research dispositions
 
@@ -70,4 +74,4 @@ Independent reference integration correction: VERIFIED by recorded real-history 
 
 Original operator application deployment: UNKNOWN.
 
-Human review, stored verified memory, exact-blob reuse: PENDING. The full loop is not yet complete.
+Human review: explicitly APPROVED by ShalyX. Completed Walrus write and exact-blob cross-incident reuse: VERIFIED. This case's full API integration loop is complete; this does not mark every product P0 or submission prerequisite complete.

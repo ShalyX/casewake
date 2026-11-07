@@ -197,3 +197,14 @@ The Product Lock says a human reviewer records a *specific confirmation method a
 - Limitations: no original-operator application fix is established; this is an independently authored reference reconciliation correction. It is a DeepBook integration case and does not satisfy the recorded non-DeFi sourcing gate without a user scope decision. It is not the original flashloan repair.
 - Human causal review: PENDING. Walrus resolution writes: ZERO. Exact-blob resolution recall: UNPROVEN. FULL_PRODUCT_VERIFIED and JUDGE_READY remain blocked.
 - Validation: real-history replay, compatibility/reviewed-evidence tests, ESLint and TypeScript pass. Next production build passes with webpack; default Turbopack cannot resolve the external dependency junction in this isolated worktree. No application build configuration was changed.
+
+## 2026-11-07 — First human-reviewed Mainnet memory loop VERIFIED
+
+- Human authorization: explicit chat response “Approve this case as ShalyX,” recorded with the exact incident, independent-integration scope and immutable engineering artifact. This accepts the case-specific DeepBook scope exception; original operator deployment remains UNKNOWN.
+- Write: protected actual application `/api/remember`, HTTP 201; Walrus completed job `edfdbf0f-931b-464f-a5e7-f009de08498c`; blob `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`; namespace `incident-memory-v1`; method `integration-test` / human-reviewed engineering artifact.
+- Reuse: actual Tatum read of distinct failure `HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV`, signed Walrus recall, exact same completed blob, `eligible-for-review`, `/api/verify-recall` HTTP 200 and `gate3=verified`.
+- Controls: source self-match HTTP 400; unrelated genuine MoveAbort HTTP 409. Both rejected; no additional Walrus write.
+- Before/after: baseline 12 Walrus hits and zero eligible resolution cases for this recurrence; after write 13 hits including the approved exact-blob resolution. Namespace inventory independently confirms 13 completed memories.
+- Proof: `evidence/real-case/{human-approval,reviewed-memory-attempt,reviewed-memory-receipt,exact-blob-recall,recall-negative-controls,namespace-inventory-after}.json`.
+- Environment: local production build at port 4220, real Tatum Sui Mainnet and Walrus Mainnet. Public deployment unchanged. This verifies this case's API workflow; broader product completeness, external utility validation and judge readiness are not inferred.
+- Browser readback: actual 1440px desktop and 390px mobile rendered workspace displays the approved procedure, ShalyX attribution, original-operator limitation, exact recalled blob and inventory 13. No horizontal overflow. A misleading progress-summary fallback was corrected to acknowledge a live recalled reviewed case. Both screenshots were inspected; webpack production build and focused ESLint pass after the correction. Captures: `evidence/real-case/recall-desktop.png` and `recall-mobile.png`.

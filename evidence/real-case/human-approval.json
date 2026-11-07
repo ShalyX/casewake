@@ -1,0 +1,11 @@
+{
+  "authorizationSource": "Explicit user response in this chat",
+  "sourceDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+  "reviewer": "ShalyX",
+  "scope": "independent-integration-reconciliation",
+  "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+  "approved": true,
+  "scopeDecision": "Accept this DeepBook order-management integration case as the first reviewed case despite the previous non-DeFi sourcing target; original operator application change remains unknown.",
+  "userResponse": "Approve this case as ShalyX",
+  "approvedAt": "2026-11-07T15:43:14.8821205Z"
+}

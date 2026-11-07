@@ -1,0 +1,56 @@
+{
+  "status": 201,
+  "data": {
+    "record": {
+      "schema": "incident-memory/v1",
+      "id": "8cab9c0c-dde1-49f5-a360-628dcd1951be",
+      "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+      "network": "sui-mainnet",
+      "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+      "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+      "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+      "sdkVersion": null,
+      "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+      "resolutionSteps": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+      "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+      "reviewer": "ShalyX",
+      "verifiedAt": "2026-11-07T15:43:17.725Z",
+      "status": "human-verified",
+      "resolutionKind": "reviewed-evidence",
+      "validatedEvidence": {
+        "schema": "casewake-validated-evidence/v1",
+        "scope": "human-reviewed-engineering-artifact",
+        "proofType": "reviewer-attested-github-artifact",
+        "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+        "originalTimestampMs": 1794064679525,
+        "originalCheckpoint": "342680912",
+        "provider": "GitHub public API",
+        "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+        "evidenceApiUrl": "https://api.github.com/repos/ShalyX/casewake/commits/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+        "evidenceTitle": "Prove real duplicate-cancel reconciliation and prepare reviewed memory loop",
+        "evidenceCommitSha": "fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+        "evidenceFileCount": 17,
+        "evidenceSha256": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+        "verificationMethod": "integration-test",
+        "reviewerConfirmedCausality": true,
+        "reviewedChange": "Independently authored a cancellation-reconciliation adapter that recognizes an exact earlier successful cancellation before treating a duplicate retry as unresolved. Real finalized history replay resolves this incident and a distinct recurrence. This corrects integration interpretation/retry behavior; the original operator application change is unknown.",
+        "verifiedAt": "2026-11-07T15:43:17.724Z",
+        "originalHistoricalRouteRepaired": false
+      }
+    },
+    "proof": {
+      "jobId": "edfdbf0f-931b-464f-a5e7-f009de08498c",
+      "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+      "owner": "0xfc0a0f72201439c6abea1f490dccc751de178313e7e8697e062c0e5efed4abea",
+      "namespace": "incident-memory-v1",
+      "status": "mainnet-stored"
+    },
+    "gates": {
+      "proofMethod": "reviewer-attested-github-artifact",
+      "guardControlEvidence": "validated",
+      "originalThreeHopCorrection": "not-claimed",
+      "humanReview": "approved",
+      "walrusWrite": "completed"
+    }
+  }
+}

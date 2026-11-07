@@ -231,7 +231,7 @@ export default function Workspace() {
           <div className="case-progress-grid">
             <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? `Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
             <div><strong>02 / HUMAN REVIEW</strong><span>{proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
-            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : proof && !observationOnly ? "Write complete · recurrence check pending" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
+            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : proof && !observationOnly ? "Write complete · recurrence check pending" : eligible.some(candidate => candidate.walrusReceipt?.blobId) ? "Reviewed resolution recalled from Walrus" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
           </div>
           <p className="muted">Observed failures, simulation-tested procedures and human-reviewed resolutions are separate evidence tiers. Casewake never signs or executes a repair.</p>
         </div>
