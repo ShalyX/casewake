@@ -20,7 +20,7 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 12 | TECHNICAL_DERISK | PASS — DISPOSITION | Mainnet integrations proven; historical flashloan experiment separate. |
 | 13 | BUILD_VERTICAL_SLICE | PASS | Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified. |
 | 14 | PRODUCT_REVIEW | PASS | Purpose intact, all eight P0 groups reviewed and workflow fixes verified. |
-| 15 | BRAND_KIT | IN PROGRESS | Rouse locked; ownable canonical mark/wordmark, favicon/avatar/social family and render QA remain. |
+| 15 | BRAND_KIT | PASS | Rouse asset family and rendered font/size/crop QA; BRAND_REVIEW_ROUSE_2026-11-07.md. Internal selection, not user visual signoff. |
 | 16 | ART_DIRECTION | DOCUMENTED | Trace Instrument direction; formal acceptance remains. |
 | 17 | REFERENCE_BOARD | DOCUMENTED | Borrow/avoid decisions; formal acceptance remains. |
 | 18 | VISUAL_ASSET_STRATEGY | DOCUMENTED | Asset plan; final accepted assets remain. |
@@ -48,7 +48,7 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is closed by explicit user selection of Rouse. Phase 15 brand kit is active. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phase 15 brand kit passes; Phase 16 Art Direction is active. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
 Release details: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 

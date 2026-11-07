@@ -1,0 +1,61 @@
+{
+  "svgs": [
+    "avatar.svg",
+    "favicon.svg",
+    "mark-dark.svg",
+    "mark-light.svg",
+    "mark.svg",
+    "wordmark-dark.svg",
+    "wordmark-light.svg",
+    "wordmark.svg"
+  ],
+  "pngs": {
+    "mark-dark": {
+      "width": 512,
+      "height": 512,
+      "sha256": "9d460dd44878858d5773f66132488bc94c01a1345e7e19c6019ed27e663d240f"
+    },
+    "mark-light": {
+      "width": 512,
+      "height": 512,
+      "sha256": "a3e966e4a6307cecd6d0f45ff79a4d04ae442dd0e543059ce7f6a3af2dfab7fd"
+    },
+    "wordmark-dark": {
+      "width": 660,
+      "height": 144,
+      "sha256": "4d4ecef7904fd97bbdda5af58b99336ca90b86934c8e17ef0cdc11251cfa7fb8"
+    },
+    "wordmark-light": {
+      "width": 660,
+      "height": 144,
+      "sha256": "dbc6aa638ff81c7eb65bd78d7c4791139bf4efc3eacab58ed5c51a3830ef11c3"
+    },
+    "avatar": {
+      "width": 512,
+      "height": 512,
+      "sha256": "7efbb9532e39140373add2d6a57c3d17b7c2eb122ef6f1b50cf766bb163b540c"
+    },
+    "favicon-16": {
+      "width": 16,
+      "height": 16,
+      "sha256": "84a35730422504a7515fe1cd9dacfb8456cf0d892586d5f448da6b58a85ce077"
+    },
+    "favicon-32": {
+      "width": 32,
+      "height": 32,
+      "sha256": "0fc964530ca0c2d1d4b76064b64809c3a360651ce095ef752f8eb03c2018db79"
+    },
+    "social-card": {
+      "width": 1200,
+      "height": 630,
+      "sha256": "199bf11c7311c9740d165163c882b730de386e22c3d21cc4b2f5870a6216715c"
+    }
+  },
+  "contrast": {
+    "paper_on_ink": 17.23,
+    "recall_on_ink": 14.4,
+    "failure_on_ink": 7.71,
+    "muted_on_ink": 7.91
+  },
+  "passed": true
+}

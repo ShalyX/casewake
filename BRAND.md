@@ -15,6 +15,26 @@ The sections below are historical naming work, superseded by this explicit lock.
 
 ---
 
+## Brand kit 1.0 — retained counter
+
+Phase 15 brand kit PASS (internal selection and asset QA; not a claim of user visual signoff). Name Rouse remains user-locked.
+
+Canonical files: web/public/brand/rouse/. Review: BRAND_REVIEW_ROUSE_2026-11-07.md. Font-independent SVG wordmarks, positive/reverse marks, favicon, avatar, social card, tokens, usage rules and self-hosted typography.
+
+Selected concept: an open lowercase r with a stepped shoulder cut. The closed first vector read as p and was rejected. Two other concepts were rejected as generic paired-lobe/link symbols. Final monochrome geometry and 16–64px/104px wordmark samples were inspected.
+
+Palette: preserve graphite/lime/orange Trace Instrument for actual product state roles; compared light oyster/cobalt and aubergine/flax. Mark works in black/white without color. No gradient or glow.
+
+Type: custom r plus outlined Archivo Black wordmark; Space Grotesk headings, DM Sans body, DM Mono provenance. Kit font files and licenses supplied; deployed app font migration remains separate.
+
+Voice: direct, evidence-first, clear about uncertainty. Distinguish observed failures, simulation-tested guidance and human-reviewed resolutions. No autonomous-repair claims. Clear space and minimum-size rules are in the asset README.
+
+Rendered QA: desktop 1440/mobile 390; all three fonts loaded; no horizontal overflow; social 1200×630 crop pass; vector parse and PNG-dimension checks pass. Evidence: evidence/brand-rouse/.
+
+Next: Phase 16 Art Direction using Rouse and the approved real case. Existing live Casewake release and immutable records remain unchanged until implementation/release.
+
+---
+
 ## Historical naming and identity work
 
 Version: 1.0 / 2026-11-04. Hackathon product identity. Final trademark clearance NOT completed.

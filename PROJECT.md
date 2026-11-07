@@ -1,3 +1,13 @@
+# Current checkpoint — Rouse brand kit complete, 2026-11-07
+
+Phase 15 PASS for internal brand selection and asset QA. Canonical retained-counter r/wordmark, vector/raster variants, favicon/avatar/social card, typography and usage rules in web/public/brand/rouse/. Three concept territories explored; closed-counter vector rejected and refined for legibility. BRAND_REVIEW_ROUSE_2026-11-07.md records proof and limitations.
+
+Next active phase: 16 ART_DIRECTION. Reconcile DESIGN.md with Rouse and the actual reviewed-case journey, then accept remaining design gates before app-wide implementation/release. Current public app remains the verified Casewake release. No new Mainnet memory writes or production deployment in this milestone.
+
+Earlier checkpoints below are historical.
+
+---
+
 # Current checkpoint — Rouse locked, 2026-11-07
 
 User explicitly instructed **“lock Rouse”** after the known overlap was disclosed. Phase 8 NAME_LOCK PASS; Phase 15 BRAND_KIT active. NAME_LOCK.md and the current BRAND.md section supersede earlier recommendations and pending naming choices. Approved product and Phase 14 proof remain unchanged.
