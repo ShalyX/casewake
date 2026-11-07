@@ -123,3 +123,7 @@ This ledger preserves the original Product Lock revision 1. A working read/recal
 - Distinct real failure `HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV` recalled that exact blob through the actual signed Walrus recall path; `gate3=verified`, eligible for review. Self-match and unrelated-failure controls were rejected.
 - First reviewed case's API loop: VERIFIED on local application build against actual Tatum/Walrus Mainnet. Public production release and complete P0/UI/submission acceptance remain separate.
 - Evidence: `evidence/real-case/human-approval.json`, `reviewed-memory-receipt.json`, `exact-blob-recall.json`, `recall-negative-controls.json` and `namespace-inventory-after.json`. Inventory is now 13 total memories, including one human-reviewed integration resolution.
+
+## Public acceptance for the reviewed case — 2026-11-07
+
+The user-authorized production release at `casewake.vercel.app` now exposes the approved case as a public read-only example. Anonymous Tatum lookup and exact-blob Walrus recall pass; the protected production verifier independently returns `gate3=verified`. Self/unrelated controls and unauthorized-write controls pass. Desktop/mobile guest readback shows the reviewer, procedure, evidence and blob. No new memory was written. This closes the approved case's public-release acceptance; it does not claim completion of every product requirement or submission gate. Artifacts: `evidence/production-reviewed-case/`.

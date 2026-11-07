@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 22,
+  "revision": 23,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "PRODUCT_REVIEW",
   "active_specialist": "Engineering + Proof + Visual QA",
@@ -61,7 +61,7 @@
     "PRODUCTION_NEGATIVE_CONTROL": "VERIFIED 2026-11-05: unrelated real MoveAbort returned zero runbooks; recallDegraded=false",
     "PRODUCTION_WRITE_SECURITY": "VERIFIED 2026-11-05: unknown digest 403; observations 403; remember 403; publicDemoMode true; reviewerWritesEnabled false",
     "PRODUCTION_MEMORY_INVENTORY": "VERIFIED 2026-11-05: 12 complete Mainnet memories in incident-memory-v1",
-    "PUBLIC_DEPLOYMENT": "VERIFIED 2026-11-05: Vercel READY dpl_EBnwaqjqjDm4UFhGe9oovHwkKTym, commit 40e93fd",
+    "PUBLIC_DEPLOYMENT": "VERIFIED 2026-11-07: dpl_DV38eu8MsyLF1jfAJVAMhjhUW3Eu READY, production source 35d28f3348b7a409c24daec38e4993aacd89f281, alias casewake.vercel.app.",
     "PUBLIC_BLOG": "VERIFIED 2026-11-05: https://casewake.vercel.app/journal/casewake and screenshot assets HTTP 200",
     "REVIEWER_WRITE_PRODUCT_LOOP": "IMPLEMENTED; reviewer auth and custom lookup verified in production; human approval and human-case Walrus write remain pending",
     "DEMO_VIDEO": "OPEN: 2-3 minute script exists; MP4 not recorded/reviewed",
@@ -106,7 +106,8 @@
     "OPERATOR_PHASE_AUDIT_2026_11_07": "Updated 2026-11-07: phases 1-12 accepted from recorded proof; Phase 13 remains IN PROGRESS with one human-case/Walrus/exact-recall gate; phases 14-35 remain unpassed until their sequential exit criteria are met.",
     "DUPLICATE_CANCEL_CASE_RESEARCH": "VERIFIED actual Tatum failure/success/events and independent reference reconciliation on two real failures; zero human-approved writes. Optional DeepBook integration case; non-DeFi sourcing gate unchanged pending explicit user decision.",
     "FIRST_REVIEWED_MEMORY_RECEIPT": "HTTP 201; job edfdbf0f-931b-464f-a5e7-f009de08498c; namespace incident-memory-v1; one write; inventory 13.",
-    "FIRST_REVIEWED_CASE_BROWSER_READBACK": "PASS: actual 1440px desktop and 390px mobile workspace displays reviewed procedure, ShalyX, exact blob and scope limits; no overflow; misleading recall summary fixed; build/lint pass."
+    "FIRST_REVIEWED_CASE_BROWSER_READBACK": "PASS: actual 1440px desktop and 390px mobile workspace displays reviewed procedure, ShalyX, exact blob and scope limits; no overflow; misleading recall summary fixed; build/lint pass.",
+    "PUBLIC_REVIEWED_CASE_ACCEPTANCE": "VERIFIED: guest real Tatum lookup and exact reviewed-blob recall; authorized verifier gate3=verified; self/mismatch and anonymous-write protection pass; desktop/mobile guest browser passes. Inventory13; new memory writes0."
   },
   "blockers": [
     "Workspace empty and simulation-runbook states are visually inspected at 1440px desktop and true 390px mobile. Missing-key, timeout, observation, verified write, receipt and recurrence states remain.",
@@ -117,6 +118,6 @@
     "PR #1 remains draft and unmerged; do not promote to Production before human-case acceptance and release checks.",
     "The strict DeepBook full-route repayment case remains separately blocked; do not resume route economics or weaken its acceptance criteria."
   ],
-  "next_action": "Requested first reviewed-case loop and browser readback are complete against real Mainnet integrations. Remaining original-product/release gates are separate: full UI state matrix, general acceptance ledger alignment, external utility validation, release review and public promotion. No further memory writes are needed for this case.",
+  "next_action": "Public reviewed-case deployment request complete. Preserve release 35d28f3 on future master releases; broader full-product/submission gates remain separate. No new reviewed memory writes required.",
   "updated_at": "2026-11-07"
 }

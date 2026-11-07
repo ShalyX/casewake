@@ -1,0 +1,478 @@
+{
+  "checkedAt": "2026-11-07T16:02:21.614Z",
+  "base": "https://casewake.vercel.app",
+  "readOnly": true,
+  "expectedBlobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+  "checks": {
+    "configuration": {
+      "status": 200,
+      "data": {
+        "tatumConfigured": true,
+        "walrusConfigured": true,
+        "reviewerWritesEnabled": true,
+        "publicDemoMode": true,
+        "network": "sui-mainnet",
+        "checksAreLive": false
+      }
+    },
+    "inventory": {
+      "status": 200,
+      "data": {
+        "allStoredMemories": 13,
+        "namespace": "incident-memory-v1",
+        "complete": true
+      }
+    },
+    "sourceTransaction": {
+      "status": 200,
+      "data": {
+        "transaction": {
+          "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:25.116Z",
+          "transactionTimestampMs": 1794064679525,
+          "checkpoint": "342680912",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+          "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+          "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+          "failedCommandIndex": 1,
+          "failedCommandKind": "moveCall",
+          "sender": "0xcde6dbe01902be1f200ff03dbbd149e586847be8cee15235f82750d9b06c0e04",
+          "operationMarkers": [
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::balance_manager::generate_proof_as_owner",
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::pool::cancel_order"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall"
+          ]
+        }
+      }
+    },
+    "recurrenceTransaction": {
+      "status": 200,
+      "data": {
+        "transaction": {
+          "digest": "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:25.496Z",
+          "transactionTimestampMs": 1794064682942,
+          "checkpoint": "342680926",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+          "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+          "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+          "failedCommandIndex": 1,
+          "failedCommandKind": "moveCall",
+          "sender": "0xcde6dbe01902be1f200ff03dbbd149e586847be8cee15235f82750d9b06c0e04",
+          "operationMarkers": [
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::balance_manager::generate_proof_as_owner",
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::pool::cancel_order"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall"
+          ]
+        }
+      }
+    },
+    "publicExactBlobRecall": {
+      "status": 200,
+      "data": {
+        "transaction": {
+          "digest": "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:26.229Z",
+          "transactionTimestampMs": 1794064682942,
+          "checkpoint": "342680926",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+          "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+          "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+          "failedCommandIndex": 1,
+          "failedCommandKind": "moveCall",
+          "sender": "0xcde6dbe01902be1f200ff03dbbd149e586847be8cee15235f82750d9b06c0e04",
+          "operationMarkers": [
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::balance_manager::generate_proof_as_owner",
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::pool::cancel_order"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall"
+          ]
+        },
+        "candidates": [
+          {
+            "record": {
+              "schema": "incident-memory/v1",
+              "id": "8cab9c0c-dde1-49f5-a360-628dcd1951be",
+              "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+              "network": "sui-mainnet",
+              "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+              "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+              "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+              "sdkVersion": null,
+              "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+              "resolutionSteps": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+              "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "reviewer": "ShalyX",
+              "verifiedAt": "2026-11-07T15:43:17.725Z",
+              "status": "human-verified",
+              "resolutionKind": "reviewed-evidence",
+              "validatedEvidence": {
+                "schema": "casewake-validated-evidence/v1",
+                "scope": "human-reviewed-engineering-artifact",
+                "proofType": "reviewer-attested-github-artifact",
+                "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+                "originalTimestampMs": 1794064679525,
+                "originalCheckpoint": "342680912",
+                "provider": "GitHub public API",
+                "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceApiUrl": "https://api.github.com/repos/ShalyX/casewake/commits/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceTitle": "Prove real duplicate-cancel reconciliation and prepare reviewed memory loop",
+                "evidenceCommitSha": "fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceFileCount": 17,
+                "evidenceSha256": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+                "verificationMethod": "integration-test",
+                "reviewerConfirmedCausality": true,
+                "reviewedChange": "Independently authored a cancellation-reconciliation adapter that recognizes an exact earlier successful cancellation before treating a duplicate retry as unresolved. Real finalized history replay resolves this incident and a distinct recurrence. This corrects integration interpretation/retry behavior; the original operator application change is unknown.",
+                "verifiedAt": "2026-11-07T15:43:17.724Z",
+                "originalHistoricalRouteRepaired": false
+              }
+            },
+            "distance": 0.40001966542580825,
+            "verdict": "eligible-for-review",
+            "reasons": [],
+            "warnings": [],
+            "walrusReceipt": {
+              "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+              "namespace": "incident-memory-v1",
+              "verifiedThrough": "signed-walrus-recall"
+            }
+          }
+        ],
+        "observedPrecedents": [],
+        "simulationRunbooks": [],
+        "walrusHitsExamined": 13,
+        "recallDegraded": false,
+        "reason": "A compatible human-reviewed resolution exists for review."
+      }
+    },
+    "publicSelfMatchExcluded": {
+      "status": 200,
+      "data": {
+        "transaction": {
+          "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:29.156Z",
+          "transactionTimestampMs": 1794064679525,
+          "checkpoint": "342680912",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+          "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+          "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+          "failedCommandIndex": 1,
+          "failedCommandKind": "moveCall",
+          "sender": "0xcde6dbe01902be1f200ff03dbbd149e586847be8cee15235f82750d9b06c0e04",
+          "operationMarkers": [
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::balance_manager::generate_proof_as_owner",
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::pool::cancel_order"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall"
+          ]
+        },
+        "candidates": [
+          {
+            "record": {
+              "schema": "incident-memory/v1",
+              "id": "8cab9c0c-dde1-49f5-a360-628dcd1951be",
+              "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+              "network": "sui-mainnet",
+              "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+              "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+              "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+              "sdkVersion": null,
+              "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+              "resolutionSteps": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+              "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "reviewer": "ShalyX",
+              "verifiedAt": "2026-11-07T15:43:17.725Z",
+              "status": "human-verified",
+              "resolutionKind": "reviewed-evidence",
+              "validatedEvidence": {
+                "schema": "casewake-validated-evidence/v1",
+                "scope": "human-reviewed-engineering-artifact",
+                "proofType": "reviewer-attested-github-artifact",
+                "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+                "originalTimestampMs": 1794064679525,
+                "originalCheckpoint": "342680912",
+                "provider": "GitHub public API",
+                "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceApiUrl": "https://api.github.com/repos/ShalyX/casewake/commits/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceTitle": "Prove real duplicate-cancel reconciliation and prepare reviewed memory loop",
+                "evidenceCommitSha": "fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceFileCount": 17,
+                "evidenceSha256": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+                "verificationMethod": "integration-test",
+                "reviewerConfirmedCausality": true,
+                "reviewedChange": "Independently authored a cancellation-reconciliation adapter that recognizes an exact earlier successful cancellation before treating a duplicate retry as unresolved. Real finalized history replay resolves this incident and a distinct recurrence. This corrects integration interpretation/retry behavior; the original operator application change is unknown.",
+                "verifiedAt": "2026-11-07T15:43:17.724Z",
+                "originalHistoricalRouteRepaired": false
+              }
+            },
+            "distance": 0.40001966542580825,
+            "verdict": "incompatible",
+            "reasons": [
+              "Self-match cannot prove comparable-incident recall."
+            ],
+            "warnings": [],
+            "walrusReceipt": {
+              "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+              "namespace": "incident-memory-v1",
+              "verifiedThrough": "signed-walrus-recall"
+            }
+          }
+        ],
+        "observedPrecedents": [],
+        "simulationRunbooks": [],
+        "walrusHitsExamined": 13,
+        "recallDegraded": false,
+        "reason": "No compatible saved precedent or simulation-tested procedure was found in the returned Walrus results."
+      }
+    },
+    "publicUnrelatedExcluded": {
+      "status": 200,
+      "data": {
+        "transaction": {
+          "digest": "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:31.689Z",
+          "transactionTimestampMs": 1793751616746,
+          "checkpoint": "341377758",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: 806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953, name: Identifier(\"guard\") }, function: 0, instruction: 11, function_name: Some(\"check\") }, 21117270) in command 3",
+          "fingerprint": "move-abort:0x806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953::guard::check:abort-21117270",
+          "packageId": "0x806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953",
+          "failedCommandIndex": 3,
+          "failedCommandKind": "moveCall",
+          "sender": "0xb48031e01ee50bc718efda3b9f0a397ffcb84fff1b84b21f29796f68db0b25ba",
+          "operationMarkers": [
+            "move:0xeea8f15fb077e025e64f9b29ad844160af10ec68892014a89120cdf8e68226da::bluefin::open_a2b",
+            "move:0x7360caf46c060dfdbae047b5aa0ef9f756152135b44c7108a8dae4ed11047a4c::cetus::swap_b2a",
+            "move:0x7360caf46c060dfdbae047b5aa0ef9f756152135b44c7108a8dae4ed11047a4c::cetus::swap_a2b",
+            "move:0xeea8f15fb077e025e64f9b29ad844160af10ec68892014a89120cdf8e68226da::bluefin::close_a2b",
+            "move:0x806e8570f5a254d46eccdbc721ae4977aa7b3d8ff53dda1457944d6944a02953::settlement::settle"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall",
+            "moveCall",
+            "moveCall",
+            "moveCall"
+          ]
+        },
+        "candidates": [
+          {
+            "record": {
+              "schema": "incident-memory/v1",
+              "id": "8cab9c0c-dde1-49f5-a360-628dcd1951be",
+              "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+              "network": "sui-mainnet",
+              "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+              "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+              "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+              "sdkVersion": null,
+              "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+              "resolutionSteps": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+              "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "reviewer": "ShalyX",
+              "verifiedAt": "2026-11-07T15:43:17.725Z",
+              "status": "human-verified",
+              "resolutionKind": "reviewed-evidence",
+              "validatedEvidence": {
+                "schema": "casewake-validated-evidence/v1",
+                "scope": "human-reviewed-engineering-artifact",
+                "proofType": "reviewer-attested-github-artifact",
+                "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+                "originalTimestampMs": 1794064679525,
+                "originalCheckpoint": "342680912",
+                "provider": "GitHub public API",
+                "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceApiUrl": "https://api.github.com/repos/ShalyX/casewake/commits/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceTitle": "Prove real duplicate-cancel reconciliation and prepare reviewed memory loop",
+                "evidenceCommitSha": "fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+                "evidenceFileCount": 17,
+                "evidenceSha256": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+                "verificationMethod": "integration-test",
+                "reviewerConfirmedCausality": true,
+                "reviewedChange": "Independently authored a cancellation-reconciliation adapter that recognizes an exact earlier successful cancellation before treating a duplicate retry as unresolved. Real finalized history replay resolves this incident and a distinct recurrence. This corrects integration interpretation/retry behavior; the original operator application change is unknown.",
+                "verifiedAt": "2026-11-07T15:43:17.724Z",
+                "originalHistoricalRouteRepaired": false
+              }
+            },
+            "distance": 0.4111872915807303,
+            "verdict": "incompatible",
+            "reasons": [
+              "Execution error class or operation differs.",
+              "Package mismatch."
+            ],
+            "warnings": [
+              "The detailed trace differs from the source incident. Review the command position and transaction context before reusing the procedure."
+            ],
+            "walrusReceipt": {
+              "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+              "namespace": "incident-memory-v1",
+              "verifiedThrough": "signed-walrus-recall"
+            }
+          }
+        ],
+        "observedPrecedents": [],
+        "simulationRunbooks": [],
+        "walrusHitsExamined": 13,
+        "recallDegraded": false,
+        "reason": "No compatible saved precedent or simulation-tested procedure was found in the returned Walrus results."
+      }
+    },
+    "unknownPublicDigestBlocked": {
+      "status": 403,
+      "data": {
+        "error": "The public demo only supports the three displayed real transaction examples. Private operator mode supports other digests."
+      }
+    },
+    "anonymousRememberBlocked": {
+      "status": 403,
+      "data": {
+        "error": "Reviewer access token is incorrect."
+      }
+    },
+    "anonymousObservationBlocked": {
+      "status": 403,
+      "data": {
+        "error": "Reviewer access required."
+      }
+    },
+    "anonymousVerifierProtected": {
+      "status": 403,
+      "data": {
+        "error": "Reviewer authorization required for production recall acceptance."
+      }
+    },
+    "reviewerExactBlobVerification": {
+      "status": 200,
+      "data": {
+        "gate3": "verified",
+        "proofScope": "human-reviewed-engineering-artifact",
+        "originalThreeHopCorrection": "not-applicable",
+        "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+        "secondTransaction": {
+          "digest": "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV",
+          "network": "sui-mainnet",
+          "source": "Tatum Sui gRPC",
+          "observedAt": "2026-11-07T16:02:37.169Z",
+          "transactionTimestampMs": 1794064682942,
+          "checkpoint": "342680926",
+          "outcome": "failed",
+          "outcomeReason": null,
+          "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+          "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+          "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+          "failedCommandIndex": 1,
+          "failedCommandKind": "moveCall",
+          "sender": "0xcde6dbe01902be1f200ff03dbbd149e586847be8cee15235f82750d9b06c0e04",
+          "operationMarkers": [
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::balance_manager::generate_proof_as_owner",
+            "move:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::pool::cancel_order"
+          ],
+          "commandKinds": [
+            "moveCall",
+            "moveCall"
+          ]
+        },
+        "matchedCandidate": {
+          "record": {
+            "schema": "incident-memory/v1",
+            "id": "8cab9c0c-dde1-49f5-a360-628dcd1951be",
+            "digest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+            "network": "sui-mainnet",
+            "fingerprint": "move-abort:0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a::big_vector::leaf_remove:abort-5",
+            "errorText": "MoveAbort(MoveLocation { module: ModuleId { address: caf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a, name: Identifier(\"big_vector\") }, function: 40, instruction: 35, function_name: Some(\"leaf_remove\") }, 5) in command 1",
+            "packageId": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a",
+            "sdkVersion": null,
+            "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+            "resolutionSteps": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+            "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+            "reviewer": "ShalyX",
+            "verifiedAt": "2026-11-07T15:43:17.725Z",
+            "status": "human-verified",
+            "resolutionKind": "reviewed-evidence",
+            "validatedEvidence": {
+              "schema": "casewake-validated-evidence/v1",
+              "scope": "human-reviewed-engineering-artifact",
+              "proofType": "reviewer-attested-github-artifact",
+              "originalDigest": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+              "originalTimestampMs": 1794064679525,
+              "originalCheckpoint": "342680912",
+              "provider": "GitHub public API",
+              "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "evidenceApiUrl": "https://api.github.com/repos/ShalyX/casewake/commits/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "evidenceTitle": "Prove real duplicate-cancel reconciliation and prepare reviewed memory loop",
+              "evidenceCommitSha": "fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+              "evidenceFileCount": 17,
+              "evidenceSha256": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+              "verificationMethod": "integration-test",
+              "reviewerConfirmedCausality": true,
+              "reviewedChange": "Independently authored a cancellation-reconciliation adapter that recognizes an exact earlier successful cancellation before treating a duplicate retry as unresolved. Real finalized history replay resolves this incident and a distinct recurrence. This corrects integration interpretation/retry behavior; the original operator application change is unknown.",
+              "verifiedAt": "2026-11-07T15:43:17.724Z",
+              "originalHistoricalRouteRepaired": false
+            }
+          },
+          "distance": 0.40001966542580825,
+          "verdict": "eligible-for-review",
+          "reasons": [],
+          "warnings": [],
+          "walrusReceipt": {
+            "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+            "namespace": "incident-memory-v1",
+            "verifiedThrough": "signed-walrus-recall"
+          }
+        },
+        "walrusReceipt": {
+          "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+          "namespace": "incident-memory-v1",
+          "verifiedThrough": "signed-walrus-recall"
+        },
+        "walrusHitsExamined": 13,
+        "note": "A distinct later Tatum-confirmed failure recalled the exact Walrus blob containing a human-reviewed GitHub engineering artifact snapshot. The artifact hash and verification method are preserved; causal relevance remains the reviewer's attested judgment."
+      }
+    },
+    "reviewerSelfRejected": {
+      "status": 400,
+      "data": {
+        "error": "A distinct genuine recurrence and completed Walrus blob ID are required. DeepBook must use its locked independent recurrence."
+      }
+    },
+    "reviewerMismatchRejected": {
+      "status": 409,
+      "data": {
+        "error": "Gate 3 not yet proven: Walrus did not return the exact reviewed resolution blob as an eligible precedent for the second incident.",
+        "secondDigest": "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",
+        "walrusHitsExamined": 13
+      }
+    }
+  },
+  "memoryWrites": 0,
+  "status": "VERIFIED"
+}

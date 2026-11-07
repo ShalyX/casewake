@@ -235,3 +235,12 @@ Machine-readable evidence: `evidence/phase13-readonly-acceptance-2026-11-07.json
 - Original flashloan acceptance remains blocked. Original cancellation operator's code deployment remains unknown. The approved memory accurately describes independent integration reconciliation rather than historical onchain repair.
 - This requested API integration loop is complete against actual Mainnet services. Public deployment is unchanged; broader full-product, UI and submission work is not automatically accepted.
 - Actual desktop/mobile workspace readback also passed: procedure, reviewer, limits and exact blob visible; 13 memories; no horizontal overflow. Corrected the stale “No verified resolution recalled” progress label for eligible signed-recall results. Build/typecheck and focused lint pass. The general acceptance-ledger link still points to the older separate route acceptance endpoint and should be revisited in broader product review; it is not used as this case's proof.
+
+## 2026-11-07 — User-authorized public release completed
+
+- Released source `35d28f3348b7a409c24daec38e4993aacd89f281` to the existing Vercel production project. Deployment `dpl_DV38eu8MsyLF1jfAJVAMhjhUW3Eu` is READY and serves `casewake.vercel.app`. Previous production was `dpl_HrWrFZ2XbQwJCHQyFpq3G83Z4bHa` at `9419428...`.
+- Public read-only example now exposes the approved recurrence; writes remain reviewer-only. The progress card links to the recalled case's actual evidence; the older route ledger is shown only for its route-specific case.
+- Public Tatum lookup and exact reviewed-blob recall pass; production reviewer verification returns `gate3=verified`; self/mismatch controls rejected; anonymous writes/custom unknown digests blocked. Inventory 13, zero new writes.
+- Public desktop/mobile guest browser journey passes with no reviewer key entered. Evidence and reproducible script are under `evidence/production-reviewed-case/` and `web/scripts/verify-public-reviewed-case.mjs`.
+- Release deployed directly from the verified feature branch; repository master and draft PR #1 were not merged as part of this deployment. A future master production push should preserve this released revision.
+- This deployment request is complete. Broader submission readiness and external validation remain separate.
