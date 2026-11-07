@@ -71,12 +71,12 @@ const pools1=route1.paths.map(p=>p.id);
 // 4. USDSUI -> USDC. Exclude all pools already touched by the first route,
 // the loan source pool, and the three original incident swap pools.
 const route2=await findRoute(USDSUI,USDC,route1.amountOut,[...ORIGINAL_SWAP_POOLS,LOAN_POOL,...pools1]);
-const usdcCoin=await aggregator.routerSwap({router:route2,inputCoin:usdsuiCoin,slippage:SLIPPAGE,txb:tx});
+const usdcCoin=await aggregator.routerSwap({router:route2,inputCoin:usdsuiCoin,slippage:SWAP_SLIPPAGE,txb:tx});
 const pools2=route2.paths.map(p=>p.id);
 
 // 5. USDC -> SUI, again using only fresh pools.
 const route3=await findRoute(USDC,SUI,route2.amountOut,[...ORIGINAL_SWAP_POOLS,LOAN_POOL,...pools1,...pools2]);
-const returnedSui=await aggregator.routerSwap({router:route3,inputCoin:usdcCoin,slippage:SLIPPAGE,txb:tx});
+const returnedSui=await aggregator.routerSwap({router:route3,inputCoin:usdcCoin,slippage:SWAP_SLIPPAGE,txb:tx});
 const pools3=route3.paths.map(p=>p.id);
 
 // 6. Merge swap output with untouched reserve, split exact principal,
