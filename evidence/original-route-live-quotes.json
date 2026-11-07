@@ -53,7 +53,7 @@
         "label": "deepbook-usdc-to-sui",
         "decoded": {
           "suiOutMist": "65000000000",
-          "usdcRemainderMist": "46546",
+          "usdcRemainderMist": "33543",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -67,7 +67,7 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "46546",
+        "deepbookUsdcRemainderMist": "33543",
         "deepbookDeepFeeMist": "0",
         "deepbookSuiOutputMist": "65000000000"
       },
@@ -116,7 +116,7 @@
         "label": "deepbook-usdc-to-sui",
         "decoded": {
           "suiOutMist": "64700000000",
-          "usdcRemainderMist": "82931",
+          "usdcRemainderMist": "64811",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -130,7 +130,7 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "82931",
+        "deepbookUsdcRemainderMist": "64811",
         "deepbookDeepFeeMist": "0",
         "deepbookSuiOutputMist": "64700000000"
       },
@@ -179,7 +179,7 @@
         "label": "deepbook-usdc-to-sui",
         "decoded": {
           "suiOutMist": "64600000000",
-          "usdcRemainderMist": "84531",
+          "usdcRemainderMist": "65793",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -193,7 +193,7 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "84531",
+        "deepbookUsdcRemainderMist": "65793",
         "deepbookDeepFeeMist": "0",
         "deepbookSuiOutputMist": "64600000000"
       },
@@ -242,7 +242,7 @@
         "label": "deepbook-usdc-to-sui",
         "decoded": {
           "suiOutMist": "64500000000",
-          "usdcRemainderMist": "84837",
+          "usdcRemainderMist": "66127",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -256,7 +256,7 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "84837",
+        "deepbookUsdcRemainderMist": "66127",
         "deepbookDeepFeeMist": "0",
         "deepbookSuiOutputMist": "64500000000"
       },
@@ -305,7 +305,7 @@
         "label": "deepbook-usdc-to-sui",
         "decoded": {
           "suiOutMist": "64400000000",
-          "usdcRemainderMist": "85144",
+          "usdcRemainderMist": "66463",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -319,7 +319,7 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "85144",
+        "deepbookUsdcRemainderMist": "66463",
         "deepbookDeepFeeMist": "0",
         "deepbookSuiOutputMist": "64400000000"
       },
@@ -367,8 +367,8 @@
       "hop3": {
         "label": "deepbook-usdc-to-sui",
         "decoded": {
-          "suiOutMist": "64300000000",
-          "usdcRemainderMist": "460",
+          "suiOutMist": "64200000000",
+          "usdcRemainderMist": "67133",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -382,15 +382,15 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "460",
+        "deepbookUsdcRemainderMist": "67133",
         "deepbookDeepFeeMist": "0",
-        "deepbookSuiOutputMist": "64300000000"
+        "deepbookSuiOutputMist": "64200000000"
       },
       "repayment": {
-        "availableSuiMist": "65065188650",
+        "availableSuiMist": "64965188650",
         "requiredPrincipalMist": "65265188650",
-        "marginMist": "-200000000",
-        "shortfallMist": "200000000",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
         "repayable": false
       }
     },
@@ -430,8 +430,8 @@
       "hop3": {
         "label": "deepbook-usdc-to-sui",
         "decoded": {
-          "suiOutMist": "63800000000",
-          "usdcRemainderMist": "1974",
+          "suiOutMist": "63700000000",
+          "usdcRemainderMist": "68807",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -445,15 +445,15 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "1974",
+        "deepbookUsdcRemainderMist": "68807",
         "deepbookDeepFeeMist": "0",
-        "deepbookSuiOutputMist": "63800000000"
+        "deepbookSuiOutputMist": "63700000000"
       },
       "repayment": {
-        "availableSuiMist": "65065188650",
+        "availableSuiMist": "64965188650",
         "requiredPrincipalMist": "65265188650",
-        "marginMist": "-200000000",
-        "shortfallMist": "200000000",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
         "repayable": false
       }
     },
@@ -493,8 +493,8 @@
       "hop3": {
         "label": "deepbook-usdc-to-sui",
         "decoded": {
-          "suiOutMist": "63300000000",
-          "usdcRemainderMist": "3485",
+          "suiOutMist": "63200000000",
+          "usdcRemainderMist": "70478",
           "deepRequiredMist": "0"
         },
         "gasUsed": {
@@ -508,15 +508,15 @@
       "handoffs": {
         "turbosSuiRemainderMist": "0",
         "bluefinUsdsuiRemainderMist": "0",
-        "deepbookUsdcRemainderMist": "3485",
+        "deepbookUsdcRemainderMist": "70478",
         "deepbookDeepFeeMist": "0",
-        "deepbookSuiOutputMist": "63300000000"
+        "deepbookSuiOutputMist": "63200000000"
       },
       "repayment": {
-        "availableSuiMist": "65065188650",
+        "availableSuiMist": "64965188650",
         "requiredPrincipalMist": "65265188650",
-        "marginMist": "-200000000",
-        "shortfallMist": "200000000",
+        "marginMist": "-300000000",
+        "shortfallMist": "300000000",
         "repayable": false
       }
     }
@@ -526,7 +526,7 @@
     "label": "deepbook-usdc-to-sui",
     "decoded": {
       "suiOutMist": "0",
-      "usdcRemainderMist": "46546",
+      "usdcRemainderMist": "33543",
       "deepRequiredMist": "0"
     },
     "gasUsed": {
@@ -549,5 +549,5 @@
     "walrusWritten": false,
     "gate1Eligible": false
   },
-  "generatedAt": "2026-11-07T01:44:31.084Z"
+  "generatedAt": "2026-11-07T01:47:41.478Z"
 }

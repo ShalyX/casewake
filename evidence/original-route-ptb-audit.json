@@ -1931,7 +1931,7 @@
           "initialSharedVersion": "773317532"
         }
       },
-      "version": "1076096355",
+      "version": "1076097020",
       "content": {
         "type": "Buffer",
         "data": [
@@ -2458,7 +2458,7 @@
           "initialSharedVersion": "1"
         }
       },
-      "version": "1021391885",
+      "version": "1021394699",
       "content": {
         "type": "Buffer",
         "data": [
@@ -2494,9 +2494,9 @@
           0,
           0,
           6,
-          59,
-          152,
-          173,
+          92,
+          128,
+          176,
           179,
           161,
           1,
@@ -2572,7 +2572,7 @@
           "initialSharedVersion": "406496849"
         }
       },
-      "version": "1076096212",
+      "version": "1076097018",
       "content": {
         "type": "Buffer",
         "data": [
@@ -2670,7 +2670,7 @@
           "initialSharedVersion": "808468881"
         }
       },
-      "version": "1076095990",
+      "version": "1076096680",
       "content": {
         "type": "Buffer",
         "data": [
@@ -3230,7 +3230,7 @@
           "initialSharedVersion": "389750322"
         }
       },
-      "version": "1076096358",
+      "version": "1076097025",
       "content": {
         "type": "Buffer",
         "data": [
@@ -4026,5 +4026,5 @@
     "A current object state does not reconstruct historical liquidity at the transaction checkpoint.",
     "No route economics, repaired transaction, human approval or Walrus resolution is claimed."
   ],
-  "generatedAt": "2026-11-07T01:44:21.676Z"
+  "generatedAt": "2026-11-07T01:47:32.221Z"
 }
