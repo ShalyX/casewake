@@ -7,14 +7,14 @@ Rule: one complete, honest user journey; supporting spikes do not substitute for
 
 | # | Locked P0 / acceptance | Test and required evidence | Current status |
 |---:|---|---|---|
-| 1 | Real Sui digest intake via Tatum with provenance | Live Mainnet digest; show digest, network, source, outcome and actual execution effects | PASS for failed examples; success/unknown branches still need explicit live tests |
-| 2 | Failure/success/unknown distinction; no sign or submit | Live failed, successful and unknown/pruned lookup cases; inspect all UI labels and API outcomes | PARTIAL |
+| 1 | Real Sui digest intake via Tatum with provenance | Live Mainnet failed and successful digests; show digest, network, source, outcome, chain timestamp and checkpoint | PASS for live failed/successful reads and provenance; NOT_FOUND now maps to an explicit unknown state; live retest pending |
+| 2 | Failure/success/unknown distinction; no sign or submit | Live failed, successful and unavailable/pruned lookups; inspect API and UI outcomes | PARTIAL: failed + succeeded live; NOT_FOUND-to-unknown implemented and unit-tested; live endpoint retest and full UI state matrix remain |
 | 3 | Deterministic compatibility and evidence tiers | Same network/error fingerprint and known package/version constraints; observed failure ≠ simulation runbook ≠ human-verified case; mismatches must not recommend a fix | PASS for existing observation/runbook positives and MoveAbort negative control; general human case needs live acceptance |
-| 4 | Human-reviewed case record | Case-specific diagnosis, exact proof, named reviewer, reviewer key, explicit causal approval; server independently re-fetches source and successor before storage | CODED in PR #1; no genuine approved case accepted yet |
+| 4 | Human-reviewed case record | Case-specific diagnosis, exact proof, named reviewer, reviewer key, explicit causal approval; server independently re-fetches source and later successor before storage | PARTIAL: code restored; live anonymous 403 and no-causal-approval 400 pass; strict later-checkpoint guard tested; no genuine case approved |
 | 5 | Completed Walrus Mainnet write | Only after Gate 4: wait for completed remember job; capture exact blob ID, job ID, owner and namespace; no retry after uncertain write | NOT RUN for a human-verified case; no resolution write authorized |
 | 6 | Later recurrence retrieves exact stored case | Different real failed digest; compatible fingerprint/package/version; signed Walrus recall returns the exact same blob ID and an eligible candidate | CODED in PR #1; no human-verified blob exists to test |
-| 7 | Negative controls and fail-closed behavior | Unrelated MoveAbort; different fingerprint; different package/version when known; wrong sender; no matching operation; self-match; invalid evidence URL; missing reviewer attestation; unauthorized writes | PARTIAL: existing API/security tests pass; full live human-case matrix remains |
-| 8 | Saved count and workspace states | Count only completed Mainnet writes; test empty, missing keys, loading, live, timeout, failed lookup, no precedent, observation, runbook, verified case, write pending, write complete, recurrence pass/fail; desktop and mobile | PARTIAL |
+| 7 | Negative controls and fail-closed behavior | Unrelated MoveAbort; different fingerprint; different package/version when known; wrong sender; no matching operation; self-match; invalid evidence URL; missing reviewer attestation; unauthorized writes | PARTIAL: live 403/400 reviewer gates and synthetic chronology/tamper tests pass; full case-specific live abuse matrix remains |
+| 8 | Saved count and workspace states | Count only completed Mainnet writes; test empty, missing keys, loading, live, timeout, failed lookup, no precedent, observation, runbook, verified case, write pending, write complete, recurrence pass/fail; desktop and mobile | PARTIAL: chain timestamp/checkpoint now visible; full desktop/mobile state matrix remains |
 
 ## End-to-end happy path
 
@@ -38,6 +38,15 @@ Rule: one complete, honest user journey; supporting spikes do not substitute for
 
 Phase 13 passes only when all eight P0s have acceptance evidence and one complete general Casewake user journey reaches a completed Walrus receipt and exact-blob recurrence on a different compatible real failure, with a human reviewer explicitly approving the case. Until then the phase remains IN PROGRESS.
 
+
+## 2026-11-07 — Live read-only acceptance update
+
+- scripts/verify-phase13-readonly.mjs passed against the rebuilt local production server. Live Tatum controls distinguish a failed Mainnet transaction and a succeeded Mainnet transaction; both return chain timestamp and checkpoint.
+- A historical public issue digest previously returned HTTP 422 `not found`. The current branch maps Tatum gRPC `NOT_FOUND` to `outcome: unknown`; the rebuilt local endpoint retest is pending. Unknown outcomes must not trigger Walrus recall.
+- Anonymous POST /api/remember returns 403. Authenticated reviewer request with confirmedCausalLink=false returns 400 before Walrus storage. No Walrus write, signing or submission occurred.
+- Successor evidence now requires both Tatum chain timestamps and a strictly later checkpoint. Synthetic tests reject equal/earlier/missing checkpoints and malformed successor evidence.
+- Seven test scripts pass (17 TAP tests plus four assertion-based suites); `pnpm lint` exits 0. The production build for this updated head is pending GitHub Actions. These are supporting controls only, not the required representative human-reviewed case.
+- The failed/successful transaction fixtures used for status checks are DeFi controls and are explicitly excluded from the general-case quality gate.
 
 ## Case-source quality gate
 

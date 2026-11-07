@@ -20,7 +20,7 @@ jobs:
       - run: corepack enable
       - run: corepack prepare pnpm@10.22.0 --activate
       - run: pnpm install --frozen-lockfile
-      - run: node --experimental-strip-types scripts/test-incidents.mjs
+      - run: pnpm test
       - run: pnpm lint
       - run: pnpm build
         env:

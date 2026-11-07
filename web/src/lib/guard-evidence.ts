@@ -33,6 +33,10 @@ export type ValidatedEvidence = {
   proofType: "tatum-executed-successor";
   originalDigest: string;
   successorDigest: string;
+  originalTimestampMs: number;
+  successorTimestampMs: number;
+  originalCheckpoint: string;
+  successorCheckpoint: string;
   provider: "Tatum Sui gRPC";
   originalSender: string;
   successorSender: string;

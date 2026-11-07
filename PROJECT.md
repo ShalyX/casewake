@@ -187,3 +187,19 @@ Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](
 - Latest PR head: 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; GitHub Actions run 42335361421 passed install, deterministic tests, ESLint and Next production build. Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF is READY at https://casewake-1840fh0xz-shalyxs-projects.vercel.app. Preview credentials are absent by design; no live reviewer write was attempted.
 - Production remains on master commit 94194282650a217c67adcecf0df559abdbcf713b. No Production promotion or Walrus resolution write occurred in this checkpoint.
 - The Windows workspace was left untouched; current implementation work is on the GitHub PR branch to avoid mixing the stale local checkpoint and untracked investigation artifacts.
+
+## 2026-11-07 — Phase 13 live read-only acceptance
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Live Tatum failed transaction lookup returns execution evidence, chain timestamp and checkpoint | VERIFIED (LIVE MAINNET CONTROL) | Local production build `/api/transaction` for `6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v`; outcome `failed`; `transactionTimestampMs` finite and checkpoint numeric | This fixture is from the DeFi-heavy candidate pool; it is a status/provenance control only, not the representative general developer case |
+| Live Tatum successful transaction lookup is distinguished from failure and includes chain timestamp/checkpoint | VERIFIED (LIVE MAINNET CONTROL) | `/api/transaction` for `DmskUFSYixcpEcNgJyyquQH6q8t7fA856Y6rzZuVbBQv`; outcome `succeeded` | Control only; not asserted to be a correction or causal successor |
+| Historical unavailable digest is not mislabeled as an onchain failure | RETEST PENDING | Earlier `/api/transaction` returned HTTP 422 `not found`; current branch maps gRPC `NOT_FOUND` to `outcome: unknown` and updates the live acceptance script to assert no Walrus recall | Code-level classifier tests pass; rebuilt local API retest still required |
+| Anonymous verified-resolution write is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` without reviewer key returned HTTP 403 | No write attempted |
+| Authenticated reviewer without explicit causal approval is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` with reviewer key and `confirmedCausalLink=false` returned HTTP 400 | Request deliberately stopped before successor verification and before Walrus storage; no write attempted |
+| Later-successor chronology is enforced in code and persisted-memory validation | VERIFIED (CODE + SYNTHETIC TESTS) | Tatum read mask includes `timestamp` and `checkpoint`; `verifyOnchainSuccessor` requires finite timestamps and strictly increasing checkpoint; `test-route-memory-gate.mjs` rejects equal, earlier and missing checkpoints | No genuine representative case has yet exercised this path end-to-end |
+| Corrective branch quality | PARTIAL (LOCAL) | Seven test scripts pass (17 TAP tests plus four assertion-based suites); `pnpm lint` exits 0 | Production build for this updated head is pending GitHub Actions; deterministic fixtures do not prove a human-reviewed resolution |
+
+The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/` with the local production server running. It performs real Tatum reads and reviewer rejection checks only. It never writes to Walrus, signs or submits a transaction.
+
+**No human-verified resolution memory was written.** The first general case still requires a genuinely different non-flashloan Sui developer incident, case-specific diagnosis/proof, a Tatum-confirmed later successful transaction, and an authorized human's explicit causal approval. The eight-digest DeFi/flashloan sample is not accepted as representative validation.

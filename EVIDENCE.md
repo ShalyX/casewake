@@ -155,3 +155,19 @@ No new Walrus resolution memory was written in this checkpoint. Do not infer a s
 ## 2026-11-07 — Candidate-pool quality audit
 
 A bounded inspection of all eight current InsufficientCoinBalance candidate PTBs (evidence/insufficient-coin-balance-sample-audit-2026-11-07.md) found that all eight are DeFi flashloan/DEX swap strategies clustered at checkpoint 341377758. This is not a representative general Sui developer-incident sample. Do not use these eight as external user validation or continue route mining. The next general case must come from a distinct real developer incident with case-specific proof and a human reviewer.
+
+## 2026-11-07 — Phase 13 live read-only acceptance
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Live Tatum failed transaction lookup returns execution evidence, chain timestamp and checkpoint | VERIFIED (LIVE MAINNET CONTROL) | Local production build `/api/transaction` for `6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v`; outcome `failed`; `transactionTimestampMs` finite and checkpoint numeric | This fixture is from the DeFi-heavy candidate pool; it is a status/provenance control only, not the representative general developer case |
+| Live Tatum successful transaction lookup is distinguished from failure and includes chain timestamp/checkpoint | VERIFIED (LIVE MAINNET CONTROL) | `/api/transaction` for `DmskUFSYixcpEcNgJyyquQH6q8t7fA856Y6rzZuVbBQv`; outcome `succeeded` | Control only; not asserted to be a correction or causal successor |
+| Historical unavailable digest is not mislabeled as an onchain failure | RETEST PENDING | Earlier `/api/transaction` returned HTTP 422 `not found`. The current branch now maps Tatum gRPC `NOT_FOUND` to an explicit `outcome: unknown`; the updated live acceptance script checks both the lookup and that recall does not query Walrus | Code-level classifier tests pass; rebuilt local API retest still required |
+| Anonymous verified-resolution write is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` without reviewer key returned HTTP 403 | No write attempted |
+| Authenticated reviewer without explicit causal approval is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` with reviewer key and `confirmedCausalLink=false` returned HTTP 400 | Request deliberately stopped before successor verification and before Walrus storage; no write attempted |
+| Later-successor chronology is enforced in code and persisted-memory validation | VERIFIED (CODE + SYNTHETIC TESTS) | Tatum read mask includes `timestamp` and `checkpoint`; `verifyOnchainSuccessor` requires finite timestamps and strictly increasing checkpoint; `test-route-memory-gate.mjs` rejects equal, earlier and missing checkpoints | No genuine representative case has yet exercised this path end-to-end |
+| Corrective branch quality | PARTIAL (LOCAL) | Seven test scripts pass (17 TAP tests plus four assertion-based suites); `pnpm lint` exits 0 | Production build for this updated head is pending GitHub Actions; deterministic fixtures do not prove a human-reviewed resolution |
+
+The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/` with the local production server running. It performs real Tatum reads and reviewer rejection checks only. It never writes to Walrus, signs or submits a transaction.
+
+**No human-verified resolution memory was written.** The first general case still requires a genuinely different non-flashloan Sui developer incident, case-specific diagnosis/proof, a Tatum-confirmed later successful transaction, and an authorized human's explicit causal approval. The eight-digest DeFi/flashloan sample is not accepted as representative validation.

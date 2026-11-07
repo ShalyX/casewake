@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {encodeMemory,decodeMemory,assessCase} from '../src/lib/incidents.ts';
+import {encodeMemory,decodeMemory,assessCase,isLaterCheckpoint} from '../src/lib/incidents.ts';
 
 const base={
  schema:'incident-memory/v1',id:'full-repair-fixture',network:'sui-mainnet',
@@ -38,4 +38,32 @@ test('Self-match rejected and distinct comparable failure eligible only for revi
  outcome:'failed',errorText:base.errorText,fingerprint:base.fingerprint,packageId:null};
  assert.equal(assessCase(observed,rec,0).verdict,'incompatible');
  assert.equal(assessCase({...observed,digest:'XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue'},rec,0).verdict,'eligible-for-review');
+});
+
+test('A successor must be finalized in a strictly later checkpoint',()=>{
+ assert.equal(isLaterCheckpoint('342629269','342629270'),true);
+ assert.equal(isLaterCheckpoint('342629269','342629269'),false);
+ assert.equal(isLaterCheckpoint('342629270','342629269'),false);
+ assert.equal(isLaterCheckpoint(null,'342629270'),false);
+ assert.equal(isLaterCheckpoint('not-a-checkpoint','342629270'),false);
+});
+
+const sourceDigest='2'.repeat(43);
+const successorDigest='3'.repeat(43);
+const successorCase={...base,id:'human-successor-fixture',digest:sourceDigest,
+ evidenceUrl:'https://suivision.xyz/txblock/'+successorDigest,resolutionKind:'onchain-successor',
+ validatedEvidence:{schema:'casewake-validated-evidence/v1',scope:'human-reviewed-successor-transaction',
+  proofType:'tatum-executed-successor',originalDigest:sourceDigest,successorDigest,
+  originalTimestampMs:1793751616746,successorTimestampMs:1793751716746,
+  originalCheckpoint:'342629269',successorCheckpoint:'342629270',
+  provider:'Tatum Sui gRPC',originalSender:'0xabc',successorSender:'0xabc',
+  matchedOperations:['move:0x2::example::execute'],successorOutcome:'succeeded',
+  reviewerConfirmedCausality:true,reviewedChange:'Corrected the specific object version and rebuilt the same deposit operation.',
+  verifiedAt:'2026-11-07T10:00:00.000Z',originalHistoricalRouteRepaired:false}};
+test('A human-reviewed successor record is accepted only with later-checkpoint evidence',()=>{
+ assert.equal(decodeMemory(encodeMemory(successorCase))?.validatedEvidence?.scope,'human-reviewed-successor-transaction');
+ const earlier={...successorCase,validatedEvidence:{...successorCase.validatedEvidence,successorCheckpoint:'342629268'}};
+ assert.equal(decodeMemory(encodeMemory(earlier)),null);
+ const missing={...successorCase,validatedEvidence:{...successorCase.validatedEvidence,successorTimestampMs:null}};
+ assert.equal(decodeMemory(encodeMemory(missing)),null);
 });

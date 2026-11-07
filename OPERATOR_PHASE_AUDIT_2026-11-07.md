@@ -46,7 +46,7 @@ Status key: PASS = exit evidence present; PARTIAL = real work exists but exit pr
 | 10 | EVIDENCE_PLAN | PASS (PLAN ONLY) | EVIDENCE.md assigns critical claims, status, owner, method, artifact target, internal target and judge surface. Proof is separately tracked. |
 | 11 | DEPENDENCY_ATTACK | PARTIAL | Tatum and Walrus Mainnet integrations proven; human-reviewed case availability and live general write remain unproven; external track fit uncertain. The eight existing InsufficientCoinBalance candidates are all flashloan/DEX PTBs and are not a representative general-incident sample. |
 | 12 | TECHNICAL_DERISK | PASS (DISPOSITION COMPLETE; BLOCKERS RETAINED) | Every existential assumption has a disposition. Tatum/Walrus read, observation and simulation-runbook path proven. Generic reviewer path passes CI/Preview. Human case write/recall BLOCKED; DeepBook full-route gate separately BLOCKED. No claim promoted. |
-| 13 | BUILD_VERTICAL_SLICE | PARTIAL — ACTIVE | Authentic Tatum intake, Walrus observations/runbook recall and negative control work. Generic reviewer UI/API restored. Missing live human-approved case → completed blob receipt → distinct compatible failure recalls exact blob. The current eight-candidate error sample is DeFi flashloan-heavy; source a genuinely different developer incident. See PHASE13_ACCEPTANCE_MATRIX.md and evidence/insufficient-coin-balance-sample-audit-2026-11-07.md. |
+| 13 | BUILD_VERTICAL_SLICE | PARTIAL — ACTIVE | Live Tatum failed/success controls, timestamp/checkpoint provenance, reviewer 403/400 gates and later-checkpoint chronology tests pass. NOT_FOUND now maps to an explicit unknown state with unit coverage; live endpoint retest and the general human-approved case → Walrus receipt → exact-blob recurrence remain open. |
 | 14 | PRODUCT_REVIEW | MODIFY — OPEN | Thesis remains intact and DeepBook focus removed from product shell. Full magic moment still missing; repeat Product Critic after Phase 13 passes. See PRODUCT_REVIEW_2026-11-07.md. |
 | 15 | BRAND_KIT | PASS | BRAND.md includes wordmark concept, logo mark, colors, type, voice, vocabulary and usage rules. Rendered 24px/mobile QA belongs to Phase 22. |
 | 16 | ART_DIRECTION | PARTIAL | Trace-instrument territory selected; dedicated implementable composition and screen-by-screen art direction still needed. |
@@ -56,9 +56,9 @@ Status key: PASS = exit evidence present; PARTIAL = real work exists but exit pr
 | 20 | DESIGN_LOCK | NOT DONE | DESIGN.md does not exist; design system and page compositions are not locked. |
 | 21 | DESIGN_ENGINEERING | PARTIAL | Landing, workspace, proof page and generic progress panel exist; final implementation still needs the design lock. |
 | 22 | VISUAL_QA | PARTIAL | Preview HTTP/HTML and responsive CSS checked; no current desktop/mobile rendered screenshot matrix or 24px mark QA. |
-| 23 | BUILD_LOOP | PARTIAL — NOT PASSED | General reviewer path restored in code, but no live human-verified case and no completed exact-blob recurrence. Success/unknown and UI state matrices incomplete. |
+| 23 | BUILD_LOOP | PARTIAL — NOT PASSED | General reviewer path restored; live success and reviewer-gate controls pass; NOT_FOUND-to-unknown is implemented with unit coverage but live endpoint retest is pending; complete workspace state matrix and human-case recurrence remain open. |
 | 24 | PROOF_ENGINE | PARTIAL | Real Tatum/Walrus observation and runbook proof exists; human-reviewed resolution claim remains blocked. |
-| 25 | RED_TEAM | PARTIAL | Anonymous write denial, reviewer auth, synthetic compatibility/tamper tests exist; full live human-case journey and complete P0 abuse matrix remain. |
+| 25 | RED_TEAM | PARTIAL | Anonymous 403 and authenticated no-causal-approval 400 verified live; full case-specific abuse matrix, wrong-sender/operation and production reviewer journey still open. |
 | 26 | PRODUCT_HYGIENE | PARTIAL | Installed public-project-launch-hygiene skill located; prior HYGIENE.md has stale fallback_used=true and must be rerun on release candidate, including history secret scan. |
 | 27 | DEMO_PRODUCTION | PARTIAL | 2:35 script and shot list exist; final MP4 not recorded. |
 | 28 | DEMO_QA | NOT DONE | No final video file to watch and inspect end-to-end. |
@@ -93,3 +93,12 @@ The eight grouped P0s in PRODUCT.md remain locked. Phase 13 cannot pass until th
 Next action: continue Phase 13 with the general user workflow and complete P0 acceptance matrix. Source one genuine, non-flashloan Sui incident with case-specific evidence from an engineer/maintainer or public issue. Do not continue mining the current eight-digest flashloan sample. If no legitimate case can be independently supported, stop at the human gate and request an explicit product/submission decision rather than inventing one.
 
 Competition deadline: 2026-11-10 17:00 UTC.
+
+## 2026-11-07 — Phase 13 read-only acceptance checkpoint
+
+- Active phase remains 13 / BUILD_VERTICAL_SLICE. Phase 12 remains closed as risk disposition, not as universal technical success.
+- Corrective branch adds Tatum transaction timestamp/checkpoint provenance and refuses a claimed successor unless its checkpoint is strictly later than the source failure. Persisted successor memories must also carry valid chronological proof.
+- Five deterministic suites pass; ESLint is clean; Next production build passes. The new `web/scripts/verify-phase13-readonly.mjs` passes live failed, succeeded and pruned/unavailable Tatum lookups, including timestamp/checkpoint fields, plus anonymous 403 and authenticated no-causal-approval 400. It makes no Walrus write.
+- The live status fixtures are DeFi controls only. They do not satisfy the required general-case quality gate. No human-verified memory exists and no exact-blob recurrence has been demonstrated.
+- **Human input required:** provide or arrange one genuine non-flashloan Sui Mainnet developer incident with its failed digest, case-specific diagnosis/fix evidence, and a distinct later successful transaction from the same sender. The named reviewer must inspect and explicitly approve the causal link before Casewake writes once to Walrus.
+- Phase 13 remains IN PROGRESS; phases 14–35 remain gated by the Operator sequence. No feature freeze, demo-ready or submission-ready claim is authorized.

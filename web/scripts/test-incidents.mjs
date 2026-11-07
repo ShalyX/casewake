@@ -30,6 +30,8 @@ const incident = {
     scope: "human-reviewed-successor-transaction",
     proofType: "tatum-executed-successor",
     originalDigest: source, successorDigest: successor,
+    originalTimestampMs: 1793751616746, successorTimestampMs: 1793751716746,
+    originalCheckpoint: "342629269", successorCheckpoint: "342629270",
     originalSender: sender, successorSender: sender,
     matchedOperations: ["move:0x123::module::method"],
     provider: "Tatum Sui gRPC", successorOutcome: "succeeded",
@@ -42,10 +44,15 @@ assert.deepEqual(decodeMemory(serialized), incident);
 assert.equal(assessCase(obs, incident, 0.1).verdict, "eligible-for-review");
 assert.equal(assessCase({ ...obs, digest: source }, incident, 0.1).verdict, "incompatible");
 assert.equal(assessCase({ ...obs, outcome: "succeeded" }, incident, 0.1).verdict, "incompatible");
+assert.equal(assessCase({ ...obs, outcome: "unknown", errorText: null, fingerprint: null }, incident, 0.1).verdict, "incompatible");
 assert.equal(assessCase({ ...obs, fingerprint: fingerprintError("InsufficientGas") }, incident, 0.1).verdict, "incompatible");
 assert.equal(assessCase({ ...obs, packageId: "0x1" }, { ...incident, packageId: "0x2" }, 0.1).verdict, "incompatible");
-assert.equal(assessCase(obs, { ...incident, sdkVersion: "2.0.0" }, 0.1).verdict, "incompatible");
-assert.equal(assessCase(obs, { ...incident, errorText: "MoveAbort from another context" }, 0.1).verdict, "incompatible");
+const sdkScoped = assessCase(obs, { ...incident, sdkVersion: "2.0.0" }, 0.1);
+assert.equal(sdkScoped.verdict, "eligible-for-review");
+assert.ok(sdkScoped.warnings?.some(w => w.includes("SDK version")));
+const traceVariant = assessCase(obs, { ...incident, errorText: "MoveAbort from another context" }, 0.1);
+assert.equal(traceVariant.verdict, "eligible-for-review");
+assert.ok(traceVariant.warnings?.some(w => w.includes("detailed trace differs")));
 assert.equal(decodeMemory("malformed sample"), null);
 assert.equal(decodeMemory(serialized.replace('"status":"human-verified"', '"status":"unverified"')), null);
 

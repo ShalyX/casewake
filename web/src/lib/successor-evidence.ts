@@ -1,5 +1,5 @@
 import "server-only";
-import type { ObservedTransaction } from "./incidents";
+import { isLaterCheckpoint, type ObservedTransaction } from "./incidents";
 import { getTatumTransaction } from "./tatum";
 import type { ValidatedEvidence } from "./guard-evidence";
 
@@ -34,6 +34,13 @@ export async function verifyOnchainSuccessor(
   if (!original.sender || !successor.sender ||
       original.sender.toLowerCase() !== successor.sender.toLowerCase())
     throw new Error("The failed and successful transactions must have the same independently observed sender.");
+  if (original.transactionTimestampMs == null || successor.transactionTimestampMs == null ||
+      !Number.isFinite(original.transactionTimestampMs) || !Number.isFinite(successor.transactionTimestampMs))
+    throw new Error("Tatum did not return authenticated chain timestamps for both transactions.");
+  if (!isLaterCheckpoint(original.checkpoint, successor.checkpoint))
+    throw new Error("The successful follow-up must be finalized in a strictly later Sui checkpoint than the failed incident.");
+  if (successor.transactionTimestampMs < original.transactionTimestampMs)
+    throw new Error("The successful follow-up timestamp precedes the failed incident.");
   if (original.packageId && successor.packageId && original.packageId !== successor.packageId)
     throw new Error("The successful transaction targets a different confirmed package.");
   const originalCalls = original.operationMarkers || [];
@@ -54,6 +61,10 @@ export async function verifyOnchainSuccessor(
     proofType: "tatum-executed-successor",
     originalDigest: original.digest,
     successorDigest: successor.digest,
+    originalTimestampMs: original.transactionTimestampMs,
+    successorTimestampMs: successor.transactionTimestampMs,
+    originalCheckpoint: original.checkpoint!,
+    successorCheckpoint: successor.checkpoint!,
     originalSender: original.sender.toLowerCase(),
     successorSender: successor.sender.toLowerCase(),
     matchedOperations,
