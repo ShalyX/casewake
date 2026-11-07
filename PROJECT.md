@@ -203,3 +203,16 @@ Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](
 The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/` with the local production server running. It performs real Tatum reads and reviewer rejection checks only. It never writes to Walrus, signs or submits a transaction.
 
 **No human-verified resolution memory was written.** The first general case still requires a genuinely different non-flashloan Sui developer incident, case-specific diagnosis/proof, a Tatum-confirmed later successful transaction, and an authorized human's explicit causal approval. The eight-digest DeFi/flashloan sample is not accepted as representative validation.
+
+## 2026-11-07 — rebuilt live Phase 13 acceptance
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Failed Mainnet lookup | PASS | Tatum live read for `6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v`; finite chain timestamp + checkpoint | DeFi-heavy control only, not general-case proof |
+| Successful Mainnet lookup | PASS | Tatum live read for `DmskUFSYixcpEcNgJyyquQH6q8t7fA856Y6rzZuVbBQv`; finite chain timestamp + checkpoint | Not asserted to be a correction or causal successor |
+| Historical NOT_FOUND mapping | PASS | `3AkKcrSrqPqD8JA2UBgecq3fES6Tm73v4aDHbdSnyUzt` -> `unknown`; subsequent recall returns zero candidates and zero Walrus hits | Unknown is never inferred to be a failed execution |
+| Anonymous write and unapproved reviewer | PASS | Live API: 403 anonymous; 400 without causal approval | No Walrus write attempted |
+| Static quality | PASS | 7 operator test scripts, 17 TAP + 4 assertion suites; ESLint; Next production build | Does not prove a real human-reviewed memory |
+| Phase 13 complete journey | OPEN | No general case write, completed blob receipt or exact-blob recurrence yet | Requires a genuine representative case and explicit human review |
+
+Machine-readable evidence: `evidence/phase13-readonly-acceptance-2026-11-07.json`. The local server was rebuilt/restarted before the read-only retest. No signing, submission or Walrus resolution write occurred.
