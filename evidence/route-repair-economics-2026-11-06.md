@@ -40,3 +40,8 @@ The route cannot be made profitable by adjusting JavaScript bookkeeping: fresh M
 **Operator state:** `TECHNICAL_DERISK` remains blocked for the selected historical DeepBook route. Human approval, verified Walrus resolution write and exact-blob recall are **not unlocked**. The original general incident-memory product remains the goal; do not replace it with a DEX trading feature.
 
 Next valid step: find a materially viable new upstream price route and demonstrate repeatable complete atomic success with actual gas-aware economics; otherwise treat this original historical route as provably unsafe and prove Casewake's full approved incident-memory workflow using a separate, genuinely corrected engineering incident, without mislabeling the DeepBook case.
+
+
+## 2026-11-07 scope correction
+
+The Cetus SUI/USDC round-trip recorded above is an alternative route diagnostic, not the historical route correction. The selected original transaction is a three-hop sequence: DeepBook flashloan → `swap_b_a_with_return_` SUI→USDSUI → Bluefin `pool::swap` USDSUI→USDC → DeepBook `swap_exact_quote_for_base` USDC→SUI → merge/split/repay. The alternative route's negative economics and failed replay do not prove the original route's economics either way. Gate 1 remains blocked until the exact original route's signatures, coin handoffs, per-hop economics, and complete independent simulations are verified.
