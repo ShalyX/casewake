@@ -66,9 +66,9 @@ const EXCLUDED_ORIGINAL_POOLS=[
  '0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90', // original Bluefin USDSUI/USDC
  '0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407'  // original DeepBook SUI/USDC
 ];
-// Exclude TURBOS so the candidate is genuinely an alternative upstream pool/path.
+// Exclude the original Turbos pool so other Turbos pools can still be considered.
 const ALTERNATIVE_PROVIDERS=[
- 'CETUS','KRIYA','DIPCOIN','FLOWX','FLOWXV3','KRIYAV3','AFTERMATH','HAEDAL',
+ 'CETUS','KRIYA','DIPCOIN','FLOWX','FLOWXV3','KRIYAV3','TURBOS','AFTERMATH','HAEDAL',
  'VOLO','AFSUI','BLUEMOVE','DEEPBOOKV3','SCALLOP','SUILEND','BLUEFIN',
  'HAEDALPMM','ALPHAFI','SPRINGSUI','STEAMM','METASTABLE','OBRIC','HAWAL',
  'STEAMM_OMM','MOMENTUM','STEAMM_OMM_V2','MAGMA','HAEDALHMMV2','FULLSAIL',
