@@ -4,6 +4,7 @@ on:
     branches: ["fix/casewake-route-economics-20261106"]
     paths:
       - "web/scripts/audit-original-route.mjs"
+      - "web/scripts/quote-original-route.mjs"
       - "evidence/context-BbRZD7YfTiiN.json"
       - ".github/workflows/original-route-audit.yml"
   workflow_dispatch:
