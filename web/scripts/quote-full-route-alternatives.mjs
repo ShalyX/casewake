@@ -71,7 +71,8 @@ async function findRoute(from,target,amount,splitCount,excluded){
  }catch(error){return {available:false,error:String(error?.message||error).slice(0,500)};}
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
-const tradeSizes=[PRINCIPAL,65250000000n,65200000000n,65100000000n,65000000000n,64950000000n,64900000000n,64800000000n,64700000000n,64600000000n];
+const tradeSizes=[64600000000n,64500000000n,64400000000n,64300000000n,64200000000n,64100000000n,64000000000n,63900000000n,63800000000n,63700000000n,63600000000n,63500000000n];
+const MIN_SAFETY_MARGIN=100000000n; // 0.1 SUI reserve above flashloan principal
 const splitCounts=[1,2,3,4];
 const results=[];
 for(const tradeSize of tradeSizes){
@@ -99,22 +100,29 @@ for(const tradeSize of tradeSizes){
   }
   const reserve=PRINCIPAL-tradeSize;
   const available=reserve+BigInt(leg3.amountOutMist);
-  const usedPools=[...leg1.paths,...leg2.paths,...leg3.paths].map(p=>p.id);
+  const allPaths=[...leg1.paths,...leg2.paths,...leg3.paths];
+  const usedPools=allPaths.map(p=>p.id);
   const originalPoolReuse=usedPools.filter(id=>ORIGINAL_POOLS.includes(id));
   const duplicatePools=usedPools.filter((id,index)=>usedPools.indexOf(id)!==index);
+  const margin=available-PRINCIPAL;
+  const providerSet=[...new Set(allPaths.map(p=>p.provider))];
   results.push({tradeSizeMist:tradeSize.toString(),untouchedReserveMist:reserve.toString(),splitCount,
-   complete:true,leg1,leg2,leg3,poolReuseCheck:{originalPoolReuse,duplicatePools,passed:originalPoolReuse.length===0&&duplicatePools.length===0},
+   complete:true,leg1,leg2,leg3,routeComplexity:{swapCalls:allPaths.length,uniquePools:usedPools.length,
+    uniqueProviders:providerSet,passesPoolIsolation:originalPoolReuse.length===0&&duplicatePools.length===0},
+   poolReuseCheck:{originalPoolReuse,duplicatePools,passed:originalPoolReuse.length===0&&duplicatePools.length===0},
    repayment:{availableSuiMist:available.toString(),principalMist:PRINCIPAL.toString(),
-    marginMist:(available-PRINCIPAL).toString(),repayable:available>=PRINCIPAL}});
+    marginMist:margin.toString(),repayable:available>=PRINCIPAL,safetyMarginRequiredMist:MIN_SAFETY_MARGIN.toString(),
+    safetyMarginPassed:margin>=MIN_SAFETY_MARGIN}});
   await delay(250);
  }
 }
 const completeResults=results.filter(x=>x.complete);
 const bestMarginCandidate=completeResults.sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null;
-const report={schema:'casewake-full-three-hop-alternatives/v2',originalDigest:saved.digest,
+const bestSafetyCandidate=completeResults.filter(x=>x.repayment.safetyMarginPassed).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null;
+const report={schema:'casewake-full-three-hop-alternatives/v3',originalDigest:saved.digest,
  network:'sui-mainnet',routeIntent:'Flashloan SUI -> USDSUI -> USDC -> SUI; each leg uses a route distinct from all original pools and all previously used pools.',
- originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),splitCounts,results,
- bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,
+ originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),splitCounts,minimumSafetyMarginMist:MIN_SAFETY_MARGIN.toString(),results,
+ bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,bestSafetyCandidate,
  limitations:['Aggregator outputs are read-only quotes, not a built transaction or a full PTB simulation.',
   'Each leg excludes original pools and every pool used by previous legs to prevent artificial round-trip reuse.',
   'A candidate must still be assembled into the exact flashloan PTB and pass full Tatum Mainnet and independent simulation.',
@@ -127,5 +135,5 @@ console.log('FULL_THREE_HOP_ALTERNATIVES',JSON.stringify({results:results.map(x=
  tradeSizeMist:x.tradeSizeMist,splitCount:x.splitCount,complete:x.complete,failedLeg:x.failedLeg,
  leg1Providers:x.leg1?.paths?.map(p=>p.provider),leg2Providers:x.leg2?.paths?.map(p=>p.provider),
  leg3Providers:x.leg3?.paths?.map(p=>p.provider),marginMist:x.repayment?.marginMist,
- repayable:x.repayment?.repayable,poolReusePassed:x.poolReuseCheck?.passed,error:x.leg1?.error||x.leg2?.error||x.leg3?.error})),
- bestMargin:report.bestMarginCandidate?.repayment?.marginMist||null,bestRepayable:report.bestRepayable?.repayment?.marginMist||null,file:out}));
+ repayable:x.repayment?.repayable,safetyMarginPassed:x.repayment?.safetyMarginPassed,swapCalls:x.routeComplexity?.swapCalls,poolReusePassed:x.poolReuseCheck?.passed,error:x.leg1?.error||x.leg2?.error||x.leg3?.error})),
+ bestMargin:report.bestMarginCandidate?.repayment?.marginMist||null,bestRepayable:report.bestRepayable?.repayment?.marginMist||null,bestSafetyMargin:report.bestSafetyCandidate?.repayment?.marginMist||null,file:out}));
