@@ -15,7 +15,8 @@ const saved=JSON.parse(fs.readFileSync(path.join(ROOT,'evidence','context-BbRZD7
 const SENDER=saved.transactionData.sender;
 const PRINCIPAL=65265188650n;
 const TRADE_SIZE=BigInt(process.env.CASEWAKE_TRADE_SIZE_MIST||'64600000000');
-const SLIPPAGE=Number(process.env.CASEWAKE_SLIPPAGE||'0.001');
+const QUOTE_SLIPPAGE=0.001;
+const SWAP_SLIPPAGE=Number(process.env.CASEWAKE_SWAP_SLIPPAGE||'0.005');
 const SUI='0x2::sui::SUI';
 const SUI_USDE='0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE';
 const USDSUI='0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI';
@@ -40,7 +41,7 @@ const summarizeRoute=route=>({
 });
 async function findRoute(from,target,amount,excludePools){
  const route=await aggregator.findRouters({from,target,amount,byAmountIn:true,splitCount:1,
-  excludePools:[...new Set(excludePools)],slippage:SLIPPAGE});
+  excludePools:[...new Set(excludePools)],slippage:QUOTE_SLIPPAGE});
  if(!route?.quoteID||!route.paths?.length||route.error)throw new Error('No route '+from+' -> '+target+': '+JSON.stringify(route?.error||route));
  return route;
 }
@@ -64,7 +65,7 @@ const reserveMist=PRINCIPAL-TRADE_SIZE;
 // 3. Quote/build SUI -> USDSUI. The first route is allowed to use the loan
 // pool, but only AFTER the flashloan command has mutated it in this PTB.
 const route1=await findRoute(SUI,USDSUI,TRADE_SIZE,ORIGINAL_SWAP_POOLS);
-const usdsuiCoin=await aggregator.routerSwap({router:route1,inputCoin:tradeInput,slippage:SLIPPAGE,txb:tx});
+const usdsuiCoin=await aggregator.routerSwap({router:route1,inputCoin:tradeInput,slippage:SWAP_SLIPPAGE,txb:tx});
 const pools1=route1.paths.map(p=>p.id);
 
 // 4. USDSUI -> USDC. Exclude all pools already touched by the first route,
@@ -114,7 +115,7 @@ const report={
  originalDigest:saved.digest,network:'sui-mainnet',sender:SENDER,
  strategy:'Borrow from the original DeepBook SUI/SUI_USDE pool, then use that same pool in the first swap only after the borrow command. All later swap pools are distinct from the loan pool and from previously used pools.',
  inputs:{principalMist:PRINCIPAL.toString(),tradeSizeMist:TRADE_SIZE.toString(),untouchedReserveMist:reserveMist.toString(),
-  slippage:SLIPPAGE,gasBudget:100000000,gasPrice:333},
+  quoteSlippage:QUOTE_SLIPPAGE,swapSlippage:SWAP_SLIPPAGE,gasBudget:100000000,gasPrice:333},
  routes:{suiToUsdsui:summarizeRoute(route1),usdsuiToUsdc:summarizeRoute(route2),usdcToSui:summarizeRoute(route3)},
  poolIsolation:{loanPoolId:LOAN_POOL,loanPoolUseCount,originalSwapPoolReuse,duplicatePools,
   passed:originalSwapPoolReuse.length===0&&duplicatePools.length===0&&loanPoolUseCount>=1},
