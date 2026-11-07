@@ -2,7 +2,7 @@
 
 ## Lock
 - Thesis selected by user: 2026-11-03 ("Alright, lets push incident memiory now").
-- Product lock revision: 1. Thesis locked; final product name and branding NOT yet locked. "Incident Memory" is descriptive working title.
+- Product lock revision: 1. Thesis locked. Final name **Rouse** explicitly locked by the user on 2026-11-07; see NAME_LOCK.md. Brand kit remains in progress. Incident Memory is the descriptive product category.
 - Domain: Sui developer/support incident resolution. Track: Smart Agents for Real Life, eligibility interpretation unconfirmed.
 - Existing EchoLedger and Watchline remain PARKED. Indexer Recovery is an alternate, not part of this scope.
 
@@ -69,7 +69,7 @@ Verdict: MODIFY within selected thesis. One Sui failure class first; no dangerou
 
 ## Current product coverage — Phase14, 2026-11-07
 
-The original eight grouped P0 requirements remain authoritative. The prior Nov5/early-Nov7 ledgers are superseded by this review; their chronology remains in git history. Casewake is a provisional name per user, not a locked brand.
+The original eight grouped P0 requirements remain authoritative. The prior Nov5/early-Nov7 ledgers are superseded by this review; their chronology remains in git history. Rouse is the final user-locked name; historical Casewake references retain provenance.
 
 | Original P0 group | Verdict | Evidence and limits |
 |---|---|---|

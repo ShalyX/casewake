@@ -1,6 +1,6 @@
-# Casewake — current 35-phase operator audit
+# Rouse — current 35-phase operator audit
 
-Audited 2026-11-07 after Phase 14. Product Lock revision1 controls; Casewake is provisional. This replaces the stale revision19 audit.
+Audited 2026-11-07 after Phase 14. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
 
 Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures. Tests and the example case support that product.
 
@@ -13,14 +13,14 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 5 | HUMAN_IDEA_GATE | PASS | User selected Incident Memory Nov3. |
 | 6 | VALIDATION | PARTIAL | External engineer utility and organizer track fit unconfirmed. |
 | 7 | PRODUCT_LOCK | PASS | PRODUCT.md revision1 and original eight P0s. |
-| 8 | NAME_LOCK | PREFERENCE PENDING |40 candidates/current collision screen; recommend Casewake, alternatives Triedwell/Aftercase. NAMING_REVIEW_2026-11-07.md. |
+| 8 | NAME_LOCK | PASS | User explicitly instructed “lock Rouse” after overlap disclosure; NAME_LOCK.md. |
 | 9 | DEMO_ARCHITECTURE | PASS — PLAN | Existing sequence; final capture should foreground approved reviewed case. |
 | 10 | EVIDENCE_PLAN | PARTIAL | Core proof reconciled; final complete claim/owner/artifact register remains. |
 | 11 | DEPENDENCY_ATTACK | PARTIAL | Technical dependencies proven; utility/track assumptions open. |
 | 12 | TECHNICAL_DERISK | PASS — DISPOSITION | Mainnet integrations proven; historical flashloan experiment separate. |
 | 13 | BUILD_VERTICAL_SLICE | PASS | Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified. |
 | 14 | PRODUCT_REVIEW | PASS | Purpose intact, all eight P0 groups reviewed and workflow fixes verified. |
-| 15 | BRAND_KIT | PARTIAL | Three monochrome studies rendered/rejected as final; three palettes compared. Name choice and ownable canonical assets/QA remain. |
+| 15 | BRAND_KIT | IN PROGRESS | Rouse locked; ownable canonical mark/wordmark, favicon/avatar/social family and render QA remain. |
 | 16 | ART_DIRECTION | DOCUMENTED | Trace Instrument direction; formal acceptance remains. |
 | 17 | REFERENCE_BOARD | DOCUMENTED | Borrow/avoid decisions; formal acceptance remains. |
 | 18 | VISUAL_ASSET_STRATEGY | DOCUMENTED | Asset plan; final accepted assets remain. |
@@ -48,7 +48,7 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is reopened because the user called Casewake “not final name.” Next work is final naming followed by Phase 15 brand acceptance. External validation/track fit remains partial. Later preparatory artifacts do not imply sequential phase acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phase 15 brand kit is active. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
 Release details: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 

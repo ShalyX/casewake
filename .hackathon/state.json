@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 26,
+  "revision": 29,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "NAME_LOCK",
-  "active_specialist": "Brand \u2014 naming and Phase15 preparation",
+  "phase": "BRAND_KIT",
+  "active_specialist": "Brand - Rouse identity kit",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -35,14 +35,14 @@
     "HUMAN_IDEA_GATE": "PASS: User selected Incident Memory Nov3.",
     "VALIDATION": "PARTIAL: External engineer utility and organizer track fit unconfirmed.",
     "PRODUCT_LOCK": "PASS: PRODUCT.md revision1 and original eight P0s.",
-    "NAME_LOCK": "OPEN: previous shortlist explicitly rejected; user proposes something like Awaken. Active adjacent crypto brand collision observed; no public rename.",
+    "NAME_LOCK": "PASS: user explicitly instructed lock Rouse after known overlap disclosure; NAME_LOCK.md.",
     "DEMO_ARCHITECTURE": "PASS \u2014 PLAN: Existing sequence; final capture should foreground approved reviewed case.",
     "EVIDENCE_PLAN": "PARTIAL: Core proof reconciled; final complete claim/owner/artifact register remains.",
     "DEPENDENCY_ATTACK": "PARTIAL: Technical dependencies proven; utility/track assumptions open.",
     "TECHNICAL_DERISK": "PASS \u2014 DISPOSITION: Mainnet integrations proven; historical flashloan experiment separate.",
     "BUILD_VERTICAL_SLICE": "PASS: Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified.",
     "PRODUCT_REVIEW": "PASS: Purpose intact, all8P0 groups reviewed and workflow fixes verified.",
-    "BRAND_KIT": "PREPARATION: three monochrome studies rejected as final; three palettes compared; canonical assets/font delivery pending",
+    "BRAND_KIT": "IN PROGRESS: Rouse locked; canonical assets and render/size QA remain.",
     "ART_DIRECTION": "DOCUMENTED: Trace Instrument direction; formal acceptance remains.",
     "REFERENCE_BOARD": "DOCUMENTED: Borrow/avoid decisions; formal acceptance remains.",
     "VISUAL_ASSET_STRATEGY": "DOCUMENTED: Asset plan; final accepted assets remain.",
@@ -66,13 +66,12 @@
   },
   "blockers": [
     "External Sui-engineer utility validation and organizer track fit unconfirmed.",
-    "Final name provisional per user; Phase8 reopened before Phase15 brand acceptance.",
     "Final art direction/assets/motion/design lock and acceptance remain.",
     "Full hygiene skill/tracked-history scan, final MP4/videoQA/judge simulation/submission audit and receipt remain.",
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Continue naming from the Awaken direction: short, vivid, pronounceable, with character. Do not revive the rejected descriptive-compound shortlist or claim final approval.",
+  "next_action": "Complete Phase 15 Rouse brand kit and canonical assets; inspect small-size/social use, then proceed to Art Direction. Do not reopen naming or rewrite historical proof.",
   "updated_at": "2026-11-07",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -84,14 +83,17 @@
     "evidence": "evidence/phase14/release-verification.md"
   },
   "naming_direction": {
-    "rejected_by_user": [
-      "Casewake",
-      "Triedwell",
-      "Aftercase"
-    ],
-    "candidate": "Awaken",
-    "status": "User-proposed evocative direction; not a final-name lock",
-    "collision": "Active crypto tax software uses Awaken: https://awaken.tax/",
-    "next": "Develop the awakening/resurfacing territory; report adjacent crypto collision without treating it as a legal prohibition."
+    "status": "FINAL: Rouse explicitly locked by user after overlap disclosure.",
+    "selected_name": "Rouse",
+    "source": "NAME_LOCK.md"
+  },
+  "product_name": "Rouse",
+  "name_locked": true,
+  "name_lock": {
+    "name": "Rouse",
+    "date": "2026-11-07",
+    "instruction": "lock Rouse",
+    "known_overlap_acknowledged": true,
+    "artifact": "NAME_LOCK.md"
   }
 }

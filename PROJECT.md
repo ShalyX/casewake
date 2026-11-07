@@ -1,4 +1,14 @@
-# Latest naming steering — 2026-11-07
+# Current checkpoint — Rouse locked, 2026-11-07
+
+User explicitly instructed **“lock Rouse”** after the known overlap was disclosed. Phase 8 NAME_LOCK PASS; Phase 15 BRAND_KIT active. NAME_LOCK.md and the current BRAND.md section supersede earlier recommendations and pending naming choices. Approved product and Phase 14 proof remain unchanged.
+
+Next: Rouse canonical identity assets and brand QA, then Art Direction. Public app/URL still uses Casewake pending brand implementation/release. Preserve immutable source links and Walrus records.
+
+Earlier checkpoints below are historical.
+
+---
+
+# Historical naming steering — 2026-11-07
 
 User rejected Casewake/Triedwell/Aftercase as dead names; proposed something like Awaken. Previous recommendation and pending multiple-choice gate are superseded. Continue a short, evocative awakening/resurfacing territory. Awaken has an active adjacent crypto-tax use at https://awaken.tax/; report the tradeoff without claiming a legal restriction. No final name lock or public rename. Product purpose and Phase14 acceptance remain unchanged.
 

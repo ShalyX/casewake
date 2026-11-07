@@ -1,4 +1,21 @@
-# BRAND — CASEWAKE
+# BRAND — ROUSE
+
+## Final name lock — 2026-11-07
+
+**Rouse** is the final name. Explicit user instruction: **“lock Rouse”** after the existing same-name memory project was disclosed. Pronunciation: **rowz**, rhymes with “house”. No naming preference remains pending. See NAME_LOCK.md.
+
+Descriptor: **Evidence-backed memory for recurring Sui transaction failures.**
+Existing tagline: **The next failure shouldn't start from zero.**
+
+The name expresses retained engineering knowledge becoming useful again. Product Lock revision 1 is unchanged. Phase 8 NAME_LOCK passes; Phase 15 BRAND_KIT is active.
+
+Complete an ownable canonical mark/wordmark, favicon/avatar/social family, typography delivery and small-size/render QA. Existing Trace Instrument colors/type are a starting point; the rejected sketches are not final assets. Live-app migration follows brand implementation/release.
+
+The sections below are historical naming work, superseded by this explicit lock. Preserve immutable evidence and stored memories.
+
+---
+
+## Historical naming and identity work
 
 Version: 1.0 / 2026-11-04. Hackathon product identity. Final trademark clearance NOT completed.
 
@@ -82,3 +99,13 @@ Three palette territories compared; recommend preserving current Trace Instrumen
 The previous three-name shortlist is rejected. User prefers the character and energy of Awaken: a short, evocative word rather than a literal case/memory compound. This guides naming, not a product pivot.
 
 Current collision screen: [Awaken](https://awaken.tax/) is active crypto tax software; its [official introduction](https://help.awaken.tax/en/articles/10422066-what-is-awaken-how-can-i-use-it) uses the name Awaken. This is a practical adjacent-market confusion concern, not a legal conclusion or prohibition. Final name, domains and handles remain unselected. No public rename performed.
+
+## Vestige candidate — latest user selection
+
+User selected Vestige from a list explicitly labelled unchecked. Immediate2026-11-07 screening found [samvallad33/vestige](https://github.com/samvallad33/vestige) and [conorluddy/Vestige](https://github.com/conorluddy/vestige), both developer/agent memory projects. [Vestige Labs documentation](https://vestigelabs.org/docs/vestigefi/intro/) also describes an existing blockchain product called Vestige. This is a substantially closer product-category overlap than the Awaken tax use; report it before final public rename. No legal conclusion, exclusive-rights claim or silent substitute name. Public application unchanged.
+
+## Rouse — latest user choice and practical screen
+
+User chose Rouse. A current screen found an existing [rouse — memory with a clock](https://a2w.io/rouse) project, which explicitly contrasts recall with memory initiating contact with an agent. This is close agent-memory category overlap, not a legal prohibition. No public rename performed.
+
+Screened alternative: Rewaken (ree-WAY-ken). Exact-name, software/app/AI-memory/blockchain and company queries returned no obvious developer-memory product, but unrelated wellness and cosmetics uses were present. [Rewaken Life](https://www.rewakenlife.com/patient-home-page) is an existing unrelated use. [Collins](https://www.collinsdictionary.com/dictionary/english/rewaken) lists the word. This limited practical screen does not establish global uniqueness, trademark/domain/handle availability, or user selection. Do not automatically lock the alternative.
