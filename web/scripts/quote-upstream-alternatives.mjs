@@ -60,6 +60,12 @@ const completeCoinType=type=>{
 };
 const ROUTER_ENDPOINT='https://api-sui.cetus.zone/router_v3';
 const AGGREGATOR_SDK_VERSION=1010705;
+// Never reuse any of the three original incident pools in the upstream candidate.
+const EXCLUDED_ORIGINAL_POOLS=[
+ '0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056', // original Turbos SUI/USDSUI
+ '0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90', // original Bluefin USDSUI/USDC
+ '0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407'  // original DeepBook SUI/USDC
+];
 // Exclude TURBOS so the candidate is genuinely an alternative upstream pool/path.
 const ALTERNATIVE_PROVIDERS=[
  'CETUS','KRIYA','DIPCOIN','FLOWX','FLOWXV3','KRIYAV3','AFTERMATH','HAEDAL',
@@ -72,7 +78,7 @@ async function findAlternativeRoute(amount,splitCount){
  const params=new URLSearchParams({
   from:completeCoinType(SUI),target:completeCoinType(USDSUI),amount:amount.toString(),
   by_amount_in:'true',split_count:String(splitCount),providers:ALTERNATIVE_PROVIDERS.join(','),
-  v:String(AGGREGATOR_SDK_VERSION)
+  exclude_pools:EXCLUDED_ORIGINAL_POOLS.join(','),v:String(AGGREGATOR_SDK_VERSION)
  });
  const response=await fetch(ROUTER_ENDPOINT+'/find_routes?'+params.toString());
  const body=await response.json();
@@ -140,7 +146,7 @@ const report={schema:'casewake-original-upstream-route-candidates/v1',originalDi
   availableSuiMist:baseline.sweep[0].repayment.availableSuiMist,
   marginMist:baseline.sweep[0].repayment.marginMist},
  candidates,bestRepayable:candidates.filter(x=>x.repayment?.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,
- limitations:['Cetus Aggregator quotes are upstream quote candidates only; Turbos is excluded so each candidate is an alternative upstream path; no PTB built or simulated.',
+ limitations:['Cetus Aggregator quotes are upstream quote candidates only; all three original pools (Turbos, Bluefin, DeepBook) are excluded so the candidate cannot route through the original pools; no PTB built or simulated.',
   'Downstream Bluefin and DeepBook quotes are read-only live view calls.',
   'A quote candidate must be assembled into a complete flashloan PTB and pass Tatum plus an independent full simulation before Gate 1.'],
  safety:{signed:false,onchainExecuted:false,walletFunded:false,walrusWritten:false,gate1Eligible:false},generatedAt:new Date().toISOString()};
