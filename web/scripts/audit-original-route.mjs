@@ -50,29 +50,22 @@ for(const call of uniqueMoves){
     signatures.push({target:call.target,available:false,error:String(error?.message||error).slice(0,500)});
   }
 }
-const packageIds=[
- '0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1',
- '0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c',
- '0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809',
- '0x38a236095cb5a4fec3bdf42cf3e9c80f7ef68f1a835290a6cd107f156f8747f4'
+const quoteCandidates=[
+ ['0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64','pool_fetcher','compute_swap_result'],
+ ['0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267','pool','calculate_swap_results'],
+ ['0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c','pool','calculate_swap_results'],
+ ['0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748','pool','get_quantity_out'],
+ ['0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748','pool','get_base_quantity_out_input_fee'],
+ ['0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748','pool','get_base_quantity_out'],
+ ['0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748','pool','get_level2_ticks_from_mid']
 ];
-const packageApis=[];
-for(const packageId of packageIds){
+const quoteFunctions=[];
+for(const [packageId,moduleName,name] of quoteCandidates){
  try{
-  const response=await client.getMovePackage({packageId});
-  const modules=(response.package?.modules||[]).map(module=>({
-    name:module.name,
-    functions:(module.functions||[]).filter(fn=>/swap|quote|amount|quantity|fee|balance|sqrt|liquid|tick/i.test(fn.name)).map(fn=>fn.name),
-    datatypes:(module.datatypes||[]).filter(type=>/fee|pool|tick/i.test(type.name)).map(type=>({name:type.name,fields:type.fields?.map(f=>({name:f.name,type:f.type}))}))
-  })).filter(module=>module.functions.length||module.datatypes.length);
-  packageApis.push({packageId,available:true,modules});
- }catch(error){packageApis.push({packageId,available:false,error:String(error?.message||error).slice(0,300)});}
+  const response=await client.getMoveFunction({packageId,moduleName,name});
+  quoteFunctions.push({target:packageId+'::'+moduleName+'::'+name,available:true,function:response.function});
+ }catch(error){quoteFunctions.push({target:packageId+'::'+moduleName+'::'+name,available:false,error:String(error?.message||error).slice(0,300)});}
 }
-let feeMarker=null;
-try{
- const response=await client.getMoveDatatype({packageId:packageIds[3],moduleName:'fee1500bps',name:'FEE1500BPS'});
- feeMarker=response.datatype;
-}catch(error){feeMarker={error:String(error?.message||error).slice(0,300)};}
 const objectIds=[...new Set(inputs.filter(x=>x.kind==='object').map(x=>x.objectId))];
 const objects=[];
 for(const objectId of objectIds){
@@ -102,7 +95,7 @@ const report={
  digest:saved.digest,network:'sui-mainnet',checkpoint:saved.checkpoint,originalOutcome:saved.success?'success':'failed',
  originalError:saved.error,sender:saved.transactionData.sender,
  flashloanPrincipalMist:inputs[1]?.u64LE??null,gasPayment:saved.transactionData.gasPayment,
- inputs,commands:enrichedCommands,signatures,objects,coinFlow,packageApis,feeMarker,
+ inputs,commands:enrichedCommands,signatures,objects,coinFlow,quoteFunctions,
  routeSummary:[
   {step:1,protocol:'DeepBook',function:'borrow_flashloan_base',from:'SUI flashloan pool',to:'borrowed SUI + FlashLoan receipt'},
   {step:2,protocol:'router package 0xa5a0…',function:'swap_b_a_with_return_',from:'SUI',to:'Coin<USDSUI> + Coin<SUI> remainder'},
