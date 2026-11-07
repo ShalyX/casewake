@@ -1,81 +1,29 @@
-# Phase 13 — BUILD_VERTICAL_SLICE acceptance matrix
+# Phase 13 acceptance matrix — reconciled by Phase 14
 
-Product: Casewake / Incident Memory, Product Lock revision 1  
-Status: IN PROGRESS — do not mark SLICE_VERIFIED until all P0s have real evidence.  
-Active branch: fix/general-verified-resolution  
-Rule: one complete, honest user journey; supporting spikes do not substitute for the product workflow.
+Updated2026-11-07. Core vertical slice PASS; product review PASS after corrections. These are the original eight grouped P0 requirements, not replacement tests.
 
-| # | Locked P0 / acceptance | Test and required evidence | Current status |
-|---:|---|---|---|
-| 1 | Real Sui digest intake via Tatum with provenance | Live Mainnet failed and successful digests; show digest, network, source, outcome, chain timestamp and checkpoint | PASS: rebuilt production-mode local app returned live failed and successful Mainnet evidence with timestamps/checkpoints; unavailable/pruned digest maps to unknown without fabricated execution details. |
-| 2 | Failure/success/unknown distinction; no sign or submit | Live failed, successful and unavailable/pruned lookups; inspect API and UI outcomes | PASS for API outcome separation and fail-closed behavior; unknown outcome triggers no Walrus recall. UI matrix remains partial for missing-keys, timeout and post-write states. No signing or transaction submission path exists. |
-| 3 | Deterministic compatibility and evidence tiers | Same network/error fingerprint and known package/version constraints; observed failure ≠ simulation runbook ≠ human-verified case; mismatches must not recommend a fix | PASS for existing observation/runbook positives and MoveAbort negative control; general human case needs live acceptance |
-| 4 | Human-reviewed case record | Case-specific diagnosis, exact proof, named reviewer, reviewer key, explicit causal approval; server re-fetches the Tatum source and validates either (a) a distinct successful onchain successor with same sender, matching operation and later checkpoint, or (b) a merged public GitHub PR / immutable commit with changed-file diff. Reviewer must attest the causal link. | PARTIAL: both proof paths coded and covered by tamper/negative tests; live anonymous 403 and authenticated no-causal-approval 400 pass; no genuine general case has been approved or stored. |
-| 5 | Completed Walrus Mainnet write | Only after Gate 4: wait for completed remember job; capture exact blob ID, job ID, owner and namespace; no retry after uncertain write | NOT RUN for a human-verified case; no resolution write authorized |
-| 6 | Later recurrence retrieves exact stored case | Different real failed digest; compatible fingerprint/package/version; signed Walrus recall returns the exact same blob ID and an eligible candidate | CODED in PR #1; no human-verified blob exists to test |
-| 7 | Negative controls and fail-closed behavior | Unrelated MoveAbort; different fingerprint; different package/version when known; wrong sender; no matching operation; self-match; invalid evidence URL; missing reviewer attestation; unauthorized writes | PARTIAL: 27 automated TAP tests across eight scripts cover tampering, chronology, invalid/unmerged proof, self-match, package/version mismatch and unknown outcomes; live anonymous 403 and authenticated no-causal-approval 400 pass. Full case-specific live abuse matrix remains. |
-| 8 | Saved count and workspace states | Count only completed Mainnet writes; test empty, missing keys, loading, live, timeout, failed lookup, no precedent, observation, runbook, verified case, write pending, write complete, recurrence pass/fail; desktop and mobile | PARTIAL: empty and simulation-runbook result states inspected at 1440px desktop and 390px mobile; no horizontal overflow at either route; inventory remains 12 completed Mainnet memories. Missing-keys, timeout, observation, human-write, receipt and exact-recurrence states still require acceptance. |
+| Original P0 group | Verdict | Evidence and limits |
+|---|---|---|
+| 1. Real read-only Sui lookup with provenance | PASS | Actual Tatum Mainnet outcomes, digest, provider, checkpoint, time and explorer. Transport errors remain lookup errors. |
+| 2. Failure / success / unknown; no signing | PASS | Live outcome controls; browser transitions clear stale suggestions, no recall for success/unknown. No execution path added. |
+| 3. Human-confirmed case and completed receipt | PASS, bounded | ShalyX-approved integration case has real completed blob. New async/pending/reload/failure UI fixture-tested; protected recovery reads existing real job. No new Mainnet write in this review. |
+| 4. Transparent recall and exact/mismatch reasoning | PASS | Real signed recall returns exact approved blob for distinct failure; self/unrelated rejected. Positive rationale, mismatch warnings and unavailable/no-match distinction visible. |
+| 5. Count completed real Mainnet memories | PASS | Fresh list: 13 active unique blobs. Tested counter excludes pending/failed/duplicates. Label includes all types, not 13 verified resolutions. |
+| 6. Empty / no keys / loading / live / failed / missing / results | PASS, bounded | 26 controlled browser checks, desktop1440/mobile390 inspection and real readback. Functional QA does not equal final design acceptance. |
+| 7. Separate landing and workspace routes | PASS | Distinct / and /workspace; source/build/public route checks. Field notes distinguish current case from historical work. |
+| 8. Server-only keys and protected writes | PASS, bounded | Actual anonymous write/job403 and approval/secret-pattern400 controls. Reviewer key stays in page memory, absent from saved receipt. Shared operator scope, not multitenancy or exhaustive DLP. |
 
-## End-to-end happy path
+## Real accepted loop
 
-1. Engineer pastes a real failed Sui digest.
-2. Tatum confirms the exact Mainnet execution failure and source evidence.
-3. Casewake recalls observations, simulation-tested procedures and human-reviewed cases as separate tiers.
-4. Engineer reviews a genuinely case-specific diagnosis and proof; explicitly approves the documented change.
-5. Server independently validates evidence, then writes the sanitized case to Walrus Mainnet.
-6. UI displays the completed Walrus job and exact blob receipt.
-7. A distinct compatible failed transaction is inspected; Casewake recalls the same exact blob and explains the compatibility basis.
-8. A mismatching failure returns no confident resolution; a human remains responsible for any action.
+- Source failure: 8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA
+- Distinct recurrence: HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV
+- Reviewer: ShalyX, explicit case-specific approval
+- Completed Mainnet job: edfdbf0f-931b-464f-a5e7-f009de08498c
+- Exact blob: KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY
+- Namespace: incident-memory-v1
+- Method: reviewed-evidence / integration-test
+- Evidence: evidence/real-case/, evidence/production-reviewed-case/, evidence/phase14/
 
-## Stop conditions
+Actual failed/success/unknown controls are read-only. The26 browser checks intercept responses with clearly labelled fixture content; three fixture submissions never reached Walrus. No new Mainnet write was made to exercise delay/failure paths.
 
-- No Walrus resolution write if case-specific evidence is mismatched, incomplete, or only a prevention claim for a different failure.
-- No human approval inferred from an AI summary, checkbox default, same sender alone, shared generic Move call alone, CI pass, or a Preview build.
-- No automatic transaction signing, submission, wallet funding, funds movement or route execution.
-- The strict DeepBook three-gate route remains a separate evidence case; it is not a prerequisite for building the general workflow and must not be silently weakened.
-
-## Exit criteria
-
-Phase 13 passes only when all eight P0s have acceptance evidence and one complete general Casewake user journey reaches a completed Walrus receipt and exact-blob recurrence on a different compatible real failure, with a human reviewer explicitly approving the case. Until then the phase remains IN PROGRESS.
-
-
-## 2026-11-07 — Live read-only and responsive acceptance update
-
-- `scripts/verify-phase13-readonly.mjs` passed against the rebuilt local production server. Live Tatum controls distinguish failed, succeeded and NOT_FOUND/unknown outcomes; failed/succeeded responses include chain timestamps and checkpoints. Unknown outcomes do not trigger Walrus recall.
-- Anonymous `POST /api/remember` returns 403. An authenticated reviewer request with `confirmedCausalLink=false` returns 400 before Walrus storage. No Walrus write, signing or transaction submission occurred.
-- The onchain-successor proof route requires Tatum timestamps and a strictly later checkpoint. The separate reviewed-evidence route accepts only a merged public GitHub PR or immutable commit with a server-retrieved changed-file diff. Both require a case-specific human causal attestation; synthetic tests reject unmerged PRs, missing diffs, missing attestations and incomplete provenance.
-- All eight `test-*.mjs` scripts pass: 27 TAP tests, zero failures. `pnpm lint` and `pnpm build` both exit 0 on the isolated PR worktree.
-- Chrome DevTools Protocol visual checks at an actual 390×844 mobile viewport report `scrollWidth === clientWidth === 390` for both landing and workspace, including a real simulation-runbook result. 1440px desktop captures were also inspected. Fresh screenshots are recorded under `evidence/screenshots/`.
-- The live /api/memories inventory remains 12 completed Mainnet memories. No new memory was written during this acceptance pass.
-- The current failed/successful controls are DeFi fixtures and are explicitly excluded from the general-case quality gate. Phase 13 remains IN PROGRESS because no representative non-DeFi human-reviewed resolution has completed a Walrus write and exact-blob recurrence.
-
-## Case-source quality gate
-
-The first general human-reviewed case must not be selected solely because it shares the InsufficientCoinBalance substring. The current eight-digest candidate pool is clustered at checkpoint 341377758 and consists entirely of DeFi flashloan/swap PTBs. Do not use it as representative validation of the broad Sui engineering problem. Source a genuinely different developer incident and require a case-specific diagnosis plus independent proof before any human approval or Walrus write.
-
-
-## 2026-11-07 — rebuilt live endpoint retest (supersedes pending items above)
-
-- Rebuilt the isolated PR worktree and restarted its local production server before retesting.
-- `node scripts/verify-phase13-readonly.mjs` **PASS**:
-  - Live Tatum failed transaction returns `outcome=failed` with chain timestamp and checkpoint.
-  - Live Tatum successful transaction returns `outcome=succeeded` with chain timestamp and checkpoint.
-  - Tatum gRPC `NOT_FOUND` returns `outcome=unknown`.
-  - Unknown transaction recall returns zero candidates and `walrusHitsExamined=0`; no Walrus read occurs.
-  - Anonymous resolution write returns 403.
-  - Authenticated reviewer request without explicit causal approval returns 400 before Walrus storage.
-- Operator test suite: 7 scripts, 17 TAP tests plus 4 assertion-based suites — PASS.
-- ESLint — PASS. Next.js production build — PASS (exit code 0; all 15 static pages generated).
-- Exact machine-readable record: `evidence/phase13-readonly-acceptance-2026-11-07.json`.
-- No resolution write, wallet signing or transaction submission occurred.
-- This is supporting read-only acceptance only. Phase 13 remains IN PROGRESS because there is no representative non-flashloan, case-specific human-reviewed resolution with a completed Walrus receipt and exact-blob recurrence.
-
-## Product-aligned proof-method correction
-
-Product Lock revision 1 requires a **specific confirmation method and proof link**, followed by affirmative human approval. It does not require every valid fix to have a later same-sender onchain transaction. The current successor-only implementation is therefore too restrictive.
-
-Phase 13 will support two explicit proof methods:
-1. **Onchain successor** — Tatum verifies the later successful transaction, same sender, matching operation and chronology; the reviewer attests the causal change.
-2. **Reviewed engineering artifact** — a case-specific, independently inspectable test/reproduction/commit/PR or maintainer-resolution artifact is fetched and fingerprinted; the reviewer records the verification method, exact change and explicit causal approval.
-
-Both methods remain human-reviewed. A URL, AI explanation, generic documentation or prevention-only runbook cannot become a verified historical fix. Exact-blob recall against a different compatible failure remains mandatory. The DeepBook route gate remains separate and unchanged.
+External validation, final brand/design, hygiene, demo, judge simulation and submission remain open. This case does not prove representative non-DeFi utility or a final name.

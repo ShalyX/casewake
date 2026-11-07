@@ -43,10 +43,10 @@ Second distinct real failure -> eligible stored confirmed case -> 'previously ve
 - Do not expand to Indexer Recovery or multiple chains during this hackathon.
 
 ## Fundamental assumptions / kill gates
-- Tatum gRPC authenticated Mainnet transaction lookup works with real failure effects (UNPROVEN).
-- Walrus Mainnet account+delegated key, remember completion + recall works (UNPROVEN).
-- At least two genuine comparable failed digests plus engineer-verified fix or credible proof procedure are available (UNPROVEN).
-- Track fit for developer-workflow agent is accepted by organizer (UNCERTAIN).
+- Tatum gRPC authenticated Mainnet transaction lookup works with real failure effects (PROVEN: actual Mainnet reads).
+- Walrus Mainnet account+delegated key, remember completion + recall works (PROVEN: actual Mainnet job/blob and signed recall).
+- At least two genuine comparable failed digests plus engineer-verified fix or credible proof procedure are available (PROVEN for one specifically approved integration case; broad utility unproven).
+- Track fit for developer workflow is accepted by organizer (UNCERTAIN).
 - At least one external developer validates real utility (UNPROVEN).
 - If these fail, do not silently turn the product into a simulation or an AI error explainer. Escalate to operator for thesis review.
 
@@ -67,53 +67,26 @@ Each stored memory is a JSON string containing a readable explanation + structur
 Verdict: MODIFY within selected thesis. One Sui failure class first; no dangerous automation. Actual sponsor/API proof is a separate required technical gate, not implied by this lock.
 
 
-## Product-to-implementation coverage ledger — 2026-11-05
+## Current product coverage — Phase14, 2026-11-07
 
-This ledger preserves the original Product Lock revision 1. A working read/recall slice does NOT replace the approved human-confirmed resolution loop.
+The original eight grouped P0 requirements remain authoritative. The prior Nov5/early-Nov7 ledgers are superseded by this review; their chronology remains in git history. Casewake is a provisional name per user, not a locked brand.
 
-| Locked P0 capability | Implementation / surface | Current status | Acceptance evidence / remaining gap |
-|---|---|---|---|
-| Read-only real Sui digest lookup via Tatum with source provenance | src/app/api/transaction/route.ts, src/lib/tatum.ts, /workspace | VERIFIED | Vercel Production POST /api/transaction for approved genuine digest returns onchain outcome failed; public source explorer link is visible. |
-| Distinguish failure / success / unknown; never submit or sign | src/lib/tatum.ts, /workspace, simulation proof | LIVE API ACCEPTANCE VERIFIED | Rebuilt local production-mode endpoint confirms failed, succeeded and NOT_FOUND/unknown outcomes; unknown does not trigger Walrus recall. No signing or execution path is present. UI state matrix remains partial. |
-| Submit a human-confirmed case and receive completed Walrus receipt/blob ID | src/app/api/remember/route.ts, generic workspace reviewer editor | GENERAL PATH RESTORED IN DRAFT PR #1; LIVE CASE WRITE UNPROVEN | Two case-specific proof routes are supported: (a) Tatum-verified later onchain successor with same sender, matching operation and strictly later checkpoint; or (b) a merged public GitHub PR / immutable commit whose changed-file diff is re-fetched server-side. Both require a documented technical change, named reviewer, private reviewer key and explicit human causal attestation. Sender identity, CI or a checkbox alone is never proof. No genuinely approved case, human-verified memory, receipt or exact-blob recurrence exists yet. Strict DeepBook proof remains separate and blocked. |
-| Walrus recall with transparent candidate filtering and exact/mismatch reasoning | src/app/api/recall/route.ts, src/lib/unified-recall.ts, workspace | VERIFIED for observations/runbooks; generic human-case exact-blob path coded, live unproven | Production: first failure -> 1 runbook + 1 observed precedent; second comparable failure -> 1 runbook; unrelated MoveAbort -> 0; all recallDegraded=false. PR #1 adds exact-blob recurrence verification for a human-reviewed successor case; no such live case exists yet. |
-| Saved-case count from completed real Mainnet writes | src/app/api/memories/route.ts, workspace inventory | VERIFIED | Production /api/memories: 12, complete=true, namespace incident-memory-v1. Ten real failed observations + one simulation runbook + one integration smoke memory. |
-| Workspace empty / missing keys / loading / live / failed / result states | src/app/workspace/page.tsx | IMPLEMENTED; PARTIAL VISUAL/STATE QA | Empty and simulation-runbook states inspected at 1440px desktop and 390px mobile; no horizontal overflow. Missing-keys, timeout, observation, human-write, receipt and exact-recurrence states remain to be accepted. |
-| Landing and workspace as separate routes | /, /workspace | VERIFIED | Both public production routes HTTP 200. |
-| Server-only keys; no anonymous production write access | Vercel sensitive env; API guards | VERIFIED for public demo | Both private secrets server-side and redacted. Public writes return 403; unknown digest returns 403. Reviewer workflow must remain authenticated when restored. |
+| Original P0 group | Verdict | Evidence and limits |
+|---|---|---|
+| 1. Real read-only Sui lookup with provenance | PASS | Actual Tatum Mainnet outcomes, digest, provider, checkpoint, time and explorer. Transport errors remain lookup errors. |
+| 2. Failure / success / unknown; no signing | PASS | Live outcome controls; browser transitions clear stale suggestions, no recall for success/unknown. No execution path added. |
+| 3. Human-confirmed case and completed receipt | PASS, bounded | ShalyX-approved integration case has real completed blob. New async/pending/reload/failure UI fixture-tested; protected recovery reads existing real job. No new Mainnet write in this review. |
+| 4. Transparent recall and exact/mismatch reasoning | PASS | Real signed recall returns exact approved blob for distinct failure; self/unrelated rejected. Positive rationale, mismatch warnings and unavailable/no-match distinction visible. |
+| 5. Count completed real Mainnet memories | PASS | Fresh list:13 active unique blobs. Tested counter excludes pending/failed/duplicates. Label includes all types, not13 verified resolutions. |
+| 6. Empty / no keys / loading / live / failed / missing / results | PASS, bounded | 26 controlled browser checks, desktop1440/mobile390 inspection and real readback. Functional QA does not equal final design acceptance. |
+| 7. Separate landing and workspace routes | PASS | Distinct / and /workspace; source/build/public route checks. Field notes distinguish current case from historical work. |
+| 8. Server-only keys and protected writes | PASS, bounded | Actual anonymous write/job403 and approval/secret-pattern400 controls. Reviewer key stays in page memory, absent from saved receipt. Shared operator scope, not multitenancy or exhaustive DLP. |
 
-### Product Integrity checkpoint — 2026-11-05
-- Approved product: Incident Memory, Product Lock revision 1, selected by user 2026-11-03; Casewake is the adopted brand, not a changed thesis.
-- Current deliverable: integrated vertical slice, NOT full product.
-- Mechanism proven: Tatum Mainnet transaction read -> Walrus Mainnet semantic recall -> deterministic runbook eligibility; second analogue matches, negative control does not.
-- Full journey: digest intake -> real chain evidence -> matching memory -> evidence-backed procedure. Missing end-of-journey step: authorized engineer records a specific historical resolution, receives a completed Walrus receipt, and later recurrence retrieves that human-verified case.
-- Locked P0 total: 8 grouped requirements above; see per-row status rather than aggregate.
-- P0 missing/blocked: human approval and Walrus write of an independently reviewed resolution, followed by later compatible recall; success/unknown lookup acceptance; complete UI state matrix.
-- Differentiator retained: durable resolution memory + human verification gate + cross-incident reuse. Simulation runbook is explicitly separate from human-approved case.
-- New/replaced thesis: NO. No unauthorized de-scope. Public visitors remain read-only; reviewer-only writes are enabled behind the private key.
-- Next action: source a representative non-DeFi Sui developer incident with a genuine failed Mainnet digest and case-specific proof (a later successful onchain successor or a merged public GitHub PR / immutable commit diff). Present the exact diagnosis/change for human review; only after explicit approval, write through Casewake, verify the completed Walrus receipt and prove exact-blob recall on a distinct compatible failure.
-- Verdict: BLOCKED for FULL_PRODUCT_VERIFIED / JUDGE_READY. Vertical slice and preflight repayment guard proof are verified; original human-approved Casewake memory loop remains incomplete.
+Phase13 vertical slice and Phase14 product review pass within the approved single-operator scope. See PRODUCT_REVIEW_2026-11-07.md and PHASE13_ACCEPTANCE_MATRIX.md. One approved DeepBook order-management integration case is a specific exception to earlier non-DeFi sourcing, not a change of thesis. No claim that the original operator deployed the reference correction.
 
+The core journey is real: chain evidence -> reviewed procedure -> completed Mainnet blob -> distinct compatible recurrence. Asynchronous delay/failure UI was tested with controlled responses; real completed-job recovery uses the existing Mainnet job. No new memory was written in Phase14.
 
-## Product Integrity checkpoint — 2026-11-07
-
-- Product Lock revision 1 remains unchanged. The product is Casewake: evidence-linked memory for recurring Sui transaction failures, with a human-reviewed resolution workflow. No DEX/arbitrage scope was added.
-- The generic reviewer path is restored in draft PR #1 with two evidence methods: (a) Tatum independently checks a distinct successful follow-up from the same observed sender, a matching operation and a strictly later checkpoint; or (b) Casewake re-fetches a merged public GitHub PR or immutable commit and its changed-file diff. Both methods require the reviewer to supply the case-specific technical change and explicitly attest causality. Neither same-sender identity nor a checkbox alone is sufficient.
-- The workspace now presents the generic product workflow (chain evidence → human review → Walrus recall). It no longer presents the DeepBook repayment investigation as the application's main workflow or claims that a generic write proves a repaired DeepBook route.
-- Latest PR CI and Vercel Preview build pass. Preview is read-only because sponsor credentials are Production-only; no secret was copied and no Walrus resolution write was attempted.
-- The original DeepBook three-gate acceptance remains blocked and separate. The mismatched DZrXy3... / G7yGEr... pairing is rejected; it must not be stored or recalled as that incident's resolution.
-- Still missing: one genuinely case-specific human-approved resolution record with completed Walrus receipt and a distinct compatible failure recalling that exact blob. The 12 existing Mainnet memories remain ten observations, one simulation runbook and one smoke record; zero human-verified resolutions.
-- Verdict: Phase 12 risk disposition complete; Phase 13 vertical slice IN PROGRESS; FULL_PRODUCT_VERIFIED and JUDGE_READY remain BLOCKED.
-
-## Product Integrity checkpoint — 2026-11-07 (Phase 13 continuation)
-
-- Product Lock revision 1 remains authoritative. The strict DeepBook repayment acceptance is separate and blocked; it is not the general Casewake workflow.
-- The general reviewer path accepts either a Tatum-verified onchain successor (same sender, matching operation, strictly later checkpoint) or a server-re-fetched merged GitHub PR / immutable commit diff. Both require a case-specific change description, named reviewer, authenticated access and explicit human causal attestation.
-- Acceptance tests: all eight `test-*.mjs` scripts pass (27 TAP tests, zero failures); `pnpm lint` and `pnpm build` pass on the isolated PR worktree.
-- Live read-only acceptance: Tatum failed/succeeded/NOT_FOUND outcomes verified; unknown does not trigger Walrus recall; anonymous reviewer write returns 403; authenticated write without causal approval returns 400. No Walrus write or chain action occurred.
-- Responsive QA: 1440px desktop and true 390×844 mobile captures inspected for landing, empty workspace and simulation-runbook result. Both routes report no horizontal overflow at 390px. Captures are in `evidence/screenshots/`.
-- Current inventory remains 12 completed Mainnet memories: ten genuine observations, one simulation-tested runbook, one integration smoke record; zero human-verified resolutions.
-- Phase 13 remains IN PROGRESS. Missing gate: one representative non-DeFi Sui developer incident, its genuine failed digest and case-specific fix evidence, explicit reviewer approval, completed Walrus receipt and exact-blob recall from a second compatible failure. The first eight-digest DeFi candidate pool is excluded.
+External engineer utility and track-fit validation remain open. Final naming, brand/design acceptance, hygiene, demo, judge simulation and submission are later gates; FULL_PRODUCT_VERIFIED and JUDGE_READY are not claimed.
 
 ## First reviewed case acceptance — 2026-11-07
 

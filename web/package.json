@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --conditions=react-server --experimental-strip-types scripts/test-incidents.mjs && node --conditions=react-server --experimental-strip-types scripts/test-incident-compatibility.mjs && node --conditions=react-server --experimental-strip-types scripts/test-tatum-outcomes.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-memory-gate.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-repair-proof.mjs && node --conditions=react-server --experimental-strip-types scripts/test-repayment-safety.mjs && node --conditions=react-server --experimental-strip-types scripts/test-retry-reads.mjs && node --conditions=react-server --experimental-strip-types scripts/test-reviewed-evidence.mjs"
+    "test": "node --conditions=react-server --experimental-strip-types scripts/test-incidents.mjs && node --conditions=react-server --experimental-strip-types scripts/test-incident-compatibility.mjs && node --conditions=react-server --experimental-strip-types scripts/test-tatum-outcomes.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-memory-gate.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-repair-proof.mjs && node --conditions=react-server --experimental-strip-types scripts/test-repayment-safety.mjs && node --conditions=react-server --experimental-strip-types scripts/test-retry-reads.mjs && node --conditions=react-server --experimental-strip-types scripts/test-reviewed-evidence.mjs && node --conditions=react-server --experimental-strip-types scripts/test-phase14-workflows.mjs"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.14.7",

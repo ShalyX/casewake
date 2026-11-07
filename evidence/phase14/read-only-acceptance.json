@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-11-07T16:33:23.068Z",
+  "base": "http://127.0.0.1:4220",
+  "memoryWrites": 0,
+  "checks": {
+    "completedExistingJob": {
+      "status": 200,
+      "data": {
+        "proof": {
+          "jobId": "edfdbf0f-931b-464f-a5e7-f009de08498c",
+          "blobId": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+          "namespace": "incident-memory-v1",
+          "status": "mainnet-stored"
+        }
+      }
+    },
+    "jobReadProtected": {
+      "status": 403,
+      "data": {
+        "error": "Reviewer authorization is required to inspect a storage job."
+      }
+    },
+    "wrongIncidentCannotRecoverReceipt": {
+      "status": 202,
+      "data": {
+        "pending": {
+          "jobId": "edfdbf0f-931b-464f-a5e7-f009de08498c",
+          "status": "identity-check-pending"
+        },
+        "message": "Storage completed, but this job has not yet been matched to the original incident. Do not write another copy."
+      }
+    },
+    "malformedDigest": {
+      "status": 400,
+      "data": {
+        "error": "Enter a valid Sui transaction digest."
+      }
+    },
+    "credentialContentRejected": {
+      "status": 400,
+      "data": {
+        "error": "Remove credentials or private key material from diagnosis before storing this case."
+      }
+    },
+    "completedInventory": {
+      "status": 200,
+      "data": {
+        "namespace": "incident-memory-v1",
+        "allStoredMemories": 13,
+        "sampleBlobIds": [
+          "fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA",
+          "duiuqo48PMf_v6lYakj5jwqX5D8rE1bXTxRbgtFc4q0",
+          "-GJ6sTLGrAxS0JF8fhqBLIbeDPCZJVZNh1Q5iP0LQOs",
+          "HCkV_2yZkHm0LBrQmBd9IVLRluxeFhS9DyFgKq2S8Xo",
+          "vwqDiXurTB3w1J9PU4Za0sKlKZv2OTER1Tl7vlDKyHI",
+          "7LaaUSXE9lkGMkyezbciiHKdNE2NzbAE4a_4RC39sPg",
+          "GdCNNgqsubZhRmoWf8bqq1mrbOvmrUS1Jmurq608Goo",
+          "GA2oUh9Dgdf5yJrzZnD_R6Em5pHTbas6S2rwF68UFSA",
+          "FEuvBlh6VopgS_7L34eXFNCqMXGuzb2ooL4ZydTzqQ8",
+          "LoWHztOMtZuGIM7Oqr60g16C7W21S__eeIR9SpftKr0",
+          "Jq7CNgZpBUzJL48Gzf4I0uwFv0R0-RWkdbWx_TQir3E",
+          "keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw",
+          "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY"
+        ],
+        "complete": true
+      }
+    }
+  },
+  "status": "VERIFIED"
+}

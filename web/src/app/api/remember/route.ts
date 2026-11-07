@@ -2,7 +2,8 @@ import { randomUUID, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { safeText, type VerifiedCase } from "@/lib/incidents";
-import { storeVerifiedIncident } from "@/lib/walrus";
+import { storeVerifiedIncident, beginVerifiedIncident } from "@/lib/walrus";
+import { assertSafeMemoryContent } from "@/lib/memory-content";
 import { validateCasewakeEvidence, type ResolutionKind, type ValidatedEvidence } from "@/lib/guard-evidence";
 import { ROUTE_INCIDENT_DIGEST, RECALL_TEST_DIGEST, independentlyVerifyRouteRepair } from "@/lib/route-repair-proof";
 import { verifyOnchainSuccessor } from "@/lib/successor-evidence";
@@ -29,9 +30,13 @@ export async function POST(request: NextRequest) {
     const resolutionKind = body.resolutionKind as ResolutionKind;
     const reviewedChange = safeText(body.reviewedChange, 1000);
     const verificationMethod = safeText(body.verificationMethod, 60);
+    if(body.asyncWrite===true && (typeof body.requestId!=="string" || !/^[a-f0-9-]{36}$/i.test(body.requestId)))
+      return NextResponse.json({error:"A stable storage request ID is required."},{status:400});
     if (body.verified !== true || diagnosis.length < 20 || resolutionSteps.length < 20 || reviewer.length < 2 ||
         !/^https:\/\/[^\s]+$/i.test(evidenceUrl))
       return NextResponse.json({ error: "Human verification, diagnosis, a concrete resolution, reviewer and HTTPS evidence URL are required." }, { status: 400 });
+    try {assertSafeMemoryContent({diagnosis,resolutionSteps,reviewer,sdkVersion,reviewedChange,evidenceUrl});}
+    catch(error){return NextResponse.json({error:error instanceof Error?error.message:"Remove private data before storing."},{status:400});}
     const observed = await getTatumTransaction(digest);
     if (observed.outcome !== "failed" || !observed.fingerprint || !observed.errorText)
       return NextResponse.json({ error: "Only a Tatum-confirmed onchain failed transaction can become a verified incident memory." }, { status: 400 });
@@ -80,7 +85,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "A prevention runbook cannot be saved as a human-verified historical repair." }, { status: 409 });
     }
     const record: VerifiedCase = {
-      schema: "incident-memory/v1", id: randomUUID(),
+      schema: "incident-memory/v1", id: body.asyncWrite===true ? String(body.requestId) : randomUUID(),
       digest: observed.digest, network: observed.network,
       fingerprint: observed.fingerprint, errorText: observed.errorText,
       packageId: observed.packageId, sdkVersion, diagnosis,
@@ -88,6 +93,10 @@ export async function POST(request: NextRequest) {
       verifiedAt: new Date().toISOString(), status: "human-verified",
       resolutionKind, validatedEvidence,
     };
+    if(body.asyncWrite===true){
+      const pending=await beginVerifiedIncident(record,String(body.requestId));
+      return NextResponse.json({record,pending},{status:202});
+    }
     const proof = await storeVerifiedIncident(record);
     return NextResponse.json({ record, proof, gates: { proofMethod: validatedEvidence.proofType, guardControlEvidence: "validated", originalThreeHopCorrection: validatedEvidence.originalHistoricalRouteRepaired ? "full-route-simulation-passed" : "not-claimed", humanReview: "approved", walrusWrite: "completed" } }, { status: 201 });
   } catch (error) {

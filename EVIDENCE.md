@@ -1,5 +1,21 @@
 # EVIDENCE REGISTRY — Total Recall
-Checked 2026-11-04. Statuses describe facts independently of a proposal.
+Current checkpoint: 2026-11-07 Phase14. Core evidence below supersedes historical zero-reviewed-case/blocker claims. Historical sections are retained as dated provenance, not current status.
+
+| Current claim | Status | Method/artifact | Limit |
+|---|---|---|---|
+| Approved human-reviewed integration resolution | VERIFIED | evidence/real-case/human-approval.json, reviewed-memory-receipt.json | ShalyX approved one independent reference correction; original operator change unknown |
+| Distinct failure recalls exact blob; self/unrelated rejected | VERIFIED | evidence/real-case/exact-blob-recall.json, recall-negative-controls.json; evidence/production-reviewed-case/ | Case-specific compatibility, not all Sui failures |
+| Completed inventory13 | VERIFIED | evidence/phase14/storage-readonly.json, read-only-acceptance.json | Ten observations + smoke + runbook + one reviewed resolution |
+| Protected completed-job recovery | VERIFIED LIVE READ | evidence/phase14/read-only-acceptance.json | Existing actual job, no new write |
+| Delayed/error/reload workflow | VERIFIED CONTROLLED UI | evidence/phase14/browser-matrix.json, fixture-labelled screenshots |26 checks; three intercepted submissions; zero real writes |
+| Phase14 approved-purpose/all8P0 review | PASS | PRODUCT_REVIEW_2026-11-07.md | Not final full-product/judge/submission acceptance |
+| Current public release regression | See release record | evidence/phase14/release-verification.md | Exact deployed commit/environment recorded there |
+| External engineer utility / organizer track fit | OPEN | No qualifying acceptance observed | Do not claim validation |
+| Final identity/design/hygiene/video/judge/submission | OPEN | OPERATOR_PHASE_AUDIT_2026-11-07.md | Sequential later gates remain |
+
+## Historical evidence registry (dated checkpoints)
+
+Checked 2026-11-04. These older statuses are historical and are superseded where the current checkpoint above differs.
 
 | Claim | Status | Method/source | Limitation/next proof |
 |---|---|---|---|

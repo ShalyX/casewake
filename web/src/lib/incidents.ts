@@ -43,6 +43,7 @@ export type Candidate = {
   verdict: "eligible-for-review" | "incompatible";
   reasons: string[];
   warnings?: string[];
+  matchReasons?: string[];
   walrusReceipt?: { blobId: string; namespace: string; verifiedThrough: "signed-walrus-recall" };
 };
 
@@ -171,7 +172,12 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   if (record.sdkVersion) warnings.push("The saved procedure was reviewed against SDK " + record.sdkVersion + "; the current SDK version is not available from chain evidence and must be confirmed manually.");
   if (record.status !== "human-verified") reasons.push("Unverified case.");
   if (!record.evidenceUrl.startsWith("https://")) reasons.push("Missing secure evidence URL.");
-  return { record, distance, verdict: reasons.length ? "incompatible" : "eligible-for-review", reasons, warnings };
+  const matchReasons=[];
+  if(record.network===observation.network)matchReasons.push("Same Sui network.");
+  if(observation.fingerprint&&record.fingerprint===observation.fingerprint)matchReasons.push("Same normalized execution error class and operation.");
+  if(observation.packageId&&record.packageId&&observation.packageId===record.packageId)matchReasons.push("Same independently observed Move package.");
+  if(record.digest!==observation.digest)matchReasons.push("Different source transaction; this is not a self-match.");
+  return { record, distance, verdict: reasons.length ? "incompatible" : "eligible-for-review", reasons, warnings, matchReasons };
 }
 
 export function safeText(input: unknown, max = 2000): string {

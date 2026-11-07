@@ -1,8 +1,10 @@
 import "server-only";
 import { secureMemwalClient } from "./memwal-secure";
 import { type ObservedTransaction } from "./incidents";
+import { completedBlobIds } from "./completed-inventory";
 
 export type ObservedCaseMemory = {
+  requestId?:string;
   schema: "incident-observation/v1";
   kind: "onchain-observed-not-human-verified";
   digest: string;
@@ -58,6 +60,12 @@ export async function storeObservedCase(tx: ObservedTransaction) {
   if(!done.blob_id) throw new Error("No completed Walrus Mainnet storage receipt.");
   return {case:c,proof:{jobId:done.job_id,blobId:done.blob_id,namespace:process.env.MEMWAL_NAMESPACE || "incident-memory-v1"}};
 }
+export async function beginObservedCase(tx:ObservedTransaction,requestId:string){
+  const walrus=await memwalClient();
+  const accepted=await walrus.rememberAsync(encodeObservedCase({...observedCase(tx),requestId}),undefined,{dedupe:true,idempotencyKey:"casewake-observation-"+requestId});
+  if(!accepted.job_id)throw new Error("Walrus did not return a storage job ID.");
+  return {jobId:accepted.job_id,namespace:process.env.MEMWAL_NAMESPACE||"incident-memory-v1",status:"pending" as const};
+}
 export async function recallObservedCases(tx: ObservedTransaction) {
   if(tx.outcome !== "failed" || !tx.fingerprint || !tx.errorText) return [];
   const walrus=await memwalClient();
@@ -72,14 +80,14 @@ export async function memoryInventory() {
   const walrus=await memwalClient();
   const namespace=process.env.MEMWAL_NAMESPACE || "incident-memory-v1";
   let cursor: string | undefined;
-  let count=0;
+  const completed=new Set<string>();
   const ids: string[]=[];
   for (let page=0;page<30;page++){
     const result=await walrus.listMemories({namespace,limit:100,cursor});
-    for(const item of result.memories) {count++;if(ids.length<15)ids.push(item.blob_id);}
-    if(!result.has_more) return {namespace,allStoredMemories:count,sampleBlobIds:ids,complete:true};
+    for(const blob of completedBlobIds(result.memories)){completed.add(blob);if(ids.length<15&&!ids.includes(blob))ids.push(blob);}
+    if(!result.has_more) return {namespace,allStoredMemories:completed.size,sampleBlobIds:ids,complete:true};
     if(!result.next_cursor) break;
     cursor=result.next_cursor;
   }
-  return {namespace,allStoredMemories:count,sampleBlobIds:ids,complete:false};
+  return {namespace,allStoredMemories:completed.size,sampleBlobIds:ids,complete:false};
 }

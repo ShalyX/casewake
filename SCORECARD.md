@@ -1,3 +1,18 @@
+# Current scorecard checkpoint — Phase14, 2026-11-07
+
+Official rubric mapping remains30% sponsor integration,30% technical quality,20% creativity,20% presentation. No invented score or placement prediction.
+
+| Criterion | Current evidence | Remaining gap |
+|---|---|---|
+| Tatum/Walrus integration30% | Real read -> approved case write -> exact-blob distinct recall;13 completed memories | Final demo must show core loop; track interpretation unconfirmed |
+| Technical quality30% | Nine regression scripts, live outcome/auth/receipt checks,26 controlled browser states, lint/type/build | Final red-team, hygiene and release audit |
+| Creativity20% | Evidence-linked reviewed resolution reuse beyond one-off error explanation | External engineer utility validation |
+| Presentation20% | Working public app and factual field notes | Final name/brand/design,2–3min video, pitch and judge simulation |
+
+Phase14 PASS does not close downstream gates. See current operator audit and product review. The following older scorecard is historical planning; missing-product/integration claims are superseded above.
+
+---
+
 # SCORECARD
 
 ## Official rubric source and checked-at time

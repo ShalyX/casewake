@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { memoryInventory } from "@/lib/observations";
-import { isPublicDemoMode } from "@/lib/public-demo";
+import { isPublicDemoMode, isReviewerKeyValid } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export const maxDuration=30;
 let last: { at:number; count:number; namespace:string; complete:boolean } | null=null;
-export async function GET(){
+export async function GET(request:NextRequest){
   try{
-    if(isPublicDemoMode() && last && Date.now()-last.at < 120000) {
+    if(isPublicDemoMode() && !isReviewerKeyValid(request.headers.get("x-workspace-key")) && last && Date.now()-last.at < 120000) {
       return NextResponse.json({allStoredMemories:last.count,namespace:last.namespace,complete:last.complete});
     }
     const result=await memoryInventory();

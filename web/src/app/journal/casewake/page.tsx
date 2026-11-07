@@ -23,6 +23,15 @@ export default function CasewakeJournal() {
       <p className="journal-lead">A Sui transaction records what failed. What it does not preserve is the engineering context needed to make the next investigation easier. We built Casewake to remember that context—with its evidence and uncertainty intact.</p>
       <div className="journal-byline"><span>CASEWAKE / TOTAL RECALL</span><span>Built with Tatum and Walrus Memory</span></div>
 
+      <section><div className="journal-section-number">NOVEMBER 7 UPDATE / REVIEWED CASE</div>
+        <h2>A reviewed resolution,<br/>recalled for another incident.</h2>
+        <p>ShalyX reviewed an integration procedure for a real duplicate-cancellation failure. Tatum shows that the exact order had already been cancelled successfully. The procedure reconciles that earlier result and stops retrying the completed cancellation; the original operator&apos;s application change remains unknown.</p>
+        <p>Casewake stored the approved procedure in Walrus Mainnet, then recalled the exact same blob for a distinct real failure. Self-matches and an unrelated failure were excluded. There are now thirteen completed memories in the workspace, including this one human-reviewed integration resolution.</p>
+        <div className="journal-receipt"><span>REVIEWED RESOLUTION / WALRUS MAINNET</span><code>KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY</code></div>
+        <div className="journal-source"><Link href="/workspace?digest=HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV">Inspect the reviewed recurrence ↗</Link><a href="https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215" target="_blank" rel="noreferrer">Read the engineering evidence ↗</a></div>
+        <p>The original November 4 investigation below remains a separate, simulation-tested runbook. It is not the reviewed cancellation case.</p>
+      </section>
+
       <figure className="journal-figure">
         <Image src="/images/casewake-live-workspace.png" width={1440} height={1350} alt="Actual Casewake browser screenshot showing a real InsufficientCoinBalance transaction and a matching simulation-tested Walrus runbook." sizes="(max-width: 900px) 100vw, 1000px" />
         <figcaption>Actual local production-mode screenshot, November 4, 2026: Tatum chain evidence beside the Walrus-recalled runbook. No synthetic transaction data was substituted.</figcaption>
@@ -81,7 +90,7 @@ export default function CasewakeJournal() {
       <section><div className="journal-section-number">06 / WHAT IS ACTUALLY VERIFIED</div>
         <h2>Twelve stored memories.<br/>Zero invented repairs.</h2>
         <div className="journal-stats"><div><strong>10</strong><span>Genuine onchain failure observations</span></div><div><strong>1</strong><span>Controlled simulation-tested runbook</span></div><div><strong>1</strong><span>Integration smoke-test memory</span></div></div>
-        <p>All twelve were completed Walrus Mainnet writes as of November 4, 2026. That does not mean twelve verified fixes. We have <strong>zero</strong> independent human approvals of a case-specific historical repair, and we have not measured time saved for an external engineering team.</p>
+        <p>All twelve were completed Walrus Mainnet writes as of November 4, 2026. That did not mean twelve verified fixes. The November 7 update above adds one reviewed integration resolution; it does not establish a historical smart-contract repair. We have not measured time saved for an external engineering team.</p>
         <p>The next important proof is a real engineer reproducing and confirming a fix for a specific incident, with independent evidence and a reviewer sign-off. Casewake can store and later recall that tier of memory, but the hackathon demonstration does not fake that gate.</p>
       </section>
       <div className="journal-end">

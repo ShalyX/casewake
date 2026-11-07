@@ -1,8 +1,8 @@
 # Casewake — evidence-backed Sui engineering memory
 
-An evidence-backed agent for Sui dApp builders: a real failed transaction is observed through Tatum, related past failures are recalled from Walrus Mainnet, and only human-confirmed resolutions can become recommended fixes.
+Incident memory for Sui dApp builders: a real failed transaction is observed through Tatum, related past failures are recalled from Walrus Mainnet, and only human-confirmed resolutions can become recommended fixes.
 
-**Casewake is the release-candidate brand.** The underlying Incident Memory thesis was locked on 2026-11-03. Naming collision checks are preliminary, not trademark clearance. Deadline: November 10, 2026, 17:00 UTC.
+**Casewake is a provisional name.** The underlying Incident Memory thesis was locked on 2026-11-03. Naming collision checks are preliminary, not trademark clearance. Deadline: November 10, 2026, 17:00 UTC.
 
 ## First reviewed resolution loop — November 7, 2026
 

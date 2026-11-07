@@ -18,6 +18,13 @@ export async function storeVerifiedIncident(record: VerifiedCase) {
   };
 }
 
+export async function beginVerifiedIncident(record: VerifiedCase, requestId:string) {
+  const memwal=await client();
+  const accepted=await memwal.rememberAsync(encodeMemory(record),undefined,{dedupe:true,idempotencyKey:"casewake-resolution-"+requestId});
+  if(!accepted.job_id)throw new Error("Walrus did not return a storage job ID.");
+  return {jobId:accepted.job_id,namespace:process.env.MEMWAL_NAMESPACE||"incident-memory-v1",status:"pending" as const};
+}
+
 export async function recallIncidentCandidates(observation: ObservedTransaction) {
   if (observation.outcome !== "failed" || !observation.fingerprint) return [];
   const memwal = await client();

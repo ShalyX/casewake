@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
     digest = body.digest;
     if (!isAllowedPublicDemoDigest(digest, isReviewerKeyValid(request.headers.get("x-workspace-key")))) {
-      return NextResponse.json({error:"Only the three published real evidence digests are available in the public demo."},{status:403});
+      return NextResponse.json({error:"Only the published real evidence examples are available in the public demo. Reviewer access enables other digests."},{status:403});
     }
   } catch {
     return NextResponse.json({error:"Invalid request body."},{status:400});

@@ -1,60 +1,64 @@
-# Product Critic — Casewake review
+# Phase 14 product review — 2026-11-07
 
-Date: 2026-11-07  
-Operator phase: 14 / PRODUCT_REVIEW (early corrective review; phase exit not yet earned)  
-Product lock: Incident Memory revision 1  
-Verdict: MODIFY — retain the thesis; complete the human-reviewed case loop before claiming a full product.
+Verdict: **PASS after workflow corrections**, within the approved one-operator Incident Memory scope. Product Lock revision1 is unchanged. This supersedes the earlier MODIFY review and its missing-case blockers. Public release details: evidence/phase14/release-verification.md.
 
-## Is this still worth building?
+## Approved purpose and adversarial assessment
 
-The product thesis remains coherent: Sui engineers and ecosystem support responders repeatedly investigate failed onchain executions; useful diagnosis and remediation knowledge gets scattered across transactions, docs and conversations. Casewake links real Tatum transaction evidence to durable Walrus memory and resurfaces a compatible, human-reviewed precedent later.
+Sui engineers preserve evidence-linked human-reviewed resolutions, then reuse them for compatible failures. Tatum supplies execution evidence; Walrus preserves and recalls the resolution. Tests and supporting checks serve that workflow.
 
-The strongest differentiation is not transaction lookup, generic error explanation or persistence alone. It is evidence-tiered, human-approved engineering memory: observed failures, simulation-tested procedures and human-verified historical fixes remain visibly distinct, and a mismatch must not produce a confident recommendation.
+- Problem reality: actual repeated failures and cancellation events prove a real case. They do not prove demand across teams.
+- User specificity: one operator-managed shared case space for Sui engineers/support is coherent; multitenancy and autonomous remediation are unnecessary here.
+- Value and differentiation: a reusable procedure includes source, reviewer, exact blob and limits, beyond a one-off explorer/error explanation. External utility validation remains unobserved.
+- Credibility: reviewer supplies diagnosis, technical change, evidence and causal approval. Automated evidence checks do not replace judgment.
+- Complexity: async storage/recovery supports truthful completion; it is not the main product promise.
+- Drift: none found after correction. The approved DeepBook order-management example does not turn this into a DEX product. Independent reconciliation stops duplicate retries; original operator deployment is unknown and no historical onchain repair is claimed.
+- Magic moment: a distinct real failure recalls the exact approved resolution; self/unrelated cases are rejected.
+- Hackathon fit: both sponsor integrations are essential and live. Organizer track confirmation remains open.
 
-## Adversarial assessment
+## All eight original P0 groups
 
-| Test | Verdict | Finding |
+| Original P0 group | Verdict | Evidence and limits |
 |---|---|---|
-| Problem reality | MODIFY | Repeated Sui failures are real in the sampled Mainnet evidence, but a sample of failed transactions is not proof that engineers want a separate product. External engineer interviews are missing. |
-| User specificity | PASS | Sui dApp/protocol engineers and ecosystem support responders are specific enough for a first product. |
-| Product clarity | PASS | The next failure shouldn't start from zero is clear when paired with the evidence-tier explanation. |
-| Workflow credibility | MODIFY | Tatum intake, Walrus observation/runbook recall and negative control are real. The human-reviewed case write and exact-blob recurrence remain unproven. |
-| Differentiation | MODIFY | Durable reviewed resolution memory is differentiated from explorers/debuggers, but the key human-verified resolution moment is not yet demonstrated. |
-| Unnecessary complexity | MODIFY | The DeepBook route-economics investigation had become an implementation distraction. It is now isolated as a separate evidence case, not the product shell. Do not add more route tooling. |
-| Technical takeover | PASS after correction | Generic workspace now foregrounds chain evidence → human review → Walrus recall. The previous Featured DeepBook / three-gate panel was removed. |
-| Scope creep | PASS | No multi-chain, arbitrage, autonomous repair, signing or funds movement added. |
-| Magic moment | BLOCKED | No human-verified resolution memory has been written and recalled for a distinct compatible failure. The simulation-tested runbook is not that claim. |
-| Hackathon fit | UNCERTAIN | Smart Agents for Real Life plausibly includes workflow agents that resume memory across sessions; organizer has not confirmed B2B Sui incident-response eligibility. |
+| 1. Real read-only Sui lookup with provenance | PASS | Actual Tatum Mainnet outcomes, digest, provider, checkpoint, time and explorer. Transport errors remain lookup errors. |
+| 2. Failure / success / unknown; no signing | PASS | Live outcome controls; browser transitions clear stale suggestions, no recall for success/unknown. No execution path added. |
+| 3. Human-confirmed case and completed receipt | PASS, bounded | ShalyX-approved integration case has real completed blob. New async/pending/reload/failure UI fixture-tested; protected recovery reads existing real job. No new Mainnet write in this review. |
+| 4. Transparent recall and exact/mismatch reasoning | PASS | Real signed recall returns exact approved blob for distinct failure; self/unrelated rejected. Positive rationale, mismatch warnings and unavailable/no-match distinction visible. |
+| 5. Count completed real Mainnet memories | PASS | Fresh list: 13 active unique blobs. Tested counter excludes pending/failed/duplicates. Label includes all types, not 13 verified resolutions. |
+| 6. Empty / no keys / loading / live / failed / missing / results | PASS, bounded | 26 controlled browser checks, desktop1440/mobile390 inspection and real readback. Functional QA does not equal final design acceptance. |
+| 7. Separate landing and workspace routes | PASS | Distinct / and /workspace; source/build/public route checks. Field notes distinguish current case from historical work. |
+| 8. Server-only keys and protected writes | PASS, bounded | Actual anonymous write/job403 and approval/secret-pattern400 controls. Reviewer key stays in page memory, absent from saved receipt. Shared operator scope, not multitenancy or exhaustive DLP. |
 
-## Required modifications
+## Workflow gaps corrected
 
-1. Finish the general reviewer workflow using a genuinely case-specific proof; require same-source evidence, exact transaction provenance, explicit reviewer causal attestation and completed Walrus receipt.
-2. Prove exact-blob recall for a second distinct compatible failed digest, plus a negative control. Do not use the rejected DZrXy3... / G7yGEr... pairing.
-3. Complete live success/unknown transaction outcome tests and the workspace state matrix.
-4. Keep the DeepBook strict route gate in the acceptance appendix. It must not dominate the public workspace or delay unrelated product implementation.
-5. Complete the design and demo phases only after the user workflow is stable; do not substitute visual polish for the missing product claim.
+1. New inspections clear every stale candidate tier/editor on success, unknown or lookup error. Receipt/source state remains independent.
+2. Receipt and pending-attempt metadata survive lookups/reloads in session storage. Reviewer key and free-form case content are never persisted there.
+3. Reviewer writes now request async acceptance with a stable request ID. Pending is distinct from completion. Protected job recovery verifies exact blob, incident and request identity before returning a receipt.
+4. Browser calls have bounded timeouts, with no automatic write retry. Unresolved attempts block repeats across reloads. Existing-job checks are read-only; only confirmed failure may be dismissed.
+5. Recall outage is distinct from no match and offers read retry. Unknown execution is no longer labelled confirmed.
+6. Reviewed cards explain positive matching criteria, retain limitations and mismatch warnings.
+7. Inventory counts unique active blobs; authenticated post-write refresh bypasses public cache.
+8. Recognized credentials/private keys/seed phrases are rejected before permanent storage. This is pattern rejection, not exhaustive sanitization.
+9. Observation receipts, landing and field-note copy distinguish evidence tiers and the current approved case.
+10. Audit/coverage/state no longer claim zero reviewed memories or Phase 13 incomplete. Casewake naming is provisional per user.
 
-## What must not change
+## Verification
 
-- Product Lock revision 1 and its eight P0 groups.
-- Human approval before any resolution is stored.
-- No claim that a simulation repaired a historical transaction.
-- No autonomous repair, wallet signing, submission or funds movement.
-- Separate evidence tiers and fail-closed mismatch behavior.
+Actual approval/write/recurrence: evidence/real-case/human-approval.json, reviewed-memory-receipt.json, exact-blob-recall.json and recall-negative-controls.json. Existing public proof: evidence/production-reviewed-case/.
 
-## Phase verdict and handoff
+Current local read acceptance: evidence/phase14/read-only-acceptance.json; actual failed/succeeded/NOT_FOUND controls: outcome-controls.log. Production rerun: production-read-only-acceptance.json and release-verification.md.
 
-MODIFY / Phase 14 remains open. This review is an early corrective check because the previous implementation drifted into the DeepBook route. The product shell is now corrected, but Phase 13 must pass before the formal Product Review phase can close.
+Controlled state matrix: evidence/phase14/browser-matrix.json —26 checks, three intercepted fixture submissions, zero real memory writes. Fixture-prefixed desktop/mobile screenshots were inspected and are UI evidence only. Nine test scripts include five new workflow tests; lint, typecheck and production build logs are in the same directory. Local webpack build is used because this isolated Windows worktree shares an external node_modules junction; cloud build is a separate check.
 
-Completed: general case path restored in draft PR #1; generic progress panel; latest CI pass; Preview READY.
-Remaining: human-reviewed case write + exact-blob recurrence; success/unknown and UI state matrices; external user/organizer validation.
-Blocking issues: no genuine human-approved resolution record; no live write/recall acceptance in the PR branch.
-Requires operator decision: only if no credible case-specific proof can be obtained before the deadline and the team wants to submit with the human-verified case claim explicitly marked incomplete.
-Recommended next action: Phase 13 acceptance matrix; do not resume DeepBook route economics by default.
+## Remaining limits and handoff
 
-Environment: ShalyX/casewake, branch fix/general-verified-resolution, commit 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; GitHub Actions run 42335361421 PASS; Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF READY. Preview secrets are absent; no Walrus write was performed.
+No fresh Mainnet write was authorized or performed for Phase 14. New asynchronous submission is source/SDK-contract checked and fixture-tested; the completion reader is tested against the existing actual Mainnet job. Lost initial response without job ID needs operator investigation to recover an existing ID; the UI blocks repeat submission. There is no universal exactly-once or automatic recovery claim. Semantic indexing may delay matching a completed job, which remains pending.
 
+Compatibility is checked where both sides are known; unavailable current SDK version remains manual review. Inventory 13 means ten observations, one smoke record, one simulation runbook and one reviewed integration resolution.
 
-## Evidence-source quality correction — 2026-11-07
+Completed: approved-purpose review, all eight  P0 groups, bounded fixes and audit reconciliation.
+Phase 14 blocking issues: none after documented verification.
+Strategic concerns: narrow case coverage, external utility/track uncertainty, release branch divergence from master.
+Next: final-name decision (Phase8 reopened), then Phase 15 brand acceptance; final design/hygiene/video/judge/submission work remains.
+requires_operator_decision: false for completed fixes; final name requires user choice when naming resumes.
 
-A bounded command-level review of all eight InsufficientCoinBalance candidates in the current evidence pool found that every candidate is a DeFi flashloan/DEX strategy PTB (DeepBook, Turbos/spot DEX, or AFSUI/USDC/USDY flash swaps), clustered at checkpoint 341377758. This sample is useful for testing route-specific failure handling, but it is not representative evidence of general Sui developer incidents or of the broader Casewake user problem. Do not keep mining this pool for a generic case. A valid next case must come from a different, genuine developer incident with case-specific evidence supplied by an engineer/maintainer or a documented public issue.
+FULL_PRODUCT_VERIFIED, JUDGE_READY, feature_freeze and submission_ready are not claimed.

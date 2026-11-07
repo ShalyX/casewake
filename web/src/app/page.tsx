@@ -16,7 +16,7 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="pulse" /> SUI ENGINEERING INTELLIGENCE <span className="slash">/</span> EARLY BUILD</div>
           <h1>The failure ends.<br/><em>The lesson</em><br/>shouldn&apos;t.</h1>
-          <p>Real onchain failure evidence, remembered precedents, and simulation-tested troubleshooting. When the same failure returns, the investigation no longer starts at zero.</p>
+          <p>Real onchain failure evidence and human-reviewed engineering resolutions, recalled with their original proof. When the same failure returns, the investigation no longer starts at zero.</p>
           <div className="hero-actions"><Link href="/workspace" className="primary-button">Investigate an incident <span>↗</span></Link><a href="#method" className="quiet-button">See the method <span>↓</span></a></div>
           <div className="trust-line"><span className="tiny-square"/> Read-only Sui evidence <span className="dot-separator">·</span> Reviewer-approved memory <span className="dot-separator">·</span> No automatic chain actions</div>
         </div>

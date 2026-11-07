@@ -2,7 +2,9 @@
 
 Version: 1.0 / 2026-11-04. Hackathon product identity. Final trademark clearance NOT completed.
 
-## Naming decision
+> Current override — 2026-11-07: the user explicitly describes Casewake as “not final name.” NAME_LOCK is REOPENED. The identity below is a draft direction, not final approval.
+
+## Provisional naming direction
 **CASEWAKE** / pronounced KAYS-wayk.
 
 Meaning: when a new failure repeats the shape of an old case, the old evidence *wakes* and becomes useful to the next engineer.

@@ -2,26 +2,21 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { requestJson, RequestError } from "@/lib/browser-request";
+import { decodeStorageAttempt, STORAGE_SESSION_KEY, type StorageAttempt } from "@/lib/storage-session";
 
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; publicDemoMode?: boolean; network: string; checksAreLive: boolean };
 type Transaction = { digest: string; network: string; source: string; observedAt: string; transactionTimestampMs?: number | null; checkpoint?: string | null; outcome: "failed" | "succeeded" | "unknown"; outcomeReason?: string | null; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
 type ProofMethod = "reviewed-evidence" | "onchain-successor";
 type Case = { id: string; digest: string; diagnosis: string; resolutionSteps: string; evidenceUrl: string; reviewer: string; verifiedAt: string; errorText: string; sdkVersion: string | null; validatedEvidence?: {scope:string;provider?:string;routeTransactionSha256?:string;gasPaymentMocked?:boolean;evidenceSha256?:string;evidenceTitle?:string;evidenceCommitSha?:string;evidenceFileCount?:number;verificationMethod?:string} };
-type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[]; warnings?: string[]; walrusReceipt?: {blobId:string;namespace:string;verifiedThrough:string} };
+type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[]; warnings?: string[]; matchReasons?:string[]; walrusReceipt?: {blobId:string;namespace:string;verifiedThrough:string} };
 type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
 type ObservedPrecedent = { case: {digest: string; errorText: string; sourceUrl: string; resolutionVerified: false}; distance: number };
 type Inventory = { allStoredMemories: number; namespace: string; complete: boolean };
 type SimulationRunbook = { record: { id:string; diagnosis:string; safeProcedure:string; caveat:string; proofPath:string; evidenceDigest:string; failure:{firstSplitMist:string;secondSplitMist:string;errorText:string}; corrected:{secondSplitMist:string} }; matchReason:string; verdict:"simulation-tested-review-only" };
 
 async function postJson(path: string, body: unknown, key?: string) {
-  const response = await fetch(path, {
-    method: "POST",
-    headers: { "content-type": "application/json", ...(key ? { "x-workspace-key": key } : {}) },
-    body: JSON.stringify(body),
-  });
-  const result = await response.json() as Record<string, unknown>;
-  if (!response.ok) throw new Error(String(result.error || "Request failed"));
-  return result;
+  return requestJson(path,body,key);
 }
 const LEGACY_CONTROL_EXAMPLES = [
   {digest:"BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",label:"Simulation-tested runbook"},
@@ -43,6 +38,7 @@ export default function Workspace() {
   const [inventoryUnavailable, setInventoryUnavailable] = useState(false);
   const [observationOnly, setObservationOnly] = useState(false);
   const [recallNote, setRecallNote] = useState("");
+  const [recallUnavailable,setRecallUnavailable]=useState(false);
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
   const [error, setError] = useState("");
   const [proof, setProof] = useState<Proof | null>(null);
@@ -62,12 +58,24 @@ export default function Workspace() {
   const [reviewedChange, setReviewedChange] = useState("");
   const [confirmedCausalLink, setConfirmedCausalLink] = useState(false);
   const [recurrenceDigest, setRecurrenceDigest] = useState("");
+  const [storageAttempt,setStorageAttempt]=useState<StorageAttempt|null>(null);
+  const [recoveryJobId,setRecoveryJobId]=useState("");
+  const [failedStorageJob,setFailedStorageJob]=useState(false);
+  const writeInFlight=useRef(false);
+  function retainStorage(value:StorageAttempt|null){
+    setStorageAttempt(value);
+    try{if(value)sessionStorage.setItem(STORAGE_SESSION_KEY,JSON.stringify(value));else sessionStorage.removeItem(STORAGE_SESSION_KEY);}catch{/* Storage can be disabled; keep in-memory receipt. */}
+  }
   useEffect(() => {
-    fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
-    fetch("/api/memories").then((r) => { if (!r.ok) throw new Error("Relayer unavailable"); return r.json(); }).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
+    requestJson("/api/status",undefined).then(data=>setStatus(data as Status)).catch(() => setError("Status endpoint unavailable. Reload to retry."));
+    requestJson("/api/memories",undefined).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
+    try{
+      const saved=decodeStorageAttempt(sessionStorage.getItem(STORAGE_SESSION_KEY));
+      if(saved)queueMicrotask(()=>{setStorageAttempt(saved);if(saved.receipt){setProof(saved.receipt);setWrittenSourceDigest(saved.sourceDigest);setObservationOnly(saved.kind==="observation");}});
+    }catch{/* No persistent browser access is required to inspect transactions. */}
   }, []);
   async function refreshInventory() {
-    try { const r=await fetch("/api/memories"); if(r.ok){setInventory(await r.json() as Inventory);setInventoryUnavailable(false);}else{setInventoryUnavailable(true);} } catch { setInventoryUnavailable(true); }
+    try {setInventory(await requestJson("/api/memories",undefined,reviewerKey) as Inventory);setInventoryUnavailable(false);}catch{setInventoryUnavailable(true);}
   }
 
   useEffect(() => {
@@ -91,7 +99,9 @@ export default function Workspace() {
       setObservedPrecedents((recalled.observedPrecedents || []) as ObservedPrecedent[]);
       setSimulationRunbooks((recalled.simulationRunbooks || []) as SimulationRunbook[]);
       setRecallNote(String(recalled.reason || ""));
+      setRecallUnavailable(recalled.recallDegraded===true);
     } catch {
+      setRecallUnavailable(true);
       setCandidates([]);
       setObservedPrecedents([]);
       setSimulationRunbooks([]);
@@ -102,7 +112,7 @@ export default function Workspace() {
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
-    setError(""); setRecallNote(""); setProof(null); setWrittenSourceDigest(""); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setTx(null);
+    setError(""); setRecallNote(""); setRecallUnavailable(false); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setSimulationRunbooks([]); setShowEditor(false); setTx(null);
     try {
       setPhase("reading");
       const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
@@ -146,6 +156,7 @@ export default function Workspace() {
       setCandidates([acceptance.matchedCandidate as Candidate]);
       setObservedPrecedents([]);
       setSimulationRunbooks([]);
+      setRecallUnavailable(false);
       setRecallNote(String(acceptance.note || "Exact stored Walrus blob recalled for the second independent Tatum failure."));
       setThreeGatePassed(true);
       setVerified(false);
@@ -156,7 +167,10 @@ export default function Workspace() {
   }
 
   async function remember() {
-    if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue") return;
+    if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    writeInFlight.current=true;
+    const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"resolution",requestId:crypto.randomUUID()};
+    retainStorage(attempt);
     setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(false);
     try {
       setPhase("writing");
@@ -176,36 +190,71 @@ export default function Workspace() {
         reviewedChange: reviewedChange.trim(),
         verificationMethod: proofMethod === "reviewed-evidence" ? verificationMethod : undefined,
         confirmedCausalLink,
+        asyncWrite:true,requestId:attempt.requestId,
       }, reviewerKey);
+      if(result.pending){
+        const pending=result.pending as {jobId:string;namespace:string};
+        const accepted={...attempt,jobId:pending.jobId,namespace:pending.namespace};
+        retainStorage(accepted);setShowEditor(false);await checkStorage(accepted);return;
+      }
       const stored = result.proof as Proof;
       setProof(stored);
       setWrittenSourceDigest(tx.digest);
+      retainStorage({...attempt,jobId:stored.jobId,namespace:stored.namespace,receipt:stored});
       setShowEditor(false);
       await refreshInventory();
       setRecallNote("The human-reviewed resolution has a completed Walrus receipt. Enter a distinct comparable failed digest to verify exact-blob recurrence.");
-    } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
-    finally { setPhase("idle"); }
+    } catch (e) {
+      if(e instanceof RequestError&&[400,403,409,422,503].includes(e.status))retainStorage(null);
+      setError((e instanceof Error?e.message:"Memory write response unavailable.")+" No automatic write retry was made.");
+    }
+    finally {writeInFlight.current=false;setPhase("idle");}
+  }
+
+  async function checkStorage(attempt:StorageAttempt|null=storageAttempt){
+    if(!attempt)return;
+    const jobId=attempt.jobId||recoveryJobId.trim();
+    if(!jobId||!reviewerKey){setError("Enter reviewer access and the storage job ID to check the existing write. Do not store another copy.");return;}
+    setPhase("writing");setError("");setFailedStorageJob(false);
+    try{
+      const query=new URLSearchParams({jobId,sourceDigest:attempt.sourceDigest,requestId:attempt.requestId,kind:attempt.kind});
+      const result=await requestJson("/api/memory-job?"+query,undefined,reviewerKey);
+      if(result.proof){
+        const stored=result.proof as Proof;
+        retainStorage({...attempt,jobId,namespace:stored.namespace,receipt:stored});
+        setProof(stored);setWrittenSourceDigest(attempt.sourceDigest);setObservationOnly(attempt.kind==="observation");
+        setRecallNote("Walrus storage completed. This receipt is preserved when inspecting another incident; verify recurrence without writing again.");
+        await refreshInventory();
+      }else retainStorage({...attempt,jobId});
+    }catch(e){if(e instanceof RequestError&&e.status===409)setFailedStorageJob(true);setError((e instanceof Error?e.message:"Storage status unavailable.")+" The write has not been retried.");}
+    finally{setPhase("idle");}
   }
 
   async function rememberObservation() {
-    if (!tx || tx.outcome !== "failed") return;
+    if (!tx || tx.outcome !== "failed" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    writeInFlight.current=true;
+    const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"observation",requestId:crypto.randomUUID()};
+    retainStorage(attempt);
     setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(true);
     try {
       setPhase("writing");
-      const result=await postJson("/api/observations",{digest:tx.digest},reviewerKey);
+      const result=await postJson("/api/observations",{digest:tx.digest,asyncWrite:true,requestId:attempt.requestId},reviewerKey);
+      if(result.pending){const pending=result.pending as {jobId:string;namespace:string};const accepted={...attempt,jobId:pending.jobId,namespace:pending.namespace};retainStorage(accepted);await checkStorage(accepted);return;}
       const stored = result.proof as Proof;
       setProof(stored);
+      setWrittenSourceDigest(tx.digest);retainStorage({...attempt,jobId:stored.jobId,receipt:stored});
       await refreshInventory();
       setPhase("recalling");
       await loadRecall(tx);
-    } catch(e){setError(e instanceof Error ? e.message : "Observation write failed.");}
-    finally{setPhase("idle");}
+    } catch(e){if(e instanceof RequestError&&[400,403,409,422,503].includes(e.status))retainStorage(null);setError((e instanceof Error?e.message:"Observation response unavailable.")+" No automatic write retry was made.");}
+    finally{writeInFlight.current=false;setPhase("idle");}
   }
 
   const strictDeepbook = tx?.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
   const eligible = candidates.filter((c) => c.verdict === "eligible-for-review");
   const rejected = candidates.filter((c) => c.verdict === "incompatible");
   const busy = phase !== "idle";
+  const storagePending=!!storageAttempt&&!storageAttempt.receipt;
   const proofReady = proofMethod === "onchain-successor"
     ? successorDigest.trim().length >= 32 && reviewedChange.trim().length >= 30
     : evidenceUrl.trim().length > 0 && reviewedChange.trim().length >= 30 && Boolean(verificationMethod);
@@ -222,7 +271,7 @@ export default function Workspace() {
         </div>
 
         <div className="health-row" role="status">
-          <div><span className={status?.tatumConfigured ? "health-indicator ready" : "health-indicator"} /> Tatum gRPC <b>{status ? (status.tatumConfigured ? (tx ? "Live transaction fetched" : "Key configured · inspect to verify") : "Key required") : "Checking…"}</b></div>
+          <div><span className={status?.tatumConfigured ? "health-indicator ready" : "health-indicator"} /> Tatum gRPC <b>{status ? (status.tatumConfigured ? (tx ? tx.outcome==="unknown"?"Lookup complete · outcome unknown":"Live transaction fetched" : "Key configured · inspect to verify") : "Key required") : "Checking…"}</b></div>
           <div><span className={status?.walrusConfigured ? "health-indicator ready" : "health-indicator"} /> Walrus Memory <b>{status ? (status.walrusConfigured ? (inventory ? "Mainnet inventory verified" : inventoryUnavailable ? "Relayer read temporarily unavailable" : "Credentials configured · checking") : "Credentials required") : "Checking…"}</b></div>
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
@@ -230,9 +279,9 @@ export default function Workspace() {
         <div className="panel case-progress" role="status" style={{marginBottom:"20px"}}>
           <div className="panel-kicker"><span>CASE MEMORY / PROOF STATUS</span>{eligible[0] ? <a href={eligible[0].record.evidenceUrl} target="_blank" rel="noreferrer">Inspect recalled case evidence ↗</a> : strictDeepbook ? <a href="/api/acceptance" target="_blank" rel="noreferrer">Inspect route acceptance ledger ↗</a> : null}</div>
           <div className="case-progress-grid">
-            <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? `Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
-            <div><strong>02 / HUMAN REVIEW</strong><span>{proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
-            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : proof && !observationOnly ? "Write complete · recurrence check pending" : eligible.some(candidate => candidate.walrusReceipt?.blobId) ? "Reviewed resolution recalled from Walrus" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
+            <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? tx.outcome==="unknown"?"Execution outcome unknown":`Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
+            <div><strong>02 / HUMAN REVIEW</strong><span>{storagePending?"Storage completion pending":proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
+            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : recallUnavailable?"Memory lookup unavailable":proof && !observationOnly ? "Write complete · recurrence check pending" : eligible.some(candidate => candidate.walrusReceipt?.blobId) ? "Reviewed resolution recalled from Walrus" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
           </div>
           <p className="muted">Observed failures, simulation-tested procedures and human-reviewed resolutions are separate evidence tiers. Casewake never signs or executes a repair.</p>
         </div>
@@ -263,7 +312,7 @@ export default function Workspace() {
                 </div>
                 <p>Public visitors can inspect genuine onchain transactions. Tatum and Walrus are queried live. Only an authorized reviewer with a private access key can record a confirmed case.</p>
               </details>}
-              {!status?.tatumConfigured && <p className="inline-warning">TATUM_API_KEY is not set. Configure the server environment to enable real chain reads.</p>}
+              {status&&!status.tatumConfigured && <p className="inline-warning">Transaction lookup is not configured. Ask the workspace operator to enable chain access.</p>}
               {error && <div className="inline-error" role="alert">⚠ {error}</div>}
             </div>
 
@@ -312,10 +361,10 @@ export default function Workspace() {
                 <label className="review-checkbox"><input type="checkbox" checked={confirmedCausalLink} onChange={(e) => setConfirmedCausalLink(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I reviewed this exact GitHub artifact and confirm its specific change resolves this incident. The selected test or verification method genuinely applies to this failure." : "I reviewed both executions and confirm this specific successful follow-up is the correction of the recorded incident. Tatum verifies execution and sender; it cannot infer my causal judgment."}</span></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I am an authorized human reviewer. I inspected the original failure, the linked artifact and its changed files, and the selected verification evidence. I accept responsibility for confirming the causal relationship." : "I am an authorized human reviewer. I inspected the original failure, the specific engineering change and the successful follow-up, and accept responsibility for confirming their causal relationship."}</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey || diagnosis.trim().length < 20 || resolutionSteps.trim().length < 20 || !proofReady || !confirmedCausalLink} onClick={() => void remember()}>{phase === "writing" ? "Verifying and writing…" : proofMethod === "reviewed-evidence" ? "Verify artifact, then store" : "Verify follow-up, then store"} ↗</button>
+                <button type="button" className="primary-button compact" disabled={busy || storagePending || !verified || !reviewerKey || diagnosis.trim().length < 20 || resolutionSteps.trim().length < 20 || !proofReady || !confirmedCausalLink} onClick={() => void remember()}>{phase === "writing" ? "Verifying and writing…" : proofMethod === "reviewed-evidence" ? "Verify artifact, then store" : "Verify follow-up, then store"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
-                  <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
+                  <button type="button" className="secondary-button" disabled={busy || storagePending || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
                 </div>
               </div>
             </div>}
@@ -329,7 +378,7 @@ export default function Workspace() {
                !tx ? <p className="muted">Once you import a failed transaction, compatible reviewed cases appear here—with their origin and mismatch reasons.</p> :
                <p className="muted">{recallNote || "No recall performed."}</p>}
               <div className="memory-results">
-                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p>{c.warnings?.map((warning, index) => <small className="muted" key={index}>Review note: {warning}</small>)}<a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a>{c.record.validatedEvidence?.scope === "full-flashloan-route-repair" && <small>Tatum Mainnet full-route simulation passed · proof SHA-256 {c.record.validatedEvidence.routeTransactionSha256?.slice(0,16)}… · No onchain execution claimed</small>}{c.record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && <small>Tatum confirmed a distinct successful follow-up from the same sender. Its relevance was attested by a human reviewer; causality is not inferred from chain data alone.</small>}{c.record.validatedEvidence?.scope === "human-reviewed-engineering-artifact" && <small>GitHub artifact: {c.record.validatedEvidence.evidenceTitle} · {c.record.validatedEvidence.verificationMethod} · {c.record.validatedEvidence.evidenceFileCount} changed files · snapshot SHA-256 {c.record.validatedEvidence.evidenceSha256?.slice(0,16)}…</small>}<small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small>{c.walrusReceipt ? <div className="proof-receipt"><span>RECALLED WALRUS BLOB · {c.walrusReceipt.namespace}</span><code>{c.walrusReceipt.blobId}</code><small>Signed Walrus recall · same blob returned on retrieval</small></div> : <p>Walrus receipt unavailable — not a completed proof of recall.</p>}</article>)}
+                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p>{c.matchReasons?.length ? <p><strong>Why it matches: </strong>{c.matchReasons.join(" ")}</p> : null}{c.warnings?.map((warning, index) => <small className="muted" key={index}>Review note: {warning}</small>)}<a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a>{c.record.validatedEvidence?.scope === "full-flashloan-route-repair" && <small>Tatum Mainnet full-route simulation passed · proof SHA-256 {c.record.validatedEvidence.routeTransactionSha256?.slice(0,16)}… · No onchain execution claimed</small>}{c.record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && <small>Tatum confirmed a distinct successful follow-up from the same sender. Its relevance was attested by a human reviewer; causality is not inferred from chain data alone.</small>}{c.record.validatedEvidence?.scope === "human-reviewed-engineering-artifact" && <small>GitHub artifact: {c.record.validatedEvidence.evidenceTitle} · {c.record.validatedEvidence.verificationMethod} · {c.record.validatedEvidence.evidenceFileCount} changed files · snapshot SHA-256 {c.record.validatedEvidence.evidenceSha256?.slice(0,16)}…</small>}<small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small>{c.walrusReceipt ? <div className="proof-receipt"><span>RECALLED WALRUS BLOB · {c.walrusReceipt.namespace}</span><code>{c.walrusReceipt.blobId}</code><small>Signed Walrus recall · same blob returned on retrieval</small></div> : <p>Walrus receipt unavailable — not a completed proof of recall.</p>}</article>)}
                 {simulationRunbooks.map((hit)=> <article key={hit.record.id} className="simulation-card">
                   <div className="simulation-card-kicker">SIMULATION-TESTED · HISTORICAL REPAIR NOT VERIFIED</div>
                   <h3>One reproducible failure. One tested correction.</h3>
@@ -349,13 +398,14 @@ export default function Workspace() {
                   </article>)}
                 </div>}
                 {rejected.length > 0 && <details className="rejected"><summary>{rejected.length} related case(s) excluded by compatibility checks</summary>{rejected.map((c) => <div key={c.record.id}><strong>{c.record.diagnosis}</strong><p>{c.reasons.join(" ")}</p></div>)}</details>}
-                {!eligible.length && !observedPrecedents.length && !simulationRunbooks.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>No verified match to apply.</strong><p>Unmatched failures remain for human investigation. Similar words alone aren&apos;t proof.</p></div>}
+                {!eligible.length && !observedPrecedents.length && !simulationRunbooks.length && <div className="memory-zero"><div className="memory-zero-mark">↝</div><strong>{recallUnavailable?"Memory lookup unavailable.":"No verified match to apply."}</strong><p>{recallUnavailable?"No conclusion can be drawn about saved cases. The chain evidence remains available.":"Unmatched failures remain for human investigation. Similar words alone aren't proof."}</p>{recallUnavailable&&tx?.outcome==="failed"&&<button type="button" className="secondary-button" disabled={busy} onClick={()=>void loadRecall(tx)}>Retry memory lookup ↗</button>}</div>}
               </div>
             </div>
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
-              <h3>{exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              <h3>{exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : storagePending?"Storage is awaiting confirmation.":proof ? observationOnly?"Observation stored. No resolution claimed.":"Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              {storagePending&&<div className="proof-receipt" role="status"><span>{storageAttempt.jobId?"STORAGE JOB ACCEPTED · NOT YET A COMPLETED MEMORY":"STORAGE RESPONSE UNCONFIRMED · DO NOT RESUBMIT"}</span>{storageAttempt.jobId?<code>{storageAttempt.jobId}</code>:<label>Recover storage job ID<input value={recoveryJobId} onChange={event=>setRecoveryJobId(event.target.value)} placeholder="Existing Walrus job ID"/></label>}<p>Check the existing job to recover its receipt. This action never creates another memory.</p><button type="button" className="secondary-button" disabled={busy||!reviewerKey||(!storageAttempt.jobId&&!recoveryJobId.trim())} onClick={()=>void checkStorage()}>Check storage status ↗</button>{failedStorageJob&&<button type="button" className="secondary-button" onClick={()=>{retainStorage(null);setFailedStorageJob(false);setError("");}}>Dismiss failed storage job</button>}</div>}
               <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? "A distinct Tatum-confirmed failed incident recalled the reviewed resolution from the exact Walrus blob. Human causal review remains visible." : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
-              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
+              {inventory && <div className="inventory-count"><strong>{inventory.complete ? "" : "≥"}{inventory.allStoredMemories}</strong><span>Completed namespace memories (all types; including smoke tests). {inventory.complete ? "" : "Inventory is incomplete. "}This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><small>Source incident {shortDigest(writtenSourceDigest)}</small><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
                     <label className="reviewer-access"><span>SECOND DISTINCT REAL FAILURE</span><input value={recurrenceDigest} onChange={(e) => setRecurrenceDigest(e.target.value)} placeholder="Digest of a comparable later failed incident" spellCheck={false}/><small>Casewake will independently fetch it through Tatum and require a compatible error before accepting the exact Walrus blob match.</small></label>
                     <button type="button" className="secondary-button" disabled={busy || !reviewerKey || !recurrenceDigest.trim()} onClick={() => void verifySavedRecall(proof, writtenSourceDigest, recurrenceDigest)}>Verify exact-blob recurrence — no new Walrus write ↗</button>
                   </>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
