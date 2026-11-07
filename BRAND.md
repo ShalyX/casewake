@@ -49,3 +49,20 @@ Chosen: Trace instrument / controlled fracture. Preserve the existing app hierar
 - Demo title "Casewake — A Failure Worth Remembering".
 - Repo name planned: `casewake`; canonical URL to be recorded after deployment verification.
 - Legal check: exact-name web search performed 2026-11-04, partial; no trademark guarantee. For a real business, perform relevant jurisdiction trademark searches before investing in a protected brand.
+
+## Hackathon Operator NAME_LOCK adversarial completion — November 6, 2026
+
+**Lock retained: CASEWAKE.** The existing accepted product identity and Casewake wordmark remain unchanged; this is an audit of the decision, not a new naming vote.
+
+Naming brief: short, pronounceable name for a *remembered, human-verified engineering case*; not an explorer, autonomous repair bot, DeFi strategy, or generic AI dashboard. Product category: developer incident intelligence / reviewed resolution memory. Pronunciation: KAYS-wayk.
+
+Candidate territories and attack (considered, not proposed renames):
+- **Resurfacing a case:** Casewake (selected), Aftercase (too generic), Casefold (risk of implying case folding / unrelated semantics), Wakecase (weak word order), CaseRelay (support-ticket connotation), IncidentEcho (generic descriptive).
+- **Evidence and trace:** ReTrace (crowded and collision), Tracekin (existing unrelated app), Faultprint (reads as diagnostics only), Proofline (generic proof tool), Faultmark (security-alert connotation), Tracebound (narrow technical metaphor).
+- **Operational knowledge:** WitnessLoop (legal connotation), MemoryLedger (generic/crypto), RecallFrame (generic AI term), Resolution Desk (commodity workflow software), Precedent (common dictionary/product term), Evidencewake (awkward pronunciation).
+
+Pronunciation/memorability: **Casewake** is two short common syllables; conveys a previous case resurfacing without falsely claiming automatic repair. Category descriptor must accompany it on first use.
+
+Collision check (public search, November 6): searches for exact "Casewake" software/company/mark found no obvious competing incident-memory software in the returned results. **CASEWAVE**, however, is a distinct but similar SaaS trademark application in insurance CRM (June 2026), so avoid confusingly wave-like typography/pronunciation; Casewake spells and sounds WAKE. Source: https://uspto.report/TM/99913410 . This is **not legal trademark clearance**, domain availability confirmation, or ownership of social handles. For the hackathon, name lock is acceptable; defer full trademark examination to commercial launch.
+
+NAME_LOCK exit evidence: multiple naming territories, 18 candidates, genericity/collision attack, rationale and a consistent in-product brand. **PASS as hackathon naming**, without asserting legal rights.

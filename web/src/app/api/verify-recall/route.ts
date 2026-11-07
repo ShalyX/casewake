@@ -18,23 +18,33 @@ export async function POST(request: NextRequest) {
   }
   try {
     const body = await request.json() as Record<string, unknown>;
-    if (body.sourceDigest !== DEEPBOOK_SOURCE_DIGEST ||
-        body.secondDigest !== SECOND_INCIDENT ||
+    const sourceDigest = body.sourceDigest;
+    const secondDigest = body.secondDigest;
+    const strictDeepbook = sourceDigest === DEEPBOOK_SOURCE_DIGEST;
+    if (typeof sourceDigest !== "string" || typeof secondDigest !== "string" ||
+        !/^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(sourceDigest) ||
+        !/^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(secondDigest) ||
+        sourceDigest === secondDigest ||
+        (strictDeepbook && secondDigest !== SECOND_INCIDENT) ||
         typeof body.expectedBlobId !== "string" ||
         body.expectedBlobId.length < 20 || body.expectedBlobId.length > 256) {
-      return NextResponse.json({ error: "The original digest, independent recurrence and stored Walrus blob ID are required." }, { status: 400 });
+      return NextResponse.json({ error: "A distinct genuine recurrence and completed Walrus blob ID are required. DeepBook must use its locked independent recurrence." }, { status: 400 });
     }
-    const second = await getTatumTransaction(SECOND_INCIDENT);
-    if (second.outcome !== "failed" || second.failedCommandIndex !== 16 ||
-        second.failedCommandKind !== "splitCoins" || !second.errorText?.includes("InsufficientCoinBalance")) {
-      return NextResponse.json({ error: "Gate 3 blocked: the second real transaction does not verify as a compatible repayment failure." }, { status: 409 });
+    const second = await getTatumTransaction(secondDigest);
+    if (second.outcome !== "failed" ||
+        (strictDeepbook && (second.failedCommandIndex !== 16 || second.failedCommandKind !== "splitCoins" || !second.errorText?.includes("InsufficientCoinBalance")))) {
+      return NextResponse.json({ error: "The second real transaction is not a compatible onchain failure." }, { status: 409 });
     }
     const recall = await recallAllPrecedents(second);
     const match = recall.candidates.find(candidate =>
-      candidate.record.digest === DEEPBOOK_SOURCE_DIGEST &&
-      candidate.record.resolutionKind === "route-repair" &&
-      candidate.record.validatedEvidence?.scope === "full-flashloan-route-repair" &&
-      candidate.record.validatedEvidence.originalHistoricalRouteRepaired === true &&
+      candidate.record.digest === sourceDigest &&
+      (strictDeepbook
+        ? candidate.record.resolutionKind === "route-repair" &&
+          candidate.record.validatedEvidence?.scope === "full-flashloan-route-repair" &&
+          candidate.record.validatedEvidence.originalHistoricalRouteRepaired === true
+        : candidate.record.resolutionKind === "onchain-successor" &&
+          candidate.record.validatedEvidence?.scope === "human-reviewed-successor-transaction" &&
+          candidate.record.validatedEvidence.reviewerConfirmedCausality === true) &&
       candidate.verdict === "eligible-for-review" &&
       candidate.walrusReceipt?.blobId === body.expectedBlobId
     );
@@ -47,13 +57,16 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json({
       gate3: "verified",
-      originalThreeHopCorrection: "full-route-simulation-passed",
-      originalDigest: DEEPBOOK_SOURCE_DIGEST,
+      proofScope: strictDeepbook ? "full-flashloan-route-repair" : "human-reviewed-successor-transaction",
+      originalThreeHopCorrection: strictDeepbook ? "full-route-simulation-passed" : "not-applicable",
+      originalDigest: sourceDigest,
       secondTransaction: second,
       matchedCandidate: match,
       walrusReceipt: match.walrusReceipt,
       walrusHitsExamined: recall.walrusHitsExamined,
-      note: "Independent Tatum recurrence recalled the same human-reviewed full-route repair simulation evidence from the exact Walrus blob. The repair passed simulation only; no onchain execution is claimed.",
+      note: strictDeepbook
+        ? "Independent Tatum recurrence recalled the same human-reviewed full-route repair simulation evidence from the exact Walrus blob. The repair passed simulation only; no onchain execution is claimed."
+        : "A different Tatum-confirmed onchain failure recalled the same reviewer-attested successful follow-up record from the exact Walrus blob. The onchain success is independently observed; causal relevance remains a human-reviewed claim.",
     });
   } catch (error) {
     console.error("[casewake-three-gates] proof unavailable", error instanceof Error ? error.name : "UnknownError");

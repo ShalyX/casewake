@@ -4,12 +4,18 @@ export type ObservedTransaction = {
   network: "sui-mainnet";
   source: "Tatum Sui gRPC";
   observedAt: string;
+  transactionTimestampMs?: number | null;
+  checkpoint?: string | null;
   outcome: "failed" | "succeeded" | "unknown";
+  outcomeReason?: string | null;
   errorText: string | null;
   fingerprint: string | null;
   packageId: string | null;
   failedCommandIndex?: number | null;
   failedCommandKind?: string | null;
+  sender?: string | null;
+  operationMarkers?: string[];
+  commandKinds?: string[];
 };
 
 export type VerifiedCase = {
@@ -36,19 +42,34 @@ export type Candidate = {
   distance: number;
   verdict: "eligible-for-review" | "incompatible";
   reasons: string[];
+  warnings?: string[];
   walrusReceipt?: { blobId: string; namespace: string; verifiedThrough: "signed-walrus-recall" };
 };
 
 const PREFIX = "SUI_INCIDENT_MEMORY_V1\n";
 
-export function fingerprintError(value: string): string | null {
-  const canonical = value
-    .trim()
-    .toLowerCase()
+export function fingerprintError(value: string, commandKind?: string | null): string | null {
+  const normalized = value.trim().toLowerCase();
+  const moveAbort = normalized.match(/module:\s*moduleid\s*\{\s*address:\s*(?:0x)?([a-f0-9]{64}),\s*name:\s*identifier\("([^"]+)"\)\s*\}[\s\S]*?function_name:\s*some\("([^"]+)"\)\s*\},\s*(\d+)/i);
+  if (moveAbort) return "move-abort:0x" + moveAbort[1] + "::" + moveAbort[2] + "::" + moveAbort[3] + ":abort-" + moveAbort[4];
+  if (/insufficientcoinbalance/.test(normalized)) return "sui:insufficient-coin-balance:" + (commandKind || "unknown");
+  if (/executioncancelledduetosharedobjectcongestion/.test(normalized)) {
+    const objects = [...normalized.matchAll(/0x[a-f0-9]{64}/g)].map(match => match[0]).sort();
+    return "sui:shared-object-congestion:" + (objects.join(",") || "unspecified");
+  }
+  const canonical = normalized
+    .replace(/\bin command \d+\b/g, "in command <index>")
+    .replace(/instruction:\s*\d+/g, "instruction:<index>")
     .replace(/0x[a-f0-9]{32,}/g, "0x<address>")
     .replace(/\s+/g, " ")
     .slice(0, 480);
   return canonical.length >= 4 ? canonical : null;
+}
+
+/** A successor must be finalized in a strictly later Sui checkpoint. */
+export function isLaterCheckpoint(original: string | null | undefined, successor: string | null | undefined): boolean {
+  if (!original || !successor || !/^\d+$/.test(original) || !/^\d+$/.test(successor)) return false;
+  try { return BigInt(successor) > BigInt(original); } catch { return false; }
 }
 
 export function encodeMemory(record: VerifiedCase): string {
@@ -84,26 +105,52 @@ export function decodeMemory(text: string): VerifiedCase | null {
         proof.scope === "full-flashloan-route-repair" && proof.originalHistoricalRouteRepaired === true &&
         proof.simulationSucceeded === true && proof.provider === "Tatum Sui Mainnet gRPC" &&
         proof.principalMist === "65265188650" && /^[a-f0-9]{64}$/.test(String(proof.routeTransactionSha256||""));
-    if (!prevention && !repaired) return null;
+    const successor = c.resolutionKind === "onchain-successor" &&
+        proof.scope === "human-reviewed-successor-transaction" &&
+        proof.proofType === "tatum-executed-successor" &&
+        proof.originalHistoricalRouteRepaired === false &&
+        proof.provider === "Tatum Sui gRPC" &&
+        proof.successorOutcome === "succeeded" &&
+        proof.reviewerConfirmedCausality === true &&
+        typeof proof.originalTimestampMs === "number" && Number.isFinite(proof.originalTimestampMs) &&
+        typeof proof.successorTimestampMs === "number" && Number.isFinite(proof.successorTimestampMs) &&
+        proof.successorTimestampMs >= proof.originalTimestampMs &&
+        typeof proof.originalCheckpoint === "string" &&
+        typeof proof.successorCheckpoint === "string" &&
+        isLaterCheckpoint(proof.originalCheckpoint, proof.successorCheckpoint) &&
+        typeof proof.successorDigest === "string" &&
+        /^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(proof.successorDigest) &&
+        proof.successorDigest !== c.digest &&
+        typeof proof.originalSender === "string" &&
+        typeof proof.successorSender === "string" &&
+        /^0x[a-f0-9]{1,64}$/i.test(proof.originalSender) &&
+        proof.originalSender === proof.successorSender &&
+        Array.isArray(proof.matchedOperations) && proof.matchedOperations.length > 0 &&
+        proof.matchedOperations.every((marker: unknown) => typeof marker === "string" && marker.length >= 8) &&
+        typeof proof.reviewedChange === "string" && proof.reviewedChange.length >= 30 &&
+        c.evidenceUrl === "https://suivision.xyz/txblock/" + proof.successorDigest;
+    if (!prevention && !repaired && !successor) return null;
     return c as VerifiedCase;
   } catch { return null; }
 }
 
 export function assessCase(observation: ObservedTransaction, record: VerifiedCase, distance: number): Candidate {
   const reasons: string[] = [];
+  const warnings: string[] = [];
   if (observation.outcome !== "failed") reasons.push("The current transaction is not a confirmed onchain failure.");
   if (record.network !== observation.network) reasons.push("Network mismatch.");
   if (record.digest === observation.digest) reasons.push("Self-match cannot prove comparable-incident recall.");
   if (!((record.resolutionKind === "prevention-guard" && record.validatedEvidence?.scope === "prevention-guard-only") ||
-        (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true)))
+        (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true) ||
+        (record.resolutionKind === "onchain-successor" && record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && record.validatedEvidence.reviewerConfirmedCausality === true)))
     reasons.push("Unsupported or unproven fix scope.");
-  if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error fingerprint differs.");
+  if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error class or operation differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");
-  if (record.errorText !== observation.errorText) reasons.push("Original error detail differs; do not automatically reuse this resolution.");
-  if (record.sdkVersion) reasons.push("Cannot verify the caller's SDK version from an onchain digest; manual version confirmation required.");
+  if (record.errorText !== observation.errorText) warnings.push("The detailed trace differs from the source incident. Review the command position and transaction context before reusing the procedure.");
+  if (record.sdkVersion) warnings.push("The saved procedure was reviewed against SDK " + record.sdkVersion + "; the current SDK version is not available from chain evidence and must be confirmed manually.");
   if (record.status !== "human-verified") reasons.push("Unverified case.");
   if (!record.evidenceUrl.startsWith("https://")) reasons.push("Missing secure evidence URL.");
-  return { record, distance, verdict: reasons.length ? "incompatible" : "eligible-for-review", reasons };
+  return { record, distance, verdict: reasons.length ? "incompatible" : "eligible-for-review", reasons, warnings };
 }
 
 export function safeText(input: unknown, max = 2000): string {

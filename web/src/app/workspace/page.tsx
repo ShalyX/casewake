@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; publicDemoMode?: boolean; network: string; checksAreLive: boolean };
-type Transaction = { digest: string; network: string; source: string; observedAt: string; outcome: "failed" | "succeeded" | "unknown"; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
+type Transaction = { digest: string; network: string; source: string; observedAt: string; transactionTimestampMs?: number | null; checkpoint?: string | null; outcome: "failed" | "succeeded" | "unknown"; outcomeReason?: string | null; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
 type Case = { id: string; digest: string; diagnosis: string; resolutionSteps: string; evidenceUrl: string; reviewer: string; verifiedAt: string; errorText: string; sdkVersion: string | null; validatedEvidence?: {scope:string;provider?:string;routeTransactionSha256?:string;gasPaymentMocked?:boolean} };
-type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[]; walrusReceipt?: {blobId:string;namespace:string;verifiedThrough:string} };
+type Candidate = { record: Case; distance: number; verdict: "eligible-for-review" | "incompatible"; reasons: string[]; warnings?: string[]; walrusReceipt?: {blobId:string;namespace:string;verifiedThrough:string} };
 type Proof = { jobId: string; blobId: string; owner?: string; namespace: string; status?: string };
 type ObservedPrecedent = { case: {digest: string; errorText: string; sourceUrl: string; resolutionVerified: false}; distance: number };
 type Inventory = { allStoredMemories: number; namespace: string; complete: boolean };
@@ -23,9 +23,9 @@ async function postJson(path: string, body: unknown, key?: string) {
   return result;
 }
 const PUBLIC_EXAMPLES = [
-  {digest:"BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",label:"Repeat failure"},
-  {digest:"XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",label:"Second case"},
-  {digest:"Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",label:"Negative control"},
+  {digest:"BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",label:"Simulation-tested runbook"},
+  {digest:"XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",label:"Related failure"},
+  {digest:"Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",label:"Mismatch control"},
 ] as const;
 function shortDigest(value: string) { return value.length > 19 ? value.slice(0, 12) + "…" + value.slice(-7) : value; }
 
@@ -45,16 +45,18 @@ export default function Workspace() {
   const [error, setError] = useState("");
   const [proof, setProof] = useState<Proof | null>(null);
   const [writtenSourceDigest, setWrittenSourceDigest] = useState("");
-  const [threeGatePassed, setThreeGatePassed] = useState(false);
+  const [exactBlobRecallPassed, setThreeGatePassed] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
-  const [diagnosis, setDiagnosis] = useState("The DeepBook three-hop flash-loan transaction fails at repayment split command 16 with InsufficientCoinBalance: the returned SUI is not sufficient to split out the exact borrowed principal.");
+  const [diagnosis, setDiagnosis] = useState("");
   const [resolutionSteps, setResolutionSteps] = useState("");
-  const [evidenceUrl, setEvidenceUrl] = useState("");
   const [reviewer, setReviewer] = useState("");
   const [sdkVersion, setSdkVersion] = useState("");
   const [reviewerKey, setReviewerKey] = useState("");
   const [verified, setVerified] = useState(false);
-  const [repairTransactionBcs, setRepairTransactionBcs] = useState("");
+  const [successorDigest, setSuccessorDigest] = useState("");
+  const [reviewedChange, setReviewedChange] = useState("");
+  const [confirmedCausalLink, setConfirmedCausalLink] = useState(false);
+  const [recurrenceDigest, setRecurrenceDigest] = useState("");
   useEffect(() => {
     fetch("/api/status").then((r) => r.json()).then(setStatus).catch(() => setError("Status endpoint unavailable."));
     fetch("/api/memories").then((r) => { if (!r.ok) throw new Error("Relayer unavailable"); return r.json(); }).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
@@ -101,23 +103,33 @@ export default function Workspace() {
       const result = await postJson("/api/transaction", { digest: value }, reviewerKey);
       const observed = result.transaction as Transaction;
       setTx(observed);
+      setShowEditor(false);
+      setVerified(false);
+      setConfirmedCausalLink(false);
+      setSuccessorDigest("");
+      setReviewedChange("");
+      setResolutionSteps("");
+      setDiagnosis("");
       if (observed.outcome === "failed" && status?.walrusConfigured) {
         setPhase("recalling");
         await loadRecall(observed);
       } else if (observed.outcome === "failed") {
         setRecallNote("Walrus Memory has not been configured. Transaction evidence is separate from persistent recall.");
+      } else if (observed.outcome === "succeeded") {
+        setRecallNote("This transaction succeeded. Casewake only recalls resolution precedents for confirmed onchain failures.");
       } else {
-        setRecallNote("A saved resolution is never suggested for a non-failed transaction.");
+        setRecallNote(observed.outcomeReason || "Tatum could not establish a finalized execution outcome. No failure is inferred and no resolution recall is attempted.");
       }
     } catch (e) { setError(e instanceof Error ? e.message : "Unexpected lookup error."); }
     finally { setPhase("idle"); }
   }
 
-  async function verifySavedRecall(saved: Proof, source: string) {
+  async function verifySavedRecall(saved: Proof, source: string, recurrence?: string) {
     setError("");
     setPhase("recalling");
     try {
-      const secondDigest = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
+      const secondDigest = (recurrence || "").trim();
+      if (!secondDigest || secondDigest === source) throw new Error("Enter a distinct real failed transaction digest to prove recurrence.");
       const acceptance = await postJson("/api/verify-recall", {
         sourceDigest: source, secondDigest, expectedBlobId: saved.blobId,
       }, reviewerKey);
@@ -136,20 +148,29 @@ export default function Workspace() {
   }
 
   async function remember() {
-    if (!tx || tx.outcome !== "failed" || tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6") return;
+    if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue") return;
     setError(""); setProof(null); setThreeGatePassed(false); setObservationOnly(false);
     try {
       setPhase("writing");
       const result = await postJson("/api/remember", {
-        digest: tx.digest, diagnosis, resolutionSteps, evidenceUrl, reviewer, sdkVersion, verified,
-        resolutionKind: "route-repair", repairTransactionBcs: repairTransactionBcs.trim(),
+        digest: tx.digest,
+        diagnosis: diagnosis.trim(),
+        resolutionSteps: resolutionSteps.trim(),
+        evidenceUrl: "https://suivision.xyz/txblock/" + successorDigest.trim(),
+        reviewer: reviewer.trim(),
+        sdkVersion: sdkVersion.trim() || undefined,
+        verified,
+        resolutionKind: "onchain-successor",
+        successorDigest: successorDigest.trim(),
+        reviewedChange: reviewedChange.trim(),
+        confirmedCausalLink,
       }, reviewerKey);
       const stored = result.proof as Proof;
       setProof(stored);
       setWrittenSourceDigest(tx.digest);
       setShowEditor(false);
       await refreshInventory();
-      await verifySavedRecall(stored, tx.digest);
+      setRecallNote("The human-reviewed resolution has a completed Walrus receipt. Enter a distinct comparable failed digest to verify exact-blob recurrence.");
     } catch (e) { setError(e instanceof Error ? e.message : "Memory write failed."); }
     finally { setPhase("idle"); }
   }
@@ -169,6 +190,7 @@ export default function Workspace() {
     finally{setPhase("idle");}
   }
 
+  const strictDeepbook = tx?.digest === "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
   const eligible = candidates.filter((c) => c.verdict === "eligible-for-review");
   const rejected = candidates.filter((c) => c.verdict === "incompatible");
   const busy = phase !== "idle";
@@ -190,11 +212,14 @@ export default function Workspace() {
           <div><span className={status?.reviewerWritesEnabled ? "health-indicator ready" : "health-indicator"} /> Reviewer writes <b>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</b></div>
         </div>
 
-        <div className="panel" role="status" style={{marginBottom:"20px"}}>
-          <div className="panel-kicker"><span>LIVE ACCEPTANCE / THREE GATES</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Read live audit ↗</a></div>
-          <p><strong>01 / Simulation:</strong> {proof && !observationOnly ? "Corrected full flashloan route independently passed Tatum Mainnet simulation; the exact original principal was repaid." : "Original swap route BLOCKED; prevention control ALLOW. A corrected complete flashloan repayment has not been proven."}</p>
-          <p><strong>02 / Reviewer and Walrus:</strong> {proof && !observationOnly ? "Completed blob " + shortDigest(proof.blobId) : "Awaiting approved evidence and completed memory write."}</p>
-          <p><strong>03 / Independent recall:</strong> {threeGatePassed ? "Passed — exact stored Walrus blob recalled for second real failure." : "Awaiting exact-blob recall from second real failed transaction."}</p>
+        <div className="panel case-progress" role="status" style={{marginBottom:"20px"}}>
+          <div className="panel-kicker"><span>CASE MEMORY / PROOF STATUS</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Inspect acceptance ledger ↗</a></div>
+          <div className="case-progress-grid">
+            <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? `Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
+            <div><strong>02 / HUMAN REVIEW</strong><span>{proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
+            <div><strong>03 / WALRUS RECALL</strong><span>{exactBlobRecallPassed ? "Exact stored blob recalled for a distinct failure" : proof && !observationOnly ? "Write complete · recurrence check pending" : simulationRunbooks.length ? "Simulation-tested procedure available" : "No verified resolution recalled in this session"}</span></div>
+          </div>
+          <p className="muted">Observed failures, simulation-tested procedures and human-reviewed resolutions are separate evidence tiers. Casewake never signs or executes a repair.</p>
         </div>
         <div className="workspace-grid">
           <section className="workspace-primary">
@@ -227,27 +252,32 @@ export default function Workspace() {
               <div className="evidence-heading"><h2>Transaction evidence</h2><span className={"outcome outcome-" + tx.outcome}>{tx.outcome}</span></div>
               <div className="evidence-row"><span>DIGEST</span><code title={tx.digest}>{shortDigest(tx.digest)}</code><button type="button" onClick={() => navigator.clipboard?.writeText(tx.digest)}>Copy</button></div>
               <div className="evidence-row"><span>NETWORK</span><strong>{tx.network}</strong></div>
+              <div className="evidence-row"><span>CHAIN TIME</span><strong>{tx.transactionTimestampMs != null ? new Date(tx.transactionTimestampMs).toLocaleString() : "Unavailable"}</strong></div>
+              <div className="evidence-row"><span>CHECKPOINT</span><strong>{tx.checkpoint || "Unavailable"}</strong></div>
               <div className="evidence-row"><span>PROVIDER</span><strong>{tx.source}</strong></div>
-              <div className="error-block"><span>EXECUTION STATUS</span><pre>{tx.errorText || (tx.outcome === "succeeded" ? "Transaction executed successfully." : "No reliable failure classification returned.")}</pre></div>
+              <div className="error-block"><span>EXECUTION STATUS</span><pre>{tx.errorText || (tx.outcome === "succeeded" ? "Transaction executed successfully." : tx.outcomeReason || "No reliable failure classification returned.")}</pre></div>
               {tx.failedCommandIndex !== null && tx.failedCommandIndex !== undefined && <div className="evidence-row"><span>FAILED STEP</span><strong>Command #{tx.failedCommandIndex} · {tx.failedCommandKind || "unclassified"}</strong></div>}
               {tx.errorText?.startsWith("InsufficientCoinBalance") && tx.failedCommandKind === "splitCoins" && <div className="guidance-review"><strong>DOCUMENTED TROUBLESHOOTING HYPOTHESIS — NOT A VERIFIED REPAIR</strong><p>The failure points to a coin split. Review whether the split amount exceeds the coin balance available after prior commands and gas reservation. This does not prove which change worked for this specific transaction.</p><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Read Sui&apos;s official PTB / splitCoins documentation ↗</a></div>}
               <div className="panel-actions">
                 <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(tx.digest)} className="secondary-button">View on explorer ↗</a>
-                <button disabled={tx.digest !== "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6" || tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{showEditor ? "Close reviewer" : "Review guard evidence"} ↗</button>
+                <button disabled={strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" || tx.outcome !== "failed" || busy || !status?.walrusConfigured || !status.reviewerWritesEnabled || !reviewerKey} className="primary-button compact" onClick={() => setShowEditor(!showEditor)}>{strictDeepbook ? "Separate evidence track" : showEditor ? "Close reviewer" : "Record verified resolution"} ↗</button>
+                {strictDeepbook && <p className="muted">This digest belongs to a separate route-specific evidence track. It is intentionally excluded from Casewake&apos;s general resolution workflow.</p>}
               </div>
             </div> : <div className="panel empty-evidence"><span className="empty-target">✳</span><div className="eyebrow dim">EVIDENCE WAITING ROOM</div><h2>The chain tells us what happened.</h2><p>Import a transaction to reveal its evidence before assigning an explanation.</p><div className="empty-grid"><span>STATUS / —</span><span>ERROR / —</span><span>SOURCE / —</span></div></div>}
 
-              {tx && showEditor && <div className="panel editor-panel">
+              {tx && showEditor && !strictDeepbook && <div className="panel editor-panel">
               <div className="panel-kicker"><span>03 / HUMAN REVIEW</span><span>WRITE RESTRICTED</span></div>
-              <h2>Verify a complete route repair.</h2><p>The historical DeepBook flashloan has not been repaired. Casewake will only unlock storage after it independently simulates an atomic corrected route that repays the original 65.265188650 SUI principal, without funding from wallet-owned coins. A prevention-only proof remains ineligible.</p>
+              <h2>Record a human-reviewed resolution.</h2><p>Describe the case-specific diagnosis and the engineering change. Provide a distinct later successful Sui transaction from the same sender. Casewake independently verifies both executions and their chronology; the human reviewer remains responsible for confirming that the change caused the successful outcome.</p>
               <div className="editor-form">
                 <label>Confirmed diagnosis<textarea value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} rows={2} placeholder="What caused the failure?"/></label>
                 <label>Resolution steps<textarea value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What did the engineer do, and what worked?"/></label>
-                <label>Independent engineering evidence URL<input type="url" value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} placeholder="https://github.com/.../repaired-route-proof"/><small>The server independently re-simulates the submitted repaired transaction; a URL alone never proves the fix.</small></label>
-                  <label>Complete repaired transaction BCS (base64)<textarea value={repairTransactionBcs} onChange={(e)=>setRepairTransactionBcs(e.target.value)} rows={3} spellCheck={false} placeholder="Base64 serialized transaction for the full corrected flashloan and repayment"/></label>
+                <label>Later successful Sui transaction digest<input value={successorDigest} onChange={(e) => setSuccessorDigest(e.target.value)} spellCheck={false} placeholder="Real later success digest from the same sender" /><small>Tatum independently checks success, sender, chain timestamp and a strictly later checkpoint. An unrelated or earlier success is not acceptable evidence.</small></label>
+                <label>Exact engineering change between both executions<textarea rows={3} value={reviewedChange} onChange={(e) => setReviewedChange(e.target.value)} placeholder="Explain the specific code, command, parameter, configuration or resource change and why it resolves this failure." /></label>
+                {successorDigest && <small>Success evidence: <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(successorDigest.trim())}>View submitted onchain follow-up ↗</a></small>}
+                <label className="review-checkbox"><input type="checkbox" checked={confirmedCausalLink} onChange={(e) => setConfirmedCausalLink(e.target.checked)} /><span>I reviewed both executions and confirm this specific successful follow-up is the correction of the recorded incident. Tatum verifies execution and sender; it cannot infer my causal judgment.</span></label>
                 <div className="editor-pair"><label>Reviewer<input value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" /></label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
-                <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I independently reviewed the actual corrected full-route simulation and confirm it repays the original principal without wallet funding. Casewake will re-simulate these transaction bytes on Tatum Mainnet before writing to Walrus.</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey || !repairTransactionBcs.trim() || !evidenceUrl.trim()} onClick={() => void remember()}>{phase === "writing" ? "Verifying and writing…" : "Verify complete route, then store"} ↗</button>
+                <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>I am an authorized human reviewer. I inspected the original failure, the specific engineering change and the successful follow-up, and accept responsibility for confirming their causal relationship.</span></label>
+                <button type="button" className="primary-button compact" disabled={busy || !verified || !reviewerKey || diagnosis.trim().length < 20 || resolutionSteps.trim().length < 20 || !successorDigest.trim() || reviewedChange.trim().length < 30 || !confirmedCausalLink} onClick={() => void remember()}>{phase === "writing" ? "Verifying and writing…" : "Verify follow-up, then store"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
                   <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
@@ -264,7 +294,7 @@ export default function Workspace() {
                !tx ? <p className="muted">Once you import a failed transaction, compatible reviewed cases appear here—with their origin and mismatch reasons.</p> :
                <p className="muted">{recallNote || "No recall performed."}</p>}
               <div className="memory-results">
-                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a>{c.record.validatedEvidence?.scope === "full-flashloan-route-repair" && <small>Tatum Mainnet full-route simulation passed · proof SHA-256 {c.record.validatedEvidence.routeTransactionSha256?.slice(0,16)}… · No onchain execution claimed</small>}<small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small>{c.walrusReceipt ? <div className="proof-receipt"><span>RECALLED WALRUS BLOB · {c.walrusReceipt.namespace}</span><code>{c.walrusReceipt.blobId}</code><small>Signed Walrus recall · same blob returned on retrieval</small></div> : <p>Walrus receipt unavailable — not a completed proof of recall.</p>}</article>)}
+                {eligible.map((c) => <article key={c.record.id} className="match-card"><div className="match-kicker">VERIFIED PRECEDENT <span>↗</span></div><h3>{c.record.diagnosis}</h3><p>{c.record.resolutionSteps}</p>{c.warnings?.map((warning, index) => <small className="muted" key={index}>Review note: {warning}</small>)}<a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original engineering evidence ↗</a>{c.record.validatedEvidence?.scope === "full-flashloan-route-repair" && <small>Tatum Mainnet full-route simulation passed · proof SHA-256 {c.record.validatedEvidence.routeTransactionSha256?.slice(0,16)}… · No onchain execution claimed</small>}{c.record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && <small>Tatum confirmed a distinct successful follow-up from the same sender. Its relevance was attested by a human reviewer; causality is not inferred from chain data alone.</small>}<small>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</small>{c.walrusReceipt ? <div className="proof-receipt"><span>RECALLED WALRUS BLOB · {c.walrusReceipt.namespace}</span><code>{c.walrusReceipt.blobId}</code><small>Signed Walrus recall · same blob returned on retrieval</small></div> : <p>Walrus receipt unavailable — not a completed proof of recall.</p>}</article>)}
                 {simulationRunbooks.map((hit)=> <article key={hit.record.id} className="simulation-card">
                   <div className="simulation-card-kicker">SIMULATION-TESTED · HISTORICAL REPAIR NOT VERIFIED</div>
                   <h3>One reproducible failure. One tested correction.</h3>
@@ -288,9 +318,12 @@ export default function Workspace() {
               </div>
             </div>
             <div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
-              <h3>{threeGatePassed ? "Full-route repayment and independent recall verified." : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
-              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : threeGatePassed ? "The second independent real failed transaction recalled the independently simulated, reviewer-approved full-route repair with the exact Walrus blob ID. This is simulation evidence, not a claim of onchain repair execution." : "Walrus storage completed, but the second-incident recall gate has not passed yet.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
-              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!threeGatePassed && !observationOnly && writtenSourceDigest && <button type="button" className="secondary-button" disabled={busy || !reviewerKey} onClick={() => void verifySavedRecall(proof, writtenSourceDigest)}>Retry independent recall — no new Walrus write ↗</button>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
+              <h3>{exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : proof ? "Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? "A distinct Tatum-confirmed failed incident recalled the reviewed resolution from the exact Walrus blob. Human causal review remains visible." : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
+              {inventory && <div className="inventory-count"><strong>{inventory.allStoredMemories}</strong><span>Stored namespace memories (all types; including smoke tests). This is not a count of verified resolutions.</span></div>}{proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><code>{proof.blobId}</code><small>Job {proof.jobId.slice(0, 12)}… · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
+                    <label className="reviewer-access"><span>SECOND DISTINCT REAL FAILURE</span><input value={recurrenceDigest} onChange={(e) => setRecurrenceDigest(e.target.value)} placeholder="Digest of a comparable later failed incident" spellCheck={false}/><small>Casewake will independently fetch it through Tatum and require a compatible error before accepting the exact Walrus blob match.</small></label>
+                    <button type="button" className="secondary-button" disabled={busy || !reviewerKey || !recurrenceDigest.trim()} onClick={() => void verifySavedRecall(proof, writtenSourceDigest, recurrenceDigest)}>Verify exact-blob recurrence — no new Walrus write ↗</button>
+                  </>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div>
             <div className="sidebar-note">INTEGRITY RULE <span>↗</span><p>Every reused fix is a suggestion for engineering review—not evidence that a new transaction is automatically repaired.</p></div>
           </aside>
         </div>

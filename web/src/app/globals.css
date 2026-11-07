@@ -319,3 +319,20 @@ button:disabled{opacity:.46;cursor:not-allowed}
 .reviewer-access>span{font:10px 'DM Mono',monospace;letter-spacing:.06em;color:#c8ed9b}
 .reviewer-access input{width:100%;min-width:0;background:#0e1410;border:1px solid #52634e;color:#f1f5ec;padding:11px 12px;font:12px 'DM Mono',monospace}
 .reviewer-access small{font-size:10px;line-height:1.5;color:#aab9a8}
+
+/* Generic Casewake progress: chain evidence, human review, and durable recall.
+   The DeepBook repayment acceptance remains a separate evidence case, not the app's shell. */
+.case-progress{background:#151d18;border-color:#3c5143;padding:24px 30px}
+.case-progress-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #34443a;border-bottom:1px solid #34443a;margin:0}
+.case-progress-grid>div{display:flex;flex-direction:column;gap:9px;padding:16px 18px;border-right:1px solid #34443a;min-width:0}
+.case-progress-grid>div:first-child{padding-left:0}
+.case-progress-grid>div:last-child{border-right:0}
+.case-progress-grid strong{font:10px 'DM Mono',monospace;letter-spacing:.08em;color:#9ab69a}
+.case-progress-grid span{font:13px/1.5 'DM Sans',sans-serif;color:#e1e9df}
+.case-progress>p.muted{margin:14px 0 0;color:#8fa094;font-size:11px}
+@media(max-width:720px){
+  .case-progress{padding:20px}
+  .case-progress-grid{grid-template-columns:1fr}
+  .case-progress-grid>div,.case-progress-grid>div:first-child{padding:13px 0;border-right:0;border-bottom:1px solid #34443a}
+  .case-progress-grid>div:last-child{border-bottom:0}
+}

@@ -107,3 +107,83 @@ Evidence boundary: The full Tatum -> Walrus simulation-tested guidance loop now 
 - observed_at: 2026-11-06.
 - limitations: Original three-hop route still fails at command 16 and is not repaired/proven profitable. Per-hop output shortfall is not isolated. A fresh simulation can become stale if pool state changes; rerun immediately before signing. Human approval and Walrus memory write remain pending.
 - judge_location: evidence/deepbook-repayment-guard-report.md.
+
+## Operator v0.5.0 critical-claim closure plan — November 6, 2026
+
+Source of truth: PRODUCT.md revision 1, immutable original eight P0 groups; deadline Nov 10, 17:00 UTC. A proof plan is **not** proof. "Deadline" here is the internal target to investigate; a BLOCKED item does not turn PASS on that date.
+
+| Critical claim | Status Nov 6 | Owner | Verification method and exact artifact target | Internal target | Judge surface |
+|---|---|---|---|---|---|
+| Tatum fetches a genuine failed Mainnet transaction | VERIFIED | Engineering | Live `POST /api/transaction`; evidence/live-recall-proof.json and production source | Nov 7 | /workspace |
+| Failure/success/unknown classification | PARTIAL | QA | Distinct live-API outcome cases; `evidence/transaction-outcomes.json` | Nov 7 | /workspace |
+| 10+ authentic Mainnet Walrus memories | VERIFIED (12 total; 10 observations) | Proof | Completed job IDs/blob IDs in evidence/observation-write-receipts.json, GET /api/memories | Nov 7 | /workspace memory inventory |
+| Authenticated reviewer and denied anonymous writes | VERIFIED (production prior revision) | Security | Unauthorized 403 + authorized custom digest lookup; EVIDENCE.md/release screenshots | Nov 7 | /workspace private reviewer |
+| Generic reviewer-reviewed case path | CODED ON DRAFT BRANCH; LIVE UNPROVEN | Engineering + QA | PR #1, TypeScript, synthetic tests/CI, real Tatum success pair from same sender, authorized UI acceptance | Nov 8 | /workspace reviewer editor |
+| General case proof cannot be forged by a URL/checkbox | CODED; LIVE UNPROVEN | Proof + Security | Tatum executed success + sender match, honest reviewer causal attestation, strict memory schema; regression tests | Nov 8 | /workspace + repo |
+| Historical DeepBook corrected full repayment | BLOCKED | Engineering | Repeatable independent full-PTB simulation, exact original principal/no wallet funding, gas-aware evidence; evidence/ephemeral-route-repair-replay-audit.json records replay FAIL | Nov 8 | /workspace strict three gates |
+| Human reviewed a specific engineering fix | BLOCKED | Real human reviewer | Explicit confirmation after independent evidence, not an AI guess or prevention-only runbook; approved-case receipt | Nov 8 | /workspace |
+| Completed Walrus verified-case receipt | BLOCKED | Engineering + Proof | Protected POST /api/remember; completed job/blob ID persisted; `evidence/human-verified-case-receipt.json` | Nov 8 | /workspace receipt |
+| Distinct matching failure recalls exact verified-case blob | BLOCKED | Proof + QA | Live Tatum second digest, Walrus signed recall, same blob ID; `evidence/verified-case-second-incident.json` | Nov 8 | /workspace match |
+| Different failure receives no false recommendation | VERIFIED for simulation runbook; GENERAL CASE PENDING | QA | Real unrelated MoveAbort + synthetic compatibility negatives; `evidence/negative-controls.json` | Nov 8 | /workspace |
+| Complete empty/loading/failed/results workspace state matrix | PARTIAL | QA | Browser acceptance at desktop/mobile; `evidence/workspace-state-matrix.md` | Nov 9 | /workspace |
+| Original P0s still visible across product | PARTIAL | Product Critic | Updated PRODUCT.md coverage ledger with distinct code/proof per original P0 | Nov 9 | product and repo |
+| Brand naming and identity | PASS naming; visual QA partial | Brand/Art Director | BRAND.md naming attack; real rendered favicon/desktop/mobile capture | Nov 9 | landing and workspace |
+| Full UI visual design | NOT DONE | Art Director/Design Engineer | DESIGN.md, references, asset and motion specs; real screenshots QA | Nov 9 | live demo |
+| Product Hygiene | PARTIAL | Product Hygiene | HYGIENE.md skill/fallback, secret scan and re-run | Nov 9 | repo |
+| External engineer utility and track-fit claim | UNPROVEN | Research | External engineer feedback + organizer reply, or label unconfirmed | Nov 9 | README/blog |
+| Published blog with learning timeline | PARTIAL | Pitch | Public readable article describing actual observed learning; verify external vs in-app publication requirement | Nov 9 | blog URL |
+| Final video is authentic and watchable | NOT DONE | Demo Director | 2–3 minute real UI recording, full playback QA and script concordance | Nov 10 | public MP4 |
+| Product/technical/sponsor/30-second judge QA | NOT DONE | Judge | Four-lens independent simulation report, failed claims logged | Nov 10 | SCORECARD.md |
+| Final submission is complete | NOT DONE | HQ/QA | Public repo/live app/video/blog/form checks and observed submission receipt | Nov 10 before 17:00 UTC | submission |
+
+**Hard constraints:** A successful simulation of an unrelated route does not prove the original DeepBook correction. A Tatum-successor record is independently corroborated onchain but still relies on a named human reviewer to establish the causal fix. Tests and CI are never represented as a completed real reviewed memory. No Walrus write may be triggered for unverified proof.
+
+
+## 2026-11-07 — General Casewake workflow restoration and product-shell correction
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Generic reviewer-approved case path exists for legitimate non-DeepBook Sui incidents | VERIFIED (CODE + CI + PREVIEW) | Draft PR #1, successor-evidence.ts, remember/route.ts and verify-recall/route.ts; same Tatum-observed sender, matching Move operation, exact explorer link, documented technical change and explicit human causal attestation; GitHub Actions run 42335361421 passed tests/lint/build | No live human-approved case write or exact-blob recurrence has been performed. This is not a verified resolution claim. |
+| Product workspace foregrounds the approved general Incident Memory workflow | VERIFIED (PREVIEW HTTP 200) | Commit 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF; generic CASE MEMORY / PROOF STATUS panel; no Featured DeepBook / three-gate shell and no false route-success copy | Preview has no Tatum/Walrus credentials; visual browser QA and live acceptance remain open. |
+| Strict DeepBook acceptance remains separate and honest | VERIFIED (CODE/STATE) | DEEPBOOK_SOURCE_DIGEST, strict route-repair validator and /api/acceptance; original route remains blocked, no prevention-only bypass | This selected evidence case remains incomplete; it is not the product's generic workflow. |
+| Latest PR build | VERIFIED (CI) | GitHub Actions run 42335361421 at 5da03e89; install, deterministic incident tests, ESLint and Next production build all passed | PR #1 remains draft and unmerged. |
+| Production baseline | VERIFIED (LIVE STATUS) | Production deployment dpl_HrWrFZ2XbQwJCHQyFpq3G83Z4bHa on master 94194282650a217c67adcecf0df559abdbcf713b; /api/status reports Tatum, Walrus and reviewer writes configured, publicDemoMode true | Draft PR code is not yet deployed to Production. |
+
+No new Walrus resolution memory was written in this checkpoint. Do not infer a successful reviewer write from CI, a Preview build, a Tatum read or the existing simulation runbook.
+
+
+## 2026-11-07 — Candidate-pool quality audit
+
+A bounded inspection of all eight current InsufficientCoinBalance candidate PTBs (evidence/insufficient-coin-balance-sample-audit-2026-11-07.md) found that all eight are DeFi flashloan/DEX swap strategies clustered at checkpoint 341377758. This is not a representative general Sui developer-incident sample. Do not use these eight as external user validation or continue route mining. The next general case must come from a distinct real developer incident with case-specific proof and a human reviewer.
+
+## 2026-11-07 — Phase 13 live read-only acceptance
+
+| Claim | Status | Method/source | Limitation |
+|---|---|---|---|
+| Live Tatum failed transaction lookup returns execution evidence, chain timestamp and checkpoint | VERIFIED (LIVE MAINNET CONTROL) | Local production build `/api/transaction` for `6NJrsdCPfda8FzRaMEDpGpwWyg1xpD5TDZCDXwV47T4v`; outcome `failed`; `transactionTimestampMs` finite and checkpoint numeric | This fixture is from the DeFi-heavy candidate pool; it is a status/provenance control only, not the representative general developer case |
+| Live Tatum successful transaction lookup is distinguished from failure and includes chain timestamp/checkpoint | VERIFIED (LIVE MAINNET CONTROL) | `/api/transaction` for `DmskUFSYixcpEcNgJyyquQH6q8t7fA856Y6rzZuVbBQv`; outcome `succeeded` | Control only; not asserted to be a correction or causal successor |
+| Historical unavailable digest is not mislabeled as an onchain failure | RETEST PENDING | Earlier `/api/transaction` returned HTTP 422 `not found`. The current branch now maps Tatum gRPC `NOT_FOUND` to an explicit `outcome: unknown`; the updated live acceptance script checks both the lookup and that recall does not query Walrus | Code-level classifier tests pass; rebuilt local API retest still required |
+| Anonymous verified-resolution write is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` without reviewer key returned HTTP 403 | No write attempted |
+| Authenticated reviewer without explicit causal approval is blocked | VERIFIED (LIVE LOCAL API) | `POST /api/remember` with reviewer key and `confirmedCausalLink=false` returned HTTP 400 | Request deliberately stopped before successor verification and before Walrus storage; no write attempted |
+| Later-successor chronology is enforced in code and persisted-memory validation | VERIFIED (CODE + SYNTHETIC TESTS) | Tatum read mask includes `timestamp` and `checkpoint`; `verifyOnchainSuccessor` requires finite timestamps and strictly increasing checkpoint; `test-route-memory-gate.mjs` rejects equal, earlier and missing checkpoints | No genuine representative case has yet exercised this path end-to-end |
+| Corrective branch quality | PARTIAL (LOCAL) | Seven test scripts pass (17 TAP tests plus four assertion-based suites); `pnpm lint` exits 0 | Production build for this updated head is pending GitHub Actions; deterministic fixtures do not prove a human-reviewed resolution |
+
+The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/` with the local production server running. It performs real Tatum reads and reviewer rejection checks only. It never writes to Walrus, signs or submits a transaction.
+
+**No human-verified resolution memory was written.** The first general case still requires a genuinely different non-flashloan Sui developer incident, case-specific diagnosis/proof, a Tatum-confirmed later successful transaction, and an authorized human's explicit causal approval. The eight-digest DeFi/flashloan sample is not accepted as representative validation.
+
+## 2026-11-07 — Phase 13 live read-only acceptance (rebuilt endpoint)
+
+- PASS: real failed Tatum lookup with timestamp/checkpoint.
+- PASS: real successful Tatum lookup with timestamp/checkpoint.
+- PASS: valid but unavailable historical digest maps to `unknown`, not `failed`.
+- PASS: unknown outcome recall performs no Walrus read (`walrusHitsExamined=0`).
+- PASS: anonymous write returns 403; authenticated reviewer without causal approval returns 400 before Walrus.
+- PASS: 7 operator test scripts, 17 TAP tests plus 4 assertion-based suites; ESLint; production build.
+- No Walrus resolution write, wallet signing or transaction submission.
+- Machine-readable artifact: `evidence/phase13-readonly-acceptance-2026-11-07.json`.
+- Phase 13 remains open: no representative non-flashloan human-reviewed case, completed resolution blob receipt or exact-blob recurrence.
+
+### Product alignment finding
+
+The Product Lock says a human reviewer records a *specific confirmation method and proof link*. A same-sender successful transaction is one valid method, not the only method. The implementation will add a second fail-closed proof type for a case-specific, independently inspectable engineering artifact (test/reproduction/commit/PR/maintainer resolution), snapshot-fingerprinted at review time. Both methods require explicit human causal attestation and exact-blob recall for a distinct compatible failure. Generic docs, AI-only claims and prevention-only runbooks remain ineligible.

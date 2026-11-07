@@ -33,7 +33,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       transaction,candidates:[],observedPrecedents:[],simulationRunbooks:[],
       recallDegraded:false,walrusHitsExamined:0,
-      reason:"Only confirmed onchain failed transactions are eligible for recall.",
+      reason: transaction.outcome === "succeeded"
+        ? "This transaction succeeded. Casewake only recalls resolution precedents for confirmed onchain failures."
+        : transaction.outcomeReason || "Tatum could not establish a finalized execution outcome. Casewake will not infer success or failure, and no resolution recall is attempted.",
     });
   }
 
