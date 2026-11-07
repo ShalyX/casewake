@@ -45,3 +45,12 @@ Next valid step: find a materially viable new upstream price route and demonstra
 ## 2026-11-07 scope correction
 
 The Cetus SUI/USDC round-trip recorded above is an alternative route diagnostic, not the historical route correction. The selected original transaction is a three-hop sequence: DeepBook flashloan → `swap_b_a_with_return_` SUI→USDSUI → Bluefin `pool::swap` USDSUI→USDC → DeepBook `swap_exact_quote_for_base` USDC→SUI → merge/split/repay. The alternative route's negative economics and failed replay do not prove the original route's economics either way. Gate 1 remains blocked until the exact original route's signatures, coin handoffs, per-hop economics, and complete independent simulations are verified.
+
+
+## 2026-11-07 exact original-route quote sweep
+
+The original PTB's on-chain signatures confirm the handoff mapping: Turbos returns USDSUI and SUI remainder; Bluefin returns USDSUI and USDC balances; DeepBook returns SUI, USDC remainder and DEEP remainder. The PTB merges DeepBook SUI output with the Turbos SUI remainder before splitting the exact principal. In the live quote, both SUI and USDSUI remainders were zero, so the merge is correctly typed but has no extra SUI to add.
+
+At the full 65,265,188,650-MIST principal, live quotes were: Turbos 56,659,720 MIST USDSUI; Bluefin 56,649,623 MIST USDC; DeepBook 65,000,000,000 MIST SUI with 20,470 MIST USDC remainder. This leaves a 265,188,650-MIST SUI repayment shortfall. Quoting the residual USDC returned zero SUI. A reserve-aware 8-size sweep found no repayable size; the best margin remained -265,188,650 MIST.
+
+Next, quote a better SUI→USDSUI upstream pool/path while preserving the original Bluefin and DeepBook hops. Do not approve/store a resolution until a complete corrected PTB passes full independent simulation. This remains quote-only evidence; Gate 1 is blocked.
