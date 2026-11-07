@@ -27,10 +27,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Resolve exact original PTB signatures and object state
         run: node scripts/audit-original-route.mjs
-      - name: Preserve machine-readable audit
+      - name: Quote each exact original route hop on Mainnet
+        run: node scripts/quote-original-route.mjs
+      - name: Preserve machine-readable audit and live quotes
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: casewake-original-route-ptb-audit
-          path: evidence/original-route-ptb-audit.json
+          path: |
+            evidence/original-route-ptb-audit.json
+            evidence/original-route-live-quotes.json
           if-no-files-found: error
           retention-days: 14
