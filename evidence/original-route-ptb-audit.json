@@ -1,0 +1,4030 @@
+{
+  "schema": "casewake-original-flashloan-ptb-audit/v1",
+  "purpose": "Resolve exact original Mainnet PTB Move signatures, object references and result handoffs before modifying the historical route.",
+  "digest": "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
+  "network": "sui-mainnet",
+  "checkpoint": "341377758",
+  "originalOutcome": "failed",
+  "originalError": "InsufficientCoinBalance in command 16",
+  "sender": "0x457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce",
+  "flashloanPrincipalMist": "65265188650",
+  "gasPayment": {
+    "objects": [],
+    "owner": "0x457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce",
+    "price": "333",
+    "budget": "50000000"
+  },
+  "inputs": [
+    {
+      "index": 0,
+      "kind": "object",
+      "objectId": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+      "version": "773317532",
+      "mutable": true
+    },
+    {
+      "index": 1,
+      "kind": "pure",
+      "byteLength": 8,
+      "hex": "2abf1b320f000000",
+      "u64LE": "65265188650"
+    },
+    {
+      "index": 2,
+      "kind": "object",
+      "objectId": "0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056",
+      "version": "812864564",
+      "mutable": true
+    },
+    {
+      "index": 3,
+      "kind": "pure",
+      "byteLength": 8,
+      "hex": "0000000000000000",
+      "u64LE": "0"
+    },
+    {
+      "index": 4,
+      "kind": "pure",
+      "byteLength": 16,
+      "hex": "af331ba8327fbb35b1c4feff00000000",
+      "u128LE": "79226673515401279992447579055"
+    },
+    {
+      "index": 5,
+      "kind": "pure",
+      "byteLength": 1,
+      "hex": "01",
+      "u8": 1,
+      "bool": true
+    },
+    {
+      "index": 6,
+      "kind": "pure",
+      "byteLength": 32,
+      "hex": "9f5a5c369b7fd776614c87875e7b4d6469914baa106b6c6993fc41fc6f86052d"
+    },
+    {
+      "index": 7,
+      "kind": "pure",
+      "byteLength": 8,
+      "hex": "ffffffffffffffff",
+      "u64LE": "18446744073709551615"
+    },
+    {
+      "index": 8,
+      "kind": "object",
+      "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+      "version": "1",
+      "mutable": false
+    },
+    {
+      "index": 9,
+      "kind": "object",
+      "objectId": "0xf1cf0e81048df168ebeb1b8030fad24b3e0b53ae827c25053fff0779c1445b6f",
+      "version": "1621135",
+      "mutable": false
+    },
+    {
+      "index": 10,
+      "kind": "object",
+      "objectId": "0x03db251ba509a8d5d8777b6338836082335d93eecbdd09a11e190a1cff51c352",
+      "version": "406496849",
+      "mutable": false
+    },
+    {
+      "index": 11,
+      "kind": "object",
+      "objectId": "0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90",
+      "version": "808468881",
+      "mutable": true
+    },
+    {
+      "index": 12,
+      "kind": "pure",
+      "byteLength": 16,
+      "hex": "513b0100010000000000000000000000",
+      "u128LE": "4295048017"
+    },
+    {
+      "index": 13,
+      "kind": "pure",
+      "byteLength": 32,
+      "hex": "457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce"
+    },
+    {
+      "index": 14,
+      "kind": "object",
+      "objectId": "0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407",
+      "version": "389750322",
+      "mutable": true
+    }
+  ],
+  "commands": [
+    {
+      "index": 0,
+      "kind": "moveCall",
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::borrow_flashloan_base",
+      "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+      "module": "pool",
+      "function": "borrow_flashloan_base",
+      "typeArguments": [
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE"
+      ],
+      "arguments": [
+        {
+          "source": "input",
+          "index": 0,
+          "input": {
+            "index": 0,
+            "kind": "object",
+            "objectId": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+            "version": "773317532",
+            "mutable": true
+          }
+        },
+        {
+          "source": "input",
+          "index": 1,
+          "input": {
+            "index": 1,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "2abf1b320f000000",
+            "u64LE": "65265188650"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan",
+              "typeParameters": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "value",
+      "typeArguments": [
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 0,
+          "subresult": 0
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "kind": "makeMoveVector",
+      "elements": [
+        {
+          "source": "result",
+          "command": 0,
+          "subresult": 0
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "kind": "moveCall",
+      "target": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64::swap_router::swap_b_a_with_return_",
+      "packageId": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64",
+      "module": "swap_router",
+      "function": "swap_b_a_with_return_",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "0x38a236095cb5a4fec3bdf42cf3e9c80f7ef68f1a835290a6cd107f156f8747f4::fee1500bps::FEE1500BPS"
+      ],
+      "arguments": [
+        {
+          "source": "input",
+          "index": 2,
+          "input": {
+            "index": 2,
+            "kind": "object",
+            "objectId": "0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056",
+            "version": "812864564",
+            "mutable": true
+          }
+        },
+        {
+          "source": "result",
+          "command": 2,
+          "subresult": 0
+        },
+        {
+          "source": "result",
+          "command": 1,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 3,
+          "input": {
+            "index": 3,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "0000000000000000",
+            "u64LE": "0"
+          }
+        },
+        {
+          "source": "input",
+          "index": 4,
+          "input": {
+            "index": 4,
+            "kind": "pure",
+            "byteLength": 16,
+            "hex": "af331ba8327fbb35b1c4feff00000000",
+            "u128LE": "79226673515401279992447579055"
+          }
+        },
+        {
+          "source": "input",
+          "index": 5,
+          "input": {
+            "index": 5,
+            "kind": "pure",
+            "byteLength": 1,
+            "hex": "01",
+            "u8": 1,
+            "bool": true
+          }
+        },
+        {
+          "source": "input",
+          "index": 6,
+          "input": {
+            "index": 6,
+            "kind": "pure",
+            "byteLength": 32,
+            "hex": "9f5a5c369b7fd776614c87875e7b4d6469914baa106b6c6993fc41fc6f86052d"
+          }
+        },
+        {
+          "source": "input",
+          "index": 7,
+          "input": {
+            "index": 7,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "ffffffffffffffff",
+            "u64LE": "18446744073709551615"
+          }
+        },
+        {
+          "source": "input",
+          "index": 8,
+          "input": {
+            "index": 8,
+            "kind": "object",
+            "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+            "version": "1",
+            "mutable": false
+          }
+        },
+        {
+          "source": "input",
+          "index": 9,
+          "input": {
+            "index": 9,
+            "kind": "object",
+            "objectId": "0xf1cf0e81048df168ebeb1b8030fad24b3e0b53ae827c25053fff0779c1445b6f",
+            "version": "1621135",
+            "mutable": false
+          }
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "value",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 3,
+          "subresult": 0
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "into_balance",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 3,
+          "subresult": 0
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "balance",
+      "function": "zero",
+      "typeArguments": [
+        "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+      ],
+      "arguments": [],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "kind": "moveCall",
+      "target": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c::pool::swap",
+      "packageId": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c",
+      "module": "pool",
+      "function": "swap",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+        "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+      ],
+      "arguments": [
+        {
+          "source": "input",
+          "index": 8,
+          "input": {
+            "index": 8,
+            "kind": "object",
+            "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+            "version": "1",
+            "mutable": false
+          }
+        },
+        {
+          "source": "input",
+          "index": 10,
+          "input": {
+            "index": 10,
+            "kind": "object",
+            "objectId": "0x03db251ba509a8d5d8777b6338836082335d93eecbdd09a11e190a1cff51c352",
+            "version": "406496849",
+            "mutable": false
+          }
+        },
+        {
+          "source": "input",
+          "index": 11,
+          "input": {
+            "index": 11,
+            "kind": "object",
+            "objectId": "0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90",
+            "version": "808468881",
+            "mutable": true
+          }
+        },
+        {
+          "source": "result",
+          "command": 5,
+          "subresult": 0
+        },
+        {
+          "source": "result",
+          "command": 6,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 5,
+          "input": {
+            "index": 5,
+            "kind": "pure",
+            "byteLength": 1,
+            "hex": "01",
+            "u8": 1,
+            "bool": true
+          }
+        },
+        {
+          "source": "input",
+          "index": 5,
+          "input": {
+            "index": 5,
+            "kind": "pure",
+            "byteLength": 1,
+            "hex": "01",
+            "u8": 1,
+            "bool": true
+          }
+        },
+        {
+          "source": "result",
+          "command": 4,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 3,
+          "input": {
+            "index": 3,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "0000000000000000",
+            "u64LE": "0"
+          }
+        },
+        {
+          "source": "input",
+          "index": 12,
+          "input": {
+            "index": 12,
+            "kind": "pure",
+            "byteLength": 16,
+            "hex": "513b0100010000000000000000000000",
+            "u128LE": "4295048017"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "from_balance",
+      "typeArguments": [
+        "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 7,
+          "subresult": 1
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "from_balance",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 7,
+          "subresult": 0
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::send_funds",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "send_funds",
+      "typeArguments": [
+        "0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 9,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 13,
+          "input": {
+            "index": 13,
+            "kind": "pure",
+            "byteLength": 32,
+            "hex": "457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce"
+          }
+        }
+      ],
+      "returns": []
+    },
+    {
+      "index": 11,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "zero",
+      "typeArguments": [
+        "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP"
+      ],
+      "arguments": [],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "kind": "moveCall",
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::swap_exact_quote_for_base",
+      "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+      "module": "pool",
+      "function": "swap_exact_quote_for_base",
+      "typeArguments": [
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+      ],
+      "arguments": [
+        {
+          "source": "input",
+          "index": 14,
+          "input": {
+            "index": 14,
+            "kind": "object",
+            "objectId": "0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407",
+            "version": "389750322",
+            "mutable": true
+          }
+        },
+        {
+          "source": "result",
+          "command": 8,
+          "subresult": 0
+        },
+        {
+          "source": "result",
+          "command": 11,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 3,
+          "input": {
+            "index": 3,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "0000000000000000",
+            "u64LE": "0"
+          }
+        },
+        {
+          "source": "input",
+          "index": 8,
+          "input": {
+            "index": 8,
+            "kind": "object",
+            "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+            "version": "1",
+            "mutable": false
+          }
+        }
+      ],
+      "returns": [
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "typeParameter",
+                  "index": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reference": null,
+          "body": {
+            "$kind": "datatype",
+            "datatype": {
+              "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+              "typeParameters": [
+                {
+                  "$kind": "datatype",
+                  "datatype": {
+                    "typeName": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+                    "typeParameters": []
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::send_funds",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "send_funds",
+      "typeArguments": [
+        "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 12,
+          "subresult": 1
+        },
+        {
+          "source": "input",
+          "index": 13,
+          "input": {
+            "index": 13,
+            "kind": "pure",
+            "byteLength": 32,
+            "hex": "457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce"
+          }
+        }
+      ],
+      "returns": []
+    },
+    {
+      "index": 14,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "destroy_zero",
+      "typeArguments": [
+        "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 12,
+          "subresult": 2
+        }
+      ],
+      "returns": []
+    },
+    {
+      "index": 15,
+      "kind": "mergeCoins",
+      "destination": {
+        "source": "result",
+        "command": 12,
+        "subresult": 0
+      },
+      "sources": [
+        {
+          "source": "result",
+          "command": 3,
+          "subresult": 1
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "kind": "splitCoins",
+      "coin": {
+        "source": "result",
+        "command": 12,
+        "subresult": 0
+      },
+      "amounts": [
+        {
+          "source": "input",
+          "index": 1,
+          "input": {
+            "index": 1,
+            "kind": "pure",
+            "byteLength": 8,
+            "hex": "2abf1b320f000000",
+            "u64LE": "65265188650"
+          }
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "kind": "moveCall",
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::return_flashloan_base",
+      "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+      "module": "pool",
+      "function": "return_flashloan_base",
+      "typeArguments": [
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE"
+      ],
+      "arguments": [
+        {
+          "source": "input",
+          "index": 0,
+          "input": {
+            "index": 0,
+            "kind": "object",
+            "objectId": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+            "version": "773317532",
+            "mutable": true
+          }
+        },
+        {
+          "source": "result",
+          "command": 16,
+          "subresult": 0
+        },
+        {
+          "source": "result",
+          "command": 0,
+          "subresult": 1
+        }
+      ],
+      "returns": []
+    },
+    {
+      "index": 18,
+      "kind": "moveCall",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::send_funds",
+      "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "module": "coin",
+      "function": "send_funds",
+      "typeArguments": [
+        "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+      ],
+      "arguments": [
+        {
+          "source": "result",
+          "command": 12,
+          "subresult": 0
+        },
+        {
+          "source": "input",
+          "index": 13,
+          "input": {
+            "index": 13,
+            "kind": "pure",
+            "byteLength": 32,
+            "hex": "457d5ecda9f125053adf94fe357549e11e6fa688679cf94ababb5793ed3916ce"
+          }
+        }
+      ],
+      "returns": []
+    }
+  ],
+  "signatures": [
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::borrow_flashloan_base",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "borrow_flashloan_base",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan",
+                "typeParameters": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "value",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64::swap_router::swap_b_a_with_return_",
+      "available": true,
+      "function": {
+        "packageId": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64",
+        "moduleName": "swap_router",
+        "name": "swap_b_a_with_return_",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "vector",
+              "vector": {
+                "$kind": "datatype",
+                "datatype": {
+                  "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                  "typeParameters": [
+                    {
+                      "$kind": "typeParameter",
+                      "index": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "address"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "into_balance",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "balance",
+        "name": "zero",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c::pool::swap",
+      "available": true,
+      "function": {
+        "packageId": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c",
+        "moduleName": "pool",
+        "name": "swap",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "from_balance",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::send_funds",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "send_funds",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "address"
+            }
+          }
+        ],
+        "returns": []
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "zero",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::swap_exact_quote_for_base",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "swap_exact_quote_for_base",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "datatype",
+                    "datatype": {
+                      "typeName": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+                      "typeParameters": []
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "datatype",
+                    "datatype": {
+                      "typeName": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+                      "typeParameters": []
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+      "available": true,
+      "function": {
+        "packageId": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "moduleName": "coin",
+        "name": "destroy_zero",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returns": []
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::return_flashloan_base",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "return_flashloan_base",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": []
+      }
+    }
+  ],
+  "objects": [
+    {
+      "objectId": "0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7",
+      "available": true,
+      "type": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI,0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE>",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "773317532"
+        }
+      },
+      "version": "1076096355",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          3,
+          79,
+          58,
+          66,
+          231,
+          52,
+          141,
+          226,
+          8,
+          68,
+          6,
+          219,
+          122,
+          114,
+          95,
+          157,
+          157,
+          19,
+          42,
+          86,
+          198,
+          131,
+          36,
+          113,
+          62,
+          110,
+          98,
+          54,
+          1,
+          251,
+          79,
+          215,
+          18,
+          12,
+          80,
+          190,
+          178,
+          148,
+          232,
+          218,
+          104,
+          150,
+          168,
+          212,
+          10,
+          60,
+          221,
+          58,
+          231,
+          151,
+          102,
+          169,
+          191,
+          144,
+          239,
+          71,
+          210,
+          27,
+          30,
+          106,
+          222,
+          78,
+          112,
+          199,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "objectId": "0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056",
+      "available": true,
+      "type": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI,0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI,0x38a236095cb5a4fec3bdf42cf3e9c80f7ef68f1a835290a6cd107f156f8747f4::fee1500bps::FEE1500BPS>",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "812864564"
+        }
+      },
+      "version": "1076095738",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          131,
+          94,
+          255,
+          169,
+          77,
+          186,
+          134,
+          207,
+          53,
+          76,
+          237,
+          98,
+          227,
+          60,
+          229,
+          156,
+          230,
+          117,
+          76,
+          208,
+          229,
+          126,
+          126,
+          232,
+          74,
+          110,
+          222,
+          47,
+          125,
+          127,
+          128,
+          86,
+          253,
+          24,
+          226,
+          61,
+          3,
+          0,
+          0,
+          0,
+          238,
+          134,
+          111,
+          164,
+          113,
+          33,
+          0,
+          0,
+          67,
+          84,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          173,
+          121,
+          23,
+          94,
+          0,
+          0,
+          0,
+          0,
+          16,
+          132,
+          126,
+          119,
+          179,
+          189,
+          169,
+          224,
+          33,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          58,
+          19,
+          1,
+          0,
+          30,
+          0,
+          0,
+          0,
+          98,
+          240,
+          147,
+          27,
+          130,
+          175,
+          212,
+          19,
+          203,
+          141,
+          165,
+          230,
+          70,
+          55,
+          2,
+          0,
+          220,
+          5,
+          0,
+          0,
+          224,
+          147,
+          4,
+          0,
+          1,
+          38,
+          90,
+          183,
+          57,
+          133,
+          81,
+          29,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          117,
+          31,
+          135,
+          197,
+          231,
+          199,
+          126,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          148,
+          18,
+          152,
+          245,
+          134,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          207,
+          50,
+          215,
+          142,
+          222,
+          193,
+          88,
+          195,
+          2,
+          113,
+          211,
+          8,
+          79,
+          184,
+          208,
+          152,
+          24,
+          91,
+          60,
+          45,
+          46,
+          104,
+          224,
+          77,
+          4,
+          142,
+          53,
+          238,
+          115,
+          182,
+          208,
+          2,
+          19,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          246,
+          87,
+          154,
+          202,
+          156,
+          1,
+          0,
+          0,
+          1,
+          90,
+          114,
+          204,
+          94,
+          225,
+          90,
+          199,
+          190,
+          149,
+          106,
+          204,
+          183,
+          53,
+          136,
+          225,
+          76,
+          26,
+          28,
+          106,
+          86,
+          222,
+          67,
+          124,
+          166,
+          185,
+          15,
+          38,
+          195,
+          141,
+          152,
+          236,
+          8,
+          167,
+          196,
+          31,
+          232,
+          87,
+          62,
+          73,
+          194,
+          42,
+          255,
+          151,
+          38,
+          80,
+          69,
+          232,
+          204,
+          57,
+          94,
+          18,
+          221,
+          214,
+          69,
+          118,
+          13,
+          46,
+          14,
+          243,
+          152,
+          196,
+          134,
+          32,
+          101,
+          74,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          50,
+          58,
+          58,
+          115,
+          117,
+          105,
+          58,
+          58,
+          83,
+          85,
+          73,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          253,
+          9,
+          7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          205,
+          48,
+          202,
+          117,
+          191,
+          178,
+          13,
+          120,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          139,
+          129,
+          251,
+          180,
+          164,
+          214,
+          169,
+          31,
+          241,
+          231,
+          245,
+          91,
+          97,
+          144,
+          185,
+          15,
+          107,
+          33,
+          4,
+          105,
+          157,
+          231,
+          85,
+          206,
+          132,
+          142,
+          80,
+          44,
+          96,
+          227,
+          72,
+          119,
+          168,
+          94,
+          172,
+          179,
+          161,
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+      "available": true,
+      "type": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "1"
+        }
+      },
+      "version": "1021391885",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          59,
+          152,
+          173,
+          179,
+          161,
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "objectId": "0xf1cf0e81048df168ebeb1b8030fad24b3e0b53ae827c25053fff0779c1445b6f",
+      "available": true,
+      "type": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "1621135"
+        }
+      },
+      "version": "1076096171",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          241,
+          207,
+          14,
+          129,
+          4,
+          141,
+          241,
+          104,
+          235,
+          235,
+          27,
+          128,
+          48,
+          250,
+          210,
+          75,
+          62,
+          11,
+          83,
+          174,
+          130,
+          124,
+          37,
+          5,
+          63,
+          255,
+          7,
+          121,
+          193,
+          68,
+          91,
+          111,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "objectId": "0x03db251ba509a8d5d8777b6338836082335d93eecbdd09a11e190a1cff51c352",
+      "available": true,
+      "type": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "406496849"
+        }
+      },
+      "version": "1076096212",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          3,
+          219,
+          37,
+          27,
+          165,
+          9,
+          168,
+          213,
+          216,
+          119,
+          123,
+          99,
+          56,
+          131,
+          96,
+          130,
+          51,
+          93,
+          147,
+          238,
+          203,
+          221,
+          9,
+          161,
+          30,
+          25,
+          10,
+          28,
+          255,
+          81,
+          195,
+          82,
+          12,
+          59,
+          249,
+          255,
+          244,
+          196,
+          6,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          217,
+          58,
+          142,
+          176,
+          111,
+          65,
+          249,
+          83,
+          184,
+          114,
+          249,
+          0,
+          8,
+          204,
+          127,
+          172,
+          153,
+          198,
+          214,
+          110,
+          119,
+          226,
+          13,
+          173,
+          48,
+          29,
+          93,
+          94,
+          230,
+          197,
+          92,
+          20
+        ]
+      }
+    },
+    {
+      "objectId": "0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90",
+      "available": true,
+      "type": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI,0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC>",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "808468881"
+        }
+      },
+      "version": "1076095990",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          63,
+          230,
+          32,
+          205,
+          43,
+          148,
+          237,
+          123,
+          195,
+          51,
+          244,
+          110,
+          152,
+          76,
+          222,
+          166,
+          207,
+          66,
+          207,
+          217,
+          221,
+          213,
+          79,
+          21,
+          1,
+          109,
+          97,
+          194,
+          248,
+          20,
+          154,
+          144,
+          11,
+          85,
+          83,
+          68,
+          83,
+          85,
+          73,
+          45,
+          85,
+          83,
+          68,
+          67,
+          137,
+          124,
+          116,
+          212,
+          247,
+          0,
+          0,
+          0,
+          210,
+          24,
+          69,
+          54,
+          74,
+          0,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          64,
+          13,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          19,
+          178,
+          213,
+          77,
+          193,
+          228,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          22,
+          28,
+          91,
+          97,
+          18,
+          230,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          141,
+          141,
+          228,
+          6,
+          0,
+          0,
+          0,
+          0,
+          108,
+          22,
+          1,
+          7,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          167,
+          202,
+          213,
+          49,
+          153,
+          178,
+          186,
+          114,
+          137,
+          101,
+          233,
+          147,
+          73,
+          19,
+          196,
+          233,
+          237,
+          212,
+          151,
+          182,
+          228,
+          93,
+          119,
+          248,
+          183,
+          15,
+          116,
+          71,
+          35,
+          33,
+          75,
+          243,
+          42,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          70,
+          211,
+          129,
+          230,
+          71,
+          43,
+          166,
+          116,
+          12,
+          13,
+          223,
+          37,
+          222,
+          77,
+          146,
+          129,
+          89,
+          82,
+          175,
+          38,
+          194,
+          144,
+          91,
+          186,
+          58,
+          174,
+          225,
+          84,
+          166,
+          90,
+          176,
+          154,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          126,
+          238,
+          106,
+          0,
+          0,
+          0,
+          0,
+          18,
+          123,
+          218,
+          6,
+          0,
+          0,
+          0,
+          0,
+          43,
+          239,
+          53,
+          167,
+          250,
+          195,
+          111,
+          56,
+          245,
+          28,
+          33,
+          10,
+          12,
+          12,
+          0,
+          0,
+          119,
+          221,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          98,
+          103,
+          137,
+          235,
+          246,
+          112,
+          253,
+          255,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          255,
+          255,
+          255,
+          255,
+          71,
+          4,
+          120,
+          176,
+          84,
+          156,
+          79,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          83,
+          85,
+          73,
+          9,
+          74,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          50,
+          58,
+          58,
+          115,
+          117,
+          105,
+          58,
+          58,
+          83,
+          85,
+          73,
+          3,
+          126,
+          238,
+          106,
+          0,
+          0,
+          0,
+          0,
+          128,
+          94,
+          242,
+          106,
+          0,
+          0,
+          0,
+          0,
+          0,
+          92,
+          211,
+          137,
+          14,
+          91,
+          0,
+          0,
+          67,
+          132,
+          53,
+          167,
+          221,
+          89,
+          0,
+          0,
+          122,
+          190,
+          23,
+          198,
+          113,
+          89,
+          228,
+          101,
+          47,
+          164,
+          78,
+          0,
+          0,
+          0,
+          0,
+          0,
+          131,
+          103,
+          240,
+          72,
+          38,
+          126,
+          33,
+          234,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          46,
+          104,
+          116,
+          116,
+          112,
+          115,
+          58,
+          47,
+          47,
+          98,
+          108,
+          117,
+          101,
+          102,
+          105,
+          110,
+          46,
+          105,
+          111,
+          47,
+          105,
+          109,
+          97,
+          103,
+          101,
+          115,
+          47,
+          110,
+          102,
+          116,
+          115,
+          47,
+          85,
+          83,
+          68,
+          83,
+          85,
+          73,
+          45,
+          85,
+          83,
+          68,
+          67,
+          46,
+          103,
+          105,
+          102,
+          174,
+          25,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          118,
+          243,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "objectId": "0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407",
+      "available": true,
+      "type": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI,0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC>",
+      "owner": {
+        "$kind": "Shared",
+        "Shared": {
+          "initialSharedVersion": "389750322"
+        }
+      },
+      "version": "1076096358",
+      "content": {
+        "type": "Buffer",
+        "data": [
+          224,
+          93,
+          175,
+          181,
+          19,
+          59,
+          207,
+          251,
+          141,
+          89,
+          244,
+          225,
+          36,
+          101,
+          220,
+          14,
+          159,
+          174,
+          170,
+          5,
+          227,
+          227,
+          66,
+          160,
+          143,
+          225,
+          53,
+          128,
+          14,
+          62,
+          68,
+          7,
+          80,
+          153,
+          123,
+          95,
+          31,
+          100,
+          1,
+          103,
+          77,
+          61,
+          136,
+          26,
+          97,
+          224,
+          154,
+          113,
+          119,
+          110,
+          225,
+          156,
+          216,
+          184,
+          49,
+          20,
+          160,
+          162,
+          27,
+          58,
+          130,
+          241,
+          48,
+          181,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "coinFlow": [
+    {
+      "command": 3,
+      "call": "router swap_b_a_with_return_",
+      "returns": [
+        "Coin<USDSUI> (subresult 0)",
+        "Coin<SUI> remainder (subresult 1)"
+      ]
+    },
+    {
+      "command": 7,
+      "call": "Bluefin pool::swap",
+      "returns": [
+        "Balance<USDSUI> (subresult 0)",
+        "Balance<USDC> (subresult 1)"
+      ]
+    },
+    {
+      "command": 12,
+      "call": "DeepBook swap_exact_quote_for_base",
+      "returns": [
+        "Coin<SUI> base output (subresult 0)",
+        "Coin<USDC> quote remainder (subresult 1)",
+        "Coin<DEEP> fee remainder (subresult 2)"
+      ]
+    },
+    {
+      "command": 15,
+      "call": "mergeCoins",
+      "destination": "command 12 subresult 0 (Coin<SUI>)",
+      "source": "command 3 subresult 1 (Coin<SUI> remainder)"
+    },
+    {
+      "command": 16,
+      "call": "splitCoins",
+      "source": "command 12 subresult 0 after command 15 merge",
+      "amountMist": "65265188650"
+    },
+    {
+      "command": 17,
+      "call": "return_flashloan_base",
+      "repayment": "command 16 subresult 0",
+      "flashLoanReceipt": "command 0 subresult 1"
+    },
+    {
+      "command": 18,
+      "call": "coin::send_funds",
+      "remainder": "command 12 subresult 0 after repayment split"
+    }
+  ],
+  "quoteFunctions": [
+    {
+      "target": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64::pool_fetcher::compute_swap_result",
+      "available": true,
+      "function": {
+        "packageId": "0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64",
+        "moduleName": "pool_fetcher",
+        "name": "compute_swap_result",
+        "visibility": "public",
+        "isEntry": true,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+                "typeParameters": []
+              }
+            }
+          },
+          {
+            "reference": "mutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::ComputeSwapState",
+                "typeParameters": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::calculate_swap_results",
+      "available": true,
+      "function": {
+        "packageId": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267",
+        "moduleName": "pool",
+        "name": "calculate_swap_results",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::SwapResult",
+                "typeParameters": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c::pool::calculate_swap_results",
+      "available": true,
+      "function": {
+        "packageId": "0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c",
+        "moduleName": "pool",
+        "name": "calculate_swap_results",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "bool"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u128"
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::SwapResult",
+                "typeParameters": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::get_quantity_out",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "get_quantity_out",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::get_base_quantity_out_input_fee",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "get_base_quantity_out_input_fee",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::get_base_quantity_out",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "get_base_quantity_out",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748::pool::get_level2_ticks_from_mid",
+      "available": true,
+      "function": {
+        "packageId": "0x0e735f8c93a95722efd73521aca7a7652c0bb71ed1daf41b26dfd7d1ff71f748",
+        "moduleName": "pool",
+        "name": "get_level2_ticks_from_mid",
+        "visibility": "public",
+        "isEntry": false,
+        "typeParameters": [
+          {
+            "isPhantom": false,
+            "constraints": []
+          },
+          {
+            "isPhantom": false,
+            "constraints": []
+          }
+        ],
+        "parameters": [
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool",
+                "typeParameters": [
+                  {
+                    "$kind": "typeParameter",
+                    "index": 0
+                  },
+                  {
+                    "$kind": "typeParameter",
+                    "index": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "u64"
+            }
+          },
+          {
+            "reference": "immutable",
+            "body": {
+              "$kind": "datatype",
+              "datatype": {
+                "typeName": "0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+                "typeParameters": []
+              }
+            }
+          }
+        ],
+        "returns": [
+          {
+            "reference": null,
+            "body": {
+              "$kind": "vector",
+              "vector": {
+                "$kind": "u64"
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "vector",
+              "vector": {
+                "$kind": "u64"
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "vector",
+              "vector": {
+                "$kind": "u64"
+              }
+            }
+          },
+          {
+            "reference": null,
+            "body": {
+              "$kind": "vector",
+              "vector": {
+                "$kind": "u64"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "routeSummary": [
+    {
+      "step": 1,
+      "protocol": "DeepBook",
+      "function": "borrow_flashloan_base",
+      "from": "SUI flashloan pool",
+      "to": "borrowed SUI + FlashLoan receipt"
+    },
+    {
+      "step": 2,
+      "protocol": "router package 0xa5a0…",
+      "function": "swap_b_a_with_return_",
+      "from": "SUI",
+      "to": "Coin<USDSUI> + Coin<SUI> remainder"
+    },
+    {
+      "step": 3,
+      "protocol": "Bluefin CLMM",
+      "function": "pool::swap",
+      "from": "Balance<USDSUI>",
+      "to": "Balance<USDSUI> remainder + Balance<USDC>"
+    },
+    {
+      "step": 4,
+      "protocol": "DeepBook",
+      "function": "swap_exact_quote_for_base",
+      "from": "USDC",
+      "to": "SUI base output + USDC remainder + DEEP remainder"
+    },
+    {
+      "step": 5,
+      "protocol": "PTB coin accounting",
+      "function": "mergeCoins",
+      "from": "Turbos SUI remainder + DeepBook SUI output",
+      "to": "single merged SUI coin"
+    },
+    {
+      "step": 6,
+      "protocol": "PTB coin accounting",
+      "function": "splitCoins",
+      "from": "merged SUI coin",
+      "to": "exact 65.265188650 SUI principal"
+    },
+    {
+      "step": 7,
+      "protocol": "DeepBook",
+      "function": "return_flashloan_base",
+      "from": "repayment coin + FlashLoan receipt",
+      "to": "flashloan repaid"
+    }
+  ],
+  "limitations": [
+    "This audit reads public Mainnet package/object state and the committed original PTB; it does not simulate execution.",
+    "A current object state does not reconstruct historical liquidity at the transaction checkpoint.",
+    "No route economics, repaired transaction, human approval or Walrus resolution is claimed."
+  ],
+  "generatedAt": "2026-11-07T01:44:21.676Z"
+}
