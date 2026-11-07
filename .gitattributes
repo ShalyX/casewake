@@ -1,0 +1,2 @@
+# Keep the recorded evidence byte hashes reproducible across checkouts.
+evidence/real-case/*.json text eol=lf

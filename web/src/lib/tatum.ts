@@ -82,7 +82,7 @@ export async function getTatumTransaction(digest: string): Promise<ObservedTrans
   const sender = typeof decodedTransaction?.sender === "string" && /^0x[a-f0-9]{1,64}$/i.test(decodedTransaction.sender)
     ? decodedTransaction.sender.toLowerCase() : null;
   const failedCommandKind = failedCommandIndex !== null ? txCommands?.[failedCommandIndex]?.command?.oneofKind ?? null : null;
-  const moduleAddress = errorText?.match(/module:\\s*ModuleId\\s*\\{\\s*address:\\s*(?:0x)?([a-f0-9]{64})/i)?.[1];
+  const moduleAddress = errorText?.match(/module:\s*ModuleId\s*\{\s*address:\s*(?:0x)?([a-f0-9]{64})/i)?.[1];
   return {
     digest: transaction.digest || digest,
     network: "sui-mainnet",

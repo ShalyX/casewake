@@ -187,3 +187,13 @@ The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/`
 ### Product alignment finding
 
 The Product Lock says a human reviewer records a *specific confirmation method and proof link*. A same-sender successful transaction is one valid method, not the only method. The implementation will add a second fail-closed proof type for a case-specific, independently inspectable engineering artifact (test/reproduction/commit/PR/maintainer resolution), snapshot-fingerprinted at review time. Both methods require explicit human causal attestation and exact-blob recall for a distinct compatible failure. Generic docs, AI-only claims and prevention-only runbooks remain ineligible.
+
+## 2026-11-07 — Real duplicate-cancellation case research
+
+- Claim: two real Sui Mainnet `pool::cancel_order` failures are exact retries after successful cancellations, with matching `OrderCanceled` events.
+- Status: VERIFIED through authenticated Tatum reads and exact sender/package/pool/manager/type/order/checkpoint comparison. Four raw transaction responses and hashes are in `evidence/real-case/`.
+- Independent reference integration correction: `web/examples/reconcile-cancel.mjs`; replay proof: `web/scripts/prove-cancel-reconciliation.mjs`. Both real failures resolve to their exact earlier successful cancellation; two real negative controls and seven synthetic tamper controls remain unresolved.
+- Product baseline: actual Tatum module confirms both failures and package provenance; actual signed Walrus recall examines 12 memories and finds zero eligible resolutions for this case. `evidence/real-case/app-preflight.json`.
+- Limitations: no original-operator application fix is established; this is an independently authored reference reconciliation correction. It is a DeepBook integration case and does not satisfy the recorded non-DeFi sourcing gate without a user scope decision. It is not the original flashloan repair.
+- Human causal review: PENDING. Walrus resolution writes: ZERO. Exact-blob resolution recall: UNPROVEN. FULL_PRODUCT_VERIFIED and JUDGE_READY remain blocked.
+- Validation: real-history replay, compatibility/reviewed-evidence tests, ESLint and TypeScript pass. Next production build passes with webpack; default Turbopack cannot resolve the external dependency junction in this isolated worktree. No application build configuration was changed.

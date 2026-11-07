@@ -216,3 +216,13 @@ The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/`
 | Phase 13 complete journey | OPEN | No general case write, completed blob receipt or exact-blob recurrence yet | Requires a genuine representative case and explicit human review |
 
 Machine-readable evidence: `evidence/phase13-readonly-acceptance-2026-11-07.json`. The local server was rebuilt/restarted before the read-only retest. No signing, submission or Walrus resolution write occurred.
+
+## 2026-11-07 — Real-case loop research in isolated worktree
+
+- Branch: `codex/real-incident-loop`, isolated under the current chat's `work/casewake-loop`; original dirty checkout and existing verification worktree were preserved.
+- Found a concrete two-command duplicate-cancellation incident, distinct from flashloan work. Tatum effects and `OrderCanceled` events prove the target order was already cancelled before each failed retry; a later different-order success is explicitly rejected as a correction of the original order.
+- Added a reference integration reconciliation correction and reproducible evidence replay, plus a default-read-only payload/finish runner. No automatic reviewer approval, transaction submission or Walrus write occurred.
+- Fixed the overescaped MoveLocation package regex in `tatum.ts`; live reads now supply the correct package ID for both cases.
+- Casewake's actual signed Walrus baseline returns 12 hits, zero eligible cases for the selected recurrence. All new source/receipt claims remain explicit; no product acceptance gate was marked complete.
+- Scope caveat: the existing plan asks for a non-DeFi case. This DeepBook order-management case remains an optional candidate pending user acceptance and named human causal review. Original operator code deployment is unknown. See `evidence/real-case/REVIEW.md`.
+- Next action: present the concrete evidence and precise independent-integration resolution for a user scope decision and human review. If accepted and explicitly approved, publish/use its immutable artifact through the general reviewed-evidence path, capture one completed Walrus receipt, verify exact-blob reuse on the second real failure and reject self/mismatch controls. Otherwise retain this as research and continue non-DeFi sourcing. Do not reinterpret it as the historical flashloan repair.
