@@ -55,18 +55,20 @@ const complete=t=>{
  const p=t.slice(0,i);return p.startsWith('0x')?'0x'+p.slice(2).padStart(64,'0')+t.slice(i):t;
 };
 async function findRoute(from,target,amount,splitCount,excluded){
- const params=new URLSearchParams({from:complete(from),target:complete(target),amount:amount.toString(),
-  by_amount_in:'true',split_count:String(splitCount),providers:PROVIDERS.join(','),
-  exclude_pools:[...new Set(excluded)].join(','),v:String(SDK_VERSION)});
- const response=await fetch(ENDPOINT+'/find_routes?'+params.toString());
- const body=await response.json();
- if(!response.ok)throw new Error('Aggregator HTTP '+response.status+': '+JSON.stringify(body).slice(0,500));
- if(!body?.data)return {available:false,error:body?.msg||body?.message||JSON.stringify(body).slice(0,500)};
- const data=body.data;
- return {available:true,quoteId:data.request_id||null,amountInMist:String(data.amount_in),
-  amountOutMist:String(data.amount_out),paths:(data.paths||[]).map(p=>({id:p.id,provider:p.provider,
-   from:p.from,target:p.target,direction:p.direction,amountInMist:String(p.amount_in),
-   amountOutMist:String(p.amount_out),feeRate:p.fee_rate,extendedDetails:p.extended_details||null}))};
+ try{
+  const params=new URLSearchParams({from:complete(from),target:complete(target),amount:amount.toString(),
+   by_amount_in:'true',split_count:String(splitCount),providers:PROVIDERS.join(','),
+   exclude_pools:[...new Set(excluded)].join(','),v:String(SDK_VERSION)});
+  const response=await fetch(ENDPOINT+'/find_routes?'+params.toString());
+  const body=await response.json();
+  if(!response.ok)return {available:false,error:'Aggregator HTTP '+response.status+': '+JSON.stringify(body).slice(0,500)};
+  if(!body?.data)return {available:false,error:body?.msg||body?.message||JSON.stringify(body).slice(0,500)};
+  const data=body.data;
+  return {available:true,quoteId:data.request_id||null,amountInMist:String(data.amount_in),
+   amountOutMist:String(data.amount_out),paths:(data.paths||[]).map(p=>({id:p.id,provider:p.provider,
+    from:p.from,target:p.target,direction:p.direction,amountInMist:String(p.amount_in),
+    amountOutMist:String(p.amount_out),feeRate:p.fee_rate,extendedDetails:p.extended_details||null}))};
+ }catch(error){return {available:false,error:String(error?.message||error).slice(0,500)};}
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const tradeSizes=[PRINCIPAL,65250000000n,65200000000n,65100000000n,65000000000n,64950000000n,64900000000n,64800000000n,64700000000n,64600000000n];
