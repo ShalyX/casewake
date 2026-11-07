@@ -6,6 +6,7 @@ import { storeVerifiedIncident } from "@/lib/walrus";
 import { validateCasewakeEvidence, type ResolutionKind, type ValidatedEvidence } from "@/lib/guard-evidence";
 import { ROUTE_INCIDENT_DIGEST, RECALL_TEST_DIGEST, independentlyVerifyRouteRepair } from "@/lib/route-repair-proof";
 import { verifyOnchainSuccessor } from "@/lib/successor-evidence";
+import { verifyReviewedEvidence } from "@/lib/reviewed-evidence";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
@@ -26,14 +27,16 @@ export async function POST(request: NextRequest) {
     const reviewer = safeText(body.reviewer, 120);
     const sdkVersion = safeText(body.sdkVersion, 80) || null;
     const resolutionKind = body.resolutionKind as ResolutionKind;
-    if (body.verified !== true || !diagnosis || resolutionSteps.length < 15 || !reviewer ||
+    const reviewedChange = safeText(body.reviewedChange, 1000);
+    const verificationMethod = safeText(body.verificationMethod, 60);
+    if (body.verified !== true || diagnosis.length < 20 || resolutionSteps.length < 20 || reviewer.length < 2 ||
         !/^https:\/\/[^\s]+$/i.test(evidenceUrl))
       return NextResponse.json({ error: "Human verification, diagnosis, a concrete resolution, reviewer and HTTPS evidence URL are required." }, { status: 400 });
     const observed = await getTatumTransaction(digest);
     if (observed.outcome !== "failed" || !observed.fingerprint || !observed.errorText)
       return NextResponse.json({ error: "Only a Tatum-confirmed onchain failed transaction can become a verified incident memory." }, { status: 400 });
-    // The server inspects an immutable, independently replayable Tatum proof
-    // BEFORE touching Walrus. Reviewer attestation or a URL alone never passes Gate 2.
+    // The server inspects the Tatum source and the selected case-specific proof
+    // artifact BEFORE touching Walrus. A reviewer checkbox or bare URL alone never passes Gate 2.
     if (observed.digest === RECALL_TEST_DIGEST)
       return NextResponse.json({ error: "This second incident is reserved for independent recall, not resolution storage." }, {status:409});
     if (observed.digest === ROUTE_INCIDENT_DIGEST && resolutionKind !== "route-repair")
@@ -56,10 +59,20 @@ export async function POST(request: NextRequest) {
           observed,
           safeText(body.successorDigest, 100),
           evidenceUrl,
-          safeText(body.reviewedChange, 1000),
+          reviewedChange,
         );
       } catch (error) {
         return NextResponse.json({ error: "General verified-case proof blocked: " + (error instanceof Error ? error.message : "Independent successful execution could not be confirmed.") }, { status: 409 });
+      }
+    } else if (resolutionKind === "reviewed-evidence") {
+      if (body.confirmedCausalLink !== true)
+        return NextResponse.json({ error: "A reviewer must explicitly confirm that the linked engineering artifact resolves this specific incident." }, { status: 400 });
+      try {
+        validatedEvidence = await verifyReviewedEvidence(
+          observed, evidenceUrl, reviewedChange, verificationMethod, body.confirmedCausalLink === true,
+        );
+      } catch (error) {
+        return NextResponse.json({ error: "Reviewed engineering evidence blocked: " + (error instanceof Error ? error.message : "The case-specific artifact could not be verified.") }, { status: 409 });
       }
     } else {
       // Historical prevention-only evidence is a runbook, not a verified fix.
@@ -76,7 +89,7 @@ export async function POST(request: NextRequest) {
       resolutionKind, validatedEvidence,
     };
     const proof = await storeVerifiedIncident(record);
-    return NextResponse.json({ record, proof, gates: { guardControlEvidence: "validated", originalThreeHopCorrection: validatedEvidence.originalHistoricalRouteRepaired ? "full-route-simulation-passed" : "unproven", humanReview: "approved", walrusWrite: "completed" } }, { status: 201 });
+    return NextResponse.json({ record, proof, gates: { proofMethod: validatedEvidence.proofType, guardControlEvidence: "validated", originalThreeHopCorrection: validatedEvidence.originalHistoricalRouteRepaired ? "full-route-simulation-passed" : "not-claimed", humanReview: "approved", walrusWrite: "completed" } }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Memory write failed." }, { status: 502 });
   }

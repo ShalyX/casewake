@@ -32,7 +32,7 @@ export async function recallAllPrecedents(tx: ObservedTransaction): Promise<AllR
   const query = [
     "Sui Mainnet onchain execution failure", tx.errorText,
     tx.failedCommandKind || "",
-    "human-reviewed resolution, independently corroborated successful follow-up,",
+    "human-reviewed resolution, independently corroborated successful follow-up, reviewed engineering artifact and specific confirmation method,",
     "same error fingerprint, past observed failure or simulation-tested troubleshooting runbook",
   ].join(" ");
 

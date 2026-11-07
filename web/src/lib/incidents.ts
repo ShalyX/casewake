@@ -129,7 +129,27 @@ export function decodeMemory(text: string): VerifiedCase | null {
         proof.matchedOperations.every((marker: unknown) => typeof marker === "string" && marker.length >= 8) &&
         typeof proof.reviewedChange === "string" && proof.reviewedChange.length >= 30 &&
         c.evidenceUrl === "https://suivision.xyz/txblock/" + proof.successorDigest;
-    if (!prevention && !repaired && !successor) return null;
+    const reviewedMethods = ["reproduction-test", "unit-test", "integration-test", "deployed-fix", "maintainer-confirmed-fix"];
+    const reviewedEvidence = c.resolutionKind === "reviewed-evidence" &&
+        proof.scope === "human-reviewed-engineering-artifact" &&
+        proof.proofType === "reviewer-attested-github-artifact" &&
+        proof.originalHistoricalRouteRepaired === false &&
+        proof.provider === "GitHub public API" &&
+        proof.reviewerConfirmedCausality === true &&
+        typeof proof.originalTimestampMs === "number" && Number.isFinite(proof.originalTimestampMs) &&
+        typeof proof.originalCheckpoint === "string" && /^\d+$/.test(proof.originalCheckpoint) &&
+        typeof proof.evidenceUrl === "string" &&
+        /^https:\/\/github\.com\/[^/]+\/[^/]+\/(?:pull\/[1-9]\d*|commit\/[a-f0-9]{40})$/.test(proof.evidenceUrl) &&
+        c.evidenceUrl === proof.evidenceUrl &&
+        typeof proof.evidenceApiUrl === "string" &&
+        /^https:\/\/api\.github\.com\/repos\/[^/]+\/[^/]+\/(?:pulls\/[1-9]\d*|commits\/[a-f0-9]{40})$/.test(proof.evidenceApiUrl) &&
+        typeof proof.evidenceTitle === "string" && proof.evidenceTitle.length > 0 &&
+        typeof proof.evidenceCommitSha === "string" && /^[a-f0-9]{40}$/.test(proof.evidenceCommitSha) &&
+        typeof proof.evidenceFileCount === "number" && Number.isInteger(proof.evidenceFileCount) && proof.evidenceFileCount > 0 && proof.evidenceFileCount <= 100 &&
+        typeof proof.evidenceSha256 === "string" && /^[a-f0-9]{64}$/.test(proof.evidenceSha256) &&
+        reviewedMethods.includes(String(proof.verificationMethod)) &&
+        typeof proof.reviewedChange === "string" && proof.reviewedChange.length >= 30;
+    if (!prevention && !repaired && !successor && !reviewedEvidence) return null;
     return c as VerifiedCase;
   } catch { return null; }
 }
@@ -142,7 +162,8 @@ export function assessCase(observation: ObservedTransaction, record: VerifiedCas
   if (record.digest === observation.digest) reasons.push("Self-match cannot prove comparable-incident recall.");
   if (!((record.resolutionKind === "prevention-guard" && record.validatedEvidence?.scope === "prevention-guard-only") ||
         (record.resolutionKind === "route-repair" && record.validatedEvidence?.scope === "full-flashloan-route-repair" && record.validatedEvidence.originalHistoricalRouteRepaired === true) ||
-        (record.resolutionKind === "onchain-successor" && record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && record.validatedEvidence.reviewerConfirmedCausality === true)))
+        (record.resolutionKind === "onchain-successor" && record.validatedEvidence?.scope === "human-reviewed-successor-transaction" && record.validatedEvidence.reviewerConfirmedCausality === true) ||
+        (record.resolutionKind === "reviewed-evidence" && record.validatedEvidence?.scope === "human-reviewed-engineering-artifact" && record.validatedEvidence.reviewerConfirmedCausality === true)))
     reasons.push("Unsupported or unproven fix scope.");
   if (!observation.fingerprint || record.fingerprint !== observation.fingerprint) reasons.push("Execution error class or operation differs.");
   if (observation.packageId && record.packageId && observation.packageId !== record.packageId) reasons.push("Package mismatch.");

@@ -1,9 +1,9 @@
 name: Casewake product-integrity checks
 on:
   pull_request:
-    branches: [master]
+    branches: [master, "fix/general-verified-resolution"]
   push:
-    branches: ["fix/general-verified-resolution"]
+    branches: ["fix/general-verified-resolution", "feat/casewake-phase13-wip-20261107"]
 permissions:
   contents: read
 jobs:

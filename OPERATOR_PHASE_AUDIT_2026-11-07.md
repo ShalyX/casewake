@@ -1,104 +1,48 @@
-# Casewake — Hackathon Operator v0.5.0 phase audit
+# Casewake — Hackathon Operator 35-phase audit
+Audited: 2026-11-07. Controlling brief: `PRODUCT.md` revision 1. Current checkpoint: `.hackathon/state.json` revision 19, `BUILD_VERTICAL_SLICE`.
+**Source of truth:** Incident Memory for Sui dApp/protocol engineers: Tatum-confirmed transaction evidence → compatible Walrus memory → case-specific human-reviewed fix → completed Walrus receipt → exact-blob recall on a distinct compatible failure. No wallet signing, automatic remediation, DEX/arbitrage product pivot, or fabricated approval.
+Status: PASS = exit evidence present; PARTIAL = evidence exists but exit condition incomplete; BLOCKED = downstream work cannot be accepted; NOT DONE = no qualifying evidence yet.
 
-Updated: 2026-11-07  
-Project: Tatum × Walrus Total Recall  
-Approved thesis: Incident Memory, Product Lock revision 1 (2026-11-03)  
-Brand: Casewake (NAME_LOCK PASS)  
-Current phase: 13 / BUILD_VERTICAL_SLICE  
-Working branch: fix/general-verified-resolution, draft PR #1  
-Latest code commit: 5da03e89de0705deb3e51f2ee8c2e9605ea16f90
-
-## Executive decision
-
-The approved product is Casewake, an evidence-backed memory for recurring Sui transaction failures. Its job is to retain an engineer-reviewed, evidence-linked resolution and safely surface it when a compatible failure recurs. It is not a DEX arbitrage product, a flashloan optimizer, a generic explorer or an autonomous repair bot.
-
-The previous technical investigation allowed the DeepBook route to become the centre of the product. That was a product-focus error. The correction is now in draft PR #1: a general reviewer-approved case path has been restored, and the workspace foregrounds chain evidence → human review → Walrus recall. The strict DeepBook three-gate acceptance remains intact as a separate evidence case; it is not a prerequisite for building the general product.
-
-Important distinction: Phase 12 is closed only because every existential technical assumption now has an explicit disposition (PROVEN, BLOCKED or UNCERTAIN). This is not a claim that every technical claim passed or that the full product is complete. The human-reviewed case write and exact-blob recurrence remain blocked.
-
-## Source of truth and current proof
-
-- PRODUCT.md revision 1 is unchanged; its eight grouped P0 capabilities remain authoritative.
-- BRAND.md completes the 18-candidate naming attack and locks Casewake for the hackathon; no trademark clearance is claimed.
-- EVIDENCE.md contains the claim register and owner/method/artifact/target/judge-surface plan.
-- Tatum Mainnet transaction reads are proven. Walrus Mainnet observation writes, simulation-runbook storage and signed recall are proven. The namespace contains 12 memories: ten authentic observations, one simulation runbook and one integration smoke record.
-- No human-verified resolution memory exists. No new Walrus resolution write was made in this checkpoint.
-- Draft PR #1 restores a generic onchain-successor workflow: same independently observed sender, matching operation, exact explorer evidence, reviewer-documented technical change and explicit human causal attestation. Exact-blob recurrence requires a different compatible failed transaction.
-- GitHub Actions run 42335361421 passed deterministic tests, ESLint and production build. Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF is READY at https://casewake-1840fh0xz-shalyxs-projects.vercel.app. Preview has no sponsor credentials; no live write was attempted.
-- Production remains on master commit 94194282650a217c67adcecf0df559abdbcf713b. The draft PR is not merged or promoted.
-- The prior proposed pairing of DZrXy3... with G7yGEr... is explicitly rejected: different borrowed assets/routes; same sender and chronology do not establish causality.
-
-## All 35 phases
-
-Status key: PASS = exit evidence present; PARTIAL = real work exists but exit proof is incomplete; BLOCKED = a required core claim is not proven; NOT DONE = no qualifying artifact yet. A PASS for Phase 12 means risk disposition is complete, not that the product is accepted.
-
-| # | Operator phase | Status | Evidence / remaining exit condition |
+| # | Operator phase | Status | Exit evidence / remaining condition |
 |---:|---|---|---|
-| 1 | INTAKE | PASS | Official Total Recall rules, deadline and required deliverables recorded in HACKATHON.md. |
-| 2 | RUBRIC_DECODE | PASS | SCORECARD.md maps Walrus/Tatum 30%, technical 30%, creativity 20%, presentation 20%. |
-| 3 | RESEARCH | PASS | DEPENDENCY_ATTACK.md and EVIDENCE.md cover user pain, alternatives and technical risks. |
-| 4 | IDEATION | PASS | Ecosystem candidates compared; Incident Memory selected over Indexer Recovery. |
+| 1 | INTAKE | PASS | `HACKATHON.md`: official Total Recall rules, dates, sponsor requirements and submission requirements. |
+| 2 | RUBRIC_DECODE | PASS | `SCORECARD.md`: Tatum/Walrus 30%, technical quality 30%, creativity 20%, presentation 20%, mapped to visible proof. |
+| 3 | RESEARCH | PASS | `EVIDENCE.md`, dependency and competitor notes: Sui incident pain, alternatives, risks and sponsor APIs. |
+| 4 | IDEATION | PASS | Ecosystem research/shortlist; alternatives evaluated before the user selected Incident Memory. |
 | 5 | HUMAN_IDEA_GATE | PASS | User explicitly selected Incident Memory on 2026-11-03. |
-| 6 | VALIDATION | PARTIAL | Track language plausibly supports a workflow agent; external Sui engineer utility and organizer confirmation remain unobserved. |
-| 7 | PRODUCT_LOCK | PASS | PRODUCT.md revision 1; eight grouped P0s, non-goals and no-auto-execution constraints retained. |
-| 8 | NAME_LOCK | PASS | BRAND.md records 18 candidates across territories, genericity/collision attack, pronunciation and Casewake rationale; no legal clearance claimed. |
-| 9 | DEMO_ARCHITECTURE | PASS (PLAN ONLY) | DEMO.md contains a timed 2:35 narrative and evidence/recording plan; no video yet. |
-| 10 | EVIDENCE_PLAN | PASS (PLAN ONLY) | EVIDENCE.md assigns critical claims, status, owner, method, artifact target, internal target and judge surface. Proof is separately tracked. |
-| 11 | DEPENDENCY_ATTACK | PARTIAL | Tatum and Walrus Mainnet integrations proven; human-reviewed case availability and live general write remain unproven; external track fit uncertain. The eight existing InsufficientCoinBalance candidates are all flashloan/DEX PTBs and are not a representative general-incident sample. |
-| 12 | TECHNICAL_DERISK | PASS (DISPOSITION COMPLETE; BLOCKERS RETAINED) | Every existential assumption has a disposition. Tatum/Walrus read, observation and simulation-runbook path proven. Generic reviewer path passes CI/Preview. Human case write/recall BLOCKED; DeepBook full-route gate separately BLOCKED. No claim promoted. |
-| 13 | BUILD_VERTICAL_SLICE | PARTIAL — ACTIVE | Rebuilt live API acceptance passes for failed/succeeded/unknown Tatum outcomes, timestamp/checkpoint, no-Walrus unknown recall, anonymous 403 and unapproved reviewer 400. Seven test scripts, ESLint and production build pass. General human-reviewed case → Walrus receipt → exact-blob recurrence remains open. |
-| 14 | PRODUCT_REVIEW | MODIFY — OPEN | Thesis remains intact and DeepBook focus removed from product shell. Full magic moment still missing; repeat Product Critic after Phase 13 passes. See PRODUCT_REVIEW_2026-11-07.md. |
-| 15 | BRAND_KIT | PASS | BRAND.md includes wordmark concept, logo mark, colors, type, voice, vocabulary and usage rules. Rendered 24px/mobile QA belongs to Phase 22. |
-| 16 | ART_DIRECTION | PARTIAL | Trace-instrument territory selected; dedicated implementable composition and screen-by-screen art direction still needed. |
-| 17 | REFERENCE_BOARD | NOT DONE | No purpose-by-purpose reference synthesis with transferable design decisions. |
-| 18 | VISUAL_ASSET_STRATEGY | NOT DONE | No complete asset inventory, priority, placement, fallback and provenance strategy. |
-| 19 | MOTION_STORYBOARD | NOT DONE | No motion storyboard or explicit motion-minimal rationale. |
-| 20 | DESIGN_LOCK | NOT DONE | DESIGN.md does not exist; design system and page compositions are not locked. |
-| 21 | DESIGN_ENGINEERING | PARTIAL | Landing, workspace, proof page and generic progress panel exist; final implementation still needs the design lock. |
-| 22 | VISUAL_QA | PARTIAL | Preview HTTP/HTML and responsive CSS checked; no current desktop/mobile rendered screenshot matrix or 24px mark QA. |
-| 23 | BUILD_LOOP | PARTIAL — NOT PASSED | General reviewer path restored; live failed/succeeded/unknown controls, reviewer gates, tests, lint and build pass. Complete workspace state matrix, case-specific human review and exact-blob recurrence remain open. |
-| 24 | PROOF_ENGINE | PARTIAL | Real Tatum/Walrus observation and runbook proof exists; human-reviewed resolution claim remains blocked. |
-| 25 | RED_TEAM | PARTIAL | Anonymous 403 and authenticated no-causal-approval 400 verified live; full case-specific abuse matrix, wrong-sender/operation and production reviewer journey still open. |
-| 26 | PRODUCT_HYGIENE | PARTIAL | Installed public-project-launch-hygiene skill located; prior HYGIENE.md has stale fallback_used=true and must be rerun on release candidate, including history secret scan. |
-| 27 | DEMO_PRODUCTION | PARTIAL | 2:35 script and shot list exist; final MP4 not recorded. |
-| 28 | DEMO_QA | NOT DONE | No final video file to watch and inspect end-to-end. |
-| 29 | PITCH | PARTIAL | README, SUBMISSION draft and in-app journal exist; final concise pitch and external blog requirement/publication need verification. |
-| 30 | JUDGE_SIMULATION | NOT DONE | No four-lens product, technical, sponsor and 30-second judge simulation report. |
-| 31 | PRIORITIZED_FIXES | PARTIAL | Blocking issues known; current ordered release backlog and proof closure not complete. |
-| 32 | FEATURE_FREEZE | NOT DONE | No approved freeze date or verified freeze gate. |
-| 33 | SUBMISSION_AUDIT | PARTIAL | Public repo and production exist; final video, external blog if required, track fit, final package and receipt missing. |
-| 34 | READY_TO_SUBMIT | NOT DONE | Submission package and audit incomplete. |
-| 35 | SUBMITTED | NOT DONE | No observed submission confirmation/receipt. |
+| 6 | VALIDATION | PARTIAL | MODIFY accepted within thesis; Smart Agents for Real Life is plausible, but organizer track-fit confirmation and independent Sui-engineer utility validation are unobserved. |
+| 7 | PRODUCT_LOCK | PASS | `PRODUCT.md` revision 1; eight grouped P0s; read-only chain inspection, human-owned causal judgment, no autonomous execution. |
+| 8 | NAME_LOCK | PASS | `BRAND.md`: 18 naming candidates/territories, genericity and collision attack; Casewake retained. No legal trademark clearance claimed. |
+| 9 | DEMO_ARCHITECTURE | PASS — PLAN ONLY | `DEMO.md`: 2:35 shot list, narration, real digests, reset and proof sequence. No video implied. |
+| 10 | EVIDENCE_PLAN | PARTIAL | `EVIDENCE.md` claim register exists; final owner/date/artifact/status reconciliation remains. |
+| 11 | DEPENDENCY_ATTACK | PARTIAL | Tatum Mainnet, Walrus Mainnet, Vercel, credentials and read resilience proven; external user utility and organizer track fit remain open. |
+| 12 | TECHNICAL_DERISK | PASS — DISPOSITION | Tatum reads, Walrus observations/runbook writes and recall, error classification, auth and failure handling have explicit PROVEN/BLOCKED dispositions. DeepBook route remains separately blocked. |
+| 13 | BUILD_VERTICAL_SLICE | IN PROGRESS | `PHASE13_ACCEPTANCE_MATRIX.md`: 8 P0s. Eight test scripts/27 TAP tests, lint/build, live failed/success/unknown controls, reviewer 403/400 and responsive checks pass. No representative human-approved case, resolution blob receipt or exact-blob recurrence yet. |
+| 14 | PRODUCT_REVIEW | PARTIAL / HELD | 2026-11-07 product-integrity review restored the general reviewer path and separated DeepBook evidence. Formal close waits for Phase 13 acceptance. |
+| 15 | BRAND_KIT | PARTIAL / HELD | `BRAND.md` defines name, descriptor, voice, mark, palette, type and usage; final asset set and small-size/social QA still required. |
+| 16 | ART_DIRECTION | DOCUMENTED / NOT YET ACCEPTED | `DESIGN.md` selects Trace Instrument and records product-specific composition; formal phase acceptance follows Phase 14/15. |
+| 17 | REFERENCE_BOARD | DOCUMENTED / NOT YET ACCEPTED | `DESIGN.md` Gate C maps Linear, Sentry, Raycast, GitHub PRs and Sui docs to specific borrow/avoid decisions. |
+| 18 | VISUAL_ASSET_STRATEGY | DOCUMENTED / NOT YET ACCEPTED | `DESIGN.md` Gate E defines mark, favicon, evidence diagram, screenshots and demo-frame constraints. |
+| 19 | MOTION_STORYBOARD | DOCUMENTED / NOT YET ACCEPTED | `DESIGN.md` Gate F defines six evidence-triggered beats, truth conditions and reduced-motion behavior. |
+| 20 | DESIGN_LOCK | NOT DONE | Requires final composition, actual product states, screenshot scoring and visual sign-off; no lock claimed. |
+| 21 | DESIGN_ENGINEERING | PARTIAL | Landing, workspace, field notes and proof surfaces exist; general reviewer workflow and mobile layout improved; final locked-spec implementation remains. |
+| 22 | VISUAL_QA | PARTIAL | 1440px desktop and true 390×844 mobile captures inspected for landing, empty workspace and runbook result; no horizontal overflow. Missing-key, timeout, reviewer-form, write/receipt and recurrence states plus rubric scoring remain. |
+| 23 | BUILD_LOOP | BLOCKED | Cannot pass until Phase 13 human-reviewed resolution → completed Walrus receipt → exact-blob recurrence works end to end. |
+| 24 | PROOF_ENGINE | PARTIAL | Real Tatum/Walrus observations and simulation runbook proof exist; human-reviewed resolution proof and exact recurrence remain missing. |
+| 25 | RED_TEAM | PARTIAL | 27 automated tests, evidence tamper/chronology/mismatch tests and live 403/400 gates pass; full live case-specific abuse matrix remains. |
+| 26 | PRODUCT_HYGIENE | NOT DONE | Installed public-project-launch-hygiene skill is located; current end-to-end execution and tracked-history secret scan still required. |
+| 27 | DEMO_PRODUCTION | PARTIAL | `DEMO.md` script and shot list exist; final 2–3 minute MP4 not recorded. |
+| 28 | DEMO_QA | NOT DONE | No finished MP4 to inspect for truth, legibility, audio, pacing and duration. |
+| 29 | PITCH | PARTIAL | `README.md`, `SUBMISSION.md` and published journal exist; final concise pitch not rehearsed/locked. |
+| 30 | JUDGE_SIMULATION | NOT DONE | No recorded four-lens product, technical, sponsor and 30-second judge attack. |
+| 31 | PRIORITIZED_FIXES | PARTIAL | Product drift and mobile overflow were corrected; remaining P0/P1 fixes are not all verified. |
+| 32 | FEATURE_FREEZE | NOT DONE | No freeze date or accepted Phase 13/20/25/26/28 gates. |
+| 33 | SUBMISSION_AUDIT | PARTIAL | Public repo, Vercel app and blog exist; external fit, user form fields, final video and submission receipt remain. |
+| 34 | READY_TO_SUBMIT | NOT DONE | Cannot pass while mandatory video, human-reviewed memory loop and final audit are incomplete. |
+| 35 | SUBMITTED | NOT DONE | No submission action or organizer receipt observed. |
 
-## Phase 13 acceptance — non-negotiable P0 matrix
+## No-skip execution rule
+Phases 1–12 are accepted only to the extent shown above. Phase 13 remains the active gate. Later-phase artifacts are recorded as preparatory evidence, not falsely promoted to PASS; they will be accepted in order after Phase 13 and Phase 14 close. The strict historical DeepBook three-gate experiment is a separate evidence track and is not a prerequisite for building the general Casewake product.
 
-The eight grouped P0s in PRODUCT.md remain locked. Phase 13 cannot pass until the matrix in PHASE13_ACCEPTANCE_MATRIX.md is satisfied. In particular:
-
-1. Real Tatum transaction intake must distinguish failed, succeeded and unknown outcomes.
-2. Walrus recall must classify observations, simulation-tested procedures and human-reviewed cases separately; mismatch/negative control must not suggest a resolution.
-3. A real, case-specific proof and named human reviewer must authorize the exact case; no generic checkbox or unrelated same-sender success can substitute.
-4. A successful reviewer write must return a completed Walrus Mainnet job and blob ID.
-5. A distinct compatible failed transaction must retrieve the exact same blob; a mismatch must not.
-6. No signing, submission, funds movement or autonomous repair.
-7. Complete workspace states and responsive UI must be tested.
-8. Saved count must reflect completed Mainnet writes, not observations mislabeled as fixes.
-
-## Current execution rules
-
-- No more DeepBook route-economics investigation as the default next step. Keep its strict three-gate evidence case blocked and separate; do not weaken or falsely pass it.
-- Do not write any human-verified resolution to Walrus until case-specific evidence passes independently and an authorized human explicitly approves it.
-- Work on PR #1 and Preview; preserve the local Windows workspace and its untracked diagnostic artifacts. No Production promotion until live acceptance and release checks pass.
-- Do not claim full product, demo or submission readiness from CI, screenshots, a preview build, a simulation runbook or an observation receipt.
-
-Next action: continue Phase 13 with the general user workflow and complete P0 acceptance matrix. Source one genuine, non-flashloan Sui incident with case-specific evidence from an engineer/maintainer or public issue. Do not continue mining the current eight-digest flashloan sample. If no legitimate case can be independently supported, stop at the human gate and request an explicit product/submission decision rather than inventing one.
-
-Competition deadline: 2026-11-10 17:00 UTC.
-
-## 2026-11-07 — Phase 13 read-only acceptance checkpoint
-
-- Active phase remains 13 / BUILD_VERTICAL_SLICE. Phase 12 remains closed as risk disposition, not as universal technical success.
-- Corrective branch adds Tatum transaction timestamp/checkpoint provenance and refuses a claimed successor unless its checkpoint is strictly later than the source failure. Persisted successor memories must also carry valid chronological proof.
-- Five deterministic suites pass; ESLint is clean; Next production build passes. The new `web/scripts/verify-phase13-readonly.mjs` passes live failed, succeeded and pruned/unavailable Tatum lookups, including timestamp/checkpoint fields, plus anonymous 403 and authenticated no-causal-approval 400. It makes no Walrus write.
-- The live status fixtures are DeFi controls only. They do not satisfy the required general-case quality gate. No human-verified memory exists and no exact-blob recurrence has been demonstrated.
-- **Human input required:** provide or arrange one genuine non-flashloan Sui Mainnet developer incident with its failed digest, case-specific diagnosis/fix evidence, and a distinct later successful transaction from the same sender. The named reviewer must inspect and explicitly approve the causal link before Casewake writes once to Walrus.
-- Phase 13 remains IN PROGRESS; phases 14–35 remain gated by the Operator sequence. No feature freeze, demo-ready or submission-ready claim is authorized.
+## Current Phase 13 gate
+The eight-digest candidate pool was inspected and found to be DeFi flashloan/swap-biased; it is excluded from representative general-case validation. The generic reviewer implementation supports either a Tatum-verified later onchain successor or a server-re-fetched merged GitHub PR/immutable commit diff; both require named human causal approval. No Walrus resolution write was performed. Next: source one representative non-DeFi Sui developer incident with a genuine failed Mainnet digest and case-specific proof, obtain explicit reviewer approval, then verify one completed Walrus receipt and exact-blob recall on a distinct compatible failure.
