@@ -1,7 +1,8 @@
 {
-  "schema": "casewake-general-case-successor-recurrence-candidate/v1",
-  "status": "CANDIDATE_PENDING_HUMAN_CAUSAL_REVIEW",
+  "schema": "casewake-general-case-successor-recurrence-candidate/v2",
+  "status": "REJECTED_AS_CAUSAL_PAIR",
   "network": "sui-mainnet",
+  "conclusion": "G7yGEr67JqrUUNgor3Yc8R4WWTumpLsdLxvgJkxX8dwH is a successful Mainnet transaction from the same sender after the source checkpoint, but it is NOT evidenced as the correction of DZrXy9vpqkx6mQs226HYZ2PQXtCTULA4H98dwaRbRXBu. The transaction routes use different borrowed assets and different strategy paths. Shared generic flash-swap/repayment calls and sender identity do not establish causation.",
   "source": {
     "digest": "DZrXy9vpqkx6mQs226HYZ2PQXtCTULA4H98dwaRbRXBu",
     "outcome": "failed",
@@ -11,20 +12,65 @@
     "commandCount": 20,
     "checkpoint": "341377758",
     "timestamp": "2026-11-04T00:20:16.746Z",
+    "principalBorrowAsset": "DEEP",
+    "principalBorrowType": "0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+    "observedRoute": [
+      "DeepBook flash_swap<DEEP,SUI>",
+      "swap_router::swap_a_b_with_return_<DEEP,USDC>",
+      "DeepBook flash_swap<USDC,SUI>",
+      "DeepBook repay_flash_swap<USDC,SUI>",
+      "DeepBook swap_pay_amount<DEEP,SUI>",
+      "splitCoins<SUI>",
+      "DeepBook repay_flash_swap<DEEP,SUI>"
+    ],
     "existingWalrusObservation": true,
     "verifiedResolution": false
   },
-  "successfulFollowUpCandidate": {
+  "rejectedCandidate": {
     "digest": "G7yGEr67JqrUUNgor3Yc8R4WWTumpLsdLxvgJkxX8dwH",
     "outcome": "success",
     "commandCount": 23,
     "checkpoint": "341377767",
     "timestamp": "2026-11-04T00:20:18.696Z",
     "sameSenderAsSource": true,
-    "sharedMoveCallsWithSource": 9,
-    "humanCausalConfirmation": "pending"
+    "primaryBorrowAsset": "COIN",
+    "primaryBorrowType": "0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN",
+    "observedRoute": [
+      "DeepBook flash_swap<COIN,SUI>",
+      "Turbos trade::flash_swap<COIN,USDC>",
+      "Turbos trade::repay_flash_swap<COIN,USDC>",
+      "DeepBook flash_swap<USDC,SUI>",
+      "DeepBook repay_flash_swap<USDC,SUI>",
+      "DeepBook swap_pay_amount<COIN,SUI>",
+      "DeepBook repay_flash_swap<COIN,SUI>"
+    ],
+    "sourceAttribution": "The prior followups-XkAz3VrtFLpv.json scan associates this success with source XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue, not with DZrXy9vpqkx6mQs226HYZ2PQXtCTULA4H98dwaRbRXBu.",
+    "reasonRejected": [
+      "The source borrows DEEP; this success borrows COIN.",
+      "The source uses a DEEP-to-USDC route; this success uses a COIN-to-USDC route.",
+      "Only generic protocol functions overlap; the borrowed asset and route differ.",
+      "Same sender and later checkpoint prove chronology, not that the later transaction corrected the earlier failure."
+    ]
   },
-  "laterRecurrenceCandidate": {
+  "otherScannedSuccesses": [
+    {
+      "digest": "Yxf2PyQfRtB7L2m7B3EEzJwgYxoYVVvp5gvwVu7hf3J",
+      "outcome": "success",
+      "checkpoint": "341377780",
+      "timestamp": "2026-11-04T00:20:21.649Z",
+      "primaryBorrowAsset": "USDSUI",
+      "reasonNotSourceCorrection": "Uses USDSUI/SUI and USDSUI-to-USDC routing, not the source's DEEP/SUI and DEEP-to-USDC route."
+    },
+    {
+      "digest": "5xxtzGFrn9X65iYU8cB4MeE54ohYjtkNbBiqpQtHZ19B",
+      "outcome": "success",
+      "checkpoint": "341377862",
+      "timestamp": "2026-11-04T00:20:40.648Z",
+      "primaryBorrowAsset": "NAVX",
+      "reasonNotSourceCorrection": "Uses NAVX, BUCK and USDC flash swaps; unrelated asset route."
+    }
+  ],
+  "rejectedRecurrenceCandidate": {
     "digest": "DnyMg41VJJo3FUtTqZrzbUVU1AFx21sMFTRnbphWmKhR",
     "outcome": "failed",
     "errorText": "InsufficientCoinBalance in command 15",
@@ -34,19 +80,30 @@
     "checkpoint": "341377844",
     "timestamp": "2026-11-04T00:20:36.690Z",
     "sameSenderAsSource": true,
-    "sharedMoveCallsWithSource": 9,
-    "laterThanSuccessfulFollowUp": true
+    "primaryBorrowAsset": "USDSUI",
+    "reasonRejected": "Same error and failed command index are not enough: this transaction's primary borrowed asset and route are USDSUI/SUI and USDSUI-to-USDC, not the source's DEEP/SUI and DEEP-to-USDC."
+  },
+  "scan": {
+    "method": "Sui Mainnet gRPC transaction listing for the source sender, beginning at checkpoint 341377758, capped at the first 100 returned transactions.",
+    "scannedTransactions": 100,
+    "successfulTransactions": [
+      "G7yGEr67JqrUUNgor3Yc8R4WWTumpLsdLxvgJkxX8dwH",
+      "Yxf2PyQfRtB7L2m7B3EEzJwgYxoYVVvp5gvwVu7hf3J",
+      "5xxtzGFrn9X65iYU8cB4MeE54ohYjtkNbBiqpQtHZ19B"
+    ],
+    "matchingSuccessfulDEEPRouteFound": false,
+    "exhaustive": false
   },
   "checks": {
-    "chronologicalOrderVerified": true,
-    "sameSenderAcrossAllThree": true,
-    "sourceAndRecurrenceExactErrorMatch": true,
-    "sourceAndRecurrenceSameFailedCommandKind": true,
-    "successfulFollowUpHasSuccessfulMainnetEffects": true,
-    "noWalletSigningOrSubmissionByThisInvestigation": true,
+    "sourceAndG7DifferentBorrowAssets": true,
+    "sourceAndG7DifferentSwapAssetRoute": true,
+    "G7SuccessOnMainnet": true,
+    "G7CausalLinkToSource": false,
+    "DnyIsExactSameError": true,
+    "DnyIsSameUnderlyingAssetRoute": false,
     "walrusResolutionWritePerformed": false,
     "secondFailureRecallPerformed": false
   },
-  "nextRequiredAction": "A human engineer must confirm that the successful follow-up is causally the correction for the original failure and provide the specific diagnosis/change/resolution steps. Only then may Casewake store a verified resolution and test recall against the later recurrence.",
+  "nextRequiredAction": "Do not write G7 or Dny as the resolution/recurrence pair for DZrXy. Continue searching for a successful Mainnet transaction that matches the source's DEEP/SUI and DEEP-to-USDC route and verify its repayment effects, or produce and simulate a new corrected transaction for the exact source route. Human engineering review must still supply the actual diagnosis and change before a resolution can be stored.",
   "generatedAt": "2026-11-07"
 }
