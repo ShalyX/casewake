@@ -162,3 +162,19 @@ Read the complete phase-by-phase record in [OPERATOR_PHASE_AUDIT_2026-11-06.md](
 **Next action:** close the strict case-specific simulation proof with repeatable independent results or maintain Gate 1 blocked, then demonstrate the actual Casewake user journey from reviewer-authorized resolution through completed Walrus receipt and exact-blob recurrence. Continue all other missing original P0/product and judge-facing phases without inventing results. Deadline: 2026-11-10 17:00 UTC.
 
 **Audit addendum — confirmed P0 regression:** The current `web/src/app/api/remember/route.ts` only accepts `route-repair` proof for one hardcoded DeepBook digest, and `web/src/lib/guard-evidence.ts` rejects other resolution kinds even after proof parsing. Consequently Casewake cannot store a verified reviewer-approved resolution for an otherwise independently proven unrelated Sui incident. This is a concrete general-product functionality regression. Restore the generic evidence-linked human-reviewed memory write path without weakening the stricter proof rules applicable to the selected DeepBook demo. The corrected audit is in `OPERATOR_PHASE_AUDIT_2026-11-06.md`.
+
+
+## 2026-11-07 — Original-route scope correction and remote reconstruction
+
+The previous `simulate-route-repair-v2.mjs` Cetus SUI/USDC round-trip is an **alternative route experiment**, not a correction of the selected historical transaction. It failed fresh Tatum replay and was negative after gas. It is retained only as negative/alternative-route evidence; it cannot pass the user's Gate 1.
+
+The exact original PTB is being reconstructed separately from `evidence/context-BbRZD7YfTiiN.json`:
+1. DeepBook `borrow_flashloan_base` (65,265,188,650 MIST SUI).
+2. Router package `0xa5a0c25c79e428eba04fb98b3fb2a34db45ab26d4c8faf0d7e39d66a63891e64::swap_router::swap_b_a_with_return_` (SUI → USDSUI, with a possible SUI remainder).
+3. Bluefin CLMM package `0xd075338d105482f1527cbfd363d6413558f184dec36d9138a70261e87f486e9c::pool::swap` (USDSUI → USDC, with typed balance remainders).
+4. DeepBook `swap_exact_quote_for_base` on the SUI/USDC pool (USDC → SUI, plus USDC and DEEP remainders).
+5. Merge all SUI outputs, split exact principal, call `return_flashloan_base` with the matching receipt.
+
+A GitHub Actions-only audit now resolves the original PTB's Move signatures and current shared-object metadata against public Sui Mainnet. This is reconstruction only, not an execution or economic proof. Next implementation must preserve these exact three hops and correctly account for every returned coin/balance. The alternative Cetus route is not a substitute.
+
+**Current gate:** Gate 1 BLOCKED; no reviewer approval, verified-resolution Walrus write, or second-digest exact-blob recall. No secrets or local PC workload are required for the signature audit. Tatum full replay must remain read-only and independently repeated.
