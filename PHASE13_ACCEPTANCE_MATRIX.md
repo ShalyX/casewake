@@ -52,3 +52,30 @@ Phase 13 passes only when all eight P0s have acceptance evidence and one complet
 ## Case-source quality gate
 
 The first general human-reviewed case must not be selected solely because it shares the InsufficientCoinBalance substring. The current eight-digest candidate pool is clustered at checkpoint 341377758 and consists entirely of DeFi flashloan/swap PTBs. Do not use it as representative validation of the broad Sui engineering problem. Source a genuinely different developer incident and require a case-specific diagnosis plus independent proof before any human approval or Walrus write.
+
+
+## 2026-11-07 — rebuilt live endpoint retest (supersedes pending items above)
+
+- Rebuilt the isolated PR worktree and restarted its local production server before retesting.
+- `node scripts/verify-phase13-readonly.mjs` **PASS**:
+  - Live Tatum failed transaction returns `outcome=failed` with chain timestamp and checkpoint.
+  - Live Tatum successful transaction returns `outcome=succeeded` with chain timestamp and checkpoint.
+  - Tatum gRPC `NOT_FOUND` returns `outcome=unknown`.
+  - Unknown transaction recall returns zero candidates and `walrusHitsExamined=0`; no Walrus read occurs.
+  - Anonymous resolution write returns 403.
+  - Authenticated reviewer request without explicit causal approval returns 400 before Walrus storage.
+- Operator test suite: 7 scripts, 17 TAP tests plus 4 assertion-based suites — PASS.
+- ESLint — PASS. Next.js production build — PASS (exit code 0; all 15 static pages generated).
+- Exact machine-readable record: `evidence/phase13-readonly-acceptance-2026-11-07.json`.
+- No resolution write, wallet signing or transaction submission occurred.
+- This is supporting read-only acceptance only. Phase 13 remains IN PROGRESS because there is no representative non-flashloan, case-specific human-reviewed resolution with a completed Walrus receipt and exact-blob recurrence.
+
+## Product-aligned proof-method correction
+
+Product Lock revision 1 requires a **specific confirmation method and proof link**, followed by affirmative human approval. It does not require every valid fix to have a later same-sender onchain transaction. The current successor-only implementation is therefore too restrictive.
+
+Phase 13 will support two explicit proof methods:
+1. **Onchain successor** — Tatum verifies the later successful transaction, same sender, matching operation and chronology; the reviewer attests the causal change.
+2. **Reviewed engineering artifact** — a case-specific, independently inspectable test/reproduction/commit/PR or maintainer-resolution artifact is fetched and fingerprinted; the reviewer records the verification method, exact change and explicit causal approval.
+
+Both methods remain human-reviewed. A URL, AI explanation, generic documentation or prevention-only runbook cannot become a verified historical fix. Exact-blob recall against a different compatible failure remains mandatory. The DeepBook route gate remains separate and unchanged.
