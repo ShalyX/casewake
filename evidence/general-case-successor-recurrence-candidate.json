@@ -1,0 +1,52 @@
+{
+  "schema": "casewake-general-case-successor-recurrence-candidate/v1",
+  "status": "CANDIDATE_PENDING_HUMAN_CAUSAL_REVIEW",
+  "network": "sui-mainnet",
+  "source": {
+    "digest": "DZrXy9vpqkx6mQs226HYZ2PQXtCTULA4H98dwaRbRXBu",
+    "outcome": "failed",
+    "errorText": "InsufficientCoinBalance in command 15",
+    "failedCommandIndex": 15,
+    "failedCommandKind": "splitCoins",
+    "commandCount": 20,
+    "checkpoint": "341377758",
+    "timestamp": "2026-11-04T00:20:16.746Z",
+    "existingWalrusObservation": true,
+    "verifiedResolution": false
+  },
+  "successfulFollowUpCandidate": {
+    "digest": "G7yGEr67JqrUUNgor3Yc8R4WWTumpLsdLxvgJkxX8dwH",
+    "outcome": "success",
+    "commandCount": 23,
+    "checkpoint": "341377767",
+    "timestamp": "2026-11-04T00:20:18.696Z",
+    "sameSenderAsSource": true,
+    "sharedMoveCallsWithSource": 9,
+    "humanCausalConfirmation": "pending"
+  },
+  "laterRecurrenceCandidate": {
+    "digest": "DnyMg41VJJo3FUtTqZrzbUVU1AFx21sMFTRnbphWmKhR",
+    "outcome": "failed",
+    "errorText": "InsufficientCoinBalance in command 15",
+    "failedCommandIndex": 15,
+    "failedCommandKind": "splitCoins",
+    "commandCount": 20,
+    "checkpoint": "341377844",
+    "timestamp": "2026-11-04T00:20:36.690Z",
+    "sameSenderAsSource": true,
+    "sharedMoveCallsWithSource": 9,
+    "laterThanSuccessfulFollowUp": true
+  },
+  "checks": {
+    "chronologicalOrderVerified": true,
+    "sameSenderAcrossAllThree": true,
+    "sourceAndRecurrenceExactErrorMatch": true,
+    "sourceAndRecurrenceSameFailedCommandKind": true,
+    "successfulFollowUpHasSuccessfulMainnetEffects": true,
+    "noWalletSigningOrSubmissionByThisInvestigation": true,
+    "walrusResolutionWritePerformed": false,
+    "secondFailureRecallPerformed": false
+  },
+  "nextRequiredAction": "A human engineer must confirm that the successful follow-up is causally the correction for the original failure and provide the specific diagnosis/change/resolution steps. Only then may Casewake store a verified resolution and test recall against the later recurrence.",
+  "generatedAt": "2026-11-07"
+}
