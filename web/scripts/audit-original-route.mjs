@@ -25,6 +25,7 @@ const commands=pt.commands.map((entry,index)=>{
   const kind=entry.command?.oneofKind;
   const body=entry.command?.[kind]||{};
   const mapArg=a=>{
+    if(!a||typeof a!=='object')return {source:'unknown',raw:a??null};
     if(a.kind===2)return {source:'input',index:a.input,input:inputs[a.input]||null};
     if(a.kind===3)return {source:'result',command:a.result,subresult:a.subresult??0};
     return {source:'other',...a};
