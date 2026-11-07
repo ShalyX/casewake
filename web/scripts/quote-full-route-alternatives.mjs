@@ -39,6 +39,7 @@ const USDC='0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::
 const ENDPOINT='https://api-sui.cetus.zone/router_v3';
 const SDK_VERSION=1010705;
 const ORIGINAL_POOLS=[
+ '0x034f3a42e7348de2084406db7a725f9d9d132a56c68324713e6e623601fb4fd7', // original DeepBook SUI/SUI_USDE flashloan source pool
  '0x835effa94dba86cf354ced62e33ce59ce6754cd0e57e7ee84a6ede2f7d7f8056',
  '0x3fe620cd2b94ed7bc333f46e984cdea6cf42cfd9ddd54f15016d61c2f8149a90',
  '0xe05dafb5133bcffb8d59f4e12465dc0e9faeaa05e3e342a08fe135800e3e4407'
@@ -120,11 +121,11 @@ const completeResults=results.filter(x=>x.complete);
 const bestMarginCandidate=completeResults.sort((a,b)=>BigInt(a.repayment.marginMist)>BigInt(b.repayment.marginMist)?-1:BigInt(a.repayment.marginMist)<BigInt(b.repayment.marginMist)?1:0)[0]||null;
 const bestSafetyCandidate=completeResults.filter(x=>x.repayment.safetyMarginPassed).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null;
 const report={schema:'casewake-full-three-hop-alternatives/v3',originalDigest:saved.digest,
- network:'sui-mainnet',routeIntent:'Flashloan SUI -> USDSUI -> USDC -> SUI; each leg uses a route distinct from all original pools and all previously used pools.',
+ network:'sui-mainnet',routeIntent:'Flashloan SUI -> USDSUI -> USDC -> SUI; each leg excludes the original flashloan source pool, all three original swap pools, and all previously used pools.',
  originalPoolsExcluded:ORIGINAL_POOLS,tradeSizesMist:tradeSizes.map(String),splitCounts,minimumSafetyMarginMist:MIN_SAFETY_MARGIN.toString(),results,
  bestMarginCandidate,bestRepayable:completeResults.filter(x=>x.repayment.repayable).sort((a,b)=>BigInt(b.repayment.marginMist)>BigInt(a.repayment.marginMist)?-1:1)[0]||null,bestSafetyCandidate,
  limitations:['Aggregator outputs are read-only quotes, not a built transaction or a full PTB simulation.',
-  'Each leg excludes original pools and every pool used by previous legs to prevent artificial round-trip reuse.',
+  'Each leg excludes the flashloan source pool, all original swap pools and every pool used by previous legs to prevent stale same-pool quotes and artificial round-trip reuse.',
   'A candidate must still be assembled into the exact flashloan PTB and pass full Tatum Mainnet and independent simulation.',
   'No wallet-funded repayment, signing, execution, human approval or Walrus write occurred.'],
  safety:{signed:false,onchainExecuted:false,walletFunded:false,walrusWritten:false,gate1Eligible:false},
