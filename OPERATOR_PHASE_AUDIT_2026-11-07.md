@@ -44,9 +44,9 @@ Status key: PASS = exit evidence present; PARTIAL = real work exists but exit pr
 | 8 | NAME_LOCK | PASS | BRAND.md records 18 candidates across territories, genericity/collision attack, pronunciation and Casewake rationale; no legal clearance claimed. |
 | 9 | DEMO_ARCHITECTURE | PASS (PLAN ONLY) | DEMO.md contains a timed 2:35 narrative and evidence/recording plan; no video yet. |
 | 10 | EVIDENCE_PLAN | PASS (PLAN ONLY) | EVIDENCE.md assigns critical claims, status, owner, method, artifact target, internal target and judge surface. Proof is separately tracked. |
-| 11 | DEPENDENCY_ATTACK | PARTIAL | Tatum and Walrus Mainnet integrations proven; human-reviewed case availability and live general write remain unproven; external track fit uncertain. |
+| 11 | DEPENDENCY_ATTACK | PARTIAL | Tatum and Walrus Mainnet integrations proven; human-reviewed case availability and live general write remain unproven; external track fit uncertain. The eight existing InsufficientCoinBalance candidates are all flashloan/DEX PTBs and are not a representative general-incident sample. |
 | 12 | TECHNICAL_DERISK | PASS (DISPOSITION COMPLETE; BLOCKERS RETAINED) | Every existential assumption has a disposition. Tatum/Walrus read, observation and simulation-runbook path proven. Generic reviewer path passes CI/Preview. Human case write/recall BLOCKED; DeepBook full-route gate separately BLOCKED. No claim promoted. |
-| 13 | BUILD_VERTICAL_SLICE | PARTIAL — ACTIVE | Authentic Tatum intake, Walrus observations/runbook recall and negative control work. Generic reviewer UI/API restored. Missing live human-approved case → completed blob receipt → distinct compatible failure recalls exact blob. See PHASE13_ACCEPTANCE_MATRIX.md. |
+| 13 | BUILD_VERTICAL_SLICE | PARTIAL — ACTIVE | Authentic Tatum intake, Walrus observations/runbook recall and negative control work. Generic reviewer UI/API restored. Missing live human-approved case → completed blob receipt → distinct compatible failure recalls exact blob. The current eight-candidate error sample is DeFi flashloan-heavy; source a genuinely different developer incident. See PHASE13_ACCEPTANCE_MATRIX.md and evidence/insufficient-coin-balance-sample-audit-2026-11-07.md. |
 | 14 | PRODUCT_REVIEW | MODIFY — OPEN | Thesis remains intact and DeepBook focus removed from product shell. Full magic moment still missing; repeat Product Critic after Phase 13 passes. See PRODUCT_REVIEW_2026-11-07.md. |
 | 15 | BRAND_KIT | PASS | BRAND.md includes wordmark concept, logo mark, colors, type, voice, vocabulary and usage rules. Rendered 24px/mobile QA belongs to Phase 22. |
 | 16 | ART_DIRECTION | PARTIAL | Trace-instrument territory selected; dedicated implementable composition and screen-by-screen art direction still needed. |
@@ -90,6 +90,6 @@ The eight grouped P0s in PRODUCT.md remain locked. Phase 13 cannot pass until th
 - Work on PR #1 and Preview; preserve the local Windows workspace and its untracked diagnostic artifacts. No Production promotion until live acceptance and release checks pass.
 - Do not claim full product, demo or submission readiness from CI, screenshots, a preview build, a simulation runbook or an observation receipt.
 
-Next action: continue Phase 13 with the general user workflow, the complete P0 acceptance matrix and a legitimate case-specific proof. If no legitimate case can be independently supported, stop at the human gate and request an explicit product/submission decision rather than inventing one.
+Next action: continue Phase 13 with the general user workflow and complete P0 acceptance matrix. Source one genuine, non-flashloan Sui incident with case-specific evidence from an engineer/maintainer or public issue. Do not continue mining the current eight-digest flashloan sample. If no legitimate case can be independently supported, stop at the human gate and request an explicit product/submission decision rather than inventing one.
 
 Competition deadline: 2026-11-10 17:00 UTC.

@@ -150,3 +150,8 @@ Source of truth: PRODUCT.md revision 1, immutable original eight P0 groups; dead
 | Production baseline | VERIFIED (LIVE STATUS) | Production deployment dpl_HrWrFZ2XbQwJCHQyFpq3G83Z4bHa on master 94194282650a217c67adcecf0df559abdbcf713b; /api/status reports Tatum, Walrus and reviewer writes configured, publicDemoMode true | Draft PR code is not yet deployed to Production. |
 
 No new Walrus resolution memory was written in this checkpoint. Do not infer a successful reviewer write from CI, a Preview build, a Tatum read or the existing simulation runbook.
+
+
+## 2026-11-07 — Candidate-pool quality audit
+
+A bounded inspection of all eight current InsufficientCoinBalance candidate PTBs (evidence/insufficient-coin-balance-sample-audit-2026-11-07.md) found that all eight are DeFi flashloan/DEX swap strategies clustered at checkpoint 341377758. This is not a representative general Sui developer-incident sample. Do not use these eight as external user validation or continue route mining. The next general case must come from a distinct real developer incident with case-specific proof and a human reviewer.

@@ -37,3 +37,8 @@ Rule: one complete, honest user journey; supporting spikes do not substitute for
 ## Exit criteria
 
 Phase 13 passes only when all eight P0s have acceptance evidence and one complete general Casewake user journey reaches a completed Walrus receipt and exact-blob recurrence on a different compatible real failure, with a human reviewer explicitly approving the case. Until then the phase remains IN PROGRESS.
+
+
+## Case-source quality gate
+
+The first general human-reviewed case must not be selected solely because it shares the InsufficientCoinBalance substring. The current eight-digest candidate pool is clustered at checkpoint 341377758 and consists entirely of DeFi flashloan/swap PTBs. Do not use it as representative validation of the broad Sui engineering problem. Source a genuinely different developer incident and require a case-specific diagnosis plus independent proof before any human approval or Walrus write.

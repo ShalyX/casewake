@@ -53,3 +53,8 @@ Requires operator decision: only if no credible case-specific proof can be obtai
 Recommended next action: Phase 13 acceptance matrix; do not resume DeepBook route economics by default.
 
 Environment: ShalyX/casewake, branch fix/general-verified-resolution, commit 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; GitHub Actions run 42335361421 PASS; Vercel Preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF READY. Preview secrets are absent; no Walrus write was performed.
+
+
+## Evidence-source quality correction — 2026-11-07
+
+A bounded command-level review of all eight InsufficientCoinBalance candidates in the current evidence pool found that every candidate is a DeFi flashloan/DEX strategy PTB (DeepBook, Turbos/spot DEX, or AFSUI/USDC/USDY flash swaps), clustered at checkpoint 341377758. This sample is useful for testing route-specific failure handling, but it is not representative evidence of general Sui developer incidents or of the broader Casewake user problem. Do not keep mining this pool for a generic case. A valid next case must come from a different, genuine developer incident with case-specific evidence supplied by an engineer/maintainer or a documented public issue.

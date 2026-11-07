@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 15,
+  "revision": 16,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "BUILD_VERTICAL_SLICE",
   "active_specialist": "Engineering + Product Critic",
@@ -90,7 +90,8 @@
     "PR1_LATEST_CI_2026_11_07": "PASS: GitHub Actions run 42335361421 at 5da03e89de0705deb3e51f2ee8c2e9605ea16f90; tests, ESLint and Next production build all passed.",
     "PR1_PREVIEW_2026_11_07": "READY: Vercel preview dpl_89ZRTrWrJ3UzmVAqQa4gaRh2LJHF, https://casewake-1840fh0xz-shalyxs-projects.vercel.app, commit 5da03e89de0705deb3e51f2ee8c2e9605ea16f90. Preview has no Tatum/Walrus credentials; no live reviewer write tested.",
     "PRODUCTION_BASELINE_2026_11_07": "Current Production remains master commit 94194282650a217c67adcecf0df559abdbcf713b. /api/status confirms Tatum, Walrus and reviewer writes configured; publicDemoMode true. Draft PR changes are not deployed to Production.",
-    "DEEBOOK_SCOPE_2026_11_07": "The original three-gate DeepBook repayment acceptance remains strictly blocked as a separate evidence case. It is not the product workflow and is not a prerequisite for building or validating the general Casewake incident-memory flow. No bypass or prevention-only resolution is authorized."
+    "DEEBOOK_SCOPE_2026_11_07": "The original three-gate DeepBook repayment acceptance remains strictly blocked as a separate evidence case. It is not the product workflow and is not a prerequisite for building or validating the general Casewake incident-memory flow. No bypass or prevention-only resolution is authorized.",
+    "CANDIDATE_POOL_BIAS_2026_11_07": "BOUNDED AUDIT: all eight current InsufficientCoinBalance candidate PTBs were inspected at command level; all are DeFi flashloan/swap strategies clustered at checkpoint 341377758. This is not a representative sample of general Sui developer incidents and will not be used to validate the broad product thesis."
   },
   "blockers": [
     "Human-reviewed case write and exact-Walrus-blob recurrence remain unproven. No resolution memory has been written; require genuinely case-specific evidence and explicit human approval.",
@@ -100,8 +101,9 @@
     "Art direction, reference board, visual-asset strategy, motion storyboard, DESIGN.md and current desktop/mobile visual QA are not complete.",
     "Re-run the installed public-project-launch-hygiene skill on the release candidate; complete tracked-history secret scan and public release checks.",
     "Final 2–3 minute MP4, full-video QA, external blog publication if required, four-lens judge simulation and observed submission receipt remain missing.",
-    "PR #1 remains a draft and unmerged. Its Preview has no Tatum/Walrus secrets; do not copy Production secrets into Preview by default."
+    "PR #1 remains a draft and unmerged. Its Preview has no Tatum/Walrus secrets; do not copy Production secrets into Preview by default.",
+    "The current eight-digest InsufficientCoinBalance candidate pool is flashloan/DEX-heavy and not representative of general Sui developer incidents. Source a different, genuine incident with case-specific evidence from a real engineer or maintainer; do not continue mining this sample."
   ],
-  "next_action": "Phase 13 BUILD_VERTICAL_SLICE: complete the general Casewake user journey and all eight locked P0 acceptance tests without making the DeepBook route a product gate. Use only a genuinely case-specific proof; require explicit human approval before any Walrus resolution write. Finish success/unknown outcome tests and workspace state matrix. Keep PR #1 in Preview until live acceptance is proven.",
+  "next_action": "Continue Phase 13 with the general Casewake user workflow and the eight locked P0 acceptance tests. The current eight-digest failure sample is unsuitable for a general incident case; obtain one genuine, non-flashloan Sui incident with case-specific proof from an engineer/maintainer or a public issue. Do not resume DeepBook/DEX route economics. No Walrus resolution write before explicit human approval.",
   "updated_at": "2026-11-07"
 }
