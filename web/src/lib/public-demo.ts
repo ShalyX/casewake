@@ -6,6 +6,16 @@ import { timingSafeEqual } from "node:crypto";
  */
 export const PUBLIC_DEMO_TRANSACTIONS = [
   {
+    digest: "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+    label: "Reviewed cancellation case",
+    detail: "Real duplicate cancellation · ShalyX-reviewed integration resolution",
+  },
+  {
+    digest: "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV",
+    label: "Recall reviewed resolution",
+    detail: "Distinct real failure · exact reviewed Walrus blob",
+  },
+  {
     digest: "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6",
     label: "Recovered precedent",
     detail: "InsufficientCoinBalance · matching simulation-tested runbook",

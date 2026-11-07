@@ -28,6 +28,7 @@ const LEGACY_CONTROL_EXAMPLES = [
   {digest:"XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue",label:"Related failure"},
   {digest:"Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp",label:"Mismatch control"},
 ] as const;
+const REVIEWED_RECURRENCE = "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV";
 function shortDigest(value: string) { return value.length > 19 ? value.slice(0, 12) + "…" + value.slice(-7) : value; }
 
 export default function Workspace() {
@@ -227,7 +228,7 @@ export default function Workspace() {
         </div>
 
         <div className="panel case-progress" role="status" style={{marginBottom:"20px"}}>
-          <div className="panel-kicker"><span>CASE MEMORY / PROOF STATUS</span><a href="/api/acceptance" target="_blank" rel="noreferrer">Inspect acceptance ledger ↗</a></div>
+          <div className="panel-kicker"><span>CASE MEMORY / PROOF STATUS</span>{eligible[0] ? <a href={eligible[0].record.evidenceUrl} target="_blank" rel="noreferrer">Inspect recalled case evidence ↗</a> : strictDeepbook ? <a href="/api/acceptance" target="_blank" rel="noreferrer">Inspect route acceptance ledger ↗</a> : null}</div>
           <div className="case-progress-grid">
             <div><strong>01 / CHAIN EVIDENCE</strong><span>{tx ? `Tatum confirmed · ${tx.outcome}` : "Awaiting an authentic Sui transaction"}</span></div>
             <div><strong>02 / HUMAN REVIEW</strong><span>{proof && !observationOnly ? "Reviewer-approved case stored" : proof && observationOnly ? "Observation stored · no resolution claim" : eligible.length ? "Compatible reviewed precedent available" : "No human-reviewed resolution recorded"}</span></div>
@@ -245,6 +246,10 @@ export default function Workspace() {
                 <label htmlFor="digest">SUI TRANSACTION DIGEST</label>
                 <div className="input-inline"><input id="digest" value={digest} onChange={(e) => setDigest(e.target.value)} placeholder="Paste a real Sui transaction digest" autoComplete="off" spellCheck={false} /><button type="submit" disabled={busy || !status?.tatumConfigured}>{phase === "reading" ? "Reading…" : "Inspect"} <span>↗</span></button></div>
               </form>
+              <div className="demo-presets">
+                <p>A real cancellation incident, reviewed by ShalyX. Inspect a distinct failure to retrieve the recorded integration resolution and its original evidence.</p>
+                <button type="button" className="secondary-button" disabled={busy || !status?.tatumConfigured} onClick={() => {setDigest(REVIEWED_RECURRENCE); void inspect(REVIEWED_RECURRENCE);}}>Recall reviewed resolution ↗</button>
+              </div>
               {status?.reviewerWritesEnabled && <label className="reviewer-access">
                 <span>PRIVATE REVIEWER ACCESS</span>
                 <input type="password" value={reviewerKey} onChange={(e) => setReviewerKey(e.target.value)} placeholder="Enter the private workspace key" autoComplete="off" />
