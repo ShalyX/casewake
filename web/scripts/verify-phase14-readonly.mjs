@@ -7,7 +7,7 @@ const receipt=JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname,'../..
 const key=process.env.WORKSPACE_WRITE_KEY;
 if(!key)throw new Error('Reviewer environment is required for read-only acceptance.');
 const proof={checkedAt:new Date().toISOString(),base,memoryWrites:0,checks:{}};
-const out=path.resolve(import.meta.dirname,'../../evidence/phase14/read-only-acceptance.json');
+const out=process.env.CASEWAKE_ACCEPTANCE_OUTPUT||path.resolve(import.meta.dirname,'../../evidence/phase14/read-only-acceptance.json');
 async function call(route,body,authorized=true){
  const response=await fetch(base+route,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json',...(authorized?{'x-workspace-key':key}:{})},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(110000)});
  return {status:response.status,data:await response.json()};

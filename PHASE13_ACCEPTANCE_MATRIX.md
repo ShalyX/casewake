@@ -24,6 +24,6 @@ Updated2026-11-07. Core vertical slice PASS; product review PASS after correctio
 - Method: reviewed-evidence / integration-test
 - Evidence: evidence/real-case/, evidence/production-reviewed-case/, evidence/phase14/
 
-Actual failed/success/unknown controls are read-only. The26 browser checks intercept responses with clearly labelled fixture content; three fixture submissions never reached Walrus. No new Mainnet write was made to exercise delay/failure paths.
+Actual failed/success/unknown controls are read-only. The 26 browser checks intercept responses with clearly labelled fixture content; three fixture submissions never reached Walrus. No new Mainnet write was made to exercise delay/failure paths.
 
 External validation, final brand/design, hygiene, demo, judge simulation and submission remain open. This case does not prove representative non-DeFi utility or a final name.

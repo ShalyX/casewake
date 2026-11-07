@@ -1,6 +1,6 @@
 # Phase 14 product review — 2026-11-07
 
-Verdict: **PASS after workflow corrections**, within the approved one-operator Incident Memory scope. Product Lock revision1 is unchanged. This supersedes the earlier MODIFY review and its missing-case blockers. Public release details: evidence/phase14/release-verification.md.
+Verdict: **PASS after workflow corrections**, within the approved one-operator Incident Memory scope. Product Lock revision1 is unchanged. This supersedes the earlier MODIFY review and its missing-case blockers. Public release: commit 76e7d736446577692a29910a0d260e6c90bae562 is live at https://casewake.vercel.app; production receipt/exact-blob and guest desktop/mobile checks pass. Details: evidence/phase14/release-verification.md.
 
 ## Approved purpose and adversarial assessment
 

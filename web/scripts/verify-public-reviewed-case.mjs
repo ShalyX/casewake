@@ -8,7 +8,7 @@ const sourceDigest='8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA';
 const secondDigest='HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV';
 const mismatchDigest='Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp';
 const expectedBlobId='KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY';
-const dir=path.resolve(import.meta.dirname,'../../evidence/production-reviewed-case');
+const dir=process.env.CASEWAKE_PUBLIC_EVIDENCE_DIR||path.resolve(import.meta.dirname,'../../evidence/production-reviewed-case');
 fs.mkdirSync(dir,{recursive:true});
 const result={checkedAt:new Date().toISOString(),base,readOnly:true,expectedBlobId,checks:{},memoryWrites:0};
 function save(){fs.writeFileSync(path.join(dir,'acceptance.json'),JSON.stringify(result,null,2)+'\n');}

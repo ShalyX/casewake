@@ -20,7 +20,7 @@
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
-  "evidence_status": "PHASE14_PASS: real reviewed case/exact-blob loop plus live read-only job recovery;26 controlled browser states; no new writes. Final public release details in evidence/phase14/release-verification.md.",
+  "evidence_status": "PHASE14_PASS_PUBLIC: all8 P0 groups reviewed;26 controlled browser checks; real production receipt recovery and exact reviewed-blob recall pass; inventory13, new writes0. See evidence/phase14/release-verification.md.",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -75,5 +75,12 @@
   "next_action": "Phase14 complete. Resolve final naming, then Phase15 brand acceptance. Do not restart case sourcing or write another memory to repeat proof.",
   "updated_at": "2026-11-07",
   "product_review_complete": true,
-  "p0_groups_reviewed": 8
+  "p0_groups_reviewed": 8,
+  "production_release": {
+    "app_commit": "76e7d736446577692a29910a0d260e6c90bae562",
+    "deployment_id": "dpl_6UiERmNMLMS8gb8qR9QrQpiCnobu",
+    "url": "https://casewake.vercel.app",
+    "status": "READY_AND_READ_ONLY_ACCEPTED",
+    "evidence": "evidence/phase14/release-verification.md"
+  }
 }

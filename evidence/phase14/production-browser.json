@@ -1,0 +1,1 @@
+{"evidenceType":"ACTUAL PUBLIC BROWSER; fresh session without fixture interception","url":"https://casewake.vercel.app","checks":{"exactBlob":true,"reviewer":true,"positiveReasons":true,"completedCount":true,"noCredentialsEntered":true,"mobileNoOverflow":true,"fieldNotesCurrent":true},"memoryWrites":0,"passed":true}
