@@ -6,6 +6,7 @@ on:
       - "web/scripts/audit-original-route.mjs"
       - "web/scripts/quote-original-route.mjs"
       - "web/scripts/quote-upstream-alternatives.mjs"
+      - "web/scripts/quote-full-route-alternatives.mjs"
       - "evidence/context-BbRZD7YfTiiN.json"
       - ".github/workflows/original-route-audit.yml"
   workflow_dispatch:
@@ -33,6 +34,8 @@ jobs:
         run: node scripts/quote-original-route.mjs
       - name: Search better SUI to USDSUI upstream paths
         run: node scripts/quote-upstream-alternatives.mjs
+      - name: Quote complete three-hop alternatives without pool reuse
+        run: node scripts/quote-full-route-alternatives.mjs
       - name: Preserve machine-readable audit and live quotes
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -41,5 +44,6 @@ jobs:
             evidence/original-route-ptb-audit.json
             evidence/original-route-live-quotes.json
             evidence/original-upstream-route-candidates.json
+            evidence/full-three-hop-alternatives.json
           if-no-files-found: error
           retention-days: 14
