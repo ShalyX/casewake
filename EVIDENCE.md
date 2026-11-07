@@ -171,3 +171,19 @@ A bounded inspection of all eight current InsufficientCoinBalance candidate PTBs
 The repeatable command is `node scripts/verify-phase13-readonly.mjs` from `web/` with the local production server running. It performs real Tatum reads and reviewer rejection checks only. It never writes to Walrus, signs or submits a transaction.
 
 **No human-verified resolution memory was written.** The first general case still requires a genuinely different non-flashloan Sui developer incident, case-specific diagnosis/proof, a Tatum-confirmed later successful transaction, and an authorized human's explicit causal approval. The eight-digest DeFi/flashloan sample is not accepted as representative validation.
+
+## 2026-11-07 — Phase 13 live read-only acceptance (rebuilt endpoint)
+
+- PASS: real failed Tatum lookup with timestamp/checkpoint.
+- PASS: real successful Tatum lookup with timestamp/checkpoint.
+- PASS: valid but unavailable historical digest maps to `unknown`, not `failed`.
+- PASS: unknown outcome recall performs no Walrus read (`walrusHitsExamined=0`).
+- PASS: anonymous write returns 403; authenticated reviewer without causal approval returns 400 before Walrus.
+- PASS: 7 operator test scripts, 17 TAP tests plus 4 assertion-based suites; ESLint; production build.
+- No Walrus resolution write, wallet signing or transaction submission.
+- Machine-readable artifact: `evidence/phase13-readonly-acceptance-2026-11-07.json`.
+- Phase 13 remains open: no representative non-flashloan human-reviewed case, completed resolution blob receipt or exact-blob recurrence.
+
+### Product alignment finding
+
+The Product Lock says a human reviewer records a *specific confirmation method and proof link*. A same-sender successful transaction is one valid method, not the only method. The implementation will add a second fail-closed proof type for a case-specific, independently inspectable engineering artifact (test/reproduction/commit/PR/maintainer resolution), snapshot-fingerprinted at review time. Both methods require explicit human causal attestation and exact-blob recall for a distinct compatible failure. Generic docs, AI-only claims and prevention-only runbooks remain ineligible.
