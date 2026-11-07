@@ -13,14 +13,14 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 5 | HUMAN_IDEA_GATE | PASS | User selected Incident Memory Nov3. |
 | 6 | VALIDATION | PARTIAL | External engineer utility and organizer track fit unconfirmed. |
 | 7 | PRODUCT_LOCK | PASS | PRODUCT.md revision1 and original eight P0s. |
-| 8 | NAME_LOCK | REOPENED | User says Casewake not final; older lock claims superseded. |
+| 8 | NAME_LOCK | PREFERENCE PENDING |40 candidates/current collision screen; recommend Casewake, alternatives Triedwell/Aftercase. NAMING_REVIEW_2026-11-07.md. |
 | 9 | DEMO_ARCHITECTURE | PASS — PLAN | Existing sequence; final capture should foreground approved reviewed case. |
 | 10 | EVIDENCE_PLAN | PARTIAL | Core proof reconciled; final complete claim/owner/artifact register remains. |
 | 11 | DEPENDENCY_ATTACK | PARTIAL | Technical dependencies proven; utility/track assumptions open. |
 | 12 | TECHNICAL_DERISK | PASS — DISPOSITION | Mainnet integrations proven; historical flashloan experiment separate. |
 | 13 | BUILD_VERTICAL_SLICE | PASS | Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified. |
 | 14 | PRODUCT_REVIEW | PASS | Purpose intact, all eight P0 groups reviewed and workflow fixes verified. |
-| 15 | BRAND_KIT | PARTIAL | Draft identity; provisional name and final assets/QA remain. |
+| 15 | BRAND_KIT | PARTIAL | Three monochrome studies rendered/rejected as final; three palettes compared. Name choice and ownable canonical assets/QA remain. |
 | 16 | ART_DIRECTION | DOCUMENTED | Trace Instrument direction; formal acceptance remains. |
 | 17 | REFERENCE_BOARD | DOCUMENTED | Borrow/avoid decisions; formal acceptance remains. |
 | 18 | VISUAL_ASSET_STRATEGY | DOCUMENTED | Asset plan; final accepted assets remain. |

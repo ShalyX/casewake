@@ -52,7 +52,7 @@ Chosen: Trace instrument / controlled fracture. Preserve the existing app hierar
 - Repo name planned: `casewake`; canonical URL to be recorded after deployment verification.
 - Legal check: exact-name web search performed 2026-11-04, partial; no trademark guarantee. For a real business, perform relevant jurisdiction trademark searches before investing in a protected brand.
 
-## Hackathon Operator NAME_LOCK adversarial completion — November 6, 2026
+## Historical naming audit — November 6, superseded by provisional-name instruction
 
 **Lock retained: CASEWAKE.** The existing accepted product identity and Casewake wordmark remain unchanged; this is an audit of the decision, not a new naming vote.
 
@@ -68,3 +68,11 @@ Pronunciation/memorability: **Casewake** is two short common syllables; conveys 
 Collision check (public search, November 6): searches for exact "Casewake" software/company/mark found no obvious competing incident-memory software in the returned results. **CASEWAVE**, however, is a distinct but similar SaaS trademark application in insurance CRM (June 2026), so avoid confusingly wave-like typography/pronunciation; Casewake spells and sounds WAKE. Source: https://uspto.report/TM/99913410 . This is **not legal trademark clearance**, domain availability confirmation, or ownership of social handles. For the hackathon, name lock is acceptable; defer full trademark examination to commercial launch.
 
 NAME_LOCK exit evidence: multiple naming territories, 18 candidates, genericity/collision attack, rationale and a consistent in-product brand. **PASS as hackathon naming**, without asserting legal rights.
+
+## Current naming and brand preparation — 2026-11-07
+
+See NAMING_REVIEW_2026-11-07.md: 40 candidates, current collision screening and three-finalist comparison. Recommend retaining Casewake; user preference pending. Triedwell and Aftercase are the alternative directions. No final name lock inferred.
+
+Three vector mark studies were rendered and rejected as final: Repeat cut reads as chain/copy icon; Carry slip as generic document; Witness span as code brackets. Drafts remain process evidence. No Phase 15 PASS or visual collision clearance.
+
+Three palette territories compared; recommend preserving current Trace Instrument for functional roles and continuity. Final mark, canonical favicon/header/avatar/OG family and actual font delivery remain. Public product unchanged.

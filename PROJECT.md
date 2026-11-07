@@ -1,12 +1,22 @@
-# Current operator checkpoint — Phase14, 2026-11-07
+# Current checkpoint — naming preference pending, 2026-11-07
 
-Phase13 and Phase14 PASS within approved Incident Memory scope; all eight original P0 groups reviewed. See PRODUCT_REVIEW_2026-11-07.md and OPERATOR_PHASE_AUDIT_2026-11-07.md. Purpose unchanged: Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures.
+Phase 14 remains passed. Naming work resumed: 40 candidates, current collision screen, shortlist Casewake/Triedwell/Aftercase; recommend Casewake. User preference requested asynchronously because final name was explicitly provisional. See NAMING_REVIEW_2026-11-07.md.
 
-One ShalyX-approved independent cancellation integration resolution is stored and recalled from its exact Mainnet blob on a distinct failure. Inventory13 includes ten observations, one smoke record, one simulation runbook and one reviewed resolution. No new Phase14 memory writes.
+Three monochrome mark studies and three palette territories rendered. All three marks were rejected as final for genericity; no Phase 15 PASS. Existing public app and approved product unchanged. Next: name preference -> refined canonical assets -> Phase 15 acceptance.
+
+Earlier checkpoint below retained as history.
+
+---
+
+# Current operator checkpoint — Phase 14, 2026-11-07
+
+Phase13 and Phase 14 PASS within approved Incident Memory scope; all eight original P0 groups reviewed. See PRODUCT_REVIEW_2026-11-07.md and OPERATOR_PHASE_AUDIT_2026-11-07.md. Purpose unchanged: Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures.
+
+One ShalyX-approved independent cancellation integration resolution is stored and recalled from its exact Mainnet blob on a distinct failure. Inventory13 includes ten observations, one smoke record, one simulation runbook and one reviewed resolution. No new Phase 14 memory writes.
 
 Workflow fixes cover stale results, durable session receipts, pending-job recovery, bounded requests, honest recall/unknown states, matching rationale, completed inventory and secret-pattern rejection. Twenty-six controlled browser checks are distinct from live API proof. Public release/check results: evidence/phase14/release-verification.md.
 
-Casewake is provisional; NAME_LOCK reopened. Next: final name then Phase15 brand acceptance. External utility/track fit and final design/hygiene/video/judge/submission gates remain. No FULL_PRODUCT_VERIFIED, JUDGE_READY or submission-ready claim.
+Casewake is provisional; NAME_LOCK reopened. Next: final name then Phase 15 brand acceptance. External utility/track fit and final design/hygiene/video/judge/submission gates remain. No FULL_PRODUCT_VERIFIED, JUDGE_READY or submission-ready claim.
 
 The following is historical chronology. Earlier current/blocked/zero-memory/production-baseline statements are superseded by this checkpoint and the current audit.
 
