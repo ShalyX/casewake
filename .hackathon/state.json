@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 34,
+  "revision": 35,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "DESIGN_LOCK",
-  "active_specialist": "Art Director - composition and state contract lock",
+  "phase": "DESIGN_ENGINEERING",
+  "active_specialist": "Design Engineering - locked Rouse implementation",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -16,8 +16,8 @@
   "references_synthesized": true,
   "visual_asset_strategy_complete": true,
   "motion_storyboard_complete": true,
-  "design_locked": false,
-  "design_lock_revision": null,
+  "design_locked": true,
+  "design_lock_revision": 1,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
   "evidence_status": "PHASE14_PASS_PUBLIC: all8 P0 groups reviewed;26 controlled browser checks; real production receipt recovery and exact reviewed-blob recall pass; inventory13, new writes0. See evidence/phase14/release-verification.md.",
@@ -47,8 +47,8 @@
     "REFERENCE_BOARD": "PASS: four official functional examples, two internal targets and one anti-reference; 33 browser assertions; REFERENCE_BOARD_ROUSE_2026-11-08.md.",
     "VISUAL_ASSET_STRATEGY": "PASS - STRATEGY: 12 groups with purpose/source/priority/fallback; 102 inventory +18 browser checks. Final captures/font optimization follow implementation.",
     "MOTION_STORYBOARD": "PASS - STORYBOARD: 14 event-bound transitions, six paired targets, 64 contract +36 responsive sheet checks. Actual application motion remains NOT VERIFIED.",
-    "DESIGN_LOCK": "NOT DONE: Final composition/state scoring/signoff missing.",
-    "DESIGN_ENGINEERING": "PARTIAL: Responsive working product; final locked-spec acceptance remains.",
+    "DESIGN_LOCK": "PASS - REVISION1: contract/spec snapshot/hashes; all8P0 groups mapped; nine supplemental targets pass156 viewport checks. Actual application QA remains.",
+    "DESIGN_ENGINEERING": "ACTIVE: implement locked Rouse design in existing Next.js app while preserving all8P0 handlers; no final implementation acceptance yet.",
     "VISUAL_QA": "PARTIAL: Functional state matrix complete; final art-direction/motion acceptance remains.",
     "BUILD_LOOP": "PARTIAL: Core journey works; final downstream exit audit remains.",
     "PROOF_ENGINE": "PARTIAL: Core live proof complete; final registry/judge surfaces remain.",
@@ -66,12 +66,12 @@
   },
   "blockers": [
     "External Sui-engineer utility validation and organizer track fit unconfirmed.",
-    "Design lock, asset delivery/font optimization and application design acceptance remain.",
+    "Asset delivery/font optimization, actual Rouse implementation and application design acceptance remain.",
     "Full hygiene skill/tracked-history scan, final MP4/videoQA/judge simulation/submission audit and receipt remain.",
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase20 design lock: reconcile page/state compositions, asset and motion contracts, all8 P0 coverage and implementation acceptance. Then actual Next.js Design Engineering. No new memory write for design.",
+  "next_action": "Phase21: implement revision1 Working Precedent in actual Next.js routes. Optimize font delivery, preserve API/review/storage/recall behavior; then compare actual app and record Phase22 static/motion acceptance. No new memory write for design.",
   "updated_at": "2026-11-08",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -138,5 +138,18 @@
       "evidence/phase19/browser-qa.json"
     ],
     "status": "STATIC_STORYBOARD_ACCEPTED; PRODUCTION_MOTION_NOT_VERIFIED"
+  },
+  "design_lock": {
+    "revision": 1,
+    "spec": "DESIGN.md",
+    "contract": "design/phase20/CONTRACT.md",
+    "snapshot": "design/phase20/DESIGN.locked.md",
+    "manifest": "design/phase20/lock.json",
+    "review": "DESIGN_LOCK_REVIEW_ROUSE_2026-11-08.md",
+    "qa": [
+      "evidence/phase20/browser-qa.json",
+      "evidence/phase20/lock-qa.json"
+    ],
+    "status": "LOCKED_FOR_IMPLEMENTATION; PRODUCTION_VISUAL_QA_PENDING"
   }
 }

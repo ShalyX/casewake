@@ -1,10 +1,10 @@
-# Rouse — page art direction
+# Rouse — locked design contract, revision 1
 
 Phase 16 / 2026-11-08. Product Lock revision 1 and the user-locked Rouse name control. Phase 15 identity: retained-counter r, outlined wordmark, Trace Instrument palette and type roles.
 
 **Selected direction: Working Precedent.** Current chain evidence and prior reviewed judgment occupy one working canvas. The resolution is useful because its origin, compatibility and limits remain inspectable.
 
-This is a composition contract before application-wide implementation. It does not set DESIGN_LOCK, FULL_PRODUCT_VERIFIED or JUDGE_READY, and does not deploy a renamed app.
+Design Lock revision1 is accepted on 2026-11-08 for implementation. Authority and complete acceptance contract: design/phase20/CONTRACT.md; frozen snapshot/dependency hashes: design/phase20/DESIGN.locked.md and lock.json. All eight original P0 groups remain mandatory. Dated phase notes below record their historical scope; later accepted sections and the Phase20 contract supersede earlier pending notes. Actual application visual/motion QA, FULL_PRODUCT_VERIFIED, JUDGE_READY and deployment remain separate.
 
 ## A. Product reality
 
@@ -60,7 +60,7 @@ All preserve the locked brand; differences are narrative, hierarchy and composit
 
 Rendered territory study: design/phase16/index.html; evidence/phase16/territories.png.
 
-### Initial reference stance
+### Initial reference stance — historical Phase 16 research
 
 - Rouse brand kit: exact identity target; preserve assets, palette roles and source font files.
 - Current public Casewake app: functional example plus hierarchy anti-reference; preserve behavior, replace the stale/tilted example composition.
@@ -68,7 +68,7 @@ Rendered territory study: design/phase16/index.html; evidence/phase16/territorie
 - [Linear](https://linear.app/): limited navigation/hierarchy mood reference. The captured render showed its header while the body was incomplete; do not claim a completed hero comparison or copy its agent narrative.
 - Sentry issue-detail documentation was attempted, but the web tool returned unsupported Markdown. It is an unverified reference lead, not accepted visual evidence.
 
-Formal Phase 17 reference-board synthesis remains open. Research screenshots are not reused as product artwork.
+Phase17 synthesis subsequently passed; see section G and design/phase17. Research screenshots are not product artwork.
 
 ## C. Composition contract
 
@@ -124,7 +124,7 @@ Keep body text readable, source/evidence links adjacent, long identifiers wrappe
 | State | Visual / action contract |
 |---|---|
 | Empty | Digest input plus sample entry; no fabricated rows |
-| Unconfigured | Setup guidance and disabled lookup; no secret values in copy |
+| Unconfigured | Tatum access missing: lookup unavailable. Walrus missing: permitted chain lookup remains available. Reviewer access missing: protected writes unavailable, permitted reads preserved. No secrets in guidance. |
 | Loading | Name the read in progress; clear earlier suggestions; bounded request behavior retained |
 | Lookup error | Gateway/read failure, not failed execution; retry lookup |
 | Successful execution | Show success; do not recall a failure procedure or infer causal repair |
@@ -138,7 +138,7 @@ Keep body text readable, source/evidence links adjacent, long identifiers wrappe
 | Recurrence mismatch | Explain mismatch; preserve valid storage receipt |
 | Lower evidence tiers | Separate observation/runbook labels; never visually mark as human-reviewed |
 
-Prototype renders 12 states at desktop/mobile; remaining substate behavior inherits the Phase 14 verified workflow and is mandatory for implementation QA.
+Phase16 renders12 primary states; Phase20 supplies nine supplemental configuration/storage/tier/inventory/secondary-page targets. Actual behavior inherits the existing handlers and remains mandatory for implementation QA.
 
 | Original P0 group | Composition preserves |
 |---|---|
@@ -202,3 +202,14 @@ Authority: MOTION_STORYBOARD_ROUSE_2026-11-08.md and design/phase19/motion.json;
 Fourteen transition contracts bind to actual transaction/recall/review/storage/recovery handlers. Distinguish unknown, success, no-match, unavailable, missing configuration, response-unconfirmed, accepted-pending, rejected/failed write and completed receipt. Observations/runbooks never become reviewed resolutions. Background updates preserve focus; one persistent polite region announces changes. Only user-directed editing/validation changes focus deliberately. Keep completed receipt separate across new lookups and reload. Animation callbacks/timers cannot initiate writes, claim completion or choose a sample digest.
 
 Reduced motion substitutes immediate content/status changes and removes all tween/loop/smooth-scroll including pseudo-elements. No new animation library. Actual performance, normal/reduced-motion sequences and focus require Phase22 recording. Storyboard scope passes 64 contract and36 responsive-sheet checks; actual production motion remains NOT VERIFIED. Review: evidence/phase19/REVIEW.md. Next: Phase20 design lock; no extensive Design Engineering until that gate closes.
+
+
+## J. Phase 20 design lock — revision 1, accepted 2026-11-08
+
+The implementation authority is design/phase20/CONTRACT.md. It closes route/layout, configuration, storage-recovery, evidence-tier and inventory ambiguities while preserving Product Lock revision1 and all8P0 groups. Nine supplementary static targets extend the accepted Phase16 main compositions; they cannot submit, receive keys or call services. Review: DESIGN_LOCK_REVIEW_ROUSE_2026-11-08.md.
+
+Locked: Working Precedent hierarchy; canonical identity/type/color; separate real routes; desktop43:57 paired evidence/mobile decision order; whole exact-blob strip in the1440×900 fold; semantic review/receipt/error/proof; configuration distinctions; source-bound evidence; 12-group asset strategy; 14-transition motion contract; focus/reduced-motion rules; implementation order and explicit acceptance vetoes. Tatum missing, Walrus missing and reviewer access missing are different states. Unconfirmed/accepted/rejected/failed/completed writes stay distinct. Historical proof/field-note URLs and evidence qualifiers stay stable.
+
+Nine supplemental targets pass156 desktop/tablet/mobile assertions. Existing target-level assessment21/24 is retained, not promoted to an official score or actual app QA. Dependency hashes and an identical spec snapshot make revision1 verifiable with scripts/verify-design-lock.py. Any deliberate contract revision must record its reason, new revision and affected QA. Routine fixes within the contract need no new cosmetic approval.
+
+Phase21 Design Engineering may now proceed in the existing Next.js application, preserving actual handlers and protected API boundaries. Font optimization, current Rouse release captures and actual static/motion QA remain implementation work. No new memory write or renamed deployment occurred during the lock.

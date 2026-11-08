@@ -1,3 +1,11 @@
+# Current checkpoint — Phase 20 design locked, revision 1, 2026-11-08
+
+Working Precedent is now implementation-ready. The locked contract maps all8 original P0s, routes, layout/state semantics, assets, motion, focus/accessibility and acceptance. Nine supplementary targets close configuration/storage/tier/inventory/secondary-page gaps;156 responsive checks pass. DESIGN.md matches its frozen snapshot and hashed inputs. No application source, production deployment or stored memory changed.
+
+Active phase:21 DESIGN_ENGINEERING. Implement the actual Next.js product, optimize fonts and verify real handlers/recall before Phase22 visual/motion QA. Full product, judge readiness, freeze and submission remain unclaimed. See DESIGN_LOCK_REVIEW_ROUSE_2026-11-08.md and design/phase20/CONTRACT.md. Earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Phase 19 storyboard complete, 2026-11-08
 
 Motion follows actual evidence/state changes, with no timed success or automatic repair implication. Fourteen transition contracts and six frame pairs cover lookup, recall, human review, storage acceptance/completion, ambiguous-response recovery and distinct recurrence. Sixty-four contract and36 desktop/tablet/mobile sheet checks pass. No new API calls/writes. Static storyboard acceptance is separate from actual application motion, which remains unverified.
