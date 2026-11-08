@@ -1,78 +1,63 @@
-# Casewake — evidence-backed Sui engineering memory
+# Rouse — resolution memory for Sui engineers
 
-Incident memory for Sui dApp builders: a real failed transaction is observed through Tatum, related past failures are recalled from Walrus Mainnet, and only human-confirmed resolutions can become recommended fixes.
+Keep an evidence-linked, human-reviewed resolution and recover it when a compatible Sui failure recurs. Rouse reads chain evidence through Tatum and retains reviewed procedures in Walrus Memory. The engineer decides whether to reuse them. Rouse does not sign transactions or execute repairs.
 
-**Casewake is a provisional name.** The underlying Incident Memory thesis was locked on 2026-11-03. Naming collision checks are preliminary, not trademark clearance. Deadline: November 10, 2026, 17:00 UTC.
+Rouse is the user-locked name. Historical Casewake names in stored records, URLs and evidence retain their original provenance.
 
-## First reviewed resolution loop — November 7, 2026
+## Use Rouse
 
-ShalyX explicitly approved the duplicate-cancellation integration case. Casewake recorded one human-reviewed engineering-artifact resolution to Walrus Mainnet and recalled the exact completed blob for a distinct genuine Tatum-confirmed failure. Self-match and unrelated-failure controls were rejected; the namespace now contains 13 memories, including this one reviewed resolution.
+1. Open the workspace and inspect your Sui Mainnet transaction digest. No reviewer key is needed. Failure, success and unknown outcomes are distinct; a gateway error is not an onchain failure.
+2. For a confirmed failure, compare recalled procedures, matching reasons, uncertainty, reviewer, source evidence and the exact Walrus blob.
+3. If you have error text instead, open **Reviewed cases** and search an error name, module or procedure. These results are related reading. Inspect your own transaction to check compatibility; a text match does not establish that your incident is resolved.
+4. To record a resolution, use **Reviewer access** with the operator-issued key. Choose a reviewed engineering artifact or a corroborated successful follow-up, explain the specific change, and approve both statements. Editing review details requires fresh approval.
+5. Accepted storage is pending. Keep the existing attempt and check its status; completion requires a real blob receipt. An uncertain response must not be resubmitted. The receipt stays attached to its source across later inspections and reloads when browser session storage is available. A reviewer can verify a distinct compatible recurrence without another write.
 
-Blob: `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`. Evidence and scope limits: [case review](evidence/real-case/REVIEW.md), [write receipt](evidence/real-case/reviewed-memory-receipt.json), [exact-blob recall](evidence/real-case/exact-blob-recall.json). The original operator's application deployment remains unknown; this is an independently validated integration reconciliation procedure, not an onchain contract repair.
+Public app: [casewake.vercel.app](https://casewake.vercel.app). Release status and source revision are recorded in [PROJECT.md](PROJECT.md); local acceptance is separate from public acceptance.
 
-The public production app now runs revision `35d28f3348b7a409c24daec38e4993aacd89f281`. [Open the reviewed recurrence](https://casewake.vercel.app/workspace?digest=HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV), or click “Recall reviewed resolution” in the workspace. Anonymous signed recall returned the exact existing blob; protected production verification returned `gate3=verified`; self/mismatch and unauthorized-write controls passed. No new memory was written during release verification. See [production acceptance](evidence/production-reviewed-case/acceptance.json).
+## Run locally
 
-## Historical verification snapshot — November 4, 2026
-- Next.js 16.4.4 installed with pnpm; `pnpm lint` and `pnpm build` last executed during QA; see `PROJECT.md` for latest verified result.
-- Real server-side Tatum Sui Mainnet gRPC `GetTransaction` works; 100 recent transactions inspected, 56 failed in that particular sample (NOT overall failure rate).
-- Ten **distinct, real onchain failure observations** were independently re-fetched from Tatum and stored by the application to Walrus Memory Mainnet. Receipts saved in `evidence/observation-write-receipts.json`.
-- MemWal listMemories confirmed 11 namespace records: the 10 observations plus one earlier connection smoke-test.
-- Three real additional failed digests matched previous stored error memories through `POST /api/recall`. See `evidence/live-recall-proof.json`.
-- Reviewer auth and verification gates tested: unauthorized 403, unverified reviewer submission 400.
-- **ZERO genuine human-verified fixes have been confirmed or written.** Onchain failure observations are not fixes.
+Use the `web` directory in your checkout. Copy `web/.env.example` to `web/.env.local` and supply your server credentials privately. Next.js loads this file; it must remain ignored by Git.
 
-## Launch locally
 ```powershell
-cd C:\Users\USER\Documents\Codex\2026-11-01\total-recall\web
+cd web
 pnpm install --frozen-lockfile
-pnpm build
-pnpm start --hostname 127.0.0.1 --port 4217
+pnpm build --webpack
+pnpm start --hostname 127.0.0.1 --port 4242
 ```
 
-Open http://127.0.0.1:4217 for landing and http://127.0.0.1:4217/workspace for the app.
+Open [landing](http://127.0.0.1:4242), [workspace](http://127.0.0.1:4242/workspace), or [reviewed cases](http://127.0.0.1:4242/cases). The webpack option is used by the verified Windows build. Use `pnpm dev` for development.
 
-To experience the genuine repeat-failure recall, use:
+| Variable | Purpose |
+|---|---|
+| `TATUM_API_KEY` | Server-side Sui Mainnet gRPC reads |
+| `MEMWAL_PRIVATE_KEY` | Private delegate key for the operator's Walrus Memory account |
+| `MEMWAL_ACCOUNT_ID` | Account matching that delegate |
+| `MEMWAL_SERVER_URL` | Mainnet relayer; template supplies the endpoint |
+| `MEMWAL_NAMESPACE` | Shared operator namespace; default `incident-memory-v1` |
+| `WORKSPACE_WRITE_KEY` | Random private reviewer token; absent means writes are disabled |
 
-http://127.0.0.1:4217/workspace?digest=5sc7kDbnaEASo8vBZnrM3j2ZauutQ96CXoNicM9E841U
+Inspection can work with Tatum alone. Recall/discovery needs the configured Walrus account; a new account does not inherit the operator's records. Configuration presence is not proof of connectivity. Missing configuration, unavailable reads and incomplete inventories are displayed explicitly. The library uses bounded retrieval and discloses incomplete coverage.
 
-This digest retrieves a previous observed onchain failure. The UI correctly says **resolution unverified**. It does not fake a fix.
+Sponsor credentials stay on the server. The reviewer token stays in page memory and is not saved with browser receipts. This is one operator-managed shared case space, not a multitenant account service. Recognized credential patterns are rejected before storing; this is not exhaustive data-loss prevention.
 
-## Server-only secrets
-`web/.env.local` holds `TATUM_API_KEY`, `MEMWAL_PRIVATE_KEY`, `MEMWAL_ACCOUNT_ID`, relayer URL, namespace and a local randomly generated `WORKSPACE_WRITE_KEY`. The file is Git-ignored; never commit it, print keys, or paste them in chat. `web/.env.example` contains placeholders only.
+## The reviewed example
 
-For public deployment, upgrade the single reviewer key to real role-based auth and add rate limits and audit logging; do not expose this prototype as a production multi-tenant system.
+ShalyX approved one independently tested duplicate-cancellation integration procedure. A prior authenticated cancellation establishes that the identical order was already cancelled; the procedure reconciles local state and stops duplicate retries. The original operator's code change/deployment is unknown. No onchain repair is claimed.
 
-## Product workflow
-1. Enter a genuine Sui Mainnet transaction digest; the server fetches its effects via authenticated Tatum gRPC.
-2. For a failed execution, Walrus semantic recall searches previous incident memories.
-3. The app filters by deterministic error fingerprint, matching original error detail and excludes same-digest matches.
-4. Previously observed failures are shown as **related onchain precedents, no confirmed fix**.
-5. An authorized human reviewer with actual case-specific evidence can submit a diagnosed and confirmed procedure. The Walrus SDK confirms a completed Mainnet blob ID before counting it. No such reviewer-confirmed case has been recorded.
-6. A later matching incident may show the reviewed procedure for human approval; the app does not automatically execute a fix.
+Source: `8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA`. Distinct recurrence: `HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV`. Reviewed Walrus blob: `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`.
 
-## Tests and evidence
-- `node --experimental-strip-types scripts/test-incidents.mjs` — 10 deterministic safety assertions using synthetic fixtures.
-- `pnpm lint` and `pnpm build` — project compile checks.
-- `python scripts/verify-live-recall.py` — 3 live Tatum→Walrus matched precedent cases plus negative same-digest control.
-- `python scripts/ingest-real-observations.py` — idempotent (against local receipts) import of the chosen ten real onchain failure observations. Do **not** run again unnecessarily: Mainnet writes cost quota and duplicates are possible if a write completed without a returned local receipt.
-- `evidence/failed-sui-transaction-candidates.json` — 100-trx sample, 56 actual failures.
-- `evidence/observation-write-receipts.json` — ten distinct Mainnet receipt/blob records.
-- `evidence/live-recall-proof.json` — three real repeated failure matches.
-- `evidence/screenshots/live-recall-workspace.png` — captured actual rendered UI with genuine transaction and recalled precedent.
-- `evidence/resolution-verification-queue.md` — source-documented InsufficientCoinBalance guidance that **cannot yet be described as a verified repair**.
-- `EVIDENCE.md` — all material claim statuses.
+[Case review](evidence/real-case/REVIEW.md), [human approval](evidence/real-case/human-approval.json), [completed receipt](evidence/real-case/reviewed-memory-receipt.json), [exact-blob recall](evidence/real-case/exact-blob-recall.json).
 
-## Current open blocker (do not fudge)
-A confirmed successful engineering repair. The best first candidate is `InsufficientCoinBalance` with official Sui troubleshooting guidance. To submit it as *verified*, a developer must demonstrate a case-specific fix (successful corrected operation or independently documented engineering resolution), cite evidence, and intentionally approve via the protected reviewer form. Only then is it honest to present the later memory recall as a verified-resolution recommendation.
+The last accepted namespace count was 13 completed memories of all types, including one reviewed resolution. Observations and simulation runbooks remain separate tiers and do not enter the reviewed-case library. Fresh counts appear in dated audit evidence; this is not a claim of 13 verified fixes or customer traction.
 
-## Submission prerequisites not yet completed
-Final product name/brand, UX/polish QA, real user validation, multi-tenant/shared access controls for public users, public deploy, public repository, blog, 2–3 min demo video, organizer track-fit confirmation and submission receipt. `DEMO.md` is a production plan, not a recording. Never call source code or a screenshot a completed submission.
+## Verify and contribute
 
-## Recovery / runbook proof — November 4, 2026
-The complete production app is verified locally after the Walrus read recovery.
+From `web`, run `pnpm lint`, `pnpm test` and `pnpm build --webpack`. Tests exercise compatibility, chronology, proof validation, credential rejection, inventory pagination, request timeouts and receipt handling. Browser suites in `web/scripts/phase22-*.mjs` and `phase23-*.mjs` distinguish actual integration reads from labelled controlled storage/failure responses.
 
-Open `http://localhost:4217/workspace?digest=BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6` to inspect the live historical failed transaction and its **simulation-tested, not historical-repair-verified** Walrus runbook. The proof page at `http://localhost:4217/proof/splitcoins` displays the actual failed and successful controlled Tatum Mainnet simulations and Walrus blob receipt.
+From the repository root, `python scripts/verify-design-lock.py` checks the immutable design contract. `python scripts/verify-phase22-qa.py` checks historical acceptance against its reviewed source; later source changes require a scoped successor audit rather than rewriting that record.
 
-Technical fix: one semantic search from `src/lib/unified-recall.ts` rather than three parallel MemWal queries, bounded read-only retry for transient DNS/network errors, deterministic evidence-tier classification, and separate errors for chain lookup vs Walrus recall. Production Tatum→Walrus returned one runbook from 12 stored memories in 7.4s; unrelated `MoveAbort` control returned no runbook.
+Do not run ingestion, publication or memory-writing scripts as setup or a smoke test. Existing evidence already exists. New Mainnet writes require authorized human review and consume quota. Read-only scripts requiring reviewer access load environment credentials without printing them; inspect their scope before running.
 
-Regression check: `node --experimental-strip-types scripts/test-retry-reads.mjs`, `pnpm lint`, `pnpm build`, and app `POST /api/recall`. Never describe the simulated correction as a human-approved or onchain-executed repair.
+## Remaining work
+
+The [operator audit](OPERATOR_PHASE_AUDIT_2026-11-07.md) tracks the current phase. External Sui-engineer utility validation and organizer track-fit confirmation remain open. Final proof registry, red team, product hygiene, demo film, pitch, judge simulation and submission gates remain separate. QA recordings are not the final 2–3 minute submission film. No submission receipt is claimed.

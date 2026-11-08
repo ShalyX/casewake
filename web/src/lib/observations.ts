@@ -1,7 +1,7 @@
 import "server-only";
 import { secureMemwalClient } from "./memwal-secure";
 import { type ObservedTransaction } from "./incidents";
-import { completedBlobIds } from "./completed-inventory";
+import { readCompletedInventory } from "./completed-inventory";
 
 export type ObservedCaseMemory = {
   requestId?:string;
@@ -79,15 +79,5 @@ export async function recallObservedCases(tx: ObservedTransaction) {
 export async function memoryInventory() {
   const walrus=await memwalClient();
   const namespace=process.env.MEMWAL_NAMESPACE || "incident-memory-v1";
-  let cursor: string | undefined;
-  const completed=new Set<string>();
-  const ids: string[]=[];
-  for (let page=0;page<30;page++){
-    const result=await walrus.listMemories({namespace,limit:100,cursor});
-    for(const blob of completedBlobIds(result.memories)){completed.add(blob);if(ids.length<15&&!ids.includes(blob))ids.push(blob);}
-    if(!result.has_more) return {namespace,allStoredMemories:completed.size,sampleBlobIds:ids,complete:true};
-    if(!result.next_cursor) break;
-    cursor=result.next_cursor;
-  }
-  return {namespace,allStoredMemories:completed.size,sampleBlobIds:ids,complete:false};
+  return readCompletedInventory(cursor=>walrus.listMemories({namespace,limit:100,cursor}),namespace);
 }

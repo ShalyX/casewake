@@ -53,6 +53,11 @@ export default function Workspace() {
   const [sdkVersion, setSdkVersion] = useState("");
   const [reviewerKey, setReviewerKey] = useState("");
   const [verified, setVerified] = useState(false);
+  const [reviewApprovalChanged,setReviewApprovalChanged]=useState(false);
+  function clearReviewApproval(){
+    if(verified||confirmedCausalLink)setReviewApprovalChanged(true);
+    setVerified(false);setConfirmedCausalLink(false);
+  }
   const [proofMethod, setProofMethod] = useState<ProofMethod>("reviewed-evidence");
   const [evidenceUrl, setEvidenceUrl] = useState("");
   const [verificationMethod, setVerificationMethod] = useState("integration-test");
@@ -151,6 +156,7 @@ export default function Workspace() {
       setVerified(false);
       setConfirmedCausalLink(false);
       setProofMethod("reviewed-evidence");
+      setSdkVersion("");setReviewApprovalChanged(false);
       setEvidenceUrl("");
       setVerificationMethod("integration-test");
       setSuccessorDigest("");
@@ -237,7 +243,7 @@ export default function Workspace() {
       await refreshInventory();
       setRecallNote("The human-reviewed resolution has a completed Walrus receipt. Enter a distinct comparable failed digest to verify exact-blob recurrence.");
     } catch (e) {
-      if(e instanceof RequestError&&[400,403,409,422,503].includes(e.status))retainStorage(null);
+      if(e instanceof RequestError&&[400,403,409,422].includes(e.status))retainStorage(null);
       focusStorageAfterClose.current=false;
       setError((e instanceof Error?e.message:"Memory write response unavailable.")+" No automatic write retry was made.");
     }
@@ -281,7 +287,7 @@ export default function Workspace() {
       await refreshInventory();
       setPhase("recalling");
       await loadRecall(tx);
-    } catch(e){if(e instanceof RequestError&&[400,403,409,422,503].includes(e.status))retainStorage(null);setError((e instanceof Error?e.message:"Observation response unavailable.")+" No automatic write retry was made.");}
+    } catch(e){if(e instanceof RequestError&&[400,403,409,422].includes(e.status))retainStorage(null);setError((e instanceof Error?e.message:"Observation response unavailable.")+" No automatic write retry was made.");}
     finally{writeInFlight.current=false;setPhase("idle");}
   }
 
@@ -352,15 +358,15 @@ export default function Workspace() {
               <div className="panel-kicker"><span>03 / HUMAN REVIEW</span><span>WRITE RESTRICTED</span></div>
               <h2>Record a human-reviewed resolution.</h2><p>Choose the confirmation method that actually proves this fix. Rouse checks the evidence artifact; an authorized engineer must still approve its causal link to this specific failure.</p>
               <div className="editor-form">{reviewErrors.length>0&&<div ref={reviewErrorRef} tabIndex={-1} className="review-error-summary"><h3>Correct the review</h3><ul>{reviewErrors.map(item=><li key={item.id}><a href={"#"+item.id} onClick={event=>{event.preventDefault();document.getElementById(item.id)?.focus();}}>{item.message}</a></li>)}</ul></div>}
-                <label>Confirmed diagnosis<textarea id="review-diagnosis" aria-invalid={reviewErrors.some(e=>e.id==="review-diagnosis")} aria-describedby={reviewErrors.some(e=>e.id==="review-diagnosis")?"review-diagnosis-error":undefined} value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} rows={2} placeholder="What caused this specific failure?"/>{reviewErrors.filter(e=>e.id==="review-diagnosis").map(e=><small className="field-error" id="review-diagnosis-error" key={e.id}>{e.message}</small>)}</label>
-                <label>Resolution steps<textarea id="review-steps" aria-invalid={reviewErrors.some(e=>e.id==="review-steps")} aria-describedby={reviewErrors.some(e=>e.id==="review-steps")?"review-steps-error":undefined} value={resolutionSteps} onChange={(e) => setResolutionSteps(e.target.value)} rows={4} placeholder="What changed, and how should the next engineer verify or apply it?"/>{reviewErrors.filter(e=>e.id==="review-steps").map(e=><small className="field-error" id="review-steps-error" key={e.id}>{e.message}</small>)}</label>
-                <label>Confirmation method<select value={proofMethod} onChange={(e) => setProofMethod(e.target.value as ProofMethod)}>
+                <label>Confirmed diagnosis<textarea id="review-diagnosis" aria-invalid={reviewErrors.some(e=>e.id==="review-diagnosis")} aria-describedby={reviewErrors.some(e=>e.id==="review-diagnosis")?"review-diagnosis-error":undefined} value={diagnosis} onChange={(e) => {clearReviewApproval();setDiagnosis(e.target.value);}} rows={2} placeholder="What caused this specific failure?"/>{reviewErrors.filter(e=>e.id==="review-diagnosis").map(e=><small className="field-error" id="review-diagnosis-error" key={e.id}>{e.message}</small>)}</label>
+                <label>Resolution steps<textarea id="review-steps" aria-invalid={reviewErrors.some(e=>e.id==="review-steps")} aria-describedby={reviewErrors.some(e=>e.id==="review-steps")?"review-steps-error":undefined} value={resolutionSteps} onChange={(e) => {clearReviewApproval();setResolutionSteps(e.target.value);}} rows={4} placeholder="What changed, and how should the next engineer verify or apply it?"/>{reviewErrors.filter(e=>e.id==="review-steps").map(e=><small className="field-error" id="review-steps-error" key={e.id}>{e.message}</small>)}</label>
+                <label>Confirmation method<select value={proofMethod} onChange={(e) => {clearReviewApproval();setProofMethod(e.target.value as ProofMethod);}}>
                   <option value="reviewed-evidence">Reviewed engineering artifact</option>
                   <option value="onchain-successor">Successful onchain follow-up</option>
                 </select><small>The first method is for fixes proven by a case-specific test or code change. The second is for fixes with a distinct successful transaction from the same sender.</small></label>
                 {proofMethod === "reviewed-evidence" ? <>
-                  <label>Public merged GitHub PR or immutable commit URL<input id="review-url" aria-invalid={reviewErrors.some(e=>e.id==="review-url")} aria-describedby={reviewErrors.some(e=>e.id==="review-url")?"review-url-error":undefined} value={evidenceUrl} onChange={(e) => setEvidenceUrl(e.target.value)} spellCheck={false} placeholder="https://github.com/owner/repo/pull/123 or /commit/40-character-sha" />{reviewErrors.filter(e=>e.id==="review-url").map(e=><small className="field-error" id="review-url-error" key={e.id}>{e.message}</small>)}<small>Rouse fetches the public artifact and changed-file diff, then records a SHA-256 snapshot. Pull requests must be merged. A link alone is never approval.</small></label>
-                  <label>How was the fix confirmed?<select value={verificationMethod} onChange={(e) => setVerificationMethod(e.target.value)}>
+                  <label>Public merged GitHub PR or immutable commit URL<input id="review-url" aria-invalid={reviewErrors.some(e=>e.id==="review-url")} aria-describedby={reviewErrors.some(e=>e.id==="review-url")?"review-url-error":undefined} value={evidenceUrl} onChange={(e) => {clearReviewApproval();setEvidenceUrl(e.target.value);}} spellCheck={false} placeholder="https://github.com/owner/repo/pull/123 or /commit/40-character-sha" />{reviewErrors.filter(e=>e.id==="review-url").map(e=><small className="field-error" id="review-url-error" key={e.id}>{e.message}</small>)}<small>Rouse fetches the public artifact and changed-file diff, then records a SHA-256 snapshot. Pull requests must be merged. A link alone is never approval.</small></label>
+                  <label>How was the fix confirmed?<select value={verificationMethod} onChange={(e) => {clearReviewApproval();setVerificationMethod(e.target.value);}}>
                     <option value="reproduction-test">Reproduced and retested</option>
                     <option value="unit-test">Unit test</option>
                     <option value="integration-test">Integration test</option>
@@ -368,12 +374,13 @@ export default function Workspace() {
                     <option value="maintainer-confirmed-fix">Maintainer-confirmed fix</option>
                   </select></label>
                 </> : <>
-                  <label>Later successful Sui transaction digest<input id="review-successor" aria-invalid={reviewErrors.some(e=>e.id==="review-successor")} aria-describedby={reviewErrors.some(e=>e.id==="review-successor")?"review-successor-error":undefined} value={successorDigest} onChange={(e) => setSuccessorDigest(e.target.value)} spellCheck={false} placeholder="Real later success digest from the same sender" />{reviewErrors.filter(e=>e.id==="review-successor").map(e=><small className="field-error" id="review-successor-error" key={e.id}>{e.message}</small>)}<small>Tatum checks success, sender, chain timestamp, matching operation and a strictly later checkpoint.</small></label>
+                  <label>Later successful Sui transaction digest<input id="review-successor" aria-invalid={reviewErrors.some(e=>e.id==="review-successor")} aria-describedby={reviewErrors.some(e=>e.id==="review-successor")?"review-successor-error":undefined} value={successorDigest} onChange={(e) => {clearReviewApproval();setSuccessorDigest(e.target.value);}} spellCheck={false} placeholder="Real later success digest from the same sender" />{reviewErrors.filter(e=>e.id==="review-successor").map(e=><small className="field-error" id="review-successor-error" key={e.id}>{e.message}</small>)}<small>Tatum checks success, sender, chain timestamp, matching operation and a strictly later checkpoint.</small></label>
                   {successorDigest && <small>Success evidence: <a target="_blank" rel="noreferrer" href={"https://suivision.xyz/txblock/" + encodeURIComponent(successorDigest.trim())}>View submitted onchain follow-up ↗</a></small>}
                 </>}
-                <label>Exact engineering change<textarea id="review-change" aria-invalid={reviewErrors.some(e=>e.id==="review-change")} aria-describedby={reviewErrors.some(e=>e.id==="review-change")?"review-change-error":undefined} rows={3} value={reviewedChange} onChange={(e) => setReviewedChange(e.target.value)} placeholder="Name the code, command, parameter, configuration or resource change and explain why it resolves this failure." />{reviewErrors.filter(e=>e.id==="review-change").map(e=><small className="field-error" id="review-change-error" key={e.id}>{e.message}</small>)}</label>
+                <label>Exact engineering change<textarea id="review-change" aria-invalid={reviewErrors.some(e=>e.id==="review-change")} aria-describedby={reviewErrors.some(e=>e.id==="review-change")?"review-change-error":undefined} rows={3} value={reviewedChange} onChange={(e) => {clearReviewApproval();setReviewedChange(e.target.value);}} placeholder="Name the code, command, parameter, configuration or resource change and explain why it resolves this failure." />{reviewErrors.filter(e=>e.id==="review-change").map(e=><small className="field-error" id="review-change-error" key={e.id}>{e.message}</small>)}</label>
+                {reviewApprovalChanged&&(!verified||!confirmedCausalLink)&&<p className="review-warning">Review details changed. Confirm both statements again before storing.</p>}
                 <label className="review-checkbox"><input type="checkbox" checked={confirmedCausalLink} onChange={(e) => setConfirmedCausalLink(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I reviewed this exact GitHub artifact and confirm its specific change resolves this incident. The selected test or verification method genuinely applies to this failure." : "I reviewed both executions and confirm this specific successful follow-up is the correction of the recorded incident. Tatum verifies execution and sender; it cannot infer my causal judgment."}</span></label>
-                <div className="editor-pair"><label>Reviewer<input id="review-name" aria-invalid={reviewErrors.some(e=>e.id==="review-name")} aria-describedby={reviewErrors.some(e=>e.id==="review-name")?"review-name-error":undefined} value={reviewer} onChange={(e) => setReviewer(e.target.value)} placeholder="Engineer name or handle" />{reviewErrors.filter(e=>e.id==="review-name").map(e=><small className="field-error" id="review-name-error" key={e.id}>{e.message}</small>)}</label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => setSdkVersion(e.target.value)} placeholder="2.x" /></label></div>
+                <div className="editor-pair"><label>Reviewer<input id="review-name" aria-invalid={reviewErrors.some(e=>e.id==="review-name")} aria-describedby={reviewErrors.some(e=>e.id==="review-name")?"review-name-error":undefined} value={reviewer} onChange={(e) => {clearReviewApproval();setReviewer(e.target.value);}} placeholder="Engineer name or handle" />{reviewErrors.filter(e=>e.id==="review-name").map(e=><small className="field-error" id="review-name-error" key={e.id}>{e.message}</small>)}</label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => {clearReviewApproval();setSdkVersion(e.target.value);}} placeholder="2.x" /></label></div>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I am an authorized human reviewer. I inspected the original failure, the linked artifact and its changed files, and the selected verification evidence. I accept responsibility for confirming the causal relationship." : "I am an authorized human reviewer. I inspected the original failure, the specific engineering change and the successful follow-up, and accept responsibility for confirming their causal relationship."}</span></label>
                 <button type="button" className="primary-button compact" disabled={busy || storagePending || !verified || !reviewerKey || !confirmedCausalLink} onClick={() => void submitReview()}>{phase === "writing" ? "Verifying and writing…" : proofMethod === "reviewed-evidence" ? "Verify artifact, then store" : "Verify follow-up, then store"} ↗</button>
                 <div className="observation-action">
