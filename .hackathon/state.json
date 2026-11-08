@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 33,
+  "revision": 34,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "MOTION_STORYBOARD",
-  "active_specialist": "Art Director - motion storyboard",
+  "phase": "DESIGN_LOCK",
+  "active_specialist": "Art Director - composition and state contract lock",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -15,7 +15,7 @@
   "brand_direction_locked": true,
   "references_synthesized": true,
   "visual_asset_strategy_complete": true,
-  "motion_storyboard_complete": false,
+  "motion_storyboard_complete": true,
   "design_locked": false,
   "design_lock_revision": null,
   "visual_qa_static_complete": false,
@@ -46,7 +46,7 @@
     "ART_DIRECTION": "PASS: Working Precedent selected after three concepts; rendered landing/workspace desktop/mobile and12-state layout QA, critique/fixes in ART_DIRECTION_REVIEW_2026-11-08.md.",
     "REFERENCE_BOARD": "PASS: four official functional examples, two internal targets and one anti-reference; 33 browser assertions; REFERENCE_BOARD_ROUSE_2026-11-08.md.",
     "VISUAL_ASSET_STRATEGY": "PASS - STRATEGY: 12 groups with purpose/source/priority/fallback; 102 inventory +18 browser checks. Final captures/font optimization follow implementation.",
-    "MOTION_STORYBOARD": "DOCUMENTED: Evidence-triggered beats/reduced motion; formal acceptance remains.",
+    "MOTION_STORYBOARD": "PASS - STORYBOARD: 14 event-bound transitions, six paired targets, 64 contract +36 responsive sheet checks. Actual application motion remains NOT VERIFIED.",
     "DESIGN_LOCK": "NOT DONE: Final composition/state scoring/signoff missing.",
     "DESIGN_ENGINEERING": "PARTIAL: Responsive working product; final locked-spec acceptance remains.",
     "VISUAL_QA": "PARTIAL: Functional state matrix complete; final art-direction/motion acceptance remains.",
@@ -66,12 +66,12 @@
   },
   "blockers": [
     "External Sui-engineer utility validation and organizer track fit unconfirmed.",
-    "Motion storyboard, design lock, asset delivery/font optimization and application design acceptance remain.",
+    "Design lock, asset delivery/font optimization and application design acceptance remain.",
     "Full hygiene skill/tracked-history scan, final MP4/videoQA/judge simulation/submission audit and receipt remain.",
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase19 motion storyboard for Working Precedent, then Phase20 design lock before major Next.js implementation. Preserve all8 P0s and immutable proof; no new memory write for visuals.",
+  "next_action": "Phase20 design lock: reconcile page/state compositions, asset and motion contracts, all8 P0 coverage and implementation acceptance. Then actual Next.js Design Engineering. No new memory write for design.",
   "updated_at": "2026-11-08",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -127,5 +127,16 @@
     "map": "design/phase18/index.html",
     "qa": "evidence/phase18/",
     "status": "STRATEGY_ACCEPTED; IMPLEMENTATION_AND_FINAL_CAPTURE_PENDING"
+  },
+  "motion_storyboard": {
+    "spec": "MOTION_STORYBOARD_ROUSE_2026-11-08.md",
+    "manifest": "design/phase19/motion.json",
+    "sheet": "design/phase19/index.html",
+    "review": "evidence/phase19/REVIEW.md",
+    "qa": [
+      "evidence/phase19/contract-qa.json",
+      "evidence/phase19/browser-qa.json"
+    ],
+    "status": "STATIC_STORYBOARD_ACCEPTED; PRODUCTION_MOTION_NOT_VERIFIED"
   }
 }

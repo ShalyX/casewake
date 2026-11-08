@@ -1,3 +1,11 @@
+# Current checkpoint — Phase 19 storyboard complete, 2026-11-08
+
+Motion follows actual evidence/state changes, with no timed success or automatic repair implication. Fourteen transition contracts and six frame pairs cover lookup, recall, human review, storage acceptance/completion, ambiguous-response recovery and distinct recurrence. Sixty-four contract and36 desktop/tablet/mobile sheet checks pass. No new API calls/writes. Static storyboard acceptance is separate from actual application motion, which remains unverified.
+
+Active phase:20 DESIGN_LOCK. Asset delivery/font optimization, implementation and final visual/motion QA remain. Production is unchanged. See MOTION_STORYBOARD_ROUSE_2026-11-08.md and evidence/phase19/REVIEW.md. Earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Phases 17 and 18 complete, 2026-11-08
 
 The reference board translates four official functional examples into Rouse rules; 33 desktop/mobile assertions pass. Visual asset strategy defines 12 groups with source, priority, owner, delivery status and fallback. Inventory/map QA: 102 +18 checks; no API calls or memory writes. Seven previews distinguish identity inputs from recorded design targets. Canonical fonts need transfer optimization; final product/proof/demo captures follow actual Rouse implementation.

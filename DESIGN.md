@@ -193,3 +193,12 @@ Authority: VISUAL_ASSET_STRATEGY_ROUSE_2026-11-08.md and design/phase18/assets.j
 Ready means canonical identity inputs only. Product compositions require implementation; proof/demo release captures require current Rouse integration and read-only verification. Never present recorded studies or historical Casewake screenshots as current release evidence. Canonical TTF inventory is 426,584 bytes; proposed ≤250KB used-font transfer needs subsets/WOFF2 or reduced weights and measurement. Other byte budgets are planning limits, not measured app performance. Keep originals/licenses and all historical evidence URLs.
 
 Strategy inventory passes 102 checks; the map passes 18 desktop/mobile browser assertions, with zero API calls or writes. Phase 19 motion storyboard and Phase 20 design lock remain before major implementation. This is no final production visual/motion acceptance.
+
+
+## I. Phase 19 motion storyboard — accepted 2026-11-08
+
+Authority: MOTION_STORYBOARD_ROUSE_2026-11-08.md and design/phase19/motion.json; static sheet: design/phase19/index.html. Evidence changes in place. Use no bespoke landing/nav entrance or scroll reveal. Optional reviewed-result reveal is one 180ms opacity/4px translation; status ≤120ms, receipt ≤160ms. No forced delay, stagger, progress percentage, confetti, flying blob or animated height. Essential content updates immediately; identifiers never type in.
+
+Fourteen transition contracts bind to actual transaction/recall/review/storage/recovery handlers. Distinguish unknown, success, no-match, unavailable, missing configuration, response-unconfirmed, accepted-pending, rejected/failed write and completed receipt. Observations/runbooks never become reviewed resolutions. Background updates preserve focus; one persistent polite region announces changes. Only user-directed editing/validation changes focus deliberately. Keep completed receipt separate across new lookups and reload. Animation callbacks/timers cannot initiate writes, claim completion or choose a sample digest.
+
+Reduced motion substitutes immediate content/status changes and removes all tween/loop/smooth-scroll including pseudo-elements. No new animation library. Actual performance, normal/reduced-motion sequences and focus require Phase22 recording. Storyboard scope passes 64 contract and36 responsive-sheet checks; actual production motion remains NOT VERIFIED. Review: evidence/phase19/REVIEW.md. Next: Phase20 design lock; no extensive Design Engineering until that gate closes.

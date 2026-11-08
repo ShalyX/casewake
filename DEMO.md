@@ -1,3 +1,9 @@
+# Motion handoff — Phase 19, 2026-11-08
+
+UI motion contract: MOTION_STORYBOARD_ROUSE_2026-11-08.md; static frames: design/phase19/index.html. The app story separates chain evidence, reviewed recall, human approval, accepted storage, completed receipt and distinct recurrence. Final footage must use current implemented Rouse and real read-only receipt/recall. Frame pairs are recorded design targets, not footage or proof of a live sequence. Film production and rewrite of the obsolete script remain Phase27.
+
+---
+
 # Current narrative direction — Rouse, 2026-11-08
 
 The Nov 4 script below is historical and is not the current proof ceiling. Rouse now has one explicitly ShalyX-approved independent integration resolution, a completed Mainnet blob and verified exact-blob recall on a distinct compatible failure. It still does not prove the original operator deployed a correction or that a historical onchain transaction was repaired.
