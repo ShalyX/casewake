@@ -1,3 +1,11 @@
+# Current checkpoint — discoverability complete before Phase22, 2026-11-08
+
+Engineers can inspect any valid Sui Mainnet digest without reviewer access, browse the real reviewed library at /cases and search error text/keywords. Search returns related-only results with evidence, reviewer and full blob. Recording/recovery authorization stays intact. Current catalogue: one reviewed resolution among13 completed namespace records, all retrieved in actual acceptance. Build/lint/unit tests pass;89 browser +12 actual read/access checks; zero new memory writes. Local production preview: http://127.0.0.1:4242/cases. Public deployment unchanged.
+
+Design revision2 records the user's explicit entry/access change while preserving the archived revision1. Active phase:22 VISUAL_QA, now including discovery. DISCOVERABILITY_REVIEW_2026-11-08.md records scope, evidence and limitations. Earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Phase 21 implemented, 2026-11-08
 
 Actual Next.js Rouse landing/workspace, reviewer/storage and secondary routes now use the user-approved locked design. Production build/lint/unit tests pass;62 browser checks and5 actual read-only acceptance checks pass. Full approved blob remains visible (bottom838.5px in1440×900); Tatum/Walrus/protected job recovery and distinct exact-blob recall work. Three intercepted fixture submissions, zero real memory writes. Font delivery107,428bytes. No API route changes or public deployment.

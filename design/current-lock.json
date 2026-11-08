@@ -1,0 +1,13 @@
+{
+  "revision": 2,
+  "date": "2026-11-08",
+  "base_manifest": "design/phase20/lock.json",
+  "scope": "Public read and reviewed-case discovery extension; original purpose/P0s preserved",
+  "authorization": "Explicit user instruction to fix discoverability before Phase22; recording remains protected",
+  "files": {
+    "DESIGN.md": "b17772c208bc7da262a2d0c8d4ca6f6e58dd08e11f89b8382a20f61b218e44a4",
+    "design/revisions/2/DISCOVERY.md": "8d9f0274f58b41ba6d8517d469d8379f8030c970e7ee9403557d0a42696a2770",
+    "design/revisions/2/DESIGN.locked.md": "b17772c208bc7da262a2d0c8d4ca6f6e58dd08e11f89b8382a20f61b218e44a4"
+  },
+  "status": "REVIEWED_IMPLEMENTATION; FINAL_PHASE22_QA_PENDING"
+}

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction, ConfigurationError } from "@/lib/tatum";
-import { isAllowedPublicDemoDigest, isPublicDemoMode, isReviewerKeyValid } from "@/lib/public-demo";
+import { isPublicDemoMode } from "@/lib/public-demo";
 export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   let digest:string;
@@ -11,8 +11,6 @@ export async function POST(request: NextRequest) {
     digest=body.digest.trim();
   }catch{return NextResponse.json({error:"Enter a valid Sui transaction digest."},{status:400});}
   try {
-    if (!isAllowedPublicDemoDigest(digest, isReviewerKeyValid(request.headers.get("x-workspace-key"))))
-      return NextResponse.json({error:"The public demo supports the published real transaction examples. Reviewer access enables other digests."},{status:403});
     const transaction = await getTatumTransaction(digest);
     return NextResponse.json({ transaction });
   } catch (error) {

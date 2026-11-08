@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-08",
+  "status": "IMPLEMENTED_AND_VERIFIED; PHASE22_PENDING",
+  "designLockRevision": 2,
+  "browserChecks": 89,
+  "actualReadAccessChecks": 12,
+  "newUnitTests": 6,
+  "memoryWrites": 0,
+  "controlledSubmissions": 3,
+  "legacyDemoFlagDuringProductionAcceptance": true,
+  "currentLibrary": {
+    "namespace": "incident-memory-v1",
+    "count": 1,
+    "coverageComplete": true,
+    "completedRecordsExamined": 13
+  },
+  "unchangedProtectedRouteHashes": {
+    "web/src/app/api/remember/route.ts": "d981ba144585226d5d3460dc910ae37a14c7abc3360ae5fb1020603c8ae0ab1c",
+    "web/src/app/api/observations/route.ts": "efea8734afc8176bacbb97a607069be4768312d8ace9371525e71c2822cfb5ed",
+    "web/src/app/api/memory-job/route.ts": "bf7ab43d62809c60a6d0c46b04e4f4872630ae419fde6838d835b6954ec73486",
+    "web/src/app/api/verify-recall/route.ts": "c67e9acc5f27a10fd616b1f2ba98b681514130face142eabd92ff9f2ddaa23ff"
+  },
+  "buildId": "m6cwf5q9vz71-qL6JYc8U",
+  "localPreview": "http://127.0.0.1:4242/cases",
+  "publicDeploymentChanged": false
+}

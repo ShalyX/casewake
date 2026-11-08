@@ -25,8 +25,8 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 17 | REFERENCE_BOARD | PASS | Four official functional examples + Rouse targets/anti-reference; 33 browser checks. REFERENCE_BOARD_ROUSE_2026-11-08.md. |
 | 18 | VISUAL_ASSET_STRATEGY | PASS — STRATEGY | Twelve groups; source/priority/owner/fallback/acceptance explicit. 102 inventory +18 map checks. Actual release captures/font optimization pending. |
 | 19 | MOTION_STORYBOARD | PASS — STORYBOARD | Fourteen event-bound transitions, six paired targets; 64 contract +36 sheet checks. Actual application motion unverified. |
-| 20 | DESIGN_LOCK | PASS — REVISION1 | All8 P0s and route/state contract; frozen spec/dependency hashes; nine supplementary targets pass156 viewport checks. |
-| 21 | DESIGN_ENGINEERING | PASS — IMPLEMENTATION | Actual locked Next.js Rouse routes; build/lint/unit tests;62 browser +5 actual read-only checks. Dedicated final visual QA remains. |
+| 20 | DESIGN_LOCK | PASS — REVISION2 | User-requested discovery/public-read extension; base revision1 remains verifiable; design/current-lock.json. |
+| 21 | DESIGN_ENGINEERING | PASS + DISCOVERABILITY | Actual Rouse app; public own-digest reads, reviewed library/error-text search;89 browser +12 actual access/read checks. Recording protected. |
 | 22 | VISUAL_QA | ACTIVE | Actual application target comparison, accessibility and normal/reduced-motion recordings remain; Phase21 screenshots/functional checks are available. |
 | 23 | BUILD_LOOP | PARTIAL | Core journey works; final downstream exit audit remains. |
 | 24 | PROOF_ENGINE | PARTIAL | Core live proof complete; final registry/judge surfaces remain. |

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
 import { recallAllPrecedents } from "@/lib/unified-recall";
-import { isAllowedPublicDemoDigest, isReviewerKeyValid } from "@/lib/public-demo";
 
 export const runtime = "nodejs";
 export const maxDuration = 90;
@@ -14,9 +13,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error:"Enter a valid Sui transaction digest."},{status:400});
     }
     digest = body.digest;
-    if (!isAllowedPublicDemoDigest(digest, isReviewerKeyValid(request.headers.get("x-workspace-key")))) {
-      return NextResponse.json({error:"Only the published real evidence examples are available in the public demo. Reviewer access enables other digests."},{status:403});
-    }
   } catch {
     return NextResponse.json({error:"Invalid request body."},{status:400});
   }
@@ -34,8 +30,8 @@ export async function POST(request: NextRequest) {
       transaction,candidates:[],observedPrecedents:[],simulationRunbooks:[],
       recallDegraded:false,walrusHitsExamined:0,
       reason: transaction.outcome === "succeeded"
-        ? "This transaction succeeded. Casewake only recalls resolution precedents for confirmed onchain failures."
-        : transaction.outcomeReason || "Tatum could not establish a finalized execution outcome. Casewake will not infer success or failure, and no resolution recall is attempted.",
+        ? "This transaction succeeded. Rouse only recalls resolution precedents for confirmed onchain failures."
+        : transaction.outcomeReason || "Tatum could not establish a finalized execution outcome. Rouse will not infer success or failure, and no resolution recall is attempted.",
     });
   }
 

@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 36,
+  "revision": 37,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
   "phase": "VISUAL_QA",
-  "active_specialist": "Art Director / Visual QA - actual Rouse application",
+  "active_specialist": "Art Director / Visual QA - Rouse including discovery",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -17,7 +17,7 @@
   "visual_asset_strategy_complete": true,
   "motion_storyboard_complete": true,
   "design_locked": true,
-  "design_lock_revision": 1,
+  "design_lock_revision": 2,
   "visual_qa_static_complete": false,
   "visual_qa_motion_complete": false,
   "evidence_status": "PHASE14_PASS_PUBLIC: all8 P0 groups reviewed;26 controlled browser checks; real production receipt recovery and exact reviewed-blob recall pass; inventory13, new writes0. See evidence/phase14/release-verification.md.",
@@ -47,8 +47,8 @@
     "REFERENCE_BOARD": "PASS: four official functional examples, two internal targets and one anti-reference; 33 browser assertions; REFERENCE_BOARD_ROUSE_2026-11-08.md.",
     "VISUAL_ASSET_STRATEGY": "PASS - STRATEGY: 12 groups with purpose/source/priority/fallback; 102 inventory +18 browser checks. Final captures/font optimization follow implementation.",
     "MOTION_STORYBOARD": "PASS - STORYBOARD: 14 event-bound transitions, six paired targets, 64 contract +36 responsive sheet checks. Actual application motion remains NOT VERIFIED.",
-    "DESIGN_LOCK": "PASS - REVISION1: contract/spec snapshot/hashes; all8P0 groups mapped; nine supplemental targets pass156 viewport checks. Actual application QA remains.",
-    "DESIGN_ENGINEERING": "PASS - IMPLEMENTATION: actual Next Rouse routes; build/lint/unit tests,62 browser +5 actual read-only checks; font delivery107428bytes. Dedicated Phase22 acceptance remains.",
+    "DESIGN_LOCK": "PASS - REVISION2: explicit user discovery/access extension; original revision1 archived and verifiable; design/current-lock.json.",
+    "DESIGN_ENGINEERING": "PASS - IMPLEMENTATION + DISCOVERY: locked Rouse app, public own-digest reads, reviewed library/error-text search; build/lint/unit +89 browser/12 actual read/access checks. Phase22 remains.",
     "VISUAL_QA": "ACTIVE: final target comparison, state recordings, accessibility and normal/reduced-motion acceptance on actual Rouse app remain.",
     "BUILD_LOOP": "PARTIAL: Core journey works; final downstream exit audit remains.",
     "PROOF_ENGINE": "PARTIAL: Core live proof complete; final registry/judge surfaces remain.",
@@ -71,7 +71,7 @@
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase22: inspect actual Rouse against locked revision1; record real state transitions and normal/reduced motion, complete desktop/tablet/mobile and accessibility critique/fixes. Production deployment remains separate; no new memory write for QA.",
+  "next_action": "Phase22 visual/accessibility/motion QA against design revision2, including /cases and public own-digest handoff, original all8P0s, catalogue availability/coverage and actual normal/reduced-motion recordings. Deployment remains separate.",
   "updated_at": "2026-11-08",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -140,17 +140,18 @@
     "status": "STATIC_STORYBOARD_ACCEPTED; PRODUCTION_MOTION_NOT_VERIFIED"
   },
   "design_lock": {
-    "revision": 1,
+    "revision": 2,
     "spec": "DESIGN.md",
-    "contract": "design/phase20/CONTRACT.md",
-    "snapshot": "design/phase20/DESIGN.locked.md",
-    "manifest": "design/phase20/lock.json",
-    "review": "DESIGN_LOCK_REVIEW_ROUSE_2026-11-08.md",
+    "contract": "design/revisions/2/DISCOVERY.md",
+    "snapshot": "design/revisions/2/DESIGN.locked.md",
+    "manifest": "design/current-lock.json",
+    "review": "DISCOVERABILITY_REVIEW_2026-11-08.md",
     "qa": [
       "evidence/phase20/browser-qa.json",
       "evidence/phase20/lock-qa.json"
     ],
-    "status": "LOCKED_FOR_IMPLEMENTATION; PRODUCTION_VISUAL_QA_PENDING"
+    "status": "LOCKED_FOR_IMPLEMENTATION; PRODUCTION_VISUAL_QA_PENDING",
+    "base_manifest": "design/phase20/lock.json"
   },
   "design_engineering": {
     "review": "DESIGN_IMPLEMENTATION_REVIEW_ROUSE_2026-11-08.md",
@@ -164,5 +165,15 @@
     "date": "2026-11-08",
     "scope": "Shown locked landing/workspace design targets; implementation requested",
     "instruction": "Looks good bro, let's move to Phase 21 and implement this in the actual app"
+  },
+  "discoverability": {
+    "status": "IMPLEMENTED_AND_VERIFIED",
+    "review": "DISCOVERABILITY_REVIEW_2026-11-08.md",
+    "evidence": "evidence/discoverability/",
+    "route": "/cases",
+    "public_digest_reads": true,
+    "recording_protected": true,
+    "new_memory_writes": 0,
+    "design_revision": 2
   }
 }

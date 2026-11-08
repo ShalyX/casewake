@@ -20,9 +20,9 @@ export default async function phase21ConfigBrowser(page){
  chain=false;await fresh();assert(await page.getByRole('button',{name:'Inspect transaction',exact:false}).isDisabled(),'Missing Tatum disables transaction lookup');
  memory=true;chain=true;inventory=false;await fresh();await page.getByText('Inventory unavailable — no completed-count conclusion.').waitFor();assert(!(await page.locator('.inventory-strip').innerText()).includes('0 completed'),'Unavailable inventory is not zero');
  inventory=true;partial=true;await fresh();await page.getByText('At least 7 completed memories · all types · fixture · incomplete inventory').waitFor();assert(true,'Incomplete inventory is labelled with lower bound');
- publicMode=true;await fresh();await page.getByText('Public example mode:',{exact:false}).waitFor();assert(true,'Public mode restriction appears beside intake');
+ publicMode=true;await fresh();assert(await page.getByText('Public example mode:',{exact:false}).count()===0&&await page.getByRole('button',{name:'Inspect transaction',exact:false}).isEnabled(),'Legacy example-mode flag does not restrict public reads');
  await page.locator('.access-disclosure').evaluate(e=>e.open=true);await page.getByPlaceholder('Enter the private workspace key').fill('fixture-key');await page.locator('.access-disclosure').evaluate(e=>e.open=false);
- assert(await page.getByText('Public example mode:',{exact:false}).count()===0,'Authorized mode hides public example restriction');
+ assert(await page.getByText('Public example mode:',{exact:false}).count()===0,'Reviewer access leaves public read access unchanged');
  await page.locator('#digest').fill('4'.repeat(43));await page.getByRole('button',{name:'Inspect transaction',exact:false}).click();await page.getByRole('heading',{name:'Chain evidence',exact:true}).waitFor();
  await page.getByRole('button',{name:'Record a reviewed resolution',exact:false}).click();await page.locator('.editor-panel').waitFor();
  await page.getByLabel('Confirmation method',{exact:false}).selectOption('onchain-successor');

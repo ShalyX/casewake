@@ -1,7 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 
-/** Anonymous public visitors see only genuine, preverified Sui example digests.
- *  An authenticated reviewer may inspect other authentic digests and submit a reviewed memory.
+/** Historical examples remain available for reproduction.
+ *  Valid digest inspection is public; recording and job recovery remain protected.
  *  Sponsor credentials and the reviewer key stay server-side.
  */
 export const PUBLIC_DEMO_TRANSACTIONS = [
@@ -40,9 +40,4 @@ export function isReviewerKeyValid(suppliedKey: string | null | undefined) {
   const supplied = Buffer.from(suppliedKey, "utf8");
   const expected = Buffer.from(requiredKey, "utf8");
   return supplied.length === expected.length && timingSafeEqual(supplied, expected);
-}
-
-export function isAllowedPublicDemoDigest(digest: string, reviewerAuthorized = false) {
-  return !isPublicDemoMode() || reviewerAuthorized ||
-    PUBLIC_DEMO_TRANSACTIONS.some(item => item.digest === digest);
 }

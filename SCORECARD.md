@@ -1,3 +1,9 @@
+# Discovery checkpoint — 2026-11-08
+
+Public own-digest reads, real reviewed-case library and related-only error-text search are implemented. Build/lint/unit tests pass;89 browser and12 actual public-read/access checks pass with the legacy demo flag enabled. Protected recording/recovery routes are unchanged; new memory writes0. Scope: current namespace, bounded content retrieval with coverage disclosure. Evidence: DISCOVERABILITY_REVIEW_2026-11-08.md and evidence/discoverability/. Design revision2 is current; Phase22 visual/motion/accessibility acceptance and public deployment remain separate.
+
+---
+
 # Phase 21 implementation checkpoint — 2026-11-08
 
 Rouse is implemented in the actual Next.js app. Build/lint/unit tests pass;62 browser checks separate actual Mainnet readback from controlled submission/recovery fixtures;5 actual read-only acceptance checks verify job/auth/exact/self/unrelated behavior. Font delivery107,428bytes; new real writes0; public deployment unchanged. Evidence: DESIGN_IMPLEMENTATION_REVIEW_ROUSE_2026-11-08.md and evidence/phase21/. Final Phase22 target/motion/accessibility acceptance and official judging/submission remain separate.

@@ -1,10 +1,10 @@
-# Rouse — locked design contract, revision 1
+# Rouse — locked design contract, revision 2
 
 Phase 16 / 2026-11-08. Product Lock revision 1 and the user-locked Rouse name control. Phase 15 identity: retained-counter r, outlined wordmark, Trace Instrument palette and type roles.
 
 **Selected direction: Working Precedent.** Current chain evidence and prior reviewed judgment occupy one working canvas. The resolution is useful because its origin, compatibility and limits remain inspectable.
 
-Design Lock revision1 is accepted on 2026-11-08 for implementation. Authority and complete acceptance contract: design/phase20/CONTRACT.md; frozen snapshot/dependency hashes: design/phase20/DESIGN.locked.md and lock.json. All eight original P0 groups remain mandatory. Dated phase notes below record their historical scope; later accepted sections and the Phase20 contract supersede earlier pending notes. Actual application visual/motion QA, FULL_PRODUCT_VERIFIED, JUDGE_READY and deployment remain separate.
+Design Lock revision2 extends the accepted revision1 on 2026-11-08 with the user-requested public digest inspection and reviewed-case discovery. Current manifest: design/current-lock.json; discovery contract: design/revisions/2/DISCOVERY.md. The previous Phase20 snapshot and manifest remain immutable historical records. Revision2 supersedes any example-only read restriction below. Design Lock revision1 was accepted on 2026-11-08 for implementation. Authority and complete acceptance contract: design/phase20/CONTRACT.md; frozen snapshot/dependency hashes: design/phase20/DESIGN.locked.md and lock.json. All eight original P0 groups remain mandatory. Dated phase notes below record their historical scope; later accepted sections and the Phase20 contract supersede earlier pending notes. Actual application visual/motion QA, FULL_PRODUCT_VERIFIED, JUDGE_READY and deployment remain separate.
 
 ## A. Product reality
 
@@ -213,3 +213,14 @@ Locked: Working Precedent hierarchy; canonical identity/type/color; separate rea
 Nine supplemental targets pass156 desktop/tablet/mobile assertions. Existing target-level assessment21/24 is retained, not promoted to an official score or actual app QA. Dependency hashes and an identical spec snapshot make revision1 verifiable with scripts/verify-design-lock.py. Any deliberate contract revision must record its reason, new revision and affected QA. Routine fixes within the contract need no new cosmetic approval.
 
 Phase21 Design Engineering may now proceed in the existing Next.js application, preserving actual handlers and protected API boundaries. Font optimization, current Rouse release captures and actual static/motion QA remain implementation work. No new memory write or renamed deployment occurred during the lock.
+
+
+## K. Revision 2 — discovery before Phase 22, 2026-11-08
+
+Explicit user scope: let engineers inspect their own digests without reviewer access, browse reviewed cases and search error text; keep recording protected. Product Lock revision1 and Working Precedent remain unchanged. Current composition/access authority for this addition: design/revisions/2/DISCOVERY.md; full snapshot: design/revisions/2/DESIGN.locked.md; current manifest: design/current-lock.json.
+
+Anonymous valid Sui Mainnet digest inspection/recall is now permitted irrespective of the historical example-mode flag. Reviewer access remains required for recording and protected job/acceptance tools. `/cases` adds a live reviewed library and error-text/keyword search with public source/reviewer/completed-blob provenance. Search results are related-only; applicability still requires actual transaction evidence and the existing compatibility rules. The landing, primary navigation and workspace intake expose these entry points.
+
+Library scope is the configured account/namespace, not all Sui incidents. It lists only active completed validated reviewed resolutions, excluding lower evidence tiers and prevention-only guards. The content retrieval is bounded; incomplete coverage, read failures and no results are distinct. Query text is not durably stored or sent to a write endpoint. Error-text search is local keyword matching over retrieved reviewed content, not a claim of semantic or exhaustive global search.
+
+Desktop uses a full-width search intake and procedure/provenance paired records; mobile stacks both with full identifiers and native context disclosure. The actual recorded ShalyX case supplies proof, not fake content. Current entry/source/states and protected recording regressions must be checked in Phase22 alongside all original eight P0 groups. Revision1's historical study public-example restrictions must not be copied into the new app.

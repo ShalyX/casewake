@@ -1,0 +1,125 @@
+> casewake@0.1.0 test
+> node --conditions=react-server --experimental-strip-types scripts/test-incidents.mjs && node --conditions=react-server --experimental-strip-types scripts/test-incident-compatibility.mjs && node --conditions=react-server --experimental-strip-types scripts/test-tatum-outcomes.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-memory-gate.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-repair-proof.mjs && node --conditions=react-server --experimental-strip-types scripts/test-repayment-safety.mjs && node --conditions=react-server --experimental-strip-types scripts/test-retry-reads.mjs && node --conditions=react-server --experimental-strip-types scripts/test-reviewed-evidence.mjs && node --conditions=react-server --experimental-strip-types scripts/test-phase14-workflows.mjs && node --conditions=react-server --experimental-strip-types scripts/test-case-discovery.mjs
+
+(node:11768) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/incidents.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: general verified-case memory contract, exact-match guards and tamper negatives (synthetic fixtures only).
+(node:15936) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/incidents.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: stable error classes, command-position tolerance, package mismatch, self-match, and unknown-outcome gates.
+(node:13000) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/tatum-error.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: Tatum NOT_FOUND is distinct from transient gateway failures.
+(node:4584) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/incidents.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ No memory is eligible without independently verified repair metadata (3.9284ms)
+✔ Invalid principal cannot promote a route repair (0.3391ms)
+✔ A validated complete route repair can become a candidate (0.2951ms)
+✔ Second incident is reserved for recall; not eligible as a source (0.3568ms)
+✔ Self-match rejected and distinct comparable failure eligible only for review (1.9959ms)
+✔ A successor must be finalized in a strictly later checkpoint (0.4674ms)
+✔ A human-reviewed successor record is accepted only with later-checkpoint evidence (2.9017ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33.1073
+(node:15912) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/route-repair-proof.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ proof policy is pinned to the original failed Mainnet incident (3.2887ms)
+✔ the historical transaction passes structure only; execution status is independently checked later (13.1677ms)
+✔ reject missing or malformed transaction bytes (0.5178ms)
+✔ reject historical transaction with altered flashloan principal (5.5036ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 39.8758
+✔ real original DeepBook output is blocked (1.766ms)
+✔ briefly positive two-leg quote remains blocked by 50-bps slippage budget (0.3038ms)
+✔ a profitable quote without an atomic simulation is blocked (0.2064ms)
+✔ external wallet topup is disallowed even when simulation succeeds (1.361ms)
+✔ eligible status requires conservative quote and successful atomic simulation (0.406ms)
+✔ repayment amount and bounds cannot be negative or invalid (0.4963ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15.7562
+(node:5964) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/retry-reads.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+RETRY_SAFETY_TESTS=PASS transient retries, permanent failure handling, and bounded attempts
+(node:16340) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/reviewed-evidence.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only canonical public GitHub merged PRs and full immutable commit URLs parse (3.2413ms)
+✔ a merged PR is fetched with its changed-file diff and fingerprinted (48.9795ms)
+✔ a full immutable commit URL is accepted when GitHub exposes changed files (1.5368ms)
+✔ unmerged pull requests cannot be treated as verified fix artifacts (2.0652ms)
+✔ missing diff, missing human attestation and incomplete chain provenance fail closed (2.7082ms)
+✔ reviewed engineering evidence is eligible only as a distinct compatible human-reviewed memory (3.5343ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.4658
+(node:15192) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/memory-content.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ engineering addresses remain usable while recognized credentials are rejected before storage (7.8708ms)
+✔ inventory counts only unique completed active blobs, excluding accepted jobs and failed records (2.8112ms)
+✔ a completed receipt and its source survive session restore without saving a reviewer credential (2.0619ms)
+✔ bounded browser reads time out without retrying or leaving an indefinite loading state (36.0145ms)
+✔ accepted storage jobs remain pending and are not treated as completed receipts (66.1726ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.9884
+(node:14248) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/incidents.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ library exposes completed validated resolutions, deduplicated by actual blob (4.3349ms)
+✔ claimed human review without validated evidence never enters the library (1.6743ms)
+✔ prevention-only guard records are excluded even if their legacy decoder accepts them (0.6385ms)
+✔ public projection cannot accidentally expose extra private record properties (0.8306ms)
+✔ error signatures and procedure words discover the genuine reviewed case as related-only (1.4076ms)
+✔ unrelated or generic text is not promoted to a matching resolution (0.647ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26.2345
