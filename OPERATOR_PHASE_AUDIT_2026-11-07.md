@@ -1,6 +1,6 @@
 # Rouse — current 35-phase operator audit
 
-Updated 2026-11-08 through Phase 21. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
+Updated 2026-11-08 through Phase 22. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
 
 Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures. Tests and the example case support that product.
 
@@ -21,13 +21,13 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 13 | BUILD_VERTICAL_SLICE | PASS | Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified. |
 | 14 | PRODUCT_REVIEW | PASS | Purpose intact, all eight P0 groups reviewed and workflow fixes verified. |
 | 15 | BRAND_KIT | PASS | Rouse asset family and rendered font/size/crop QA; BRAND_REVIEW_ROUSE_2026-11-07.md. Internal selection, not user visual signoff. |
-| 16 | ART_DIRECTION | PASS | Working Precedent targets and 79 layout/state assertions; ART_DIRECTION_REVIEW_2026-11-08.md. App integration remains. |
+| 16 | ART_DIRECTION | PASS | Working Precedent targets and 79 layout/state assertions; ART_DIRECTION_REVIEW_2026-11-08.md. App integration accepted in Phase21. |
 | 17 | REFERENCE_BOARD | PASS | Four official functional examples + Rouse targets/anti-reference; 33 browser checks. REFERENCE_BOARD_ROUSE_2026-11-08.md. |
 | 18 | VISUAL_ASSET_STRATEGY | PASS — STRATEGY | Twelve groups; source/priority/owner/fallback/acceptance explicit. 102 inventory +18 map checks. Actual release captures/font optimization pending. |
-| 19 | MOTION_STORYBOARD | PASS — STORYBOARD | Fourteen event-bound transitions, six paired targets; 64 contract +36 sheet checks. Actual application motion unverified. |
+| 19 | MOTION_STORYBOARD | PASS — STORYBOARD | Fourteen event-bound transitions, six paired targets; 64 contract +36 sheet checks. Actual application normal/reduced motion accepted in Phase22. |
 | 20 | DESIGN_LOCK | PASS — REVISION2 | User-requested discovery/public-read extension; base revision1 remains verifiable; design/current-lock.json. |
 | 21 | DESIGN_ENGINEERING | PASS + DISCOVERABILITY | Actual Rouse app; public own-digest reads, reviewed library/error-text search;89 browser +12 actual access/read checks. Recording protected. |
-| 22 | VISUAL_QA | ACTIVE | Actual application target comparison, accessibility and normal/reduced-motion recordings remain; Phase21 screenshots/functional checks are available. |
+| 22 | VISUAL_QA | PASS — LOCAL PRODUCTION | Revision2 target comparison,20 page/38 stable-state scans,29 workspace/10 library/28 keyboard checks,4 normal/reduced recordings and12 actual read/access checks; VISUAL_QA_REVIEW_ROUSE_2026-11-08.md. Public deployment unchanged. |
 | 23 | BUILD_LOOP | PARTIAL | Core journey works; final downstream exit audit remains. |
 | 24 | PROOF_ENGINE | PARTIAL | Core live proof complete; final registry/judge surfaces remain. |
 | 25 | RED_TEAM | PARTIAL | Auth/mismatch/tamper/chronology/failure tests pass; final pass remains. |
@@ -37,7 +37,7 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 29 | PITCH | PARTIAL | Repo/submission/blog drafts; pitch not locked/rehearsed. |
 | 30 | JUDGE_SIMULATION | NOT DONE | No recorded four-lens simulation. |
 | 31 | PRIORITIZED_FIXES | PARTIAL | Phase 14 workflow fixes verified; final pass remains. |
-| 32 | FEATURE_FREEZE | NOT DONE | Final design/QA/hygiene/video gates incomplete. |
+| 32 | FEATURE_FREEZE | NOT DONE | Final release/hygiene/video gates incomplete. |
 | 33 | SUBMISSION_AUDIT | PARTIAL | Public repo/app/blog; final video/form/audit remain. |
 | 34 | READY_TO_SUBMIT | NOT DONE | Downstream requirements incomplete. |
 | 35 | SUBMITTED | NOT DONE | No observed submission receipt. |
@@ -48,7 +48,7 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is closed by explicit user selection of Rouse. Phases 15–21 pass within their documented scopes; Phase 22 Visual QA is active. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phases 15–22 pass within their documented scopes; Phase23 BUILD_LOOP is next. Local production QA is separate from deployment acceptance. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
 Release details: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 

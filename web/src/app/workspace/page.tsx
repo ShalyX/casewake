@@ -42,6 +42,7 @@ export default function Workspace() {
   const [recallUnavailable,setRecallUnavailable]=useState(false);
   const [phase, setPhase] = useState<"idle" | "reading" | "recalling" | "writing">("idle");
   const [error, setError] = useState("");
+  const [activeTask,setActiveTask]=useState<"lookup"|"storage"|"recurrence">("lookup");
   const [proof, setProof] = useState<Proof | null>(null);
   const [writtenSourceDigest, setWrittenSourceDigest] = useState("");
   const [exactBlobRecallPassed, setThreeGatePassed] = useState(false);
@@ -65,6 +66,7 @@ export default function Workspace() {
   const writeInFlight=useRef(false);
   const editorRef=useRef<HTMLDivElement>(null);
   const storageRef=useRef<HTMLElement>(null);
+  const memoryRef=useRef<HTMLElement>(null);
   const focusStorageAfterClose=useRef(false);
   const reviewOpenerRef=useRef<HTMLButtonElement>(null);
   const reviewErrorRef=useRef<HTMLDivElement>(null);
@@ -116,6 +118,7 @@ export default function Workspace() {
   }, [status?.tatumConfigured]);
 
   async function loadRecall(observed: Transaction) {
+    setActiveTask("lookup");
     setPhase("recalling");
     try {
       const recalled = await postJson("/api/recall", { digest: observed.digest }, reviewerKey);
@@ -136,6 +139,7 @@ export default function Workspace() {
   async function inspect(override?: string) {
     const value = (override || digest).trim();
     if (!value) { setError("Enter a transaction digest."); return; }
+    setActiveTask("lookup");
     setReviewErrors([]);
     setError(""); setRecallNote(""); setRecallUnavailable(false); setThreeGatePassed(false); setCandidates([]); setObservedPrecedents([]); setSimulationRunbooks([]); setShowEditor(false); setTx(null);
     try {
@@ -168,6 +172,7 @@ export default function Workspace() {
   }
 
   async function verifySavedRecall(saved: Proof, source: string, recurrence?: string) {
+    setActiveTask("recurrence");
     setError("");
     setPhase("recalling");
     setTx(null);setCandidates([]);setObservedPrecedents([]);setSimulationRunbooks([]);setRecallUnavailable(false);
@@ -194,6 +199,7 @@ export default function Workspace() {
 
   async function remember() {
     if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    setActiveTask("storage");
     writeInFlight.current=true;
     const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"resolution",requestId:crypto.randomUUID()};
     retainStorage(attempt);
@@ -242,6 +248,7 @@ export default function Workspace() {
     if(!attempt)return;
     const jobId=attempt.jobId||recoveryJobId.trim();
     if(!jobId||!reviewerKey){setError("Enter reviewer access and the storage job ID to check the existing write. Do not store another copy.");return;}
+    setActiveTask("storage");
     setPhase("writing");setError("");setFailedStorageJob(false);
     try{
       const query=new URLSearchParams({jobId,sourceDigest:attempt.sourceDigest,requestId:attempt.requestId,kind:attempt.kind});
@@ -259,6 +266,7 @@ export default function Workspace() {
 
   async function rememberObservation() {
     if (!tx || tx.outcome !== "failed" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    setActiveTask("storage");
     writeInFlight.current=true;
     const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"observation",requestId:crypto.randomUUID()};
     retainStorage(attempt);
@@ -282,13 +290,22 @@ export default function Workspace() {
   const rejected = candidates.filter((c) => c.verdict === "incompatible");
   const busy = phase !== "idle";
   const storagePending=!!storageAttempt&&!storageAttempt.receipt;
-  return <div className="rouse-shell workspace-shell"><SiteHeader /><main className="workspace-container">
+  const liveStatus=phase==="reading"?"Reading transaction.":
+    phase==="recalling"?(activeTask==="recurrence"?"Checking exact-blob recurrence.":"Checking reviewed memory."):
+    phase==="writing"?"Submitting or checking storage. Completion is not yet confirmed.":
+    activeTask==="storage"?(storagePending?(failedStorageJob?"Storage job failed. No completed memory.":storageAttempt.jobId?"Storage accepted; completion pending.":"Storage response unconfirmed. Recover the existing job before submitting again."):proof?(observationOnly?"Observation stored. No resolution claimed.":"Memory stored."):""):
+    exactBlobRecallPassed?"Exact stored blob recalled for a distinct failure.":
+    recallUnavailable?"Memory lookup unavailable. No conclusion about saved cases.":
+    tx?(tx.outcome==="unknown"?"Execution outcome unknown.":tx.outcome==="succeeded"?"Transaction succeeded. No failure procedure is inferred.":eligible.length?"Reviewed resolution available.":status?.walrusConfigured?"Transaction failed. No eligible reviewed resolution returned.":"Transaction failed. Memory is not configured."):
+    proof?"Existing storage receipt available.":"";
+
+  return <div className="rouse-shell workspace-shell"><SiteHeader /><main id="main" tabIndex={-1} className="workspace-container">
     <div className="workspace-title-row"><div><h1>Investigate a failure.</h1><p>Read the chain evidence. Compare a reviewed resolution.</p></div><details className="access-disclosure"><summary>Reviewer access</summary><div className="access-content"><label className="reviewer-access"><span>Private reviewer access</span><input type="password" value={reviewerKey} onChange={e=>setReviewerKey(e.target.value)} placeholder="Enter the private workspace key" autoComplete="off" /><small>Kept in page memory only. Required for recording and receipt recovery. Inspection and discovery are public.</small></label><p>Reviewer writes: <strong>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</strong></p><p>Tatum: {status?.tatumConfigured?"Configured":"Not configured"} · Walrus: {status?.walrusConfigured?"Configured":"Not configured"}. Configuration is separate from a successful request.</p></div></details></div>
-    <form className="digest-form" onSubmit={event=>{event.preventDefault();void inspect();}}><label htmlFor="digest">Sui transaction digest</label><div className="input-inline"><input id="digest" value={digest} onChange={e=>setDigest(e.target.value)} placeholder="Paste a real Sui transaction digest" autoComplete="off" spellCheck={false} /><button type="submit" disabled={busy||!status?.tatumConfigured}>{phase==="reading"?"Reading…":"Inspect transaction"} <span aria-hidden="true">↗</span></button></div></form>
-    <div className="intake-context"><button className="text-link" type="button" disabled={busy||!status?.tatumConfigured} onClick={()=>{setDigest(REVIEWED_RECURRENCE);void inspect(REVIEWED_RECURRENCE);}}>Open reviewed example ↗</button><p>Inspect your own Sui Mainnet digest. Recording stays protected.</p><Link className="text-link" href="/cases">Browse or search reviewed cases ↗</Link></div>
+    <form className="digest-form" onSubmit={event=>{event.preventDefault();if(!busy)void inspect();}}><label htmlFor="digest">Sui transaction digest</label><div className="input-inline"><input id="digest" name="digest" value={digest} onChange={e=>setDigest(e.target.value)} placeholder="Paste a real Sui transaction digest" autoComplete="off" spellCheck={false} /><button type="submit" disabled={!status?.tatumConfigured} aria-disabled={busy}>{phase==="reading"?"Reading…":"Inspect transaction"} <span aria-hidden="true">↗</span></button></div></form>
+    <div className="intake-context"><button className="text-link" type="button" disabled={!status?.tatumConfigured} aria-disabled={busy} onClick={()=>{if(busy)return;setDigest(REVIEWED_RECURRENCE);void inspect(REVIEWED_RECURRENCE);}}>Open reviewed example ↗</button><p>Inspect your own Sui Mainnet digest. Recording stays protected.</p><Link className="text-link" href="/cases">Browse or search reviewed cases ↗</Link></div>
     {!status&&<p className="setup-note">Checking workspace configuration…</p>}{status&&!status.tatumConfigured&&<p className="setup-note">Transaction lookup is not configured. Ask the workspace operator to enable chain access.</p>}
     {status&&!status.walrusConfigured&&<p className="setup-note">Memory is not configured. Permitted transaction inspection remains available; no conclusion about stored cases can be drawn.</p>}
-    <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{phase==="reading"?"Reading transaction.":phase==="recalling"?"Checking reviewed memory.":phase==="writing"?"Checking storage; completion is not yet confirmed.":exactBlobRecallPassed?"Exact stored blob recalled for a distinct failure.":eligible.length?"Reviewed resolution available.":proof?"Memory stored.":tx?tx.outcome==="unknown"?"Execution outcome unknown.":`Transaction ${tx.outcome}.`:""}</div>
+    <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{liveStatus}</div>
     {error&&<div className="inline-error" role="alert">{error}</div>}
     <div className="workspace-grid">
       <section className="panel evidence-panel" aria-busy={phase==="reading"}>
@@ -300,14 +317,14 @@ export default function Workspace() {
         <div className="review-entry"><button ref={reviewOpenerRef} type="button" className="secondary-button" disabled={strictDeepbook||tx.digest==="XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue"||tx.outcome!=="failed"||busy||!status?.walrusConfigured||!status.reviewerWritesEnabled||!reviewerKey} onClick={()=>{if(showEditor){setShowEditor(false);reviewOpenerRef.current?.focus();}else setShowEditor(true);}}>{strictDeepbook?"Separate evidence track":showEditor?"Close reviewer":"Record a reviewed resolution"} ↗</button>{strictDeepbook&&<p className="caption">This historical digest has its own route-specific evidence track.</p>}{tx.outcome==="failed"&&!reviewerKey&&<p className="caption">Use Reviewer access to record a new resolution.</p>}</div></>:
         <div className="empty-evidence"><div className="eyebrow">{phase==="reading"?"Transaction read":"Start an investigation"}</div><h2>{phase==="reading"?"Reading transaction evidence.":"The chain tells us what happened."}</h2><p>{phase==="reading"?"Waiting for the actual transaction response. Earlier query results have been cleared.":"Import a Sui digest to inspect the execution before assigning an explanation."}</p></div>}
       </section>
-      <section className="panel memory-panel" aria-busy={phase==="recalling"}><div className="panel-kicker"><span>Reviewed precedent</span><span>For engineering review</span></div>
+      <section ref={memoryRef} tabIndex={-1} aria-label="Reviewed memory" className="panel memory-panel" aria-busy={phase==="recalling"}><div className="panel-kicker"><span>Reviewed precedent</span><span>For engineering review</span></div>
         {phase==="recalling"?<div className="memory-empty"><h2>Checking reviewed memory.</h2><p>Chain evidence and a reviewed resolution are separate results.</p></div>:!tx?<div className="memory-empty"><h2>Retained judgment,<br />ready for the next case.</h2><p>A compatible reviewed resolution appears here with its evidence, reasons and limits.</p></div>:tx.outcome!=="failed"?<div className="memory-empty"><h2>{tx.outcome==="succeeded"?"Successful execution.":"Execution outcome unknown."}</h2><p>{recallNote}</p></div>:<>
         {eligible.map(c=><article key={c.record.id} className="match-card"><h2>{c.record.diagnosis.split(/(?<=[.!?])\s/)[0]}</h2><p className="resolution-steps">{c.record.resolutionSteps}</p>{c.matchReasons?.length?<div className="matching-reasons"><strong>Why it matches:</strong><ul>{c.matchReasons.map(reason=><li key={reason}>✓ {reason}</li>)}</ul></div>:null}{c.warnings?.map((warning,index)=><p className="review-warning" key={index}>{warning}</p>)}
         <p className="review-warning">Current SDK version is unknown; confirm compatibility before reuse.</p>
         <div className="reviewed-by"><span>Reviewed by {c.record.reviewer} · {new Date(c.record.verifiedAt).toLocaleDateString()}</span><a href={c.record.evidenceUrl} target="_blank" rel="noreferrer">Original evidence ↗</a></div>
         {c.walrusReceipt?<div className="exact-blob"><span>Exact recalled Walrus blob</span><code>{c.walrusReceipt.blobId}</code><small>Signed recall · {c.walrusReceipt.namespace}</small></div>:<p>Walrus receipt unavailable — not a completed proof of recall.</p>}
         <details className="provenance-details"><summary>Full case provenance</summary><p>{c.record.diagnosis}</p><p>Source incident</p><code>{c.record.digest}</code><p>SDK version: {c.record.sdkVersion||"Unknown; confirm compatibility before reuse."}</p>{c.record.validatedEvidence&&<><p>Evidence scope: {c.record.validatedEvidence.scope}</p><p>Verification: {c.record.validatedEvidence.verificationMethod||"See original evidence"}</p><p>{c.record.validatedEvidence.evidenceTitle}</p><code>{c.record.validatedEvidence.evidenceSha256||c.record.validatedEvidence.routeTransactionSha256}</code><p>Evidence commit: {c.record.validatedEvidence.evidenceCommitSha||"See source"}</p></>}</details></article>)}
-        {!eligible.length&&<div className="memory-zero"><h2>{!status?.walrusConfigured?"Memory is not configured.":recallUnavailable?"Memory lookup unavailable.":"No eligible precedent."}</h2><p>{recallUnavailable?"No conclusion can be drawn about saved cases. The chain evidence remains available.":recallNote||"This failure remains open for investigation. Similar wording alone is not proof."}</p>{recallUnavailable&&<button className="secondary-button" disabled={busy} onClick={()=>void loadRecall(tx)}>Retry memory lookup ↗</button>}</div>}
+        {!eligible.length&&<div className="memory-zero"><h2>{!status?.walrusConfigured?"Memory is not configured.":recallUnavailable?"Memory lookup unavailable.":"No eligible precedent."}</h2><p>{recallUnavailable?"No conclusion can be drawn about saved cases. The chain evidence remains available.":recallNote||"This failure remains open for investigation. Similar wording alone is not proof."}</p>{recallUnavailable&&<button className="secondary-button" disabled={busy} onClick={()=>{memoryRef.current?.focus();void loadRecall(tx);}}>Retry memory lookup ↗</button>}</div>}
         {simulationRunbooks.map((hit)=> <article key={hit.record.id} className="simulation-card">
                   <div className="simulation-card-kicker">SIMULATION-TESTED · HISTORICAL REPAIR NOT VERIFIED</div>
                   <h3>One reproducible failure. One tested correction.</h3>
@@ -367,7 +384,7 @@ export default function Workspace() {
             </div>}
     {(storagePending||proof)&&<section ref={storageRef} tabIndex={-1} className="storage-section" aria-label="Storage and recurrence"><div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
               <h3>{exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : storagePending?failedStorageJob?"Storage job failed.":"Storage is awaiting confirmation.":proof ? observationOnly?"Observation stored. No resolution claimed.":"Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
-              {storagePending&&<div className="proof-receipt" role="status"><span>{failedStorageJob?"STORAGE JOB FAILED · NO COMPLETED MEMORY":storageAttempt.jobId?"STORAGE JOB ACCEPTED · NOT YET A COMPLETED MEMORY":"STORAGE RESPONSE UNCONFIRMED · DO NOT RESUBMIT"}</span>{storageAttempt.jobId?<code>{storageAttempt.jobId}</code>:<label>Recover storage job ID<input value={recoveryJobId} onChange={event=>setRecoveryJobId(event.target.value)} placeholder="Existing Walrus job ID"/></label>}<p>Check the existing job to recover its receipt. This action never creates another memory.</p><button type="button" className="secondary-button" disabled={busy||!reviewerKey||(!storageAttempt.jobId&&!recoveryJobId.trim())} onClick={()=>void checkStorage()}>Check storage status ↗</button>{failedStorageJob&&<button type="button" className="secondary-button" onClick={()=>{retainStorage(null);setFailedStorageJob(false);setError("");}}>Dismiss failed storage job</button>}</div>}
+              {storagePending&&<div className="proof-receipt"><span>{failedStorageJob?"STORAGE JOB FAILED · NO COMPLETED MEMORY":storageAttempt.jobId?"STORAGE JOB ACCEPTED · NOT YET A COMPLETED MEMORY":"STORAGE RESPONSE UNCONFIRMED · DO NOT RESUBMIT"}</span>{storageAttempt.jobId?<code>{storageAttempt.jobId}</code>:<label>Recover storage job ID<input value={recoveryJobId} onChange={event=>setRecoveryJobId(event.target.value)} placeholder="Existing Walrus job ID"/></label>}<p>Check the existing job to recover its receipt. This action never creates another memory.</p><button type="button" className="secondary-button" disabled={busy||!reviewerKey||(!storageAttempt.jobId&&!recoveryJobId.trim())} onClick={()=>void checkStorage()}>Check storage status ↗</button>{failedStorageJob&&<button type="button" className="secondary-button" onClick={()=>{retainStorage(null);setFailedStorageJob(false);setError("");}}>Dismiss failed storage job</button>}</div>}
               <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? "A distinct Tatum-confirmed failed incident recalled the reviewed resolution from the exact Walrus blob. Human causal review remains visible." : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
               {proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><small>Source incident {writtenSourceDigest}</small><code>{proof.blobId}</code><small>Job {proof.jobId} · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
                     <label className="reviewer-access"><span>SECOND DISTINCT REAL FAILURE</span><input value={recurrenceDigest} onChange={(e) => setRecurrenceDigest(e.target.value)} placeholder="Digest of a comparable later failed incident" spellCheck={false}/><small>Rouse will independently fetch it through Tatum and require a compatible error before accepting the exact Walrus blob match.</small></label>

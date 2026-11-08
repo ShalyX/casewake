@@ -1,0 +1,16 @@
+[
+  {
+    "run": "desktop-normal",
+    "responseToStartMs": 40.7,
+    "observedEventSpanMs": 167.9,
+    "cssDurationMs": 180,
+    "note": "Animation events are sampled at frame boundaries; event span differs from CSS duration."
+  },
+  {
+    "run": "mobile-normal",
+    "responseToStartMs": 39.1,
+    "observedEventSpanMs": 166.3,
+    "cssDurationMs": 180,
+    "note": "Animation events are sampled at frame boundaries; event span differs from CSS duration."
+  }
+]

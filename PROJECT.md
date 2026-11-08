@@ -1,3 +1,9 @@
+# Phase22 checkpoint — Rouse, 2026-11-08
+
+Local production visual/accessibility/motion QA passes against design revision2, including reviewed-case library and error-text search. Fixed keyboard focus, current-operation announcements, narrow proof/receipt wrapping, skip navigation and focus/target sizing.20 actual page scans;29 workspace,10 library and28 keyboard checks;4 normal/reduced recordings with98 assertions;12 actual read/access checks; build/lint/unit and95 design checks pass. Full real reviewed blob remains in first desktop screen. Zero new Mainnet writes. Review: VISUAL_QA_REVIEW_ROUSE_2026-11-08.md; evidence/phase22/acceptance.json. Phase23 BUILD_LOOP is next. Public deployment unchanged; no submission readiness implied.
+
+---
+
 # Current checkpoint — discoverability complete before Phase22, 2026-11-08
 
 Engineers can inspect any valid Sui Mainnet digest without reviewer access, browse the real reviewed library at /cases and search error text/keywords. Search returns related-only results with evidence, reviewer and full blob. Recording/recovery authorization stays intact. Current catalogue: one reviewed resolution among13 completed namespace records, all retrieved in actual acceptance. Build/lint/unit tests pass;89 browser +12 actual read/access checks; zero new memory writes. Local production preview: http://127.0.0.1:4242/cases. Public deployment unchanged.

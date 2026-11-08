@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "checks": [
+    "Visible first-tab skip link /",
+    "Skip focuses main /",
+    "One primary heading /",
+    "Text spacing reflows /",
+    "Visible first-tab skip link /workspace",
+    "Skip focuses main /workspace",
+    "One primary heading /workspace",
+    "Text spacing reflows /workspace",
+    "Visible first-tab skip link /cases",
+    "Skip focuses main /cases",
+    "One primary heading /cases",
+    "Text spacing reflows /cases",
+    "Visible first-tab skip link /journal/casewake",
+    "Skip focuses main /journal/casewake",
+    "One primary heading /journal/casewake",
+    "Text spacing reflows /journal/casewake",
+    "Visible first-tab skip link /proof/splitcoins",
+    "Skip focuses main /proof/splitcoins",
+    "One primary heading /proof/splitcoins",
+    "Text spacing reflows /proof/splitcoins",
+    "Reviewer disclosure works with keyboard",
+    "Reviewer key has a visible focus outline",
+    "Accessibility tree exposes main landmark",
+    "Accessibility tree names digest input",
+    "Error-text search has a visible focus outline",
+    "Wordmark failure retains product alt text",
+    "Font and image failure retains primary action",
+    "Fallback fonts retain mobile reflow"
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "textSpacingOverflow": 0
+    },
+    {
+      "path": "/workspace",
+      "textSpacingOverflow": 0
+    },
+    {
+      "path": "/cases",
+      "textSpacingOverflow": 0
+    },
+    {
+      "path": "/journal/casewake",
+      "textSpacingOverflow": 0
+    },
+    {
+      "path": "/proof/splitcoins",
+      "textSpacingOverflow": 0
+    }
+  ],
+  "realMemoryWrites": 0,
+  "scope": "Chromium keyboard, accessibility tree, focus, text-spacing and blocked local asset fallback; no Narrator/NVDA or Safari/Firefox certification"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "label": "desktop-normal",
+    "file": "desktop-normal.webm",
+    "duration": 22.8,
+    "width": 1440,
+    "height": 900,
+    "bytes": 4398103
+  },
+  {
+    "label": "desktop-reduced",
+    "file": "desktop-reduced.webm",
+    "duration": 22.04,
+    "width": 1440,
+    "height": 900,
+    "bytes": 4039116
+  },
+  {
+    "label": "mobile-normal",
+    "file": "mobile-normal.webm",
+    "duration": 22.08,
+    "width": 390,
+    "height": 844,
+    "bytes": 2663582
+  },
+  {
+    "label": "mobile-reduced",
+    "file": "mobile-reduced.webm",
+    "duration": 21.6,
+    "width": 390,
+    "height": 844,
+    "bytes": 2612894
+  }
+]

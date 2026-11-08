@@ -1,4 +1,4 @@
-import { Brand } from "@/components/site-chrome";
+import { Brand,SkipLink } from "@/components/site-chrome";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -15,10 +15,10 @@ const C = "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp";
 export default function CasewakeJournal() {
   return <main className="journal-page">
     <header className="journal-header">
-      <Brand />
+      <SkipLink /><Brand />
       <nav><Link href="/workspace">Open workspace ↗</Link><Link href="/">Home</Link></nav>
     </header>
-    <article className="journal-container">
+    <article id="main" tabIndex={-1} className="journal-container">
       <div className="journal-meta">ENGINEERING NOTES <span>/</span> NOV 4, 2026 <span>/</span> 8 MIN READ</div>
       <h1>When a failure teaches<br/><em>the next investigation.</em></h1>
       <p className="journal-lead">A Sui transaction records what failed. What it does not preserve is the engineering context needed to make the next investigation easier. We built Casewake to remember that context—with its evidence and uncertainty intact.</p>

@@ -1,4 +1,4 @@
-import { Brand } from "@/components/site-chrome";
+import { Brand,SkipLink } from "@/components/site-chrome";
 import Link from "next/link";
 import simulationProof from "./evidence.json";
 
@@ -13,11 +13,11 @@ export const metadata = {
 export default function SplitcoinsProof() {
   if (!failed || !corrected) return <main className="proof-page">Missing authenticated simulation evidence.</main>;
   return <main className="proof-page">
-    <header className="site-header" style={{height:55,padding:0}}>
-      <Brand />
+    <header className="site-header">
+      <SkipLink /><Brand />
       <Link href="/workspace" className="quiet-button">Return to workspace ↗</Link>
     </header>
-    <article className="proof-container">
+    <article id="main" tabIndex={-1} className="proof-container">
       <div className="eyebrow">TECHNICAL PROOF / SIMULATION 001</div>
       <h1>Same transaction structure.<br/><em>One tested correction.</em></h1>
       <p className="proof-intro">Two authentic, read-only requests to Tatum&apos;s Sui Mainnet gRPC simulation service. We deliberately created a 10,000,000 MIST coin, then attempted to split it by different amounts. No wallet signature was used and neither transaction was submitted to the blockchain.</p>
