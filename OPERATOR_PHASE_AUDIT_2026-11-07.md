@@ -1,6 +1,6 @@
 # Rouse — current 35-phase operator audit
 
-Updated 2026-11-08 through Phase 20. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
+Updated 2026-11-08 through Phase 21. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
 
 Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures. Tests and the example case support that product.
 
@@ -26,8 +26,8 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 18 | VISUAL_ASSET_STRATEGY | PASS — STRATEGY | Twelve groups; source/priority/owner/fallback/acceptance explicit. 102 inventory +18 map checks. Actual release captures/font optimization pending. |
 | 19 | MOTION_STORYBOARD | PASS — STORYBOARD | Fourteen event-bound transitions, six paired targets; 64 contract +36 sheet checks. Actual application motion unverified. |
 | 20 | DESIGN_LOCK | PASS — REVISION1 | All8 P0s and route/state contract; frozen spec/dependency hashes; nine supplementary targets pass156 viewport checks. |
-| 21 | DESIGN_ENGINEERING | ACTIVE | Implement locked Rouse design in actual Next.js app; font delivery and final implementation acceptance remain. |
-| 22 | VISUAL_QA | PARTIAL | Existing live functional checks; Phase 16 static-target QA is separate. Actual application comparison and motion QA remain after integration. |
+| 21 | DESIGN_ENGINEERING | PASS — IMPLEMENTATION | Actual locked Next.js Rouse routes; build/lint/unit tests;62 browser +5 actual read-only checks. Dedicated final visual QA remains. |
+| 22 | VISUAL_QA | ACTIVE | Actual application target comparison, accessibility and normal/reduced-motion recordings remain; Phase21 screenshots/functional checks are available. |
 | 23 | BUILD_LOOP | PARTIAL | Core journey works; final downstream exit audit remains. |
 | 24 | PROOF_ENGINE | PARTIAL | Core live proof complete; final registry/judge surfaces remain. |
 | 25 | RED_TEAM | PARTIAL | Auth/mismatch/tamper/chronology/failure tests pass; final pass remains. |
@@ -48,7 +48,7 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is closed by explicit user selection of Rouse. Phases 15–20 pass within their documented scopes; Phase 21 Design Engineering is active. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phases 15–21 pass within their documented scopes; Phase 22 Visual QA is active. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
 Release details: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 

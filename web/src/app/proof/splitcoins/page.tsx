@@ -1,3 +1,4 @@
+import { Brand } from "@/components/site-chrome";
 import Link from "next/link";
 import simulationProof from "./evidence.json";
 
@@ -6,14 +7,14 @@ const corrected = simulationProof.find((r) => r.label === "corrected");
 const evidenceHash = "bb08e026fddaebfb1167484755cd088236cab4ed232966f6b706376e2b9aac0e";
 const blobId = "keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw";
 export const metadata = {
-  title: "SplitCoins reproduction evidence — Casewake",
+  title: "SplitCoins reproduction evidence — Rouse",
   description: "Two unsigned Tatum Sui Mainnet simulations demonstrate an InsufficientCoinBalance failure and a successful controlled correction.",
 };
 export default function SplitcoinsProof() {
   if (!failed || !corrected) return <main className="proof-page">Missing authenticated simulation evidence.</main>;
   return <main className="proof-page">
     <header className="site-header" style={{height:55,padding:0}}>
-      <Link href="/" className="brand"><span className="brand-mark"><span/></span>CASEWAKE</Link>
+      <Brand />
       <Link href="/workspace" className="quiet-button">Return to workspace ↗</Link>
     </header>
     <article className="proof-container">

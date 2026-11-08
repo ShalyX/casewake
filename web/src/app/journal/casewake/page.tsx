@@ -1,10 +1,11 @@
+import { Brand } from "@/components/site-chrome";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Casewake: when a Sui failure teaches the next investigation",
-  description: "How Casewake uses Tatum Mainnet execution evidence and Walrus durable memory to recall simulation-tested troubleshooting guidance without inventing historical repairs.",
+  title: "Rouse: when a Sui failure teaches the next investigation",
+  description: "How Rouse uses Tatum Mainnet execution evidence and Walrus durable memory to recall simulation-tested troubleshooting guidance without inventing historical repairs.",
 };
 
 const A = "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
@@ -14,7 +15,7 @@ const C = "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp";
 export default function CasewakeJournal() {
   return <main className="journal-page">
     <header className="journal-header">
-      <Link href="/" className="brand"><span className="brand-mark"><span/></span><span>CASEWAKE</span></Link>
+      <Brand />
       <nav><Link href="/workspace">Open workspace ↗</Link><Link href="/">Home</Link></nav>
     </header>
     <article className="journal-container">

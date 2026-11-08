@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 35,
+  "revision": 36,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "DESIGN_ENGINEERING",
-  "active_specialist": "Design Engineering - locked Rouse implementation",
+  "phase": "VISUAL_QA",
+  "active_specialist": "Art Director / Visual QA - actual Rouse application",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -48,8 +48,8 @@
     "VISUAL_ASSET_STRATEGY": "PASS - STRATEGY: 12 groups with purpose/source/priority/fallback; 102 inventory +18 browser checks. Final captures/font optimization follow implementation.",
     "MOTION_STORYBOARD": "PASS - STORYBOARD: 14 event-bound transitions, six paired targets, 64 contract +36 responsive sheet checks. Actual application motion remains NOT VERIFIED.",
     "DESIGN_LOCK": "PASS - REVISION1: contract/spec snapshot/hashes; all8P0 groups mapped; nine supplemental targets pass156 viewport checks. Actual application QA remains.",
-    "DESIGN_ENGINEERING": "ACTIVE: implement locked Rouse design in existing Next.js app while preserving all8P0 handlers; no final implementation acceptance yet.",
-    "VISUAL_QA": "PARTIAL: Functional state matrix complete; final art-direction/motion acceptance remains.",
+    "DESIGN_ENGINEERING": "PASS - IMPLEMENTATION: actual Next Rouse routes; build/lint/unit tests,62 browser +5 actual read-only checks; font delivery107428bytes. Dedicated Phase22 acceptance remains.",
+    "VISUAL_QA": "ACTIVE: final target comparison, state recordings, accessibility and normal/reduced-motion acceptance on actual Rouse app remain.",
     "BUILD_LOOP": "PARTIAL: Core journey works; final downstream exit audit remains.",
     "PROOF_ENGINE": "PARTIAL: Core live proof complete; final registry/judge surfaces remain.",
     "RED_TEAM": "PARTIAL: Auth/mismatch/tamper/chronology/failure tests pass; final pass remains.",
@@ -66,12 +66,12 @@
   },
   "blockers": [
     "External Sui-engineer utility validation and organizer track fit unconfirmed.",
-    "Asset delivery/font optimization, actual Rouse implementation and application design acceptance remain.",
+    "Actual Rouse final visual/motion acceptance, current-release capture and deployment remain; font delivery and implementation now pass.",
     "Full hygiene skill/tracked-history scan, final MP4/videoQA/judge simulation/submission audit and receipt remain.",
     "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
     "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase21: implement revision1 Working Precedent in actual Next.js routes. Optimize font delivery, preserve API/review/storage/recall behavior; then compare actual app and record Phase22 static/motion acceptance. No new memory write for design.",
+  "next_action": "Phase22: inspect actual Rouse against locked revision1; record real state transitions and normal/reduced motion, complete desktop/tablet/mobile and accessibility critique/fixes. Production deployment remains separate; no new memory write for QA.",
   "updated_at": "2026-11-08",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -151,5 +151,18 @@
       "evidence/phase20/lock-qa.json"
     ],
     "status": "LOCKED_FOR_IMPLEMENTATION; PRODUCTION_VISUAL_QA_PENDING"
+  },
+  "design_engineering": {
+    "review": "DESIGN_IMPLEMENTATION_REVIEW_ROUSE_2026-11-08.md",
+    "evidence": "evidence/phase21/",
+    "build_id": "lCeJ3B7hDqsJveahuxVha",
+    "local_preview": "http://127.0.0.1:4242",
+    "design_lock_revision": 1,
+    "status": "IMPLEMENTED_AND_FUNCTIONALLY_CHECKED; FINAL_VISUAL_QA_PENDING"
+  },
+  "design_target_user_approval": {
+    "date": "2026-11-08",
+    "scope": "Shown locked landing/workspace design targets; implementation requested",
+    "instruction": "Looks good bro, let's move to Phase 21 and implement this in the actual app"
   }
 }

@@ -1,3 +1,11 @@
+# Current checkpoint — Phase 21 implemented, 2026-11-08
+
+Actual Next.js Rouse landing/workspace, reviewer/storage and secondary routes now use the user-approved locked design. Production build/lint/unit tests pass;62 browser checks and5 actual read-only acceptance checks pass. Full approved blob remains visible (bottom838.5px in1440×900); Tatum/Walrus/protected job recovery and distinct exact-blob recall work. Three intercepted fixture submissions, zero real memory writes. Font delivery107,428bytes. No API route changes or public deployment.
+
+Active phase:22 VISUAL_QA. Final normal/reduced-motion recording, accessibility and target comparison remain. Preview: http://127.0.0.1:4242 (local production bundle). DESIGN_IMPLEMENTATION_REVIEW_ROUSE_2026-11-08.md records evidence and fixes. Dedicated final visual/motion flags remain false; earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Phase 20 design locked, revision 1, 2026-11-08
 
 Working Precedent is now implementation-ready. The locked contract maps all8 original P0s, routes, layout/state semantics, assets, motion, focus/accessibility and acceptance. Nine supplementary targets close configuration/storage/tier/inventory/secondary-page gaps;156 responsive checks pass. DESIGN.md matches its frozen snapshot and hashed inputs. No application source, production deployment or stored memory changed.

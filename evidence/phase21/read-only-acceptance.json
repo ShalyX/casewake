@@ -1,0 +1,34 @@
+{
+  "base": "http://127.0.0.1:4242",
+  "checkedAt": "2026-11-08T12:25:21.472Z",
+  "checks": [
+    "Actual existing Mainnet job returns exact completed blob",
+    "Existing-job recovery remains protected",
+    "Distinct actual failure verifies exact stored blob",
+    "Self-recall rejected",
+    "Unrelated failure rejected"
+  ],
+  "memoryWrites": 0,
+  "inventory": {
+    "namespace": "incident-memory-v1",
+    "allStoredMemories": 13,
+    "sampleBlobIds": [
+      "fxqZ53GnDXBT3YR37npywnvxNdJF6Bb27giTaF9iKYA",
+      "duiuqo48PMf_v6lYakj5jwqX5D8rE1bXTxRbgtFc4q0",
+      "-GJ6sTLGrAxS0JF8fhqBLIbeDPCZJVZNh1Q5iP0LQOs",
+      "HCkV_2yZkHm0LBrQmBd9IVLRluxeFhS9DyFgKq2S8Xo",
+      "vwqDiXurTB3w1J9PU4Za0sKlKZv2OTER1Tl7vlDKyHI",
+      "7LaaUSXE9lkGMkyezbciiHKdNE2NzbAE4a_4RC39sPg",
+      "GdCNNgqsubZhRmoWf8bqq1mrbOvmrUS1Jmurq608Goo",
+      "GA2oUh9Dgdf5yJrzZnD_R6Em5pHTbas6S2rwF68UFSA",
+      "FEuvBlh6VopgS_7L34eXFNCqMXGuzb2ooL4ZydTzqQ8",
+      "LoWHztOMtZuGIM7Oqr60g16C7W21S__eeIR9SpftKr0",
+      "Jq7CNgZpBUzJL48Gzf4I0uwFv0R0-RWkdbWx_TQir3E",
+      "keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw",
+      "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY"
+    ],
+    "complete": true
+  },
+  "blob": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+  "passed": true
+}
