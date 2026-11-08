@@ -1,3 +1,11 @@
+# Current narrative direction — Rouse, 2026-11-08
+
+The Nov 4 script below is historical and is not the current proof ceiling. Rouse now has one explicitly ShalyX-approved independent integration resolution, a completed Mainnet blob and verified exact-blob recall on a distinct compatible failure. It still does not prove the original operator deployed a correction or that a historical onchain transaction was repaired.
+
+The final demo should foreground the general incident-memory journey and the bounded approved case, with the procedure, reviewer, match reasons, source and exact blob visible. DESIGN.md supplies Phase 16 composition targets. No final video/script-production acceptance is claimed; rewrite the historical script during Phase 27 before recording.
+
+---
+
 # Casewake — Judge Demo Production
 
 **Status:** script and shot plan prepared 2026-11-04. FINAL VIDEO NOT YET RECORDED.

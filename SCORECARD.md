@@ -1,3 +1,9 @@
+# Phase 16 presentation checkpoint — 2026-11-08
+
+Page art direction now has rendered Rouse landing/workspace targets, a general product promise backed by the real reviewed case, and inspectable procedure/reviewer/source/blob hierarchy. Internal target assessment 21/24 is an art-direction rubric, not an official hackathon score. Public implementation, video, pitch and judge simulation remain.
+
+---
+
 # Current scorecard checkpoint — Phase14, 2026-11-07
 
 Official rubric mapping remains30% sponsor integration,30% technical quality,20% creativity,20% presentation. No invented score or placement prediction.

@@ -1,3 +1,15 @@
+# Current checkpoint — Phase 16 art direction complete, 2026-11-08
+
+Working Precedent selected: current failure evidence beside an earlier human-reviewed resolution, its reasons and exact retained blob. DESIGN.md replaces the old bracket/tilted-card spec; the prior version is archived under design/history/.
+
+Actual public readback still shows the approved exact blob. Static targets pass 79 assertions over 12 states at desktop/mobile plus tablet: no horizontal overflow, exact blob above the desktop fold, protected/non-writing review study, correct proof-method fields and reduced-motion loading. No target API calls or memory writes. ART_DIRECTION_REVIEW_2026-11-08.md records limitations.
+
+Active phase:17 REFERENCE_BOARD. Asset strategy, motion storyboard and design lock remain before actual Next.js implementation/release. The original dirty checkout remains untouched; work continues in the existing isolated branch. No product thesis, API or production deployment changed.
+
+Earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Rouse brand kit complete, 2026-11-07
 
 Phase 15 PASS for internal brand selection and asset QA. Canonical retained-counter r/wordmark, vector/raster variants, favicon/avatar/social card, typography and usage rules in web/public/brand/rouse/. Three concept territories explored; closed-counter vector rejected and refined for legibility. BRAND_REVIEW_ROUSE_2026-11-07.md records proof and limitations.

@@ -14,6 +14,10 @@ Current checkpoint: 2026-11-07 Phase14. Core evidence below supersedes historica
 | External engineer utility / organizer track fit | OPEN | No qualifying acceptance observed | Do not claim validation |
 | Final identity/design/hygiene/video/judge/submission | OPEN | OPERATOR_PHASE_AUDIT_2026-11-07.md | Sequential later gates remain |
 
+## Phase 16 art direction — 2026-11-08
+
+Working Precedent selected; static targets and 79 assertions recorded in ART_DIRECTION_REVIEW_2026-11-08.md and evidence/phase16/target-qa.json. Actual public readback confirms the reviewed exact blob still visible. The target itself makes zero API calls and does not write memories. Its static case data is not a new Mainnet acceptance run. Formal app integration, final motion and production visual QA remain separate.
+
 ## Historical evidence registry (dated checkpoints)
 
 Checked 2026-11-04. These older statuses are historical and are superseded where the current checkpoint above differs.
