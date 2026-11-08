@@ -1,0 +1,269 @@
+{
+  "phase": 18,
+  "date": "2026-11-08",
+  "purpose": "Sui engineers retain evidence-linked human-reviewed resolutions and reuse them for compatible failures.",
+  "direction": "Working Precedent",
+  "scope": "Asset strategy acceptance; production integration and final captures remain.",
+  "assets": [
+    {
+      "id": "A01",
+      "surface": "Global navigation / footer / install icon",
+      "purpose": "Recognize the locked Rouse identity without displacing the task.",
+      "story_mode": "restrained/interface-first",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "READY",
+      "source": [
+        "web/public/brand/rouse/wordmark-light.svg",
+        "web/public/brand/rouse/wordmark-dark.svg",
+        "web/public/brand/rouse/favicon.svg",
+        "web/public/brand/rouse/favicon-16.png",
+        "web/public/brand/rouse/favicon-32.png"
+      ],
+      "format": "SVG wordmarks; SVG/PNG icons",
+      "responsive_variants": "Header wordmark 112\u2013144 CSS px wide, preserve viewBox; 16/32px icons. No mark crop.",
+      "fallback": "Plain Rouse text link with accessible name.",
+      "acceptance": "Use reverse on ink and dark on paper. No new lock/shield/circuit motif. Logo remains legible at smallest intended size.",
+      "alt": "Rouse",
+      "preview": "web/public/brand/rouse/wordmark-light.svg"
+    },
+    {
+      "id": "A02",
+      "surface": "All product pages",
+      "purpose": "Make decisions readable and provenance distinct.",
+      "story_mode": "interface-first",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "READY",
+      "source": [
+        "web/public/brand/rouse/fonts",
+        "web/public/brand/rouse/tokens.json",
+        "web/public/brand/rouse/FONT-LICENSE.txt"
+      ],
+      "format": "Canonical self-hosted TTF sources + JSON tokens; optimized web delivery required",
+      "responsive_variants": "Space Grotesk headings; DM Sans body; DM Mono identifiers. Body at least 16px for reading; secondary labels 12\u201314px.",
+      "fallback": "system-ui body and ui-monospace identifiers; preserve layout and all data.",
+      "acceptance": "Retain OFL licenses. Current three TTF sources total 426,584 bytes, above the proposed 250KB delivery budget. Before release, derive licensed web subsets/WOFF2 or choose only the needed weights, then measure transfer. Font swap must not hide text. Color always accompanied by wording.",
+      "alt": "Decorative typography; no image alternative required.",
+      "preview": null
+    },
+    {
+      "id": "A03",
+      "surface": "Landing hero",
+      "purpose": "Show an engineer why an earlier reviewed resolution matters to the current failure.",
+      "story_mode": "product-led",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "design/phase16/landing.html",
+        "design/phase16/workspace.html",
+        "design/phase16/case-data.json"
+      ],
+      "format": "Responsive semantic DOM; optional WebP/PNG companion capture after integration",
+      "responsive_variants": "Desktop: current evidence alongside prior judgment. Mobile: current failure \u2192 reviewed procedure \u2192 reasons/reviewer \u2192 blob. Capture targets 1440\u00d7900 and 390\u00d7844.",
+      "fallback": "Keep the same case relationship as semantic text; never leave an empty media slot.",
+      "acceptance": "Primary visual must contain real case identity, review qualification and full copyable blob. Recorded example clearly labelled with capture date. No fake live dots/counts.",
+      "alt": "Recorded example: a compatible failure retrieves a human-reviewed reconciliation procedure and its retained blob.",
+      "preview": "evidence/phase16/landing-desktop.png"
+    },
+    {
+      "id": "A04",
+      "surface": "Workspace: eligible reviewed resolution",
+      "purpose": "Let the engineer assess applicability before acting.",
+      "story_mode": "product-led",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "design/phase16/workspace.html",
+        "design/phase16/case-data.json",
+        "evidence/real-case/exact-blob-recall.json"
+      ],
+      "format": "Live accessible DOM; acceptance screenshots",
+      "responsive_variants": "1440\u00d7900 paired columns; 768px tablet and 390\u00d7844 ordered stack. Whole essential blob strip in desktop fold at reference viewport. Mobile may scroll vertically.",
+      "fallback": "Show actual source/procedure/reviewer/blob as text; if recall fails use unavailable state, never a cached eligible result.",
+      "acceptance": "Preserve procedure, compatibility reasons, reviewer, source link and full exact blob. No shortened identifier as the only evidence. Original operator deployment remains unknown.",
+      "alt": "Current failure beside the reviewed prior resolution, compatibility reasons and exact retained record.",
+      "preview": "evidence/phase16/workspace-eligible-desktop.png"
+    },
+    {
+      "id": "A05",
+      "surface": "Workspace: empty / unconfigured / loading / lookup error / success / unknown / no match / unavailable",
+      "purpose": "Make the next action clear without implying evidence that is absent.",
+      "story_mode": "interface-first",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "design/phase16/workspace.html",
+        "web/scripts/phase16-target-qa.mjs"
+      ],
+      "format": "Semantic text, CSS indicator, existing controls; no illustration set",
+      "responsive_variants": "390\u00d7844, 768px, 1440\u00d7900; status and action stay in reading order. No fixed screenshot embedded as application state.",
+      "fallback": "Plain status text and available next action. Loading can use static wording.",
+      "acceptance": "Keep all eight states distinct. Success does not suggest failure repair. Unknown requires investigation. No-match differs from unavailable. Clear stale results. Indicators obey reduced motion.",
+      "alt": "State-specific text in the interface; do not add redundant decorative alt text.",
+      "preview": "evidence/phase16/workspace-unavailable-mobile.png"
+    },
+    {
+      "id": "A06",
+      "surface": "Protected review / pending / completed receipt",
+      "purpose": "Show what the human approved and whether storage actually completed.",
+      "story_mode": "interface-first",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "design/phase16/workspace.html",
+        "evidence/real-case/human-approval.json",
+        "evidence/real-case/reviewed-memory-receipt.json"
+      ],
+      "format": "Actual form/status/receipt DOM; controlled-state QA captures",
+      "responsive_variants": "Desktop and mobile. Do not crop proof-method fields, confirmation or completion identity. Pending is a separate state with job recovery.",
+      "fallback": "Readable status plus job identifier; completed receipt only after confirmed job. No image-only receipt.",
+      "acceptance": "Keep both confirmation methods and conditional fields. No prechecked approval; no resubmit-as-recovery. Existing receipt may be read for captures; a new case requires its own approval. Controlled fixtures labelled in QA.",
+      "alt": "Human review fields followed by a storage receipt; completion names the retained blob.",
+      "preview": "evidence/phase16/workspace-receipt-mobile.png"
+    },
+    {
+      "id": "A07",
+      "surface": "Case proof / field notes / judge evidence link",
+      "purpose": "Allow an independent reader to inspect the original evidence and the scope of the correction.",
+      "story_mode": "data-led",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "CAPTURE_AFTER_INTEGRATION",
+      "source": [
+        "evidence/real-case/REVIEW.md",
+        "evidence/real-case/exact-blob-recall.json",
+        "evidence/production-reviewed-case",
+        "design/phase16/case-data.json"
+      ],
+      "format": "Text links + current read-only application PNG/WebP captures",
+      "responsive_variants": "1440\u00d7900 and 390\u00d7844; optional detail crop at native scale. Keep a full-frame parent capture and timestamp/source metadata.",
+      "fallback": "Link to immutable case commit and structured evidence with readable description.",
+      "acceptance": "Use a current Rouse build and actual read-only retrieval. Show distinct recurrence and exact blob. Do not call independent replay an original operator deployment or an onchain repair.",
+      "alt": "A distinct real failure recalls the exact blob of the approved independent integration resolution.",
+      "preview": "design/phase17/images/rouse-origin-blob.png"
+    },
+    {
+      "id": "A08",
+      "surface": "External share preview / hackathon listing",
+      "purpose": "Make Rouse recognizable before the app opens.",
+      "story_mode": "brand-led",
+      "priority": "SHOULD",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "READY",
+      "source": [
+        "web/public/brand/rouse/social-card.png",
+        "web/public/brand/rouse/avatar.png",
+        "web/public/brand/rouse/social-preview.html"
+      ],
+      "format": "PNG social card and avatar",
+      "responsive_variants": "1200\u00d7630 social; 512\u00d7512 avatar. Test centre crops and circle avatar. Keep supplied composition; do not stretch.",
+      "fallback": "Platform title and description in text.",
+      "acceptance": "These are identity assets, not evidence of usage or current app behavior. Any URL/copy change requires a fresh metadata preview.",
+      "alt": "Rouse \u2014 retain evidence-linked resolutions for compatible Sui failures.",
+      "preview": "web/public/brand/rouse/social-card.png"
+    },
+    {
+      "id": "A09",
+      "surface": "Workflow explanation below landing hero",
+      "purpose": "Explain import \u2192 review \u2192 retain \u2192 reuse without suggesting an automatic repair.",
+      "story_mode": "diagram-led",
+      "priority": "SHOULD",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "PRODUCT.md",
+        "DESIGN.md"
+      ],
+      "format": "Semantic ordered list styled with a single restrained retained-edge line",
+      "responsive_variants": "Horizontal at wide widths, ordered vertical at mobile; no text baked into image.",
+      "fallback": "The ordered list itself.",
+      "acceptance": "Human review is explicit; store completion follows the real job. Recurrence is distinct from the original source. No arrows imply automatic execution.",
+      "alt": "Four steps: inspect a failure, review a resolution, retain it, reuse it on a compatible failure.",
+      "preview": null
+    },
+    {
+      "id": "A10",
+      "surface": "Sponsor integration attribution",
+      "purpose": "Explain what Tatum and Walrus contribute to the actual product.",
+      "story_mode": "restrained/text-led",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "IMPLEMENTATION_REQUIRED",
+      "source": [
+        "PRODUCT.md",
+        "evidence/phase14/release-verification.md"
+      ],
+      "format": "Text names and source links; no downloaded or recreated sponsor marks",
+      "responsive_variants": "Short readable caption near provenance; wrap on mobile.",
+      "fallback": "Plain text: transaction evidence via Tatum; reviewed memory retained on Walrus.",
+      "acceptance": "Separate chain evidence from memory retention and review judgment. No implied sponsorship endorsement or invented availability badges.",
+      "alt": "Use visible integration wording; no sponsor logo alternatives required.",
+      "preview": null
+    },
+    {
+      "id": "A11",
+      "surface": "Demo / pitch frames",
+      "purpose": "Show the independently usable loop using the final app.",
+      "story_mode": "product-led; motion planned in Phase 19",
+      "priority": "MUST",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "CAPTURE_AFTER_INTEGRATION",
+      "source": [
+        "DEMO.md",
+        "evidence/real-case/exact-blob-recall.json",
+        "evidence/phase14/release-verification.md"
+      ],
+      "format": "Later real browser recording and high-resolution stills",
+      "responsive_variants": "Plan 1920\u00d71080 recording; keep essential evidence in a safe central readable frame. Final duration/edit belongs to demo production.",
+      "fallback": "Live read-only walkthrough plus evidence links if video unavailable.",
+      "acceptance": "Capture current Rouse app after implementation/QA. Use existing reviewed receipt and distinct recurrence. Controlled error fixtures cannot masquerade as live results. No new writes just to obtain footage.",
+      "alt": "The failure, review, completed retention and later exact-record recall shown in sequence.",
+      "preview": null
+    },
+    {
+      "id": "A12",
+      "surface": "Optional decorative hero artwork",
+      "purpose": "No independent communication job beyond the product visual.",
+      "story_mode": "none",
+      "priority": "NICE",
+      "owner": "Art Director (selection); Design Engineering (delivery); QA (acceptance)",
+      "status": "OMITTED",
+      "source": [],
+      "format": "None",
+      "responsive_variants": "None",
+      "fallback": "Use the paired evidence interface as the focal visual.",
+      "acceptance": "Do not commission stock, generated photography, 3D objects, generic particles or illustrations merely to fill space.",
+      "alt": "None",
+      "preview": null
+    }
+  ],
+  "case": {
+    "provenance": "Recorded approved case; static composition target, not live integration",
+    "source": "8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA",
+    "recurrence": "HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV",
+    "reviewer": "ShalyX",
+    "diagnosis": "Duplicate cancellation of an already-cancelled DeepBook order. Tatum confirms an earlier successful cancellation of the identical sender/package/pool/balance manager/asset types/order ID.",
+    "procedure": "Reconcile the order against authenticated prior successful cancellation effects for the exact cancellation identity. If an earlier identical cancellation succeeded, mark the local order as already cancelled and stop retrying. Otherwise investigate. Independent reference integration replay proves this procedure on two genuine failures; original operator deployment is unknown and no onchain repair is claimed.",
+    "blob": "KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY",
+    "job": "edfdbf0f-931b-464f-a5e7-f009de08498c",
+    "namespace": "incident-memory-v1",
+    "evidenceUrl": "https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215",
+    "evidenceHash": "113a57b302410a6d43a9ffab5d0569f0f48e32a4cc7cd367d5caf405bed94f03",
+    "checkpoint": "342680926",
+    "package": "0xcaf6ba059d539a97646d47f0b9ddf843e138d215e2a12ca1f4585d386f7aec3a"
+  },
+  "performance": {
+    "status": "Planning budgets, not measured app performance",
+    "logo_svg_bytes": 10000,
+    "social_png_bytes": 150000,
+    "optional_hero_webp_bytes": 250000,
+    "below_fold_capture_bytes": 180000,
+    "fonts_total_transfer_bytes": 250000,
+    "rendering": "Prefer DOM over screenshot. Reserve media dimensions; lazy-load below-fold captures; no auto-playing video or decorative data requests."
+  }
+}

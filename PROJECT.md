@@ -1,3 +1,13 @@
+# Current checkpoint — Phases 17 and 18 complete, 2026-11-08
+
+The reference board translates four official functional examples into Rouse rules; 33 desktop/mobile assertions pass. Visual asset strategy defines 12 groups with source, priority, owner, delivery status and fallback. Inventory/map QA: 102 +18 checks; no API calls or memory writes. Seven previews distinguish identity inputs from recorded design targets. Canonical fonts need transfer optimization; final product/proof/demo captures follow actual Rouse implementation.
+
+Active phase:19 MOTION_STORYBOARD, followed by design lock and actual application implementation/acceptance. Production remains the existing Casewake release. No product thesis or API changed. Full product, judge readiness and submission remain unclaimed. See REFERENCE_BOARD_ROUSE_2026-11-08.md and VISUAL_ASSET_STRATEGY_ROUSE_2026-11-08.md.
+
+Earlier checkpoints are historical.
+
+---
+
 # Current checkpoint — Phase 16 art direction complete, 2026-11-08
 
 Working Precedent selected: current failure evidence beside an earlier human-reviewed resolution, its reasons and exact retained blob. DESIGN.md replaces the old bracket/tilted-card spec; the prior version is archived under design/history/.

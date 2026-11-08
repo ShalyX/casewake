@@ -180,3 +180,16 @@ Internal target assessment (0–4): product awareness 4; originality 3; composit
 **Phase 16 verdict: PASS.** Next: Phase 17 reference board. Phases18–20 must close asset/motion/composition-lock details before extensive Design Engineering. Phase 22 must compare actual application screenshots and state sequences to these targets.
 
 Design Engineering handoff: preserve existing Next.js handlers, contracts, protected proof methods and live acceptance. Use these targets for composition; do not copy the study data/controls/disabled prototype form into production. Any generic AI look, omitted original P0, false live state, failed/unknown conflation, lost receipt, unreadable proof or mobile clipping is a veto.
+
+
+## G. Phase 17 reference synthesis — accepted 2026-11-08
+
+Canonical board: design/phase17/index.html and references.json; review: REFERENCE_BOARD_ROUSE_2026-11-08.md. GitHub supplies immutable record/context adjacency; Sentry supplies failure/context identity; GOV.UK Details supplies secondary-depth disclosure; GOV.UK Error Summary supplies reviewer correction focus. Native disclosure never hides procedure, reasons, reviewer or exact blob. Chain failures and gateway outages remain separate from input validation. Rouse identity and paired evidence are the internal targets. Prior public landing is an anti-reference. Short external crops stay research-only. Sentry was successfully inspected in Phase 17, superseding the earlier capture uncertainty. Thirty-three desktop/mobile browser assertions pass with zero API calls or writes.
+
+## H. Phase 18 visual asset strategy — accepted 2026-11-08
+
+Authority: VISUAL_ASSET_STRATEGY_ROUSE_2026-11-08.md and design/phase18/assets.json; visual map: design/phase18/index.html. Use semantic paired evidence as the hero; no additional stock/generated/3D imagery is required. A01–A12 cover identity, typography, hero, eligible result, eight alternate lookup states, review/pending/receipt, proof, share, workflow, integration attribution, demo and explicitly omitted decoration. Every group has source, priority, owner, status, format, responsive behavior, fallback and acceptance criteria.
+
+Ready means canonical identity inputs only. Product compositions require implementation; proof/demo release captures require current Rouse integration and read-only verification. Never present recorded studies or historical Casewake screenshots as current release evidence. Canonical TTF inventory is 426,584 bytes; proposed ≤250KB used-font transfer needs subsets/WOFF2 or reduced weights and measurement. Other byte budgets are planning limits, not measured app performance. Keep originals/licenses and all historical evidence URLs.
+
+Strategy inventory passes 102 checks; the map passes 18 desktop/mobile browser assertions, with zero API calls or writes. Phase 19 motion storyboard and Phase 20 design lock remain before major implementation. This is no final production visual/motion acceptance.
