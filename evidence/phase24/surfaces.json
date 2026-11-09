@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "checkedAt": "2026-11-09T00:45:20.909Z",
+  "surfaces": [
+    {
+      "url": "https://casewake.vercel.app/",
+      "status": 200,
+      "title": "Rouse — Evidence-backed memory for recurring Sui failures",
+      "sha256": "6b3ccd79be744f3393281adb8e7e494f04f9efbfd6597e5e7b875e72eb6c1861"
+    },
+    {
+      "url": "https://casewake.vercel.app/workspace",
+      "status": 200,
+      "title": "Rouse — Evidence-backed memory for recurring Sui failures",
+      "sha256": "43a4a416d7fb1f21e8a0351b6134eb674d0be679a28b165bd7d0518be8b2c3b4"
+    },
+    {
+      "url": "https://casewake.vercel.app/cases",
+      "status": 200,
+      "title": "Rouse — Evidence-backed memory for recurring Sui failures",
+      "sha256": "0ba170368c9b1d1ff08bb7355160b5ea7c0f9f54885916e9933f67b9609c3c0f"
+    },
+    {
+      "url": "https://casewake.vercel.app/journal/casewake",
+      "status": 200,
+      "title": "Rouse: when a Sui failure teaches the next investigation",
+      "sha256": "d1b03fb1b0443b5f51b2fd15e4e3204b72021e80fef7b0613ba8935d50912481",
+      "reviewedCaseLimit": true,
+      "historicalLabel": true
+    },
+    {
+      "url": "https://casewake.vercel.app/proof/splitcoins",
+      "status": 200,
+      "title": "SplitCoins reproduction evidence — Rouse",
+      "sha256": "23e68d1a0a2f2d00374d30a12bc2c9ee751d1be8eef350253402807167eaf0c5"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/ShalyX/casewake",
+    "public": true,
+    "defaultBranch": "master",
+    "releaseRelativeToDefault": {
+      "status": "ahead",
+      "aheadBy": 57,
+      "behindBy": 0
+    }
+  },
+  "sourceLink": "https://github.com/ShalyX/casewake/tree/e4c8bcc36a8a2fdc1656467e1e776602bf34169c",
+  "memoryWrites": 0
+}

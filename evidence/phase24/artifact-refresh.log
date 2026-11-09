@@ -1,0 +1,5 @@
+(node:18564) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/USER/Documents/Codex/2026-11-07/check-out-blastlab-i-m-building/work/casewake-loop/web/src/lib/reviewed-evidence.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\USER\Documents\Codex\2026-11-07\check-out-blastlab-i-m-building\work\casewake-loop\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: unchanged17-file GitHub snapshot, four immutable history hashes,2 replays,2 history controls and7 synthetic controls; no writes or new review.

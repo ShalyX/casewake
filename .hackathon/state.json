@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 39,
+  "revision": 40,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "PROOF_ENGINE",
-  "active_specialist": "Proof / Evidence registry",
+  "phase": "RED_TEAM",
+  "active_specialist": "QA / Red Team",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -20,7 +20,7 @@
   "design_lock_revision": 2,
   "visual_qa_static_complete": true,
   "visual_qa_motion_complete": true,
-  "evidence_status": "PHASE23_PASS_PUBLIC_APPROVED_SCOPE: original8 P0 groups + discovery;26 actual checks local and26 public; existing approved real receipt/reuse, controlled new submissions, zero new Mainnet writes.",
+  "evidence_status": "PHASE24_REGISTRY_CLOSED:32 dispositions,22 critical;5 critical dependencies BLOCKED. Fresh26 public read/access +19 browser checks, case hash/replay and release identity pass; zero new Mainnet writes.",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -37,7 +37,7 @@
     "PRODUCT_LOCK": "PASS: PRODUCT.md revision1 and original eight P0s.",
     "NAME_LOCK": "PASS: user explicitly instructed lock Rouse after known overlap disclosure; NAME_LOCK.md.",
     "DEMO_ARCHITECTURE": "PASS \u2014 PLAN: Existing sequence; final capture should foreground approved reviewed case.",
-    "EVIDENCE_PLAN": "PARTIAL: Core proof reconciled; final complete claim/owner/artifact register remains.",
+    "EVIDENCE_PLAN": "PASS - REGISTRY: every material claim has owner, proof standard, artifact, freshness/invalidation and judge location. Blocking dependencies are explicit, not silently proven.",
     "DEPENDENCY_ATTACK": "PARTIAL: Technical dependencies proven; utility/track assumptions open.",
     "TECHNICAL_DERISK": "PASS \u2014 DISPOSITION: Mainnet integrations proven; historical flashloan experiment separate.",
     "BUILD_VERTICAL_SLICE": "PASS: Approved case -> completed Mainnet blob -> distinct exact-blob recall, publicly verified.",
@@ -51,7 +51,7 @@
     "DESIGN_ENGINEERING": "PASS - IMPLEMENTATION + DISCOVERY: locked Rouse app, public own-digest reads, reviewed library/error-text search; build/lint/unit +89 browser/12 actual read/access checks. Phase22 acceptance superseded by scoped Phase23 regression/public release.",
     "VISUAL_QA": "PASS - LOCAL PRODUCTION: revision2 target comparison,20 page scans,29 workspace/10 library/28 keyboard checks,4 normal/reduced recordings (98 assertions),12 actual read/access checks; zero new Mainnet writes. VISUAL_QA_REVIEW_ROUSE_2026-11-08.md.",
     "BUILD_LOOP": "PASS - APPROVED SINGLE-OPERATOR SCOPE: all8 original P0s plus discovery; workflow fixes and public release independently accepted. BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md; PRODUCT-COVERAGE.md.",
-    "PROOF_ENGINE": "PARTIAL: Core live proof complete; final registry/judge surfaces remain.",
+    "PROOF_ENGINE": "PASS - DISPOSITION:32 claims (16 verified,3 measured,4 simulated,2 removed,1 inactive stale,6 blocked); five critical blockers retained. EVIDENCE.md; PROOF.md; evidence/phase24/claim-registry.json.",
     "RED_TEAM": "PARTIAL: Auth/mismatch/tamper/chronology/failure tests pass; final pass remains.",
     "PRODUCT_HYGIENE": "NOT DONE: Full hygiene skill and tracked-history scan remain.",
     "DEMO_PRODUCTION": "PARTIAL: Script/shot list; no finished2\u20133min MP4.",
@@ -65,12 +65,12 @@
     "SUBMITTED": "NOT DONE: No observed submission receipt."
   },
   "blockers": [
-    "External Sui-engineer utility validation and organizer track fit unconfirmed.",
-    "Full hygiene skill/tracked-history scan, final MP4/videoQA/judge simulation/submission audit and receipt remain.",
-    "Production source is feature branch; preserve fixes in future master releases. Draft PR#1 remains separate.",
-    "Historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
+    "C22: external engineer utility/savings not established; C23: organizer track fit unconfirmed.",
+    "C24: final film/demo QA not complete; C25: final red team/canonical hygiene not complete; C26: readiness/applicant fields/submission receipt not complete.",
+    "Default master differs from the release; use pinned released source in the current judge/submission packet and preserve/reconcile feature-branch work before future mainline releases.",
+    "C31: historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase24 PROOF_ENGINE: reconcile every critical claim with owner, source, environment, freshness and judge-facing location; preserve approved-case limits and open validation/track fit.",
+  "next_action": "Phase25 RED_TEAM: attack the public release and original8 P0/discovery/recovery workflows; preserve single-operator/case limits and avoid unapproved Mainnet writes. Final validation/track/film/hygiene/submission dependencies remain explicit.",
   "updated_at": "2026-11-09",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
@@ -214,5 +214,25 @@
     "acceptance": "evidence/phase23/acceptance.json",
     "public_release": true,
     "new_memory_writes": 0
+  },
+  "proof_engine_complete": true,
+  "claim_registry_closed": true,
+  "proof_engine": {
+    "status": "REGISTRY_CLOSED_WITH_EXPLICIT_BLOCKERS",
+    "registry": "evidence/phase24/claim-registry.json",
+    "manifest": "evidence/phase24/proof-manifest.json",
+    "review": "PROOF_ENGINE_REVIEW_ROUSE_2026-11-09.md",
+    "judge_packet": "PROOF.md",
+    "claims": 32,
+    "critical_claims": 22,
+    "blocked_critical_ids": [
+      "C22",
+      "C23",
+      "C24",
+      "C25",
+      "C26"
+    ],
+    "current_deployment_unchanged": true,
+    "new_mainnet_writes": 0
   }
 }

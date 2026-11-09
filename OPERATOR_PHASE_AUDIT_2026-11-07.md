@@ -1,6 +1,6 @@
 # Rouse — current 35-phase operator audit
 
-Updated 2026-11-09 through Phase23 and its public release. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
+Updated 2026-11-09 through Phase24 Proof Engine. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
 
 Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures. Tests and the example case support that product.
 
@@ -29,7 +29,7 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 21 | DESIGN_ENGINEERING | PASS + DISCOVERABILITY | Actual Rouse app; public own-digest reads, reviewed library/error-text search;89 browser +12 actual access/read checks. Recording protected. |
 | 22 | VISUAL_QA | PASS — LOCAL PRODUCTION | Revision2 target comparison,20 page/38 stable-state scans,29 workspace/10 library/28 keyboard checks,4 normal/reduced recordings and12 actual read/access checks; VISUAL_QA_REVIEW_ROUSE_2026-11-08.md. Public deployment unchanged. |
 | 23 | BUILD_LOOP | PASS — APPROVED SCOPE | All8 original P0s + discovery; review/inventory/uncertain-write/onboarding fixes, public release,26 public API +19 browser checks; PRODUCT-COVERAGE.md and BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md. |
-| 24 | PROOF_ENGINE | PARTIAL | Core live proof complete; final registry/judge surfaces remain. |
+| 24 | PROOF_ENGINE | PASS — DISPOSITION |32 owner/evidence/freshness-bound claims; five critical dependencies remain blocked, not proven. Fresh live26+browser19, case hash/replay, judge packet and corrected current submission links; PROOF_ENGINE_REVIEW_ROUSE_2026-11-09.md. |
 | 25 | RED_TEAM | PARTIAL | Auth/mismatch/tamper/chronology/failure tests pass; final pass remains. |
 | 26 | PRODUCT_HYGIENE | NOT DONE | Full hygiene skill and tracked-history scan remain. |
 | 27 | DEMO_PRODUCTION | PARTIAL | Script/shot list; no finished2–3min MP4. |
@@ -48,7 +48,7 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is closed by explicit user selection of Rouse. Phases15–23 pass within their documented scopes; Phase24 PROOF_ENGINE is next. Phase23 separately accepts the public release. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phases15–24 pass within their documented scopes; Phase25 RED_TEAM is next. Proof registry closure retains explicit blocked claims. Phase23 separately accepts the public release. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
 Current release: evidence/phase23/release.json. Historical release: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 

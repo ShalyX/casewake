@@ -1,3 +1,9 @@
+# Phase24 claim contract — 2026-11-09
+
+PROOF.md and EVIDENCE.md now control every factual demo claim. Use the current Rouse product and the pinned release/source/case links. Foreground the approved procedure and actual distinct exact-blob recall; keep original operator deployment unknown and historical onchain repair unclaimed. Label controlled UI/failure material.13 total memories is not13 reviewed fixes. The historical timed script below is not approved final narration and must not be recorded unchanged. Final film production/rehearsal stays Phase27; QA clips do not satisfy it.
+
+---
+
 # Motion handoff — Phase 19, 2026-11-08
 
 UI motion contract: MOTION_STORYBOARD_ROUSE_2026-11-08.md; static frames: design/phase19/index.html. The app story separates chain evidence, reviewed recall, human approval, accepted storage, completed receipt and distinct recurrence. Final footage must use current implemented Rouse and real read-only receipt/recall. Frame pairs are recorded design targets, not footage or proof of a live sequence. Film production and rewrite of the obsolete script remain Phase27.

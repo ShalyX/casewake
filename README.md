@@ -50,6 +50,10 @@ Source: `8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA`. Distinct recurrence: `Hv
 
 The last accepted namespace count was 13 completed memories of all types, including one reviewed resolution. Observations and simulation runbooks remain separate tiers and do not enter the reviewed-case library. Fresh counts appear in dated audit evidence; this is not a claim of 13 verified fixes or customer traction.
 
+## Inspect the proof
+
+Start with [the judge proof packet](PROOF.md) and [the current claim registry](EVIDENCE.md). They distinguish the pinned deployed source, immutable reviewed artifact, actual integration reads, controlled tests and blocked requirements. The default repository branch is not the released source snapshot.
+
 ## Verify and contribute
 
 From `web`, run `pnpm lint`, `pnpm test` and `pnpm build --webpack`. Tests exercise compatibility, chronology, proof validation, credential rejection, inventory pagination, request timeouts and receipt handling. Browser suites in `web/scripts/phase22-*.mjs` and `phase23-*.mjs` distinguish actual integration reads from labelled controlled storage/failure responses.

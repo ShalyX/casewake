@@ -23,5 +23,7 @@ for run in m['runs']:
     starts=[x for x in run['workspace']['events'] if x['type']=='animationstart']
     assert not starts if run['mode']=='reduce' else bool(starts)
 release=read('release.json');assert release['deploymentId']==a['productionDeployment'] and release['appCommit']==a['appCommit'] and release['status']=='READY_AND_PUBLICLY_ACCEPTED'
-state=json.loads((r/'.hackathon/state.json').read_text());assert state['phase']=='PROOF_ENGINE' and state['build_loop_complete'] and not state['submission_ready']
+state=json.loads((r/'.hackathon/state.json').read_text());assert state['build_loop_complete']
+# Later operator phases do not invalidate an unchanged source-bound acceptance.
+assert state['production_release']['app_commit']==a['appCommit']
 print('PASS: Phase23 eight-P0 coverage, discovery, current/released source and recorded local/public acceptance. No fresh network or storage test performed by this verifier.')

@@ -80,3 +80,8 @@ Verified official current formal rules at https://thewalrussessions.wal.app/tatu
 - The formal rules' older paragraph about a feedback/forms product conflicts with the specific Total Recall tracks. Treat it as a documented discrepancy, not authority for replacing the locked Casewake product.
 
 Phase-6 VALIDATION is therefore **PARTIAL**: published track language supports a plausible fit; independent external engineer utility feedback and organizer confirmation remain unobserved. This does not justify changing the approved thesis.
+
+
+## Phase24 source refresh — 2026-11-09
+
+The formal rules and Tatum event landing were re-read. Selected current facts are in evidence/phase24/official-rules.json; rubric mapping is in SCORECARD.md. No organizer track endorsement or special-prize eligibility was established. The formal introduction still conflicts with its listed tracks; preserve this uncertainty.
