@@ -22,7 +22,7 @@ export async function GET(request:NextRequest){
     if(job.namespace && job.namespace!==(process.env.MEMWAL_NAMESPACE||"incident-memory-v1"))
       return NextResponse.json({error:"This storage job belongs to another workspace."},{status:403});
     if(job.status==="not_found")return NextResponse.json({error:"Storage job not found. No write has been retried."},{status:404});
-    if(job.status==="failed")return NextResponse.json({error:"The storage job failed. Keep its ID for investigation; no write has been retried."},{status:409});
+    if(job.status==="failed")return NextResponse.json({code:"storage-job-failed",error:"The storage job failed. Keep its ID for investigation; no write has been retried."},{status:409});
     if(job.status==="done"&&job.blob_id){
       const recalled=await retryReadOnly(()=>client.recall({query:"Casewake stored incident "+sourceDigest+" request "+requestId,limit:25}));
       const belongs=recalled.results.some(hit=>{

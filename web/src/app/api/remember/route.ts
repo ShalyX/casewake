@@ -1,3 +1,4 @@
+import { readJsonObject } from "@/lib/request-body";
 import { randomUUID, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getTatumTransaction } from "@/lib/tatum";
@@ -19,9 +20,11 @@ export async function POST(request: NextRequest) {
   const expectedKey = Buffer.from(requiredKey, "utf8");
   if (suppliedKey.length !== expectedKey.length || !timingSafeEqual(suppliedKey, expectedKey))
     return NextResponse.json({ error: "Reviewer access token is incorrect." }, { status: 403 });
+  const body=await readJsonObject(request);
+  if(!body)return NextResponse.json({error:"A JSON object is required."},{status:400});
   try {
-    const body = await request.json() as Record<string, unknown>;
     const digest = safeText(body.digest, 100);
+    if(!/^[1-9A-HJ-NP-Za-km-z]{32,64}$/.test(digest))return NextResponse.json({error:"A valid Sui digest is required."},{status:400});
     const diagnosis = safeText(body.diagnosis, 800);
     const resolutionSteps = safeText(body.resolutionSteps, 1800);
     const evidenceUrl = safeText(body.evidenceUrl, 500);

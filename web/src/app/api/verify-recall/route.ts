@@ -1,3 +1,4 @@
+import { readJsonObject } from "@/lib/request-body";
 import { NextRequest, NextResponse } from "next/server";
 import { isReviewerKeyValid } from "@/lib/public-demo";
 import { getTatumTransaction } from "@/lib/tatum";
@@ -17,8 +18,9 @@ export async function POST(request: NextRequest) {
   if (!isReviewerKeyValid(request.headers.get("x-workspace-key"))) {
     return NextResponse.json({ error: "Reviewer authorization required for production recall acceptance." }, { status: 403 });
   }
+  const body=await readJsonObject(request);
+  if(!body)return NextResponse.json({error:"A JSON object is required."},{status:400});
   try {
-    const body = await request.json() as Record<string, unknown>;
     const sourceDigest = body.sourceDigest;
     const secondDigest = body.secondDigest;
     const strictDeepbook = sourceDigest === DEEPBOOK_SOURCE_DIGEST;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { useEffect, useRef, useState } from "react";
 import { requestJson, RequestError } from "@/lib/browser-request";
-import { decodeStorageAttempt, STORAGE_SESSION_KEY, type StorageAttempt } from "@/lib/storage-session";
+import { decodeStorageAttempt, parseStorageReceipt, STORAGE_SESSION_KEY, type StorageAttempt } from "@/lib/storage-session";
 
 type Status = { tatumConfigured: boolean; walrusConfigured: boolean; reviewerWritesEnabled: boolean; publicDemoMode?: boolean; network: string; checksAreLive: boolean };
 type Transaction = { digest: string; network: string; source: string; observedAt: string; transactionTimestampMs?: number | null; checkpoint?: string | null; outcome: "failed" | "succeeded" | "unknown"; outcomeReason?: string | null; errorText: string | null; fingerprint: string | null; packageId: string | null; failedCommandIndex?: number | null; failedCommandKind?: string | null };
@@ -44,6 +44,7 @@ export default function Workspace() {
   const [error, setError] = useState("");
   const [activeTask,setActiveTask]=useState<"lookup"|"storage"|"recurrence">("lookup");
   const [proof, setProof] = useState<Proof | null>(null);
+  const [receiptNeedsVerification,setReceiptNeedsVerification]=useState(false);
   const [writtenSourceDigest, setWrittenSourceDigest] = useState("");
   const [exactBlobRecallPassed, setThreeGatePassed] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
@@ -101,7 +102,7 @@ export default function Workspace() {
     requestJson("/api/memories",undefined).then((data) => { setInventory(data as Inventory); setInventoryUnavailable(false); }).catch(() => setInventoryUnavailable(true));
     try{
       const saved=decodeStorageAttempt(sessionStorage.getItem(STORAGE_SESSION_KEY));
-      if(saved)queueMicrotask(()=>{setStorageAttempt(saved);if(saved.receipt){setProof(saved.receipt);setWrittenSourceDigest(saved.sourceDigest);setObservationOnly(saved.kind==="observation");}});
+      if(saved)queueMicrotask(()=>{setStorageAttempt(saved);if(saved.receipt){setReceiptNeedsVerification(true);setProof(saved.receipt);setWrittenSourceDigest(saved.sourceDigest);setObservationOnly(saved.kind==="observation");}});
     }catch{/* No persistent browser access is required to inspect transactions. */}
   }, []);
   async function refreshInventory() {
@@ -178,6 +179,7 @@ export default function Workspace() {
   }
 
   async function verifySavedRecall(saved: Proof, source: string, recurrence?: string) {
+    if(receiptNeedsVerification){setError("Verify the saved receipt with the server before checking recurrence.");return;}
     setActiveTask("recurrence");
     setError("");
     setPhase("recalling");
@@ -204,7 +206,7 @@ export default function Workspace() {
   }
 
   async function remember() {
-    if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    if (!tx || tx.outcome !== "failed" || strictDeepbook || tx.digest === "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue" || writeInFlight.current || receiptNeedsVerification || (storageAttempt&&!storageAttempt.receipt)) return;
     setActiveTask("storage");
     writeInFlight.current=true;
     const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"resolution",requestId:crypto.randomUUID()};
@@ -235,8 +237,9 @@ export default function Workspace() {
         const accepted={...attempt,jobId:pending.jobId,namespace:pending.namespace};
         retainStorage(accepted);closeEditorForStorage();await checkStorage(accepted);return;
       }
-      const stored = result.proof as Proof;
-      setProof(stored);
+      const stored=parseStorageReceipt(result.proof);
+      if(!stored)throw new Error("Storage returned an invalid receipt. Check the existing job; do not submit another memory.");
+      setReceiptNeedsVerification(false);setProof(stored);
       setWrittenSourceDigest(tx.digest);
       retainStorage({...attempt,jobId:stored.jobId,namespace:stored.namespace,receipt:stored});
       closeEditorForStorage();
@@ -252,7 +255,7 @@ export default function Workspace() {
 
   async function checkStorage(attempt:StorageAttempt|null=storageAttempt){
     if(!attempt)return;
-    const jobId=attempt.jobId||recoveryJobId.trim();
+    const jobId=attempt.jobId||attempt.receipt?.jobId||recoveryJobId.trim();
     if(!jobId||!reviewerKey){setError("Enter reviewer access and the storage job ID to check the existing write. Do not store another copy.");return;}
     setActiveTask("storage");
     setPhase("writing");setError("");setFailedStorageJob(false);
@@ -260,18 +263,19 @@ export default function Workspace() {
       const query=new URLSearchParams({jobId,sourceDigest:attempt.sourceDigest,requestId:attempt.requestId,kind:attempt.kind});
       const result=await requestJson("/api/memory-job?"+query,undefined,reviewerKey);
       if(result.proof){
-        const stored=result.proof as Proof;
+        const stored=parseStorageReceipt(result.proof);
+      if(!stored)throw new Error("Storage returned an invalid receipt. Check the existing job; do not submit another memory.");
         retainStorage({...attempt,jobId,namespace:stored.namespace,receipt:stored});
-        setProof(stored);setWrittenSourceDigest(attempt.sourceDigest);setObservationOnly(attempt.kind==="observation");
+        setReceiptNeedsVerification(false);setProof(stored);setWrittenSourceDigest(attempt.sourceDigest);setObservationOnly(attempt.kind==="observation");
         setRecallNote("Walrus storage completed. This receipt is preserved when inspecting another incident; verify recurrence without writing again.");
         await refreshInventory();
       }else retainStorage({...attempt,jobId});
-    }catch(e){if(e instanceof RequestError&&e.status===409)setFailedStorageJob(true);setError((e instanceof Error?e.message:"Storage status unavailable.")+" The write has not been retried.");}
+    }catch(e){if(e instanceof RequestError&&e.status===409&&e.code==="storage-job-failed"){setFailedStorageJob(true);setProof(null);setReceiptNeedsVerification(false);retainStorage({...attempt,receipt:undefined});}setError((e instanceof Error?e.message:"Storage status unavailable.")+" The write has not been retried.");}
     finally{setPhase("idle");}
   }
 
   async function rememberObservation() {
-    if (!tx || tx.outcome !== "failed" || writeInFlight.current || (storageAttempt&&!storageAttempt.receipt)) return;
+    if (!tx || tx.outcome !== "failed" || writeInFlight.current || receiptNeedsVerification || (storageAttempt&&!storageAttempt.receipt)) return;
     setActiveTask("storage");
     writeInFlight.current=true;
     const attempt:StorageAttempt={sourceDigest:tx.digest,kind:"observation",requestId:crypto.randomUUID()};
@@ -281,8 +285,9 @@ export default function Workspace() {
       setPhase("writing");
       const result=await postJson("/api/observations",{digest:tx.digest,asyncWrite:true,requestId:attempt.requestId},reviewerKey);
       if(result.pending){const pending=result.pending as {jobId:string;namespace:string};const accepted={...attempt,jobId:pending.jobId,namespace:pending.namespace};retainStorage(accepted);await checkStorage(accepted);return;}
-      const stored = result.proof as Proof;
-      setProof(stored);
+      const stored=parseStorageReceipt(result.proof);
+      if(!stored)throw new Error("Storage returned an invalid receipt. Check the existing job; do not submit another memory.");
+      setReceiptNeedsVerification(false);setProof(stored);
       setWrittenSourceDigest(tx.digest);retainStorage({...attempt,jobId:stored.jobId,receipt:stored});
       await refreshInventory();
       setPhase("recalling");
@@ -299,11 +304,11 @@ export default function Workspace() {
   const liveStatus=phase==="reading"?"Reading transaction.":
     phase==="recalling"?(activeTask==="recurrence"?"Checking exact-blob recurrence.":"Checking reviewed memory."):
     phase==="writing"?"Submitting or checking storage. Completion is not yet confirmed.":
-    activeTask==="storage"?(storagePending?(failedStorageJob?"Storage job failed. No completed memory.":storageAttempt.jobId?"Storage accepted; completion pending.":"Storage response unconfirmed. Recover the existing job before submitting again."):proof?(observationOnly?"Observation stored. No resolution claimed.":"Memory stored."):""):
+    activeTask==="storage"?(storagePending?(failedStorageJob?"Storage job failed. No completed memory.":storageAttempt.jobId?"Storage accepted; completion pending.":"Storage response unconfirmed. Recover the existing job before submitting again."):proof?(receiptNeedsVerification?"Saved receipt requires server verification.":observationOnly?"Observation stored. No resolution claimed.":"Memory stored."):""):
     exactBlobRecallPassed?"Exact stored blob recalled for a distinct failure.":
     recallUnavailable?"Memory lookup unavailable. No conclusion about saved cases.":
     tx?(tx.outcome==="unknown"?"Execution outcome unknown.":tx.outcome==="succeeded"?"Transaction succeeded. No failure procedure is inferred.":eligible.length?"Reviewed resolution available.":status?.walrusConfigured?"Transaction failed. No eligible reviewed resolution returned.":"Transaction failed. Memory is not configured."):
-    proof?"Existing storage receipt available.":"";
+    proof?(receiptNeedsVerification?"Saved receipt requires server verification.":"Existing storage receipt available."):"";
 
   return <div className="rouse-shell workspace-shell"><SiteHeader /><main id="main" tabIndex={-1} className="workspace-container">
     <div className="workspace-title-row"><div><h1>Investigate a failure.</h1><p>Read the chain evidence. Compare a reviewed resolution.</p></div><details className="access-disclosure"><summary>Reviewer access</summary><div className="access-content"><label className="reviewer-access"><span>Private reviewer access</span><input type="password" value={reviewerKey} onChange={e=>setReviewerKey(e.target.value)} placeholder="Enter the private workspace key" autoComplete="off" /><small>Kept in page memory only. Required for recording and receipt recovery. Inspection and discovery are public.</small></label><p>Reviewer writes: <strong>{status?.reviewerWritesEnabled ? "Guarded" : "Disabled"}</strong></p><p>Tatum: {status?.tatumConfigured?"Configured":"Not configured"} · Walrus: {status?.walrusConfigured?"Configured":"Not configured"}. Configuration is separate from a successful request.</p></div></details></div>
@@ -382,18 +387,18 @@ export default function Workspace() {
                 <label className="review-checkbox"><input type="checkbox" checked={confirmedCausalLink} onChange={(e) => setConfirmedCausalLink(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I reviewed this exact GitHub artifact and confirm its specific change resolves this incident. The selected test or verification method genuinely applies to this failure." : "I reviewed both executions and confirm this specific successful follow-up is the correction of the recorded incident. Tatum verifies execution and sender; it cannot infer my causal judgment."}</span></label>
                 <div className="editor-pair"><label>Reviewer<input id="review-name" aria-invalid={reviewErrors.some(e=>e.id==="review-name")} aria-describedby={reviewErrors.some(e=>e.id==="review-name")?"review-name-error":undefined} value={reviewer} onChange={(e) => {clearReviewApproval();setReviewer(e.target.value);}} placeholder="Engineer name or handle" />{reviewErrors.filter(e=>e.id==="review-name").map(e=><small className="field-error" id="review-name-error" key={e.id}>{e.message}</small>)}</label><label>SDK version (optional)<input value={sdkVersion} onChange={(e) => {clearReviewApproval();setSdkVersion(e.target.value);}} placeholder="2.x" /></label></div>
                 <label className="review-checkbox"><input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} /><span>{proofMethod === "reviewed-evidence" ? "I am an authorized human reviewer. I inspected the original failure, the linked artifact and its changed files, and the selected verification evidence. I accept responsibility for confirming the causal relationship." : "I am an authorized human reviewer. I inspected the original failure, the specific engineering change and the successful follow-up, and accept responsibility for confirming their causal relationship."}</span></label>
-                <button type="button" className="primary-button compact" disabled={busy || storagePending || !verified || !reviewerKey || !confirmedCausalLink} onClick={() => void submitReview()}>{phase === "writing" ? "Verifying and writing…" : proofMethod === "reviewed-evidence" ? "Verify artifact, then store" : "Verify follow-up, then store"} ↗</button>
+                <button type="button" className="primary-button compact" disabled={busy || storagePending || receiptNeedsVerification || !verified || !reviewerKey || !confirmedCausalLink} onClick={() => void submitReview()}>{phase === "writing" ? "Verifying and writing…" : proofMethod === "reviewed-evidence" ? "Verify artifact, then store" : "Verify follow-up, then store"} ↗</button>
                 <div className="observation-action">
                   <span>Don&apos;t have a confirmed fix? Save an authentic failure observation instead. It will never be presented as an engineer-approved resolution.</span>
-                  <button type="button" className="secondary-button" disabled={busy || storagePending || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
+                  <button type="button" className="secondary-button" disabled={busy || storagePending || receiptNeedsVerification || !reviewerKey} onClick={() => void rememberObservation()}>Save onchain observation to Walrus ↗</button>
                 </div>
               </div>
             </div>}
     {(storagePending||proof)&&<section ref={storageRef} tabIndex={-1} className="storage-section" aria-label="Storage and recurrence"><div className="panel proof-panel"><div className="panel-kicker"><span>MEMORY PROVENANCE</span><span>WALRUS / MAINNET</span></div>
-              <h3>{exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : storagePending?failedStorageJob?"Storage job failed.":"Storage is awaiting confirmation.":proof ? observationOnly?"Observation stored. No resolution claimed.":"Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
-              {storagePending&&<div className="proof-receipt"><span>{failedStorageJob?"STORAGE JOB FAILED · NO COMPLETED MEMORY":storageAttempt.jobId?"STORAGE JOB ACCEPTED · NOT YET A COMPLETED MEMORY":"STORAGE RESPONSE UNCONFIRMED · DO NOT RESUBMIT"}</span>{storageAttempt.jobId?<code>{storageAttempt.jobId}</code>:<label>Recover storage job ID<input value={recoveryJobId} onChange={event=>setRecoveryJobId(event.target.value)} placeholder="Existing Walrus job ID"/></label>}<p>Check the existing job to recover its receipt. This action never creates another memory.</p><button type="button" className="secondary-button" disabled={busy||!reviewerKey||(!storageAttempt.jobId&&!recoveryJobId.trim())} onClick={()=>void checkStorage()}>Check storage status ↗</button>{failedStorageJob&&<button type="button" className="secondary-button" onClick={()=>{retainStorage(null);setFailedStorageJob(false);setError("");}}>Dismiss failed storage job</button>}</div>}
-              <p>{proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? "A distinct Tatum-confirmed failed incident recalled the reviewed resolution from the exact Walrus blob. Human causal review remains visible." : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
-              {proof ? <div className="proof-receipt"><span>STORAGE RECEIPT</span><small>Source incident {writtenSourceDigest}</small><code>{proof.blobId}</code><small>Job {proof.jobId} · {proof.namespace}</small>{!exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
+              <h3>{receiptNeedsVerification?"Saved receipt requires server verification.":exactBlobRecallPassed ? "Human-reviewed resolution recalled across incidents." : storagePending?failedStorageJob?"Storage job failed.":"Storage is awaiting confirmation.":proof ? observationOnly?"Observation stored. No resolution claimed.":"Mainnet write confirmed. Recall pending verification." : "Proof, not promises."}</h3>
+              {storagePending&&<div className="proof-receipt"><span>{failedStorageJob?"STORAGE JOB FAILED · NO COMPLETED MEMORY":storageAttempt.jobId?"STORAGE JOB ACCEPTED · NOT YET A COMPLETED MEMORY":"STORAGE RESPONSE UNCONFIRMED · DO NOT RESUBMIT"}</span>{storageAttempt.jobId?<code>{storageAttempt.jobId}</code>:<label>Recover storage job ID<input value={recoveryJobId} onChange={event=>setRecoveryJobId(event.target.value)} placeholder="Existing Walrus job ID"/></label>}<p>Check the existing job to recover its receipt. This action never creates another memory.</p><button type="button" className="secondary-button" disabled={busy||!reviewerKey||(!storageAttempt.jobId&&!recoveryJobId.trim())} onClick={()=>{storageRef.current?.focus();void checkStorage();}}>Check storage status ↗</button>{failedStorageJob&&<button type="button" className="secondary-button" onClick={()=>{retainStorage(null);setFailedStorageJob(false);setError("");}}>Dismiss failed storage job</button>}</div>}
+              <p>{receiptNeedsVerification?"This receipt was restored from browser storage. Verify the existing job with reviewer access before treating it as completed Mainnet evidence.":proof ? (observationOnly ? "An authentic onchain failure observation was stored. No repair or resolution was verified." : exactBlobRecallPassed ? "A distinct Tatum-confirmed failed incident recalled the reviewed resolution from the exact Walrus blob. Human causal review remains visible." : "Walrus storage completed, but a different comparable incident has not yet recalled the exact blob.") : "Only completed Mainnet writes with real blob IDs count. Observations are not the same as verified resolutions."}</p>
+              {proof ? <div className="proof-receipt"><span>{receiptNeedsVerification?"SAVED RECEIPT · NOT REVERIFIED":"STORAGE RECEIPT"}</span><small>Source incident {writtenSourceDigest}</small><code>{proof.blobId}</code><small>Job {proof.jobId} · {proof.namespace}</small>{receiptNeedsVerification&&<><button type="button" className="secondary-button" disabled={busy||!reviewerKey} onClick={()=>{storageRef.current?.focus();void checkStorage();}}>Verify saved receipt ↗</button>{!reviewerKey&&<p className="caption">Use Reviewer access to verify this saved receipt. This read never creates another memory.</p>}</>}{!receiptNeedsVerification && !exactBlobRecallPassed && !observationOnly && writtenSourceDigest && <>
                     <label className="reviewer-access"><span>SECOND DISTINCT REAL FAILURE</span><input value={recurrenceDigest} onChange={(e) => setRecurrenceDigest(e.target.value)} placeholder="Digest of a comparable later failed incident" spellCheck={false}/><small>Rouse will independently fetch it through Tatum and require a compatible error before accepting the exact Walrus blob match.</small></label>
                     <button type="button" className="secondary-button" disabled={busy || !reviewerKey || !recurrenceDigest.trim()} onClick={() => void verifySavedRecall(proof, writtenSourceDigest, recurrenceDigest)}>Verify exact-blob recurrence — no new Walrus write ↗</button>
                   </>}</div> : <div className="proof-placeholder">NO CONFIRMED WRITE IN THIS SESSION</div>}</div></section>}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useCallback,useEffect,useRef,useState } from "react";
 import { SiteHeader,SiteFooter } from "@/components/site-chrome";
 import { requestJson } from "@/lib/browser-request";
+import { parseCaseResponse } from "@/lib/case-response";
 import type { CaseCatalog,ReviewedLibraryCase } from "@/lib/case-discovery";
 
 type Hit={record:ReviewedLibraryCase;matchedTerms:string[];relationship:'related-only'};
@@ -17,7 +18,7 @@ export default function ReviewedCases(){
     try{
       const data=await requestJson(text?'/api/cases/search':'/api/cases',text?{query:text}:undefined,undefined,90000) as unknown as CaseCatalog&{results?:Hit[]};
       if(!state.mounted||state.id!==id)return;
-      setCatalog(data);setHits(text?data.results||[]:(data.cases||[]).map(record=>({record,matchedTerms:[],relationship:'related-only'})));
+      const parsed=parseCaseResponse(data,!!text);setCatalog(parsed.catalog);setHits(parsed.hits);
     }catch(e){if(state.mounted&&state.id===id)setError(e instanceof Error?e.message:'The reviewed-case library is unavailable.');}
     finally{if(state.mounted&&state.id===id)setLoading(false);}
   },[]);
