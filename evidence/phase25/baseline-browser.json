@@ -1,0 +1,10 @@
+{
+  "scope": "Controlled malformed services and altered client cache on public frontend",
+  "malformedAsEmpty": true,
+  "malformedUnavailable": true,
+  "forgedConfirmed": true,
+  "errors": [],
+  "unexpectedApiRequests": 0,
+  "realMemoryWrites": 0,
+  "passed": false
+}

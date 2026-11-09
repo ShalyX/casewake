@@ -1,0 +1,237 @@
+{
+  "base": "https://casewake.vercel.app",
+  "checks": [
+    {
+      "name": "anonymous full-attestation attempt rejected /api/remember",
+      "path": "/api/remember",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer access token is incorrect."
+    },
+    {
+      "name": "cross-origin anonymous request rejected /api/remember",
+      "path": "/api/remember",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer access token is incorrect."
+    },
+    {
+      "name": "authorized malformed body rejected null /api/remember",
+      "path": "/api/remember",
+      "status": 502,
+      "passed": false,
+      "error": "Cannot read properties of null (reading 'digest')"
+    },
+    {
+      "name": "authorized malformed body rejected invalid-json /api/remember",
+      "path": "/api/remember",
+      "status": 502,
+      "passed": false,
+      "error": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    },
+    {
+      "name": "anonymous full-attestation attempt rejected /api/observations",
+      "path": "/api/observations",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer access required."
+    },
+    {
+      "name": "cross-origin anonymous request rejected /api/observations",
+      "path": "/api/observations",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer access required."
+    },
+    {
+      "name": "authorized malformed body rejected null /api/observations",
+      "path": "/api/observations",
+      "status": 502,
+      "passed": false,
+      "error": "Onchain evidence lookup or Mainnet memory write failed."
+    },
+    {
+      "name": "authorized malformed body rejected invalid-json /api/observations",
+      "path": "/api/observations",
+      "status": 502,
+      "passed": false,
+      "error": "Onchain evidence lookup or Mainnet memory write failed."
+    },
+    {
+      "name": "anonymous full-attestation attempt rejected /api/verify-recall",
+      "path": "/api/verify-recall",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer authorization required for production recall acceptance."
+    },
+    {
+      "name": "cross-origin anonymous request rejected /api/verify-recall",
+      "path": "/api/verify-recall",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer authorization required for production recall acceptance."
+    },
+    {
+      "name": "authorized malformed body rejected null /api/verify-recall",
+      "path": "/api/verify-recall",
+      "status": 502,
+      "passed": false,
+      "error": "Gate 3 could not complete the live Tatum and Walrus verification. It remains unproven."
+    },
+    {
+      "name": "authorized malformed body rejected invalid-json /api/verify-recall",
+      "path": "/api/verify-recall",
+      "status": 502,
+      "passed": false,
+      "error": "Gate 3 could not complete the live Tatum and Walrus verification. It remains unproven."
+    },
+    {
+      "name": "search invalid shape/length null",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter error text to search."
+    },
+    {
+      "name": "search invalid shape/length []",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "search invalid shape/length {\"query\":[\"MoveAbort\"]}",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "search invalid shape/length {\"query\":\"\"}",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "search invalid shape/length {\"query\":\" \"}",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "search invalid shape/length {\"query\":\"a\"}",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "search invalid shape/length {\"query\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "path": "/api/cases/search",
+      "status": 400,
+      "passed": true,
+      "error": "Enter 3–2,000 characters of error text, a module name or a procedure."
+    },
+    {
+      "name": "invalid digest null",
+      "path": "/api/transaction",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid Sui transaction digest."
+    },
+    {
+      "name": "invalid digest {}",
+      "path": "/api/transaction",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid Sui transaction digest."
+    },
+    {
+      "name": "invalid digest \"0000000000000000000000000000000000000000000\"",
+      "path": "/api/transaction",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid Sui transaction digest."
+    },
+    {
+      "name": "invalid digest \"1111111111111111111111111111111111111111111111111111111111111111",
+      "path": "/api/transaction",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid Sui transaction digest."
+    },
+    {
+      "name": "invalid digest \"<script>window.__rouseAttack=1</script>\"",
+      "path": "/api/transaction",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid Sui transaction digest."
+    },
+    {
+      "name": "read route rejects deletion",
+      "path": "/api/cases",
+      "status": 405,
+      "passed": true
+    },
+    {
+      "name": "legacy acceptance never upgrades blocked historical repair",
+      "path": "/api/acceptance",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "job recovery rejects anonymous access",
+      "path": "/api/memory-job?jobId=22222222-2222-4222-8222-222222222222",
+      "status": 403,
+      "passed": true,
+      "error": "Reviewer authorization is required to inspect a storage job."
+    },
+    {
+      "name": "job recovery validates identity before lookup",
+      "path": "/api/memory-job?jobId=not-a-job",
+      "status": 400,
+      "passed": true,
+      "error": "Enter a valid storage job ID."
+    },
+    {
+      "name": "human verification cannot be string-coerced",
+      "path": "/api/remember",
+      "status": 400,
+      "passed": true,
+      "error": "Human verification, diagnosis, a concrete resolution, reviewer and HTTPS evidence URL are required."
+    },
+    {
+      "name": "malformed observation digest never reaches storage",
+      "path": "/api/observations",
+      "status": 400,
+      "passed": true,
+      "error": "A valid Sui digest is required."
+    },
+    {
+      "name": "non-GitHub evidence rejected without storage",
+      "path": "/api/remember",
+      "status": 409,
+      "passed": true,
+      "error": "Reviewed engineering evidence blocked: Reviewed evidence must be a canonical public HTTPS GitHub pull request or commit URL."
+    },
+    {
+      "name": "non-GitHub evidence rejected without storage",
+      "path": "/api/remember",
+      "status": 409,
+      "passed": true,
+      "error": "Reviewed engineering evidence blocked: Reviewed evidence must be a canonical public HTTPS GitHub pull request or commit URL."
+    },
+    {
+      "name": "wrong expected blob cannot verify recurrence",
+      "path": "/api/verify-recall",
+      "status": 409,
+      "passed": true,
+      "error": "Gate 3 not yet proven: Walrus did not return the exact reviewed resolution blob as an eligible precedent for the second incident."
+    }
+  ],
+  "passed": false,
+  "memoryWrites": 0,
+  "scope": "Bounded reads and pre-write rejection controls; no approved case or observation submission"
+}

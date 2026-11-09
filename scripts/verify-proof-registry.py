@@ -1,7 +1,11 @@
 """Validate the recorded Proof Engine dispositions/hashes; no live calls or writes."""
 from pathlib import Path
 import json,hashlib,datetime,sys
-r=Path(__file__).resolve().parents[1];e=r/'evidence/phase24'
+r=Path(__file__).resolve().parents[1]
+# Default to the operator's current successor registry. Explicit historical snapshots
+# remain checkable and correctly fail if their source/artifacts have changed.
+if '--evidence-dir' in sys.argv:e=r/sys.argv[sys.argv.index('--evidence-dir')+1]
+else:e=(r/json.loads((r/'.hackathon/state.json').read_text(encoding='utf-8-sig'))['proof_engine']['registry']).parent
 def read(name):return json.loads((e/name).read_text(encoding='utf-8-sig'))
 reg=read('claim-registry.json');summary=read('acceptance.json');manifest=read('proof-manifest.json');rows=reg['claims']
 allowed={'VERIFIED','MEASURED','SIMULATED','STALE','REMOVED','BLOCKED'};critical_allowed={'VERIFIED','MEASURED','SIMULATED','REMOVED','BLOCKED'}
@@ -30,6 +34,16 @@ assert live['catalog']['count']==1 and live['catalog']['coverageComplete']
 replay=read('artifact-refresh.json');assert replay['passed'] and replay['evidenceFiles']==17 and len(replay['recordedHistoryHashes'])==4 and len(replay['syntheticMutationControls'])==7 and replay['memoryWrites']==0 and not replay['newHumanReview']
 browser=read('public-browser.json');assert browser['passed'] and len(browser['checks'])==19 and browser['memoryWrites']==0
 deployment=read('deployment.json');assert deployment['state']=='READY' and deployment['appCommit']==manifest['appCommit']
+if e.name=='phase25':
+    assert deployment['deploymentId']==deployment['aliasDeploymentId']
+    attacks=read('production-api.json');assert attacks['passed'] and len(attacks['checks'])==33 and attacks['memoryWrites']==0
+    workflow=read('production-workflow.json');assert workflow['passed'] and len(workflow['checks'])==21 and workflow['unexpectedMutationRequests']==0
+    repeated=read('public-browser-repeat.json');assert repeated['passed'] and len(repeated['checks'])==19 and repeated['memoryWrites']==0
+    a11y=read('receipt-accessibility.json');assert a11y['passed'] and len(a11y['runs'])==4
+    assert all(not a['violations'] and a['overflow']==0 for run in a11y['runs'] for a in run['audits'])
+    state=json.loads((r/'.hackathon/state.json').read_text(encoding='utf-8-sig'))
+    assert state['phase']=='PRODUCT_HYGIENE' and state['red_team_complete'] and not state['submission_ready'] and not state['feature_freeze']
+    assert state['production_release']['app_commit']==manifest['appCommit']
 assert summary['passed'] and summary['unclosedCriticalIds']==[] and summary['newMainnetWrites']==0
 assert set(summary['unresolvedCriticalIds'])=={x['id'] for x in rows if x['status']=='BLOCKED' and x['criticality']=='CRITICAL'}
 expired=[]

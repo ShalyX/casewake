@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "revision": 40,
+  "revision": 41,
   "project_root": "C:\\Users\\USER\\Documents\\Codex\\2026-11-01\\total-recall",
-  "phase": "RED_TEAM",
-  "active_specialist": "QA / Red Team",
+  "phase": "PRODUCT_HYGIENE",
+  "active_specialist": "QA / Product Hygiene",
   "human_input_required": false,
   "pending_gate": null,
   "product_locked": true,
@@ -20,7 +20,7 @@
   "design_lock_revision": 2,
   "visual_qa_static_complete": true,
   "visual_qa_motion_complete": true,
-  "evidence_status": "PHASE24_REGISTRY_CLOSED:32 dispositions,22 critical;5 critical dependencies BLOCKED. Fresh26 public read/access +19 browser checks, case hash/replay and release identity pass; zero new Mainnet writes.",
+  "evidence_status": "PHASE25_RED_TEAM_PASS: four findings closed; fixed public release,33 actual adversarial +26 integration/access +19 browser checks repeated twice. Inventory13/one reviewed case; no new Mainnet writes. Phase26 hygiene remains.",
   "feature_freeze": false,
   "freeze_at": null,
   "deadline": "2026-11-10T17:00:00Z",
@@ -51,8 +51,8 @@
     "DESIGN_ENGINEERING": "PASS - IMPLEMENTATION + DISCOVERY: locked Rouse app, public own-digest reads, reviewed library/error-text search; build/lint/unit +89 browser/12 actual read/access checks. Phase22 acceptance superseded by scoped Phase23 regression/public release.",
     "VISUAL_QA": "PASS - LOCAL PRODUCTION: revision2 target comparison,20 page scans,29 workspace/10 library/28 keyboard checks,4 normal/reduced recordings (98 assertions),12 actual read/access checks; zero new Mainnet writes. VISUAL_QA_REVIEW_ROUSE_2026-11-08.md.",
     "BUILD_LOOP": "PASS - APPROVED SINGLE-OPERATOR SCOPE: all8 original P0s plus discovery; workflow fixes and public release independently accepted. BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md; PRODUCT-COVERAGE.md.",
-    "PROOF_ENGINE": "PASS - DISPOSITION:32 claims (16 verified,3 measured,4 simulated,2 removed,1 inactive stale,6 blocked); five critical blockers retained. EVIDENCE.md; PROOF.md; evidence/phase24/claim-registry.json.",
-    "RED_TEAM": "PARTIAL: Auth/mismatch/tamper/chronology/failure tests pass; final pass remains.",
+    "PROOF_ENGINE": "PASS - SUCCESSOR DISPOSITION:32 claims/22 critical; Phase25 registry/source binding refreshed. Five critical blockers remain, with C25 narrowed to Phase26 hygiene.",
+    "RED_TEAM": "PASS - BOUNDED PUBLIC RELEASE: four findings fixed;33 real API probes,26 integration/access,19 browser checks repeated twice and21 controlled UI attacks. RED_TEAM_REVIEW_ROUSE_2026-11-09.md.",
     "PRODUCT_HYGIENE": "NOT DONE: Full hygiene skill and tracked-history scan remain.",
     "DEMO_PRODUCTION": "PARTIAL: Script/shot list; no finished2\u20133min MP4.",
     "DEMO_QA": "NOT DONE: No final video to inspect.",
@@ -70,16 +70,16 @@
     "Default master differs from the release; use pinned released source in the current judge/submission packet and preserve/reconcile feature-branch work before future mainline releases.",
     "C31: historical strict flashloan repayment case remains separately blocked; do not weaken its acceptance."
   ],
-  "next_action": "Phase25 RED_TEAM: attack the public release and original8 P0/discovery/recovery workflows; preserve single-operator/case limits and avoid unapproved Mainnet writes. Final validation/track/film/hygiene/submission dependencies remain explicit.",
+  "next_action": "Phase26 PRODUCT_HYGIENE: run canonical repository/history hygiene against the released source; retain scoped case limits and explicit downstream blockers.",
   "updated_at": "2026-11-09",
   "product_review_complete": true,
   "p0_groups_reviewed": 8,
   "production_release": {
-    "app_commit": "e4c8bcc36a8a2fdc1656467e1e776602bf34169c",
-    "deployment_id": "dpl_3orbBpbco7sDXp2pfk6R93qtpGhB",
+    "app_commit": "5c61e8a8f6067151c92dffe39e2852562d8f3324",
+    "deployment_id": "dpl_9HZrb9GVNRdsDfCScYNe9XVEsVNA",
     "url": "https://casewake.vercel.app",
-    "status": "READY_AND_PUBLICLY_ACCEPTED",
-    "evidence": "evidence/phase23/release.json"
+    "status": "READY_AND_RED_TEAM_ACCEPTED",
+    "evidence": "evidence/phase25/deployment.json"
   },
   "naming_direction": {
     "status": "FINAL: Rouse explicitly locked by user after overlap disclosure.",
@@ -174,17 +174,18 @@
     "recording_protected": true,
     "new_memory_writes": 0,
     "design_revision": 2,
-    "public_evidence": "evidence/phase23/production-browser.json"
+    "public_evidence": "evidence/phase25/public-browser.json"
   },
   "visual_qa": {
-    "status": "PASS_PHASE23_SUCCESSOR_PUBLIC_REGRESSION",
-    "review": "BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md",
-    "acceptance": "evidence/phase23/acceptance.json",
+    "status": "PASS_PHASE25_SOURCE_BOUND_REGRESSION",
+    "review": "RED_TEAM_REVIEW_ROUSE_2026-11-09.md",
+    "acceptance": "evidence/phase25/acceptance.json",
     "score": 21,
     "max_score": 24,
     "public_deployment_verified": true,
     "real_memory_writes": 0,
-    "previous_review": "VISUAL_QA_REVIEW_ROUSE_2026-11-08.md"
+    "previous_review": "VISUAL_QA_REVIEW_ROUSE_2026-11-08.md",
+    "score_scope": "Carried Phase22 internal visual heuristic; not rescored in Phase25."
   },
   "full_product_verified": true,
   "build_loop_complete": true,
@@ -195,6 +196,13 @@
       "url": "https://casewake.vercel.app",
       "status": "READY_AND_READ_ONLY_ACCEPTED",
       "evidence": "evidence/phase14/release-verification.md"
+    },
+    {
+      "app_commit": "5c61e8a8f6067151c92dffe39e2852562d8f3324",
+      "deployment_id": "dpl_9HZrb9GVNRdsDfCScYNe9XVEsVNA",
+      "url": "https://casewake.vercel.app",
+      "status": "READY_AND_RED_TEAM_ACCEPTED",
+      "evidence": "evidence/phase25/acceptance.json"
     }
   ],
   "full_product_verification_scope": {
@@ -219,9 +227,9 @@
   "claim_registry_closed": true,
   "proof_engine": {
     "status": "REGISTRY_CLOSED_WITH_EXPLICIT_BLOCKERS",
-    "registry": "evidence/phase24/claim-registry.json",
-    "manifest": "evidence/phase24/proof-manifest.json",
-    "review": "PROOF_ENGINE_REVIEW_ROUSE_2026-11-09.md",
+    "registry": "evidence/phase25/claim-registry.json",
+    "manifest": "evidence/phase25/proof-manifest.json",
+    "review": "RED_TEAM_REVIEW_ROUSE_2026-11-09.md",
     "judge_packet": "PROOF.md",
     "claims": 32,
     "critical_claims": 22,
@@ -232,7 +240,16 @@
       "C25",
       "C26"
     ],
-    "current_deployment_unchanged": true,
+    "current_deployment_unchanged": false,
     "new_mainnet_writes": 0
+  },
+  "red_team_complete": true,
+  "red_team": {
+    "status": "PASS_BOUNDED_PUBLIC_RELEASE",
+    "review": "RED_TEAM_REVIEW_ROUSE_2026-11-09.md",
+    "acceptance": "evidence/phase25/acceptance.json",
+    "app_commit": "5c61e8a8f6067151c92dffe39e2852562d8f3324",
+    "new_mainnet_writes": 0,
+    "open_p0_p1_findings": 0
   }
 }

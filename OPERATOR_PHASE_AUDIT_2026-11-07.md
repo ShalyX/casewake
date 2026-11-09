@@ -1,6 +1,6 @@
 # Rouse — current 35-phase operator audit
 
-Updated 2026-11-09 through Phase24 Proof Engine. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
+Updated 2026-11-09 through Phase25 Red Team. Product Lock revision 1 controls; Rouse is explicitly locked by the user. See NAME_LOCK.md. This replaces the stale revision19 audit.
 
 Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions and reuse them for compatible failures. Tests and the example case support that product.
 
@@ -30,7 +30,7 @@ Purpose: help Sui engineers preserve evidence-linked human-reviewed resolutions 
 | 22 | VISUAL_QA | PASS — LOCAL PRODUCTION | Revision2 target comparison,20 page/38 stable-state scans,29 workspace/10 library/28 keyboard checks,4 normal/reduced recordings and12 actual read/access checks; VISUAL_QA_REVIEW_ROUSE_2026-11-08.md. Public deployment unchanged. |
 | 23 | BUILD_LOOP | PASS — APPROVED SCOPE | All8 original P0s + discovery; review/inventory/uncertain-write/onboarding fixes, public release,26 public API +19 browser checks; PRODUCT-COVERAGE.md and BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md. |
 | 24 | PROOF_ENGINE | PASS — DISPOSITION |32 owner/evidence/freshness-bound claims; five critical dependencies remain blocked, not proven. Fresh live26+browser19, case hash/replay, judge packet and corrected current submission links; PROOF_ENGINE_REVIEW_ROUSE_2026-11-09.md. |
-| 25 | RED_TEAM | PARTIAL | Auth/mismatch/tamper/chronology/failure tests pass; final pass remains. |
+| 25 | RED_TEAM | PASS — BOUNDED PUBLIC RELEASE | Four findings fixed and deployed;33 real API probes,26 read/access checks,19 actual browser checks repeated twice,21 controlled UI attacks. No new Mainnet write; RED_TEAM_REVIEW_ROUSE_2026-11-09.md. |
 | 26 | PRODUCT_HYGIENE | NOT DONE | Full hygiene skill and tracked-history scan remain. |
 | 27 | DEMO_PRODUCTION | PARTIAL | Script/shot list; no finished2–3min MP4. |
 | 28 | DEMO_QA | NOT DONE | No final video to inspect. |
@@ -48,8 +48,8 @@ Phase 13 and14 pass within the approved scope. ShalyX specifically approved the 
 
 All eight P0 groups were reviewed. Actual Mainnet reads and completed-job recovery are separated from 26 controlled browser checks; no new memory was written. Functional QA does not automatically pass final design/motion gates.
 
-NAME_LOCK is closed by explicit user selection of Rouse. Phases15–24 pass within their documented scopes; Phase25 RED_TEAM is next. Proof registry closure retains explicit blocked claims. Phase23 separately accepts the public release. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
+NAME_LOCK is closed by explicit user selection of Rouse. Phases15–25 pass within their documented scopes; Phase26 PRODUCT_HYGIENE is next. Proof registry closure retains explicit blocked claims. Phase23 separately accepts the public release. Asset strategy acceptance does not imply final asset delivery or production integration. External validation/track fit remains partial; preparatory artifacts do not imply later acceptance.
 
-Current release: evidence/phase23/release.json. Historical release: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
+Current release: evidence/phase25/deployment.json. Prior accepted release: evidence/phase23/release.json. Historical release: evidence/phase14/release-verification.md. Preserve the deployed feature-branch fixes before future master releases. Master/draft PR#1 are separate; original dirty checkout and other worktree are intact.
 
 FULL_PRODUCT_VERIFIED is scoped to the original eight P0 groups and approved single-operator/case workflow, with carried real-write proof and controlled new-write/failure UI tests. JUDGE_READY, freeze, submission_ready and submitted are not claimed.

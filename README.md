@@ -64,4 +64,4 @@ Do not run ingestion, publication or memory-writing scripts as setup or a smoke 
 
 ## Remaining work
 
-The [operator audit](OPERATOR_PHASE_AUDIT_2026-11-07.md) tracks the current phase. External Sui-engineer utility validation and organizer track-fit confirmation remain open. Final proof registry, red team, product hygiene, demo film, pitch, judge simulation and submission gates remain separate. QA recordings are not the final 2–3 minute submission film. No submission receipt is claimed.
+The [operator audit](OPERATOR_PHASE_AUDIT_2026-11-07.md) tracks the current phase. External Sui-engineer utility validation and organizer track-fit confirmation remain open. Phase25 bounded Red Team passes on the public release; see [the review](RED_TEAM_REVIEW_ROUSE_2026-11-09.md). Product hygiene, demo film, pitch, judge simulation and submission gates remain separate. QA recordings are not the final 2–3 minute submission film. No submission receipt is claimed.

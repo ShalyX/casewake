@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "date": "2026-11-09",
+  "checkedAt": "2026-11-09T01:57:32.681223Z",
+  "appCommit": "5c61e8a8f6067151c92dffe39e2852562d8f3324",
+  "deploymentId": "dpl_9HZrb9GVNRdsDfCScYNe9XVEsVNA",
+  "claims": 32,
+  "statusCounts": {
+    "VERIFIED": 16,
+    "MEASURED": 3,
+    "SIMULATED": 4,
+    "REMOVED": 2,
+    "STALE": 1,
+    "BLOCKED": 6
+  },
+  "criticalClaims": 22,
+  "unresolvedCriticalIds": [
+    "C22",
+    "C23",
+    "C24",
+    "C25",
+    "C26"
+  ],
+  "unclosedCriticalIds": [],
+  "newMainnetWrites": 0,
+  "actualPublicAdversarialChecks": 33,
+  "freshLiveReadChecks": 26,
+  "freshBrowserChecks": 19,
+  "freshBrowserRepeatedRuns": 2,
+  "controlledDeployedAttackChecks": 21,
+  "workspaceChecks": 29,
+  "libraryChecks": 10,
+  "keyboardChecks": 28,
+  "publicViewportScans": 20,
+  "controlledReceiptStateScans": 8,
+  "normalReducedRuns": 4,
+  "motionAssertions": 98,
+  "openP0P1Findings": 0,
+  "nextPhase": "PRODUCT_HYGIENE",
+  "scope": "Approved single-operator namespace and one reviewed cancellation case; bounded audit, not security certification."
+}

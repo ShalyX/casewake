@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-09T01:48:53.740Z",
+  "repository": {
+    "url": "https://github.com/ShalyX/casewake",
+    "public": true,
+    "defaultBranch": "master",
+    "releaseRelativeToDefault": {
+      "status": "ahead",
+      "aheadBy": 61,
+      "behindBy": 0
+    }
+  },
+  "sourceLink": "https://github.com/ShalyX/casewake/tree/5c61e8a8f6067151c92dffe39e2852562d8f3324",
+  "sourceFile": {
+    "url": "https://github.com/ShalyX/casewake/blob/5c61e8a8f6067151c92dffe39e2852562d8f3324/web/src/lib/storage-session.ts",
+    "gitBlob": "26a900bb31898d9372692c38c095fd3a2d55b4c7",
+    "pinnedRef": "5c61e8a8f6067151c92dffe39e2852562d8f3324"
+  },
+  "method": "GitHub connector get_repo, compare_commits and fetch_file at pinned release; repository remains public and default master differs."
+}

@@ -1,3 +1,11 @@
+# Phase25 checkpoint — Rouse / 2026-11-09
+
+Red Team PASS within the approved public single-operator scope. Four findings closed: altered cache claiming completion, malformed catalogue claiming empty, unexplained409 allowing job dismissal, and malformed authorized JSON returning502. The fixed release is 5c61e8a, deployment dpl_9HZrb9GVNRdsDfCScYNe9XVEsVNA.33 actual adversarial API probes,26 actual integration/access checks,19 actual browser checks repeated twice and21 controlled deployed-UI attacks pass.20 public viewport scans,8 controlled receipt-state scans,29 workspace/10 library/28 keyboard checks and4 normal/reduced recordings pass.13 completed memories include one reviewed resolution; no new Mainnet write, human approval or chain execution. Original operator deployment remains unknown; no historical onchain repair.
+
+Review: RED_TEAM_REVIEW_ROUSE_2026-11-09.md. Current Phase26 PRODUCT_HYGIENE. Current registry/source certificate: evidence/phase25. Phase24 artifacts remain historical. External utility, track confirmation, final film, hygiene and readiness/submission remain blocked. Feature freeze and submission readiness remain false.
+
+---
+
 # Phase24 checkpoint — Rouse / 2026-11-09
 
 Proof Engine PASS by explicit disposition:32 material claims,22 critical, no silent unproven critical status.16 verified,3 measured,4 labelled simulated,2 removed,1 inactive stale,6 blocked. Five critical dependencies remain: utility, organizer track confirmation, final film, final red team/hygiene and readiness/submission. EVIDENCE.md is the current ledger; prior mixed-status logs are archived. PROOF.md supplies judge locations and exact release/case source links. Fresh26 public read/access +19 browser checks, five surfaces, deployment identity and immutable case snapshot/replay pass.13 completed memories include one reviewed resolution. No new Mainnet write, chain execution or human approval. Original operator deployment remains unknown; no historical onchain repair claimed.

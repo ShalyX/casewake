@@ -1,0 +1,109 @@
+{
+  "stateAudits": [
+    {
+      "stage": "Unavailable library never claims an empty result",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "Case discovery is unavailable."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Incomplete catalogue exposes missing coverage",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Library card has no transaction compatibility claim",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Starting a new search clears old cases",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "Reading the reviewed-case library\u2026"
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Search outage stays distinct from no result",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "Case discovery is unavailable."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "No-result search retains partial-coverage qualification",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "0 related reviewed cases found for this search."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Keyboard opens original case context",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Mobile case and expanded provenance no overflow",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Library respects reduced motion",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    },
+    {
+      "stage": "Library state checks never submit a record",
+      "violations": [],
+      "overflow": 0,
+      "statuses": [
+        "1 reviewed case retrieved."
+      ],
+      "width": 390
+    }
+  ],
+  "passed": true,
+  "checks": [
+    "Unavailable library never claims an empty result",
+    "Incomplete catalogue exposes missing coverage",
+    "Library card has no transaction compatibility claim",
+    "Starting a new search clears old cases",
+    "Search outage stays distinct from no result",
+    "No-result search retains partial-coverage qualification",
+    "Keyboard opens original case context",
+    "Mobile case and expanded provenance no overflow",
+    "Library respects reduced motion",
+    "Library state checks never submit a record"
+  ],
+  "realMemoryWrites": 0,
+  "scope": "Controlled availability, coverage, keyboard and search states"
+}

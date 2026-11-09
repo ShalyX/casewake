@@ -1,0 +1,35 @@
+{
+  "scope": "Controlled reviewer transitions on actual UI; one intercepted submission, no Mainnet writes",
+  "stateAudits": [
+    {
+      "stage": "Changed evidence requires new approvals",
+      "violations": [],
+      "overflow": 0
+    },
+    {
+      "stage": "Unconfirmed503 survives reload",
+      "violations": [],
+      "overflow": 0
+    }
+  ],
+  "afterMethodChange": [
+    false,
+    false
+  ],
+  "afterArtifactChange": [
+    false,
+    false
+  ],
+  "afterProcedureChange": [
+    false,
+    false
+  ],
+  "nextIncidentSdk": "",
+  "nextIncidentDiagnosis": "",
+  "unconfirmedStorage": true,
+  "duplicateBlocked": true,
+  "survivesReload": true,
+  "writeRequests": 1,
+  "realMemoryWrites": 0,
+  "passed": true
+}

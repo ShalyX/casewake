@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "checkedAt": "2026-11-09T01:44:38.292Z",
+  "base": "https://casewake.vercel.app",
+  "assets": [
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/7334c212-c28d7784beca76b6.js",
+      "bytes": 203721,
+      "sha256": "060f79bc9f15f944755dca6316fae25a7a0bb24de4e15314990f6034e3b73bdd",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/238-7567a8143f754c99.js",
+      "bytes": 241734,
+      "sha256": "f072187adfe65c5d093b1880ee40f93a4df1805c9c6582626345f86b6aab5d43",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/main-app-cad2500581aa2f22.js",
+      "bytes": 937,
+      "sha256": "6026008609279b40c1f0331769bfc997ef063c3a724ba6e083925b46325b8d8d",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/182-50050fa319549e81.js",
+      "bytes": 21953,
+      "sha256": "4b9e32a2b715de1dd2d4f2aa6476c109da2dd3632a4a01401bf1af10434c151f",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/app/page-5b1fa62412116154.js",
+      "bytes": 235,
+      "sha256": "ad23a7b2abfa31e47039757246c0c077e21dae92b338d3c50ee08aa630a7715e",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "bytes": 112594,
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "containsKnownSecret": false
+    },
+    {
+      "url": "https://casewake.vercel.app/_next/static/chunks/webpack-ec4288ee90e729ee.js",
+      "bytes": 3326,
+      "sha256": "66691dde277057d52fc44937290fbfaeda112c5fc07a812a2231431c680557bf",
+      "containsKnownSecret": false
+    }
+  ],
+  "blocked": [
+    {
+      "path": "/.env.local",
+      "status": 404
+    },
+    {
+      "path": "/.git/config",
+      "status": 404
+    },
+    {
+      "path": "/_next/server/app/api/remember/route.js",
+      "status": 404
+    }
+  ],
+  "secretValuesPrinted": false,
+  "scope": "Bounded exact-value checks in fetched public HTML/JS and three private-path probes; not a history scan or exhaustive DLP/security certification",
+  "memoryWrites": 0
+}

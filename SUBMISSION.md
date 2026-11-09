@@ -8,7 +8,7 @@ Project: **Rouse**. Purpose: retain an evidence-linked human-reviewed Sui resolu
 |---|---|
 |Working app|https://casewake.vercel.app|
 |Reviewed-case library/search|https://casewake.vercel.app/cases|
-|Released public source|https://github.com/ShalyX/casewake/tree/e4c8bcc36a8a2fdc1656467e1e776602bf34169c — use this pinned source; default master differs|
+|Released public source|https://github.com/ShalyX/casewake/tree/5c61e8a8f6067151c92dffe39e2852562d8f3324 — use this pinned source; default master differs|
 |Approved case artifact|https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215|
 |Published engineering article|https://casewake.vercel.app/journal/casewake — existence/content verified; publication does not imply organizer acceptance|
 |Final video|BLOCKED C24; controlled QA clips are not a final submission film|
@@ -20,4 +20,4 @@ Project: **Rouse**. Purpose: retain an evidence-linked human-reviewed Sui resolu
 
 Approved scope: ShalyX-reviewed independent cancellation reconciliation, original operator deployment unknown, no onchain repair. Current measured namespace total13 includes one reviewed resolution plus lower-tier records. Actual chain inspection and recall are public; reviewer-approved memory recording is protected. New async/failure UI tests are controlled and no new Mainnet memory was written during this audit.
 
-Do not submit with unsupported utility, time-saved, original-operator deployment, automatic correction, official score or award claims. External validation/track confirmation and final red-team/hygiene/film/pitch/judging/submission gates remain open. Registry disposition is not permission to send or publish a submission.
+Do not submit with unsupported utility, time-saved, original-operator deployment, automatic correction, official score or award claims. External validation/track confirmation and Phase26 hygiene/film/pitch/judging/submission gates remain open. Registry disposition is not permission to send or publish a submission.
