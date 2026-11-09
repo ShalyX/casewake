@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const base=process.env.ROUSE_ACCEPTANCE_BASE||'http://127.0.0.1:4242';
 const key=process.env.WORKSPACE_WRITE_KEY;if(!key)throw new Error('Existing-job reads require reviewer environment.');
 const saved=JSON.parse(fs.readFileSync(new URL('../../evidence/real-case/reviewed-memory-receipt.json',import.meta.url),'utf8')).data;
-const output=new URL('../../evidence/phase23/live-acceptance.json',import.meta.url);
+const output=process.env.ROUSE_ACCEPTANCE_OUTPUT||new URL('../../evidence/phase23/live-acceptance.json',import.meta.url);
 const proof={base,startedAt:new Date().toISOString(),checks:[],memoryWrites:0,responses:{}};
 async function call(path,body,auth=false){const r=await fetch(base+path,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json',...(auth?{'x-workspace-key':key}:{})},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(110000)});return {status:r.status,data:await r.json()};}
 async function check(name,request,validate){const result=await request();proof.responses[name]=result;validate(result);proof.checks.push(name);fs.writeFileSync(output,JSON.stringify(proof,null,2)+'\n');console.log('PASS',name);return result;}

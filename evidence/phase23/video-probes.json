@@ -1,0 +1,30 @@
+[
+  {
+    "label": "desktop-normal",
+    "file": "desktop-normal.webm",
+    "duration": 21.52,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "label": "desktop-reduced",
+    "file": "desktop-reduced.webm",
+    "duration": 21.32,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "label": "mobile-normal",
+    "file": "mobile-normal.webm",
+    "duration": 20.56,
+    "width": 390,
+    "height": 844
+  },
+  {
+    "label": "mobile-reduced",
+    "file": "mobile-reduced.webm",
+    "duration": 20.72,
+    "width": 390,
+    "height": 844
+  }
+]

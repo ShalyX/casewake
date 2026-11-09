@@ -3,10 +3,11 @@
 import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import {stripTypeScriptTypes} from 'node:module';
 import {completedBlobIds,readCompletedInventory} from '../src/lib/completed-inventory.ts';
 const old=execFileSync('git',['show','83f22e9:web/src/lib/observations.ts'],{encoding:'utf8'});
 const start=old.indexOf('export async function memoryInventory()');assert.ok(start>=0);
-const body=old.slice(start).replace('export async function','async function');
+const body=stripTypeScriptTypes(old.slice(start).replace('export async function','async function'));
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
 const expired={memories:[],must_resync:true,has_more:false};
 const oldResult=await new AsyncFunction('memwalClient','completedBlobIds',body+'\nreturn memoryInventory();')(async()=>({listMemories:async()=>expired}),completedBlobIds);

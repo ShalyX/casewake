@@ -1,0 +1,23 @@
+{
+  "scope": "Controlled reviewer transitions on actual UI; one intercepted submission, no Mainnet writes",
+  "afterMethodChange": [
+    false,
+    false
+  ],
+  "afterArtifactChange": [
+    false,
+    false
+  ],
+  "afterProcedureChange": [
+    false,
+    false
+  ],
+  "nextIncidentSdk": "",
+  "nextIncidentDiagnosis": "",
+  "unconfirmedStorage": true,
+  "duplicateBlocked": true,
+  "survivesReload": true,
+  "writeRequests": 1,
+  "realMemoryWrites": 0,
+  "passed": true
+}

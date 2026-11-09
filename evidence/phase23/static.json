@@ -1,0 +1,329 @@
+{
+  "scope": "Actual local production app, read-only live pages; automated audit requires manual follow-up",
+  "results": [
+    {
+      "page": "landing",
+      "viewportName": "desktop",
+      "width": 1440,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".text-link[href$=\"cases\"] > span[aria-hidden=\"true\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+              "html": "<span aria-hidden=\"true\">\u2192</span>"
+            }
+          ]
+        }
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "landing",
+      "viewportName": "tablet",
+      "width": 768,
+      "height": 1024,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".text-link[href$=\"cases\"] > span[aria-hidden=\"true\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+              "html": "<span aria-hidden=\"true\">\u2192</span>"
+            }
+          ]
+        }
+      ],
+      "scrollWidth": 768,
+      "viewport": 768,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "landing",
+      "viewportName": "mobile",
+      "width": 390,
+      "height": 844,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".text-link[href$=\"cases\"] > span[aria-hidden=\"true\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+              "html": "<span aria-hidden=\"true\">\u2192</span>"
+            }
+          ]
+        }
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "landing",
+      "viewportName": "reflow",
+      "width": 320,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".text-link[href$=\"cases\"] > span[aria-hidden=\"true\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+              "html": "<span aria-hidden=\"true\">\u2192</span>"
+            }
+          ]
+        }
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "workspace",
+      "viewportName": "desktop",
+      "width": 1440,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "workspace",
+      "viewportName": "tablet",
+      "width": 768,
+      "height": 1024,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 768,
+      "viewport": 768,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "workspace",
+      "viewportName": "mobile",
+      "width": 390,
+      "height": 844,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "workspace",
+      "viewportName": "reflow",
+      "width": 320,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "library",
+      "viewportName": "desktop",
+      "width": 1440,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "library",
+      "viewportName": "tablet",
+      "width": 768,
+      "height": 1024,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 768,
+      "viewport": 768,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "library",
+      "viewportName": "mobile",
+      "width": 390,
+      "height": 844,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "library",
+      "viewportName": "reflow",
+      "width": 320,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "journal",
+      "viewportName": "desktop",
+      "width": 1440,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "journal",
+      "viewportName": "tablet",
+      "width": 768,
+      "height": 1024,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 768,
+      "viewport": 768,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "journal",
+      "viewportName": "mobile",
+      "width": 390,
+      "height": 844,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "journal",
+      "viewportName": "reflow",
+      "width": 320,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "proof",
+      "viewportName": "desktop",
+      "width": 1440,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "proof",
+      "viewportName": "tablet",
+      "width": 768,
+      "height": 1024,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 768,
+      "viewport": 768,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "proof",
+      "viewportName": "mobile",
+      "width": 390,
+      "height": 844,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "skipLinks": 1,
+      "smallTargets": []
+    },
+    {
+      "page": "proof",
+      "viewportName": "reflow",
+      "width": 320,
+      "height": 900,
+      "axeVersion": "4.14.0",
+      "violations": [],
+      "incomplete": [],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "skipLinks": 1,
+      "smallTargets": []
+    }
+  ],
+  "writes": 0,
+  "errors": [],
+  "browserSupportsVideo": true,
+  "checkedAt": "2026-11-08T23:07:00.048Z"
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "Actual missing environment disables providers and reviewer writes",
+    "Lookup remains disabled without chain credentials",
+    "Memory setup state is explicit",
+    "Unknown inventory is not a synthetic zero",
+    "Unconfigured library does not claim no cases",
+    "Read retry stays available",
+    "Setup checks never attempt storage"
+  ],
+  "realMemoryWrites": 0,
+  "scope": "Actual production process with credentials removed; no simulated API responses"
+}

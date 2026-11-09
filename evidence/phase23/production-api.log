@@ -1,0 +1,27 @@
+PASS configurationIsNotLiveProof
+PASS completedInventoryBefore
+PASS actualFailure
+PASS actualSuccess
+PASS actualSuccessNoPrecedent
+PASS actualNotFound
+PASS actualNotFoundNoPrecedent
+PASS arbitraryOwnDigest
+PASS reviewedLibrary
+PASS errorTextSearch
+PASS unrelatedSearch
+PASS searchBounds1
+PASS searchBounds2001
+PASS recoverExistingCompletedJob
+PASS rejectWrongReceiptIdentity
+PASS exactReviewedBlobRecurrence
+PASS selfRecallRejected
+PASS unrelatedRecallRejected
+PASS malformedDigest
+PASS /api/rememberProtected
+PASS /api/observationsProtected
+PASS /api/verify-recallProtected
+PASS receiptRecoveryProtected
+PASS humanApprovalRequired
+PASS credentialsRejectedBeforeWrite
+PASS completedInventoryAfter
+PASS 26 actual integration/read/access checks; new Mainnet writes0

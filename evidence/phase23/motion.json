@@ -1,0 +1,709 @@
+{
+  "passed": true,
+  "scope": "Actual UI with clearly labelled simulated service responses; not Mainnet write proof",
+  "runs": [
+    {
+      "label": "desktop-normal",
+      "mode": "no-preference",
+      "viewport": "desktop",
+      "checks": [
+        "Transaction read preserves initiator focus",
+        "No candidate while transaction is pending",
+        "Provenance toggle keeps keyboard focus",
+        "Essential blob stays outside disclosure",
+        "No submission without human approval",
+        "No pre-approval write request",
+        "Submission carries both explicit attestations",
+        "Accepted status receives focus from replaced editor",
+        "Pending storage has no completed blob",
+        "Completion announced only after actual result state",
+        "New lookup announces its result rather than old receipt",
+        "Completed receipt survives another lookup",
+        "Normal/reduced reveal follows preference",
+        "Result reveal configured at180ms",
+        "Live announcements are concise and do not read job IDs",
+        "Search retains focus while reading",
+        "Search clears stale cards before response",
+        "Search retains focus after response",
+        "Results retain explicit submitted-query context",
+        "Outage is distinct from no result",
+        "Retry hands focus to stable result region",
+        "Retry completion does not steal focus",
+        "Library has no horizontal overflow",
+        "Exactly one controlled reviewed submission",
+        "No JavaScript errors"
+      ],
+      "workspace": {
+        "events": [
+          {
+            "type": "transaction-response",
+            "t": 1988.1000000014901
+          },
+          {
+            "type": "recall-response",
+            "t": 2824
+          },
+          {
+            "type": "animationstart",
+            "t": 2864.800000000745,
+            "name": "rouse-result",
+            "elapsed": 0,
+            "duration": "0.18s",
+            "transform": "matrix(1, 0, 0, 1, 0, 2.51331)",
+            "opacity": "0.371672"
+          },
+          {
+            "type": "animationend",
+            "t": 3032,
+            "name": "rouse-result",
+            "elapsed": 0.18,
+            "duration": "0.18s",
+            "transform": "none",
+            "opacity": "1"
+          },
+          {
+            "type": "transaction-response",
+            "t": 9504.800000000745
+          },
+          {
+            "type": "animationstart",
+            "t": 11298.800000000745,
+            "name": "rouse-result",
+            "elapsed": 0,
+            "duration": "0.18s",
+            "transform": "matrix(1, 0, 0, 1, 0, 2.51389)",
+            "opacity": "0.371527"
+          },
+          {
+            "type": "animationend",
+            "t": 11465.300000000745,
+            "name": "rouse-result",
+            "elapsed": 0.18,
+            "duration": "0.18s",
+            "transform": "none",
+            "opacity": "1"
+          }
+        ],
+        "statuses": [
+          {
+            "t": 1069.5,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 2031,
+            "text": "Checking reviewed memory."
+          },
+          {
+            "t": 2836,
+            "text": "Reviewed resolution available."
+          },
+          {
+            "t": 4660.5,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 6117.200000001118,
+            "text": "Storage accepted; completion pending."
+          },
+          {
+            "t": 7136.5,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 7566.300000000745,
+            "text": "Memory stored."
+          },
+          {
+            "t": 8582.400000000373,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 9522.400000000373,
+            "text": "Transaction succeeded. No failure procedure is inferred."
+          },
+          {
+            "t": 10566.10000000149,
+            "text": "Checking exact-blob recurrence."
+          },
+          {
+            "t": 11288.700000001118,
+            "text": "Exact stored blob recalled for a distinct failure."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "library": {
+        "events": [],
+        "statuses": [
+          {
+            "t": 215.7999999988824,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 667.2999999988824,
+            "text": "1 reviewed case retrieved."
+          },
+          {
+            "t": 1597.5999999996275,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 2224.2999999988824,
+            "text": "1 related reviewed case found for this search."
+          },
+          {
+            "t": 3435.0999999996275,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 4054,
+            "text": "0 related reviewed cases found for this search."
+          },
+          {
+            "t": 4751.5,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 5378,
+            "text": "Case discovery is unavailable."
+          },
+          {
+            "t": 6049.799999998882,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 6681.0999999996275,
+            "text": "1 related reviewed case found for this search."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "fixtureSubmissions": 1,
+      "realMemoryWrites": 0,
+      "video": "evidence/phase23/desktop-normal.webm",
+      "marks": [
+        {
+          "name": "transaction-response",
+          "at": 1794179320867
+        },
+        {
+          "name": "recall-response",
+          "at": 1794179321704
+        },
+        {
+          "name": "transaction-response",
+          "at": 1794179328384
+        }
+      ]
+    },
+    {
+      "label": "desktop-reduced",
+      "mode": "reduce",
+      "viewport": "desktop",
+      "checks": [
+        "Transaction read preserves initiator focus",
+        "No candidate while transaction is pending",
+        "Provenance toggle keeps keyboard focus",
+        "Essential blob stays outside disclosure",
+        "No submission without human approval",
+        "No pre-approval write request",
+        "Submission carries both explicit attestations",
+        "Accepted status receives focus from replaced editor",
+        "Pending storage has no completed blob",
+        "Completion announced only after actual result state",
+        "New lookup announces its result rather than old receipt",
+        "Completed receipt survives another lookup",
+        "Normal/reduced reveal follows preference",
+        "Live announcements are concise and do not read job IDs",
+        "Search retains focus while reading",
+        "Search clears stale cards before response",
+        "Search retains focus after response",
+        "Results retain explicit submitted-query context",
+        "Outage is distinct from no result",
+        "Retry hands focus to stable result region",
+        "Retry completion does not steal focus",
+        "Library has no horizontal overflow",
+        "Exactly one controlled reviewed submission",
+        "No JavaScript errors"
+      ],
+      "workspace": {
+        "events": [
+          {
+            "type": "transaction-response",
+            "t": 2066.2000000011176
+          },
+          {
+            "type": "recall-response",
+            "t": 2879.800000000745
+          },
+          {
+            "type": "transaction-response",
+            "t": 9555.60000000149
+          }
+        ],
+        "statuses": [
+          {
+            "t": 1146.300000000745,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 2106.4000000003725,
+            "text": "Checking reviewed memory."
+          },
+          {
+            "t": 2895.9000000003725,
+            "text": "Reviewed resolution available."
+          },
+          {
+            "t": 4768.800000000745,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 6210.300000000745,
+            "text": "Storage accepted; completion pending."
+          },
+          {
+            "t": 7199.800000000745,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 7630.9000000003725,
+            "text": "Memory stored."
+          },
+          {
+            "t": 8636.400000000373,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 9563.400000000373,
+            "text": "Transaction succeeded. No failure procedure is inferred."
+          },
+          {
+            "t": 10585,
+            "text": "Checking exact-blob recurrence."
+          },
+          {
+            "t": 11301.60000000149,
+            "text": "Exact stored blob recalled for a distinct failure."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "library": {
+        "events": [],
+        "statuses": [
+          {
+            "t": 250.90000000037253,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 718.7999999988824,
+            "text": "1 reviewed case retrieved."
+          },
+          {
+            "t": 1676.199999999255,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 2292.7999999988824,
+            "text": "1 related reviewed case found for this search."
+          },
+          {
+            "t": 3494.2999999988824,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 4107,
+            "text": "0 related reviewed cases found for this search."
+          },
+          {
+            "t": 4830.4000000003725,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 5442.699999999255,
+            "text": "Case discovery is unavailable."
+          },
+          {
+            "t": 6206.9000000003725,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 6836.0999999996275,
+            "text": "1 related reviewed case found for this search."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "fixtureSubmissions": 1,
+      "realMemoryWrites": 0,
+      "video": "evidence/phase23/desktop-reduced.webm",
+      "marks": [
+        {
+          "name": "transaction-response",
+          "at": 1794179341253
+        },
+        {
+          "name": "recall-response",
+          "at": 1794179342067
+        },
+        {
+          "name": "transaction-response",
+          "at": 1794179348745
+        }
+      ]
+    },
+    {
+      "label": "mobile-normal",
+      "mode": "no-preference",
+      "viewport": "mobile",
+      "checks": [
+        "Transaction read preserves initiator focus",
+        "No candidate while transaction is pending",
+        "Provenance toggle keeps keyboard focus",
+        "Essential blob stays outside disclosure",
+        "No submission without human approval",
+        "No pre-approval write request",
+        "Submission carries both explicit attestations",
+        "Accepted status receives focus from replaced editor",
+        "Pending storage has no completed blob",
+        "Completion announced only after actual result state",
+        "New lookup announces its result rather than old receipt",
+        "Completed receipt survives another lookup",
+        "Normal/reduced reveal follows preference",
+        "Result reveal configured at180ms",
+        "Live announcements are concise and do not read job IDs",
+        "Search retains focus while reading",
+        "Search clears stale cards before response",
+        "Search retains focus after response",
+        "Results retain explicit submitted-query context",
+        "Outage is distinct from no result",
+        "Retry hands focus to stable result region",
+        "Retry completion does not steal focus",
+        "Library has no horizontal overflow",
+        "Exactly one controlled reviewed submission",
+        "No JavaScript errors"
+      ],
+      "workspace": {
+        "events": [
+          {
+            "type": "transaction-response",
+            "t": 2102.2999999988824
+          },
+          {
+            "type": "recall-response",
+            "t": 2919.2999999988824
+          },
+          {
+            "type": "animationstart",
+            "t": 2966.199999999255,
+            "name": "rouse-result",
+            "elapsed": 0,
+            "duration": "0.18s",
+            "transform": "matrix(1, 0, 0, 1, 0, 2.5173)",
+            "opacity": "0.370675"
+          },
+          {
+            "type": "animationend",
+            "t": 3132.9000000003725,
+            "name": "rouse-result",
+            "elapsed": 0.18,
+            "duration": "0.18s",
+            "transform": "none",
+            "opacity": "1"
+          },
+          {
+            "type": "transaction-response",
+            "t": 9469.699999999255
+          },
+          {
+            "type": "animationstart",
+            "t": 11216.299999998882,
+            "name": "rouse-result",
+            "elapsed": 0,
+            "duration": "0.18s",
+            "transform": "matrix(1, 0, 0, 1, 0, 2.51663)",
+            "opacity": "0.370842"
+          },
+          {
+            "type": "animationend",
+            "t": 11382.799999998882,
+            "name": "rouse-result",
+            "elapsed": 0.18,
+            "duration": "0.18s",
+            "transform": "none",
+            "opacity": "1"
+          }
+        ],
+        "statuses": [
+          {
+            "t": 1175.5,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 2131.699999999255,
+            "text": "Checking reviewed memory."
+          },
+          {
+            "t": 2926.0999999996275,
+            "text": "Reviewed resolution available."
+          },
+          {
+            "t": 4712.9000000003725,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 6165.9000000003725,
+            "text": "Storage accepted; completion pending."
+          },
+          {
+            "t": 7126.699999999255,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 7554.299999998882,
+            "text": "Memory stored."
+          },
+          {
+            "t": 8546,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 9474.299999998882,
+            "text": "Transaction succeeded. No failure procedure is inferred."
+          },
+          {
+            "t": 10495.799999998882,
+            "text": "Checking exact-blob recurrence."
+          },
+          {
+            "t": 11207.099999999627,
+            "text": "Exact stored blob recalled for a distinct failure."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "library": {
+        "events": [],
+        "statuses": [
+          {
+            "t": 227,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 669.9000000003725,
+            "text": "1 reviewed case retrieved."
+          },
+          {
+            "t": 1584.9000000003725,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 2198.199999999255,
+            "text": "1 related reviewed case found for this search."
+          },
+          {
+            "t": 3396.699999999255,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 4019.5,
+            "text": "0 related reviewed cases found for this search."
+          },
+          {
+            "t": 4696.4000000003725,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 5318.299999998882,
+            "text": "Case discovery is unavailable."
+          },
+          {
+            "t": 5978.5,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 6594.9000000003725,
+            "text": "1 related reviewed case found for this search."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "fixtureSubmissions": 1,
+      "realMemoryWrites": 0,
+      "video": "evidence/phase23/mobile-normal.webm",
+      "marks": [
+        {
+          "name": "transaction-response",
+          "at": 1794179363116
+        },
+        {
+          "name": "recall-response",
+          "at": 1794179363933
+        },
+        {
+          "name": "transaction-response",
+          "at": 1794179370483
+        }
+      ]
+    },
+    {
+      "label": "mobile-reduced",
+      "mode": "reduce",
+      "viewport": "mobile",
+      "checks": [
+        "Transaction read preserves initiator focus",
+        "No candidate while transaction is pending",
+        "Provenance toggle keeps keyboard focus",
+        "Essential blob stays outside disclosure",
+        "No submission without human approval",
+        "No pre-approval write request",
+        "Submission carries both explicit attestations",
+        "Accepted status receives focus from replaced editor",
+        "Pending storage has no completed blob",
+        "Completion announced only after actual result state",
+        "New lookup announces its result rather than old receipt",
+        "Completed receipt survives another lookup",
+        "Normal/reduced reveal follows preference",
+        "Live announcements are concise and do not read job IDs",
+        "Search retains focus while reading",
+        "Search clears stale cards before response",
+        "Search retains focus after response",
+        "Results retain explicit submitted-query context",
+        "Outage is distinct from no result",
+        "Retry hands focus to stable result region",
+        "Retry completion does not steal focus",
+        "Library has no horizontal overflow",
+        "Exactly one controlled reviewed submission",
+        "No JavaScript errors"
+      ],
+      "workspace": {
+        "events": [
+          {
+            "type": "transaction-response",
+            "t": 1993
+          },
+          {
+            "type": "recall-response",
+            "t": 2809.2999999988824
+          },
+          {
+            "type": "transaction-response",
+            "t": 9217.799999998882
+          }
+        ],
+        "statuses": [
+          {
+            "t": 1063.5,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 2027.2999999988824,
+            "text": "Checking reviewed memory."
+          },
+          {
+            "t": 2815.7999999988824,
+            "text": "Reviewed resolution available."
+          },
+          {
+            "t": 4501,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 5943.9000000003725,
+            "text": "Storage accepted; completion pending."
+          },
+          {
+            "t": 6916,
+            "text": "Submitting or checking storage. Completion is not yet confirmed."
+          },
+          {
+            "t": 7333.4000000003725,
+            "text": "Memory stored."
+          },
+          {
+            "t": 8302.400000000373,
+            "text": "Reading transaction."
+          },
+          {
+            "t": 9223.199999999255,
+            "text": "Transaction succeeded. No failure procedure is inferred."
+          },
+          {
+            "t": 10235,
+            "text": "Checking exact-blob recurrence."
+          },
+          {
+            "t": 10951.099999999627,
+            "text": "Exact stored blob recalled for a distinct failure."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "library": {
+        "events": [],
+        "statuses": [
+          {
+            "t": 238.5,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 674.8999999985099,
+            "text": "1 reviewed case retrieved."
+          },
+          {
+            "t": 1610,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 2231.7999999988824,
+            "text": "1 related reviewed case found for this search."
+          },
+          {
+            "t": 3422.5999999996275,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 4045.39999999851,
+            "text": "0 related reviewed cases found for this search."
+          },
+          {
+            "t": 4720.5999999996275,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 5330.199999999255,
+            "text": "Case discovery is unavailable."
+          },
+          {
+            "t": 5987.0999999996275,
+            "text": "Reading the reviewed-case library\u2026"
+          },
+          {
+            "t": 6595.5,
+            "text": "1 related reviewed case found for this search."
+          }
+        ],
+        "activeAnimations": 0
+      },
+      "fixtureSubmissions": 1,
+      "realMemoryWrites": 0,
+      "video": "evidence/phase23/mobile-reduced.webm",
+      "marks": [
+        {
+          "name": "transaction-response",
+          "at": 1794179382902
+        },
+        {
+          "name": "recall-response",
+          "at": 1794179383718
+        },
+        {
+          "name": "transaction-response",
+          "at": 1794179390127
+        }
+      ]
+    }
+  ],
+  "realMemoryWrites": 0
+}

@@ -1,3 +1,11 @@
+# Phase23 checkpoint — Rouse / 2026-11-09
+
+Build-loop PASS for all8 original P0 groups plus approved discovery, within the single-operator/case scope. Fixed stale approvals/SDK, expired-inventory false zero, uncertain503 duplicate risk, obsolete onboarding and missing public /cases. Released app e4c8bcc to https://casewake.vercel.app; Vercel READY/alias and26 public integration/access checks +19 public browser checks pass. Local26+19,29 workspace/10 library/28 keyboard/7 actual unconfigured checks,80 local/public AXE scans and4 normal/reduced recordings (98 assertions) pass. Existing approved real write carried; no new Mainnet writes. Inventory13 before/after; one reviewed case. See BUILD_LOOP_REVIEW_ROUSE_2026-11-09.md, PRODUCT-COVERAGE.md and evidence/phase23/acceptance.json.
+
+Current phase24 PROOF_ENGINE. FULL_PRODUCT_VERIFIED is scoped to the approved original product, not external utility/arbitrary-case validation or JUDGE_READY. Track fit/utility, final proof registry/red team/hygiene/demo/judging/submission remain open. Historical checkpoints below retain their original scope.
+
+---
+
 # Phase22 checkpoint — Rouse, 2026-11-08
 
 Local production visual/accessibility/motion QA passes against design revision2, including reviewed-case library and error-text search. Fixed keyboard focus, current-operation announcements, narrow proof/receipt wrapping, skip navigation and focus/target sizing.20 actual page scans;29 workspace,10 library and28 keyboard checks;4 normal/reduced recordings with98 assertions;12 actual read/access checks; build/lint/unit and95 design checks pass. Full real reviewed blob remains in first desktop screen. Zero new Mainnet writes. Review: VISUAL_QA_REVIEW_ROUSE_2026-11-08.md; evidence/phase22/acceptance.json. Phase23 BUILD_LOOP is next. Public deployment unchanged; no submission readiness implied.
