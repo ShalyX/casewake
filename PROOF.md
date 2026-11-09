@@ -285,4 +285,3 @@ The separate strict flashloan repayment case has a proven full-route repair. Own
 An empty injected recall produces no reviewed recommendation, unlike a reviewed-result response. Owner: QA (Codex). Controlled counterfactual; no actual Walrus deletion or live memory-ablation experiment was performed.
 
 [states.json](evidence/phase23/states.json) · [unified-recall.ts](web/src/lib/unified-recall.ts)
-
