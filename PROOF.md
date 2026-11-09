@@ -4,8 +4,8 @@ Rouse retains an evidence-linked, human-reviewed Sui resolution and recalls it f
 
 ## Try the real case
 
-1. [Browse or search reviewed cases](https://casewake.vercel.app/cases). Text matches are related reading, not compatibility verdicts.
-2. [Inspect the distinct recurrence](https://casewake.vercel.app/workspace?digest=HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV). Read the failure, matching reasons, reviewer, SDK uncertainty and exact Walrus blob.
+1. [Browse or search reviewed cases](https://tryrouse.vercel.app/cases). Text matches are related reading, not compatibility verdicts.
+2. [Inspect the distinct recurrence](https://tryrouse.vercel.app/workspace?digest=HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV). Read the failure, matching reasons, reviewer, SDK uncertainty and exact Walrus blob.
 3. Inspect the [case report](evidence/real-case/REVIEW.md), [reference adapter](web/examples/reconcile-cancel.mjs), recorded transaction responses and [replay result](evidence/real-case/cancel-reconciliation-proof.json).
 
 Source failure: `8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA`.
@@ -40,10 +40,12 @@ node web/scripts/check-public.mjs
 
 The offline replay checks four recorded transaction hashes, two positive cases, missing/wrong-order history controls and seven synthetic mutations. It never signs, executes or stores anything. The public checker makes bounded reads and guaranteed anonymous recording rejections; it never submits a valid recording.
 
-## Limits
+## Test context and user feedback
 
-One reviewed cancellation integration procedure is established. Reference testing here does not mean an external team validated utility. Time savings have not been measured. Original operator deployment remains unknown; no historical onchain repair is proven.
+The reviewed procedure was tested by this project against recorded transaction history. We do not know whether the original operator deployed the same procedure. The failed transactions remain part of chain history; the procedure reconciles the application’s order state and stops duplicate retries.
 
-The November 9 snapshot has 13 completed memories of all types, including one reviewed resolution. The older [coin-split runbook](https://casewake.vercel.app/proof/splitcoins) is a read-only simulation with mocked gas and no executed transfer. The separate strict flashloan repair remains unproven and blocked by its existing acceptance rules.
+We have not yet collected feedback from Sui engineers outside this project or measured time saved during their investigations.
+
+The November 9 snapshot has 13 completed memories of all types, including one reviewed resolution. The older [coin-split runbook](https://tryrouse.vercel.app/proof/splitcoins) is a read-only simulation with mocked gas and no executed transfer. The separate strict flashloan repair remains unproven and blocked by its existing acceptance rules.
 
 Counts and service availability are dated observations. Refresh before relying on a current value. Public access checks and automated Chromium/Axe checks are bounded tests, not exhaustive penetration testing, data-loss prevention or screen-reader certification.

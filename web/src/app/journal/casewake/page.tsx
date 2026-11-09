@@ -91,14 +91,14 @@ export default function RouseJournal() {
       <section><div className="journal-section-number">06 / WHAT IS ACTUALLY VERIFIED</div>
         <h2>Twelve stored memories.<br/>Zero invented repairs.</h2>
         <div className="journal-stats"><div><strong>10</strong><span>Genuine onchain failure observations</span></div><div><strong>1</strong><span>Controlled simulation-tested runbook</span></div><div><strong>1</strong><span>Integration smoke-test memory</span></div></div>
-        <p>All twelve were completed Walrus Mainnet writes as of November 4, 2026. That did not mean twelve verified fixes. The November 7 update above adds one reviewed integration resolution; it does not establish a historical smart-contract repair. We have not measured time saved for an external engineering team.</p>
-        <p>The reviewed cancellation case above establishes one evidence-linked procedure. External engineering-team utility and time savings have not been measured. The earlier simulation remains a separate evidence tier.</p>
+        <p>All twelve were completed Walrus Mainnet writes as of November 4, 2026. That did not mean twelve verified fixes. The November 7 update above adds one reviewed integration resolution; it does not establish a historical smart-contract repair. </p>
+        <p>The reviewed cancellation case above adds one evidence-linked procedure to the case library. We have not yet collected feedback from Sui engineers outside this project or measured time saved during their investigations. The earlier simulation remains a separate evidence tier.</p>
       </section>
       <div className="journal-end">
         <span>THE NEXT FAILURE SHOULD NOT START FROM ZERO.</span>
         <h2>Rouse</h2>
         <p>Evidence first. Reuse what was genuinely learned. Keep the uncertainty visible.</p>
-        <div><Link className="primary-button compact" href="/workspace">Try the live investigation <span>↗</span></Link><a className="secondary-button" href="https://github.com/ShalyX/casewake" target="_blank" rel="noreferrer">Source and receipts ↗</a></div>
+        <div><Link className="primary-button compact" href="/workspace">Try the live investigation <span>↗</span></Link><a className="secondary-button" href="https://github.com/ShalyX/rouse" target="_blank" rel="noreferrer">Source and receipts ↗</a></div>
       </div>
       <footer className="journal-sources"><strong>SOURCES / IMPLEMENTATION</strong><a href="https://docs.wal.app/walrus-memory/sdk/usage/memwal" target="_blank" rel="noreferrer">Walrus Memory SDK ↗</a><a href="https://www.docs.sui.io/develop/transactions/ptbs/prog-txn-blocks" target="_blank" rel="noreferrer">Sui programmable transactions ↗</a><a href="https://docs.tatum.io/reference/rpc-sui" target="_blank" rel="noreferrer">Tatum Sui RPC ↗</a><a href="https://thewalrussessions.wal.app/tatum-total-recall" target="_blank" rel="noreferrer">Hackathon rules ↗</a></footer>
     </article>

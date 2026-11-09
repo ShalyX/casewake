@@ -3,9 +3,9 @@ import "./globals.css";
 import "./rouse.css";
 
 export const metadata: Metadata = {
-  metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL||"https://casewake.vercel.app"),
+  metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL||"https://tryrouse.vercel.app"),
   title: "Rouse — Evidence-backed memory for recurring Sui failures",
-  description: "The next failure shouldn't start from zero. Rouse pairs real Tatum Sui transaction evidence with reusable, transparently qualified Walrus Memory precedents.",
+  description: "The next failure shouldn't start from zero. Rouse pairs real Tatum Sui transaction evidence with earlier reviewed procedures retained in Walrus Memory.",
   openGraph: {
     title: "Rouse — The next failure shouldn't start from zero",
     description: "Real Sui transaction evidence. Human-reviewed resolutions. Durable memory powered by Tatum and Walrus.",

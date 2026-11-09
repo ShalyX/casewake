@@ -1,8 +1,8 @@
 # Rouse
 
-Resolution memory for Sui engineers. Inspect a transaction, compare an earlier human-reviewed procedure, and keep its evidence available for a compatible failure.
+Rouse helps Sui engineers find an earlier reviewed case when a transaction fails. Search the error, inspect your transaction, and compare the procedure with its evidence before deciding what to reuse.
 
-[Open Rouse](https://casewake.vercel.app) · [Browse reviewed cases](https://casewake.vercel.app/cases) · [Read the evidence](PROOF.md)
+[Open Rouse](https://tryrouse.vercel.app) · [Browse reviewed cases](https://tryrouse.vercel.app/cases) · [Watch the demo](https://shalyx.github.io/rouse/) · [Read the evidence](PROOF.md)
 
 ![Rouse reviewed-case library](docs/images/reviewed-cases.png)
 
@@ -46,14 +46,14 @@ From `web`, run `pnpm test`, `pnpm lint` and `pnpm build --webpack`. Tests cover
 
 From the repository root, run `node web/scripts/replay-reviewed-case.mjs` to replay recorded history without network access or writes. Run `node web/scripts/check-public.mjs` for bounded anonymous reads and rejected recording requests. Set `ROUSE_BASE_URL` to check another deployment.
 
-Do not use Mainnet recording as an installation or smoke test. Recording consumes quota and requires authorized human review. Sponsor credentials stay on the server; the reviewer token stays in page memory. This is one operator-managed namespace, not a multitenant account service. Credential-pattern rejection is not exhaustive data-loss prevention.
+Use the read-only checks above to verify your setup. Creating a Mainnet record consumes quota and requires an authorized reviewer. Sponsor credentials stay on the server; the reviewer token stays in page memory. Each deployment uses one shared case workspace. Recording rejects common credential patterns; reviewers should check case content before publishing.
 
-## Evidence and limits
+## The demonstrated case
 
-The reviewed example is a duplicate DeepBook order cancellation. The reference procedure reconciles an earlier authenticated cancellation and stops duplicate retries. It was reviewed by ShalyX and replayed against genuine recorded failures. Original operator code changes/deployment remain unknown. No historical onchain repair is claimed.
+The demo follows a duplicate DeepBook order cancellation. A reference procedure checks an earlier authenticated cancellation and stops duplicate retries. ShalyX reviewed it, and recorded-history replay tested it against two genuine failed transactions. A distinct failure then recalled the exact reviewed Walrus record. [See the test method and case scope](PROOF.md).
 
 [Case report](evidence/real-case/REVIEW.md) · [Completed receipt](evidence/real-case/reviewed-memory-receipt.json) · [Exact-blob recall](evidence/real-case/exact-blob-recall.json)
 
-The November 9 snapshot contains 13 completed memories of all types, including one reviewed resolution. Observations and simulation runbooks remain separate tiers. This is not 13 verified fixes, measured time savings or customer traction. External engineer utility has not been established.
+The November 9 inventory contains 13 completed memories, including one reviewed resolution. Other records include incident observations and simulation runbooks, which are kept separate from the reviewed-case library.
 
-The repository address, stored schemas and older evidence use the former Casewake name for compatibility and provenance. Current product branding is Rouse. Historical article screenshots are dated and labelled. See [third-party asset notices](NOTICE.md). No submission, award or organizer endorsement is claimed here.
+Rouse was submitted to the Tatum × Walrus Total Recall hackathon. Stored schemas and older evidence retain the former Casewake name so existing records remain verifiable. Historical article screenshots are dated and labelled. See [third-party asset notices](NOTICE.md).
