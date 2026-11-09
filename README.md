@@ -1,22 +1,24 @@
-# Rouse — resolution memory for Sui engineers
+# Rouse
 
-Keep an evidence-linked, human-reviewed resolution and recover it when a compatible Sui failure recurs. Rouse reads chain evidence through Tatum and retains reviewed procedures in Walrus Memory. The engineer decides whether to reuse them. Rouse does not sign transactions or execute repairs.
+Resolution memory for Sui engineers. Inspect a transaction, compare an earlier human-reviewed procedure, and keep its evidence available for a compatible failure.
 
-Rouse is the user-locked name. Historical Casewake names in stored records, URLs and evidence retain their original provenance.
+[Open Rouse](https://casewake.vercel.app) · [Browse reviewed cases](https://casewake.vercel.app/cases) · [Read the evidence](PROOF.md)
 
-## Use Rouse
+![Rouse reviewed-case library](docs/images/reviewed-cases.png)
 
-1. Open the workspace and inspect your Sui Mainnet transaction digest. No reviewer key is needed. Failure, success and unknown outcomes are distinct; a gateway error is not an onchain failure.
-2. For a confirmed failure, compare recalled procedures, matching reasons, uncertainty, reviewer, source evidence and the exact Walrus blob.
-3. If you have error text instead, open **Reviewed cases** and search an error name, module or procedure. These results are related reading. Inspect your own transaction to check compatibility; a text match does not establish that your incident is resolved.
-4. To record a resolution, use **Reviewer access** with the operator-issued key. Choose a reviewed engineering artifact or a corroborated successful follow-up, explain the specific change, and approve both statements. Editing review details requires fresh approval.
-5. Accepted storage is pending. Keep the existing attempt and check its status; completion requires a real blob receipt. An uncertain response must not be resubmitted. Receipt metadata stays attached to its source across reloads when browser session storage is available. After reload, use reviewer access to verify the original job before treating the saved receipt as Mainnet evidence. A reviewer can then verify a distinct compatible recurrence without another write.
+## Use it
 
-Public app: [casewake.vercel.app](https://casewake.vercel.app). Release status and source revision are recorded in [PROJECT.md](PROJECT.md); local acceptance is separate from public acceptance.
+1. Inspect your Sui Mainnet transaction digest. No reviewer key is needed. Rouse distinguishes failed, successful and unknown outcomes from unavailable reads.
+2. Compare recalled procedures, matching reasons, reviewer, evidence, SDK uncertainty and exact Walrus blob.
+3. Search error text, a module or a procedure in **Reviewed cases**. Search results are related reading; inspect your transaction to check compatibility.
+4. Recording requires an operator-issued reviewer key, case-specific evidence and explicit human causal review. An accepted storage job stays pending until a completed receipt is returned.
+5. After reload, saved receipt metadata requires a protected check of the original job before completion or recurrence can be claimed. Uncertain writes must not be resubmitted.
+
+Tatum provides read-only chain evidence. Walrus Memory retains the reviewed procedure. The engineer decides what to reuse. Rouse does not sign wallet transactions, execute repairs or move funds.
 
 ## Run locally
 
-Use the `web` directory in your checkout. Copy `web/.env.example` to `web/.env.local` and supply your server credentials privately. Next.js loads this file; it must remain ignored by Git.
+Use Node.js 24 and pnpm 10. Copy `web/.env.example` to `web/.env.local` and supply server credentials privately. The local file is ignored by Git.
 
 ```powershell
 cd web
@@ -25,43 +27,33 @@ pnpm build --webpack
 pnpm start --hostname 127.0.0.1 --port 4242
 ```
 
-Open [landing](http://127.0.0.1:4242), [workspace](http://127.0.0.1:4242/workspace), or [reviewed cases](http://127.0.0.1:4242/cases). The webpack option is used by the verified Windows build. Use `pnpm dev` for development.
+Open `http://127.0.0.1:4242`. Use `pnpm dev` for development. The webpack build is the verified production build on Windows and CI.
 
-| Variable | Purpose |
+|Variable|Purpose|
 |---|---|
-| `TATUM_API_KEY` | Server-side Sui Mainnet gRPC reads |
-| `MEMWAL_PRIVATE_KEY` | Private delegate key for the operator's Walrus Memory account |
-| `MEMWAL_ACCOUNT_ID` | Account matching that delegate |
-| `MEMWAL_SERVER_URL` | Mainnet relayer; template supplies the endpoint |
-| `MEMWAL_NAMESPACE` | Shared operator namespace; default `incident-memory-v1` |
-| `WORKSPACE_WRITE_KEY` | Random private reviewer token; absent means writes are disabled |
+|`TATUM_API_KEY`|Server-side Sui Mainnet gRPC reads|
+|`MEMWAL_PRIVATE_KEY`|Private delegate key for the operator's Walrus Memory account|
+|`MEMWAL_ACCOUNT_ID`|Account matching that delegate|
+|`MEMWAL_SERVER_URL`|Mainnet relayer endpoint supplied in the template|
+|`MEMWAL_NAMESPACE`|Shared namespace; defaults to `incident-memory-v1`|
+|`WORKSPACE_WRITE_KEY`|Random private reviewer token; absent disables recording|
 
-Inspection can work with Tatum alone. Recall/discovery needs the configured Walrus account; a new account does not inherit the operator's records. Configuration presence is not proof of connectivity. Missing configuration, unavailable reads and incomplete inventories are displayed explicitly. The library uses bounded retrieval and discloses incomplete coverage.
+Inspection can work with Tatum alone. Recall and discovery need the configured Walrus account. A new account does not inherit the public application's records. Configuration presence does not prove connectivity; missing configuration, unavailable reads and incomplete inventories are shown explicitly.
 
-Sponsor credentials stay on the server. The reviewer token stays in page memory and is not saved with browser receipts. This is one operator-managed shared case space, not a multitenant account service. Recognized credential patterns are rejected before storing; this is not exhaustive data-loss prevention.
+## Verify
 
-## The reviewed example
+From `web`, run `pnpm test`, `pnpm lint` and `pnpm build --webpack`. Tests cover compatibility, chronology, evidence validation, credential rejection, paged inventory, request uncertainty, receipts and discovery.
 
-ShalyX approved one independently tested duplicate-cancellation integration procedure. A prior authenticated cancellation establishes that the identical order was already cancelled; the procedure reconciles local state and stops duplicate retries. The original operator's code change/deployment is unknown. No onchain repair is claimed.
+From the repository root, run `node web/scripts/replay-reviewed-case.mjs` to replay recorded history without network access or writes. Run `node web/scripts/check-public.mjs` for bounded anonymous reads and rejected recording requests. Set `ROUSE_BASE_URL` to check another deployment.
 
-Source: `8dT1dpmvyX9o8t5F5H9AtsQQDdsYDxcoLnSVyEXzJLiA`. Distinct recurrence: `HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV`. Reviewed Walrus blob: `KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY`.
+Do not use Mainnet recording as an installation or smoke test. Recording consumes quota and requires authorized human review. Sponsor credentials stay on the server; the reviewer token stays in page memory. This is one operator-managed namespace, not a multitenant account service. Credential-pattern rejection is not exhaustive data-loss prevention.
 
-[Case review](evidence/real-case/REVIEW.md), [human approval](evidence/real-case/human-approval.json), [completed receipt](evidence/real-case/reviewed-memory-receipt.json), [exact-blob recall](evidence/real-case/exact-blob-recall.json).
+## Evidence and limits
 
-The last accepted namespace count was 13 completed memories of all types, including one reviewed resolution. Observations and simulation runbooks remain separate tiers and do not enter the reviewed-case library. Fresh counts appear in dated audit evidence; this is not a claim of 13 verified fixes or customer traction.
+The reviewed example is a duplicate DeepBook order cancellation. The reference procedure reconciles an earlier authenticated cancellation and stops duplicate retries. It was reviewed by ShalyX and replayed against genuine recorded failures. Original operator code changes/deployment remain unknown. No historical onchain repair is claimed.
 
-## Inspect the proof
+[Case report](evidence/real-case/REVIEW.md) · [Completed receipt](evidence/real-case/reviewed-memory-receipt.json) · [Exact-blob recall](evidence/real-case/exact-blob-recall.json)
 
-Start with [the judge proof packet](PROOF.md) and [the current claim registry](EVIDENCE.md). They distinguish the pinned deployed source, immutable reviewed artifact, actual integration reads, controlled tests and blocked requirements. The default repository branch is not the released source snapshot.
+The November 9 snapshot contains 13 completed memories of all types, including one reviewed resolution. Observations and simulation runbooks remain separate tiers. This is not 13 verified fixes, measured time savings or customer traction. External engineer utility has not been established.
 
-## Verify and contribute
-
-From `web`, run `pnpm lint`, `pnpm test` and `pnpm build --webpack`. Tests exercise compatibility, chronology, proof validation, credential rejection, inventory pagination, request timeouts and receipt handling. Browser suites in `web/scripts/phase22-*.mjs` and `phase23-*.mjs` distinguish actual integration reads from labelled controlled storage/failure responses.
-
-From the repository root, `python scripts/verify-design-lock.py` checks the immutable design contract. `python scripts/verify-phase22-qa.py` checks historical acceptance against its reviewed source; later source changes require a scoped successor audit rather than rewriting that record.
-
-Do not run ingestion, publication or memory-writing scripts as setup or a smoke test. Existing evidence already exists. New Mainnet writes require authorized human review and consume quota. Read-only scripts requiring reviewer access load environment credentials without printing them; inspect their scope before running.
-
-## Remaining work
-
-The [operator audit](OPERATOR_PHASE_AUDIT_2026-11-07.md) tracks the current phase. External Sui-engineer utility validation and organizer track-fit confirmation remain open. Phase25 bounded Red Team passes on the public release; see [the review](RED_TEAM_REVIEW_ROUSE_2026-11-09.md). Product hygiene, demo film, pitch, judge simulation and submission gates remain separate. QA recordings are not the final 2–3 minute submission film. No submission receipt is claimed.
+The repository address, stored schemas and older evidence use the former Casewake name for compatibility and provenance. Current product branding is Rouse. Historical article screenshots are dated and labelled. See [third-party asset notices](NOTICE.md). No submission, award or organizer endorsement is claimed here.

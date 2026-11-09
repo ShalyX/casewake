@@ -2,8 +2,8 @@ import "server-only";
 import type { ObservedTransaction } from "./incidents";
 import type { VerifiedRouteSimulation } from "./route-repair-proof";
 
-// This immutable GitHub revision is the independently inspectable output of
-// web/scripts/prove-deepbook-repayment-guard.mjs, not an asserted repaired swap.
+// Historical read-only simulation evidence for existing prevention records.
+// This artifact does not establish a repaired historical swap.
 const PROOF_COMMIT = "f9d3ea32e24f84f2306cd2533d92dbfd0cb62f2e";
 const PROOF_PATH = "evidence/deepbook-repayment-guard-proof.json";
 export const GUARD_EVIDENCE_URL = `https://github.com/ShalyX/casewake/blob/${PROOF_COMMIT}/${PROOF_PATH}`;

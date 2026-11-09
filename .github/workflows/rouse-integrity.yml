@@ -1,0 +1,27 @@
+name: Rouse product checks
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master, "codex/**"]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+      - run: corepack enable
+      - run: corepack prepare pnpm@10.34.5 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm lint
+      - run: pnpm build --webpack
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"

@@ -1,9 +1,0 @@
-PASS: live app status and Tatum configuration
-PASS: real Tatum Mainnet failed lookup includes timestamp and checkpoint
-PASS: real Tatum Mainnet successful lookup includes timestamp and checkpoint
-PASS: unavailable historical digest is explicitly classified as unknown
-PASS: unknown transaction does not trigger resolution recall or a Walrus read
-PASS: anonymous resolution write rejected
-PASS: authenticated reviewer without explicit causal approval rejected; no Walrus write attempted
-PASS: reviewed-artifact method also rejects missing human causal approval before fetching GitHub or writing Walrus
-PHASE13_READ_ONLY_CONTROLS=PASS (not the human-reviewed case acceptance gate)

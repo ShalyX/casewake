@@ -1,1 +1,0 @@
-Rouse web-delivery subsets of the unmodified canonical Space Grotesk, DM Sans and DM Mono sources. OFL licenses remain in ../brand/rouse/fonts/. Rebuild with scripts/build-rouse-webfonts.py and fonttools + brotli. Latin and UI punctuation/arrows/check glyphs; other scripts fall back to system fonts.

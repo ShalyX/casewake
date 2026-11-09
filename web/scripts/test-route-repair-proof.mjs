@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { validateRouteRepairStructure, ROUTE_INCIDENT_DIGEST } from '../src/lib/route-repair-proof.ts';
 
-const evidence=JSON.parse(fs.readFileSync(new URL('../../evidence/context-BbRZD7YfTiiN.json',import.meta.url),'utf8'));
+const evidence=JSON.parse(fs.readFileSync(new URL('../test/fixtures/original-route.json',import.meta.url),'utf8'));
 const historical=Buffer.from(evidence.transactionData.bcs.value.data);
 const asBase64=b=>b.toString('base64');
 

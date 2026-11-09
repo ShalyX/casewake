@@ -12,7 +12,7 @@ const A = "BbRZD7YfTiiNWYd1BuVHxirCJMpSHW3taxgNh1bzqMd6";
 const B = "XkAz3VrtFLpvZne2ZoYJSzjbyqrqnt7FEYjQviKKoue";
 const C = "Bh2xSsApGWjJGUqtMFez19VVFYAzu6CHpw5GMfHC9Byp";
 
-export default function CasewakeJournal() {
+export default function RouseJournal() {
   return <main className="journal-page">
     <header className="journal-header">
       <SkipLink /><Brand />
@@ -21,13 +21,13 @@ export default function CasewakeJournal() {
     <article id="main" tabIndex={-1} className="journal-container">
       <div className="journal-meta">ENGINEERING NOTES <span>/</span> NOV 4, 2026 <span>/</span> 8 MIN READ</div>
       <h1>When a failure teaches<br/><em>the next investigation.</em></h1>
-      <p className="journal-lead">A Sui transaction records what failed. What it does not preserve is the engineering context needed to make the next investigation easier. We built Casewake to remember that context—with its evidence and uncertainty intact.</p>
-      <div className="journal-byline"><span>CASEWAKE / TOTAL RECALL</span><span>Built with Tatum and Walrus Memory</span></div>
+      <p className="journal-lead">A Sui transaction records what failed. What it does not preserve is the engineering context needed to make the next investigation easier. We built Rouse to remember that context—with its evidence and uncertainty intact.</p>
+      <div className="journal-byline"><span>ROUSE / TOTAL RECALL</span><span>Built with Tatum and Walrus Memory</span></div>
 
       <section><div className="journal-section-number">NOVEMBER 7 UPDATE / REVIEWED CASE</div>
         <h2>A reviewed resolution,<br/>recalled for another incident.</h2>
         <p>ShalyX reviewed an integration procedure for a real duplicate-cancellation failure. Tatum shows that the exact order had already been cancelled successfully. The procedure reconciles that earlier result and stops retrying the completed cancellation; the original operator&apos;s application change remains unknown.</p>
-        <p>Casewake stored the approved procedure in Walrus Mainnet, then recalled the exact same blob for a distinct real failure. Self-matches and an unrelated failure were excluded. There are now thirteen completed memories in the workspace, including this one human-reviewed integration resolution.</p>
+        <p>Rouse stored the approved procedure in Walrus Mainnet, then recalled the exact same blob for a distinct real failure. Self-matches and an unrelated failure were excluded. The November 7 snapshot contains thirteen completed memories, including this one human-reviewed integration resolution.</p>
         <div className="journal-receipt"><span>REVIEWED RESOLUTION / WALRUS MAINNET</span><code>KYVwYj5yXnhoEMZN_m-6rPGVUKw9h43bSkFg4zxcIxY</code></div>
         <div className="journal-source"><Link href="/workspace?digest=HvDzt4nbgp4espMfM8m9vBks6L8EqAyRUGQpuvWRAPHV">Inspect the reviewed recurrence ↗</Link><a href="https://github.com/ShalyX/casewake/commit/fa78ff8a458dd9d61855b43f67ff9fd575fba215" target="_blank" rel="noreferrer">Read the engineering evidence ↗</a></div>
         <p>The original November 4 investigation below remains a separate, simulation-tested runbook. It is not the reviewed cancellation case.</p>
@@ -35,13 +35,13 @@ export default function CasewakeJournal() {
 
       <figure className="journal-figure">
         <Image src="/images/casewake-live-workspace.png" width={1440} height={1350} alt="Actual Casewake browser screenshot showing a real InsufficientCoinBalance transaction and a matching simulation-tested Walrus runbook." sizes="(max-width: 900px) 100vw, 1000px" />
-        <figcaption>Actual local production-mode screenshot, November 4, 2026: Tatum chain evidence beside the Walrus-recalled runbook. No synthetic transaction data was substituted.</figcaption>
+        <figcaption>Recorded Casewake build, November 4, 2026, before the Rouse rename: Tatum chain evidence beside the Walrus-recalled runbook. No synthetic transaction data was substituted.</figcaption>
       </figure>
 
       <section><div className="journal-section-number">01 / THE PROBLEM</div>
         <h2>The chain remembers the event.<br/>Not the reasoning.</h2>
         <p>A Sui engineer investigates a failed programmable transaction. They inspect the actual command, coin inputs, gas context and error class. Weeks later, somebody else sees a similar failure and has to repeat the same research.</p>
-        <p>Casewake is an experiment in making that work reusable. It is not a generic error-explainer and it does not sign or repair transactions. It pairs genuine Sui Mainnet events with a memory of previous observations and tested procedures.</p>
+        <p>Rouse is an experiment in making that work reusable. It is not a generic error-explainer and it does not sign or repair transactions. It pairs genuine Sui Mainnet events with a memory of previous observations and tested procedures.</p>
         <p>The distinction matters: an observed failure is not a verified fix, and a successful simulation is not evidence that someone repaired a historical wallet transaction.</p>
       </section>
 
@@ -70,7 +70,7 @@ export default function CasewakeJournal() {
       <section><div className="journal-section-number">04 / MEMORY WITH BOUNDARIES</div>
         <h2>Give the next incident<br/>a usable precedent.</h2>
         <p>We saved ten distinct, genuine failed-transaction observations to Walrus Memory Mainnet, each with its own completed storage receipt and source digest. We then stored our controlled <code>splitCoins</code> runbook as a new memory, explicitly labeled <strong>simulation-tested, not human-verified</strong>.</p>
-        <p>When the next compatible failure appears, Casewake makes one semantic Walrus recall request, then performs deterministic checks before showing a recommendation. It matches the onchain error class and the failed command type. It presents the procedure with evidence, not as an automatic repair.</p>
+        <p>When the next compatible failure appears, Rouse makes one semantic Walrus recall request, then performs deterministic checks before showing a recommendation. It matches the onchain error class and the failed command type. It presents the procedure with evidence, not as an automatic repair.</p>
         <div className="journal-receipt">
           <span>WALRUS MAINNET / COMPLETED MEMORY</span>
           <strong>keORrsffV8gLkXG8smus_plmk1qUnXC2m2Gv9gyBwAw</strong>
@@ -92,11 +92,11 @@ export default function CasewakeJournal() {
         <h2>Twelve stored memories.<br/>Zero invented repairs.</h2>
         <div className="journal-stats"><div><strong>10</strong><span>Genuine onchain failure observations</span></div><div><strong>1</strong><span>Controlled simulation-tested runbook</span></div><div><strong>1</strong><span>Integration smoke-test memory</span></div></div>
         <p>All twelve were completed Walrus Mainnet writes as of November 4, 2026. That did not mean twelve verified fixes. The November 7 update above adds one reviewed integration resolution; it does not establish a historical smart-contract repair. We have not measured time saved for an external engineering team.</p>
-        <p>The next important proof is a real engineer reproducing and confirming a fix for a specific incident, with independent evidence and a reviewer sign-off. Casewake can store and later recall that tier of memory, but the hackathon demonstration does not fake that gate.</p>
+        <p>The reviewed cancellation case above establishes one evidence-linked procedure. External engineering-team utility and time savings have not been measured. The earlier simulation remains a separate evidence tier.</p>
       </section>
       <div className="journal-end">
         <span>THE NEXT FAILURE SHOULD NOT START FROM ZERO.</span>
-        <h2>Casewake</h2>
+        <h2>Rouse</h2>
         <p>Evidence first. Reuse what was genuinely learned. Keep the uncertainty visible.</p>
         <div><Link className="primary-button compact" href="/workspace">Try the live investigation <span>↗</span></Link><a className="secondary-button" href="https://github.com/ShalyX/casewake" target="_blank" rel="noreferrer">Source and receipts ↗</a></div>
       </div>

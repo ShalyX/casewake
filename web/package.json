@@ -1,5 +1,5 @@
 {
-  "name": "casewake",
+  "name": "rouse",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --conditions=react-server --experimental-strip-types scripts/test-incidents.mjs && node --conditions=react-server --experimental-strip-types scripts/test-incident-compatibility.mjs && node --conditions=react-server --experimental-strip-types scripts/test-tatum-outcomes.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-memory-gate.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-repair-proof.mjs && node --conditions=react-server --experimental-strip-types scripts/test-repayment-safety.mjs && node --conditions=react-server --experimental-strip-types scripts/test-retry-reads.mjs && node --conditions=react-server --experimental-strip-types scripts/test-reviewed-evidence.mjs && node --conditions=react-server --experimental-strip-types scripts/test-phase14-workflows.mjs && node --conditions=react-server --experimental-strip-types scripts/test-case-discovery.mjs && node --conditions=react-server --experimental-strip-types scripts/test-red-team.mjs"
+    "test": "node --conditions=react-server --experimental-strip-types scripts/test-incidents.mjs && node --conditions=react-server --experimental-strip-types scripts/test-incident-compatibility.mjs && node --conditions=react-server --experimental-strip-types scripts/test-tatum-outcomes.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-memory-gate.mjs && node --conditions=react-server --experimental-strip-types scripts/test-route-repair-proof.mjs && node --conditions=react-server --experimental-strip-types scripts/test-repayment-safety.mjs && node --conditions=react-server --experimental-strip-types scripts/test-retry-reads.mjs && node --conditions=react-server --experimental-strip-types scripts/test-reviewed-evidence.mjs && node --conditions=react-server --experimental-strip-types scripts/test-workspace.mjs && node --conditions=react-server --experimental-strip-types scripts/test-case-discovery.mjs && node --conditions=react-server --experimental-strip-types scripts/test-red-team.mjs"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.14.7",
@@ -20,6 +20,11 @@
     "react-dom": "19.3.0",
     "server-only": "^0.0.1"
   },
+  "pnpm": {
+    "overrides": {
+      "source-map-js": "1.2.2"
+    }
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
@@ -27,5 +32,9 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.4",
     "typescript": "^5"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": "24.x"
   }
 }

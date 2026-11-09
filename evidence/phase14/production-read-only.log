@@ -1,7 +1,0 @@
-PASS completedExistingJob 200
-PASS jobReadProtected 403
-PASS wrongIncidentCannotRecoverReceipt 202
-PASS malformedDigest 400
-PASS credentialContentRejected 400
-PASS completedInventory 200
-PHASE14_READ_ONLY_ACCEPTANCE=PASS
